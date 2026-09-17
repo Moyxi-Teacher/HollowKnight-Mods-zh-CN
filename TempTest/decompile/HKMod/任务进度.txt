@@ -1,0 +1,16 @@
+
+### 阶段97续：草/骨/金/水地面脚步再下调（2026-09-15 23:45）
+- 用户实测反馈：草/骨/金/水（run 地面）脚步震动"还是很大"。
+- 调整：非石质地面脚步精细触觉强度 0.2 → **0.1**（含 grass/bones/metal/water 的 run 脉冲）。
+- 石质地面（stone）保持 0.8 不变，继续保留"一顿一顿"逐步脉冲感。
+- 非走路精细触觉仍为最大 3.5；施法/受伤 rumble 仍为引擎默认。
+- 重建成功（0 警告 0 错误），DLL/PDB 已更新至 D:\KDQSHH\Mods\HollowKnightHaptics\。
+- 下一步：用户重启实测草/骨/金/水是否足够轻；若仍偏大可继续向 0.05 下探。
+
+### 阶段97终续：震动倍率恢复至基准版 0.1.2（2026-09-16）
+- 用户要求：所有震动倍率与 D:\重要文件\Downloads\压缩文件\HollowKnightHaptics-0.1.2\files\BepInEx\plugins\HollowKnightHaptics 一致，其他改动保留。
+- 基准版 0.1.2 震动倍率 = 直接使用 VibrationData.Strength（无硬编码倍率）。
+- 处理：PlayEmission 中移除之前的硬编码 3.5/0.1/0.8 倍率逻辑，改用反射读取 VibrationData.Strength（若读取失败则 fallback 1.0），保持与基准版一致。
+- 保留改动：FootstepVibrationPatch 脚步逐步触发、clipAliases 别名映射、石脉冲 WAV 支持、Rumble 曲线恢复默认、--exit-on-disconnect 等全部保留。
+- 重建成功，DLL 已更新至 D:\KDQSHH\Mods\HollowKnightHaptics\。
+- 下一步：用户按基准倍率实测；若仍需微调，可在之上叠加 MasterGain。

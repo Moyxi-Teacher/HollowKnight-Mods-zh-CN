@@ -1,0 +1,261 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using HKMirror.Hooks.OnHooks;
+using HKVocals;
+using HallownestVocalizedAudioLoader.MajorFeatures;
+using HallownestVocalizedAudioLoader.UI;
+using JetBrains.Annotations;
+using Language;
+using Modding;
+using Modding.Menu;
+using On;
+using SFCore;
+using Satchel;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace HallownestVocalizedAudioLoader;
+
+[PublicAPI]
+public class HallownestVocalizedAudioLoaderMod : Mod
+{
+	[CompilerGenerated]
+	private static class <>O
+	{
+		public static Hook <0>__AddTheme;
+
+		public static Action <1>__AddCreditsButton;
+
+		public static Action<AsyncOperation> <2>__SaveLoadedBundle;
+	}
+
+	public static HallownestVocalizedAudioLoaderMod Instance;
+
+	public static AssetBundle audioBundle;
+
+	public static AssetBundle styleBundle;
+
+	public static AssetBundle creditsBundle;
+
+	private static AssetBundleCreateRequest loadRequest;
+
+	public static NonBouncer CoroutineHolder;
+
+	private static GameObject TextCanvas;
+
+	private static Text TextPanelText;
+
+	private static readonly List<string> ClipsToMute = new List<string>
+	{
+		"Salubra_Laugh_Loop", "Sly_talk", "Sly_talk_02", "Sly_talk_03", "Sly_talk_04", "Sly_talk_05", "Banker_talk_01", "Stag_ambient_loop", "junk_fluke_long_loop", "junk_fluke_long_loop_nervous",
+		"Moss_Cultist_Loop", "Grimm_talk_02", "Grimm_talk_03", "Grimm_talk_05", "Grimm_talk_06", "Nailmsith_greet", "Nailmsith_talk_02", "Nailmsith_talk_03", "Nailmsith_talk_04", "Nailmsith_talk_05",
+		"Hornet_Dialogue_Generic_02", "Hornet_Dialogue_Generic_03", "Hornet_Dialogue_Generic_04", "Hornet_Dialogue_Generic_05", "Bow_Repeat", "WD_outro", "Stag_02", "Hornet_Greenpath_01", "Salubra_Talk", "Mr_Mush_talk_03",
+		"GS_standard_01", "GS_standard_02", "GS_standard_05", "GS_standard_06", "GS_standard_07", "GS_engine_room", "GS_engine_room_03", "GS_engine_room_04", "Hunter_journal_02", "Relic_Dealer_04"
+	};
+
+	public static bool MainModExists => AppDomain.CurrentDomain.GetAssemblies().Any((Assembly a) => a.GetName().Name == "HKVocal");
+
+	private static string WaitText
+	{
+		get
+		{
+			//IL_0000: Unknown result type (might be due to invalid IL or missing references)
+			//IL_0005: Unknown result type (might be due to invalid IL or missing references)
+			if (!(((object)Language.CurrentLanguage()/*cast due to constrained. prefix*/).ToString() == "ZH"))
+			{
+				return "Please wait while Hallownest Vocalized audio is loading...";
+			}
+			return "Ժڼءʥ֮Ƶ";
+		}
+	}
+
+	public HallownestVocalizedAudioLoaderMod()
+	{
+		//IL_0020: Unknown result type (might be due to invalid IL or missing references)
+		//IL_002a: Expected O, but got Unknown
+		//IL_004f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0059: Expected O, but got Unknown
+		//IL_0068: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0090: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0096: Invalid comparison between Unknown and I4
+		//IL_003f: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0044: Unknown result type (might be due to invalid IL or missing references)
+		//IL_004a: Expected O, but got Unknown
+		((Mod)this)..ctor("ʥ֮Ƶ");
+		Instance = this;
+		if (MainModExists)
+		{
+			AfterOrig.SetTitle += new SetTitle_AfterArgs(AddCustomBanner);
+			Hook addMenuStyleHook = MenuStyleHelper.AddMenuStyleHook;
+			object obj = <>O.<0>__AddTheme;
+			if (obj == null)
+			{
+				Hook val = MenuTheme.AddTheme;
+				<>O.<0>__AddTheme = val;
+				obj = (object)val;
+			}
+			MenuStyleHelper.AddMenuStyleHook = (Hook)Delegate.Combine((Delegate)(object)addMenuStyleHook, (Delegate)obj);
+			HKVocals.Icon = AssemblyUtils.GetSpriteFromResources("Resources.icon.png");
+			CoroutineHolder = new GameObject().AddComponent<NonBouncer>();
+			Object.DontDestroyOnLoad((Object)(object)CoroutineHolder);
+			((Loggable)Instance).Log("Starting Hallownest Vocalised Misc. Load");
+			styleBundle = AssetBundle.LoadFromMemory(((int)SystemInfo.operatingSystemFamily == 3) ? AssemblyUtils.GetBytesFromResources("Resources.stylebundlelinux") : AssemblyUtils.GetBytesFromResources("Resources.stylebundle"));
+			creditsBundle = AssetBundle.LoadFromMemory(AssemblyUtils.GetBytesFromResources("Resources.creditsbundle"));
+			((Loggable)Instance).Log("Starting Hallownest Vocalised Audio Load");
+			LoadAssetBundle();
+		}
+	}
+
+	public override void Initialize()
+	{
+		//IL_0011: Unknown result type (might be due to invalid IL or missing references)
+		//IL_001b: Expected O, but got Unknown
+		//IL_0022: Unknown result type (might be due to invalid IL or missing references)
+		//IL_002c: Expected O, but got Unknown
+		if (MainModExists)
+		{
+			GameManager.StartNewGame += new hook_StartNewGame(StopStartNewGame);
+			GameManager.ContinueGame += new hook_ContinueGame(StopContinueGame);
+			UIManager.EditMenus += ExtrasMenu.AddCreditsButton;
+			if (HKVocals._globalSettings.ForceMenuTheme)
+			{
+				HKVocals._globalSettings.ForceMenuTheme = false;
+				MenuStyle item = MenuStyles.Instance.styles.First((MenuStyle x) => ((Object)x.styleObject).name.Contains("HKVStyle"));
+				MenuStyles.Instance.SetStyle(MenuStyles.Instance.styles.ToList().IndexOf(item), false, true);
+			}
+		}
+		else
+		{
+			((Loggable)this).LogError("You dont have hallownest vocalized audio without the main hallownest vocalized mod. please download that");
+			_ = loadRequest;
+		}
+	}
+
+	private void StopContinueGame(orig_ContinueGame orig, GameManager self)
+	{
+		((MonoBehaviour)CoroutineHolder).StartCoroutine(BlockContinueGame(orig, self));
+	}
+
+	private void StopStartNewGame(orig_StartNewGame orig, GameManager self, bool permadeathmode, bool bossrushmode)
+	{
+		((MonoBehaviour)CoroutineHolder).StartCoroutine(BlockStartNewGame(orig, self, permadeathmode, bossrushmode));
+	}
+
+	private IEnumerator BlockContinueGame(orig_ContinueGame orig, GameManager self)
+	{
+		yield return WaitForBundleToLoad();
+		orig.Invoke(self);
+	}
+
+	private IEnumerator BlockStartNewGame(orig_StartNewGame orig, GameManager self, bool p, bool b)
+	{
+		yield return WaitForBundleToLoad();
+		orig.Invoke(self, p, b);
+	}
+
+	private IEnumerator WaitForBundleToLoad()
+	{
+		if (loadRequest == null || ((AsyncOperation)loadRequest).isDone)
+		{
+			yield break;
+		}
+		CreateTextPanel();
+		string prevText = "";
+		while (!((AsyncOperation)loadRequest).isDone)
+		{
+			yield return null;
+			string text = WaitText + $"({Math.Round(((AsyncOperation)loadRequest).progress, 1) * 100.0}%)";
+			if (text != prevText)
+			{
+				TextPanelText.text = text;
+				prevText = text;
+			}
+		}
+		Object.Destroy((Object)(object)TextCanvas);
+	}
+
+	private static void LoadAssetBundle()
+	{
+		//IL_0063: Unknown result type (might be due to invalid IL or missing references)
+		//IL_006d: Expected O, but got Unknown
+		if (File.Exists(AssemblyExtensions.GetCurrentDirectory() + "/audiobundle"))
+		{
+			loadRequest = AssetBundle.LoadFromFileAsync(AssemblyExtensions.GetCurrentDirectory() + "/audiobundle");
+		}
+		else
+		{
+			loadRequest = AssetBundle.LoadFromMemoryAsync(AssemblyExtensions.GetBytesFromResources("Resources.audiobundle"));
+		}
+		if (loadRequest == null)
+		{
+			((Loggable)Instance).LogError("Hallownest Vocalized audio not loaded. no audio bundle was found neither embedded nor as an external file placed next to the dll");
+			return;
+		}
+		AudioAPI.AddAudioProvider(-1, (IAudioProvider)new AssetBundleCreateRequestAudioProvider(loadRequest, true));
+		string[] allAssetNames = loadRequest.assetBundle.GetAllAssetNames();
+		foreach (string audio in allAssetNames)
+		{
+			if (new string[2] { ".mp3", ".wav" }.Any((string extension) => audio.EndsWith(extension)))
+			{
+				AudioAPI.AudioNames.Add(Path.GetFileNameWithoutExtension(audio).ToUpper());
+				((Loggable)Instance).LogDebug("Loaded audio: " + audio);
+			}
+		}
+		foreach (string item in ClipsToMute)
+		{
+			AudioAPI.AddMuteAudio(item);
+		}
+		((AsyncOperation)loadRequest).completed += SaveLoadedBundle;
+	}
+
+	private void AddCustomBanner(Params_SetTitle args)
+	{
+		if (MainModExists)
+		{
+			args.self.Title.sprite = AssemblyUtils.GetSpriteFromResources((Random.Range(1, 1000) == 1 && HKVocals._globalSettings.settingsOpened) ? "Resources.Title_alt.png" : "Resources.Title.png");
+		}
+		else
+		{
+			args.self.Title.sprite = AssemblyUtils.GetSpriteFromResources("Resources.Title_missingDeps.png");
+		}
+	}
+
+	public static void SaveLoadedBundle(AsyncOperation operation)
+	{
+		audioBundle = loadRequest.assetBundle;
+		((Loggable)Instance).Log("Sucessfully loaded hallownest vocalized audio");
+	}
+
+	public static void CreateTextPanel()
+	{
+		//IL_000b: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0058: Unknown result type (might be due to invalid IL or missing references)
+		//IL_005d: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0062: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0067: Unknown result type (might be due to invalid IL or missing references)
+		//IL_006c: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0076: Expected O, but got Unknown
+		//IL_0088: Unknown result type (might be due to invalid IL or missing references)
+		//IL_008d: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0092: Unknown result type (might be due to invalid IL or missing references)
+		//IL_0097: Unknown result type (might be due to invalid IL or missing references)
+		//IL_009c: Unknown result type (might be due to invalid IL or missing references)
+		//IL_00ab: Expected O, but got Unknown
+		TextCanvas = CanvasUtil.CreateCanvas((RenderMode)0, new Vector2(1920f, 1080f));
+		((Object)TextCanvas).name = "Hallownest Vocalized Wait message";
+		CanvasGroup component = TextCanvas.GetComponent<CanvasGroup>();
+		component.interactable = false;
+		component.blocksRaycasts = false;
+		TextPanelText = CanvasUtil.CreateTextPanel(CanvasUtil.CreateImagePanel(TextCanvas, CanvasUtil.NullSprite(new byte[4] { 128, 0, 0, 0 }), new RectData(Vector2.zero, Vector2.zero, Vector2.zero, Vector2.one)), WaitText, 60, (TextAnchor)4, new RectData(new Vector2(-5f, -5f), Vector2.zero, Vector2.zero, Vector2.one), MenuResources.Perpetua).GetComponent<Text>();
+	}
+
+	public override string GetVersion()
+	{
+		return ((object)this).GetType().Assembly.GetName().Version.ToString() + (MainModExists ? "" : "Error Hallownest Vocalized not present");
+	}
+}

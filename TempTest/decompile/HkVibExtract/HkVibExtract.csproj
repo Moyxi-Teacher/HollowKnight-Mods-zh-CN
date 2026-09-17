@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>HkVibExtract</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net40</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="AssetsTools.NET">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\AssetsTools.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Fmod5Sharp">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\Fmod5Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\NVorbis.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

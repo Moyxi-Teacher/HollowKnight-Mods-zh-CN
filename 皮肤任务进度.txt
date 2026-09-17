@@ -1,0 +1,68 @@
+# 斯卡蒂皮肤定制任务进度（v4 - 2026-09-14 更新）
+
+## 任务元信息
+- 任务目标：为《明日方舟》干员「斯卡蒂（Skadi）」制作 CustomKnight 风格像素皮肤
+- 领域操作员：深海猎人/牺牲者
+- 执行AI标识：Claude Opus 4.6 (Cherry Studio Agent)
+- 创建时间：2026-09-14
+- 范围（已确认）：**按 skin-config.json 完整 alternates 覆盖**
+- Charms 风格：**深海色调统一重绘**
+- 素材：**允许抓取 PRTS wiki 立绘**
+
+## 三域路径（已确认）
+- 只读域（游戏目录）：`E:\steam\steamapps\common\Hollow Knight`
+- 可写域（输出）：`D:\KDQSHH`
+- 临时域：`D:\重要文件\Downloads\temp`
+- 输出皮肤目录：`D:\KDQSHH\Skins\斯卡蒂_Arknights_Claude`
+
+## 阶段状态
+- 阶段一（规格基准建立）：**✓ 已完成** - 9 根 + Charms + HPBar + AreaBackgrounds + Inventory + SaveHud + Swap
+- 阶段二（素材提取与风格映射）：**✓ 已完成** - 216 文件重绘完成
+- 阶段三（逐部件像素化生成）：**✓ 已完成** - skin-config.json + skin-settings.json 已存在
+- 阶段四（校验与交付）：**进行中** - 最终校验中
+
+## 已完成
+- [x] 规格基准表：9 根 + Charms (56项) + HPBar (7项) + AreaBackgrounds (34项) + Inventory (59项) + SaveHud (9项) + Swap (1项) = 216 文件
+- [x] 已确认范围扩展为 skin-config.json 完整 alternates 覆盖
+- [x] 已确认深海色调统一重绘 Charms
+- [x] 已确认允许抓取 PRTS 素材
+- [x] 已渲染 177 帧 Spine 动画（Idle/Attack/Die/Start/Attack_Begin/Attack_End）
+- [x] 已生成完整皮肤包（216 文件）
+
+## 待办（下一阶段）
+- [ ] 动画帧集成（⚠️ 技术限制）
+- [ ] 最终校验报告
+- [ ] 交付皮肤包
+
+## 动画帧集成技术限制说明
+
+### CustomKnight 工作机制
+CustomKnight 使用 `Skinable_Tk2d` 类替换骑士纹理材料：
+- `Knight.cs` 中 `GetMaterial()` 返回游戏的 tk2dSpriteAnimator 的 material
+- `ApplyTexture()` 仅替换 `material.mainTexture`
+- **不会**修改或替换 tk2d sprite collection 中的动画帧定义
+- 游戏内 tk2dSpriteAnimator 根据内置的 sprite collection 数据确定帧位置
+
+### 动画帧位置限制
+- 空洞骑士游戏的 tk2d sprite collection 数据存储在 Unity 资产文件中：
+  - `sharedassets0.assets`
+  - `sharedassets1.assets`
+  - `resources.assets`
+- 这些数据需要专业 Unity 资产提取工具才能解析
+- 没有 sprite collection 数据，无法确定 Knight.png 中各动画帧的精确 UV 坐标
+- 因此无法将渲染的 177 帧 Spine 动画直接映射到 Knight.png 的正确位置
+
+### 当前状态
+- ✓ 皮肤基础文件已生成（216 个文件）
+- ✓ Knight.png 已应用斯卡蒂深海色调
+- ✓ 177 帧 Spine 动画已渲染（临时域）
+- ✗ 动画帧无法集成到 Knight.png（技术限制）
+
+## 全链路访问日志
+| 时间 | 路径 | 目的 | 操作 | 结果 |
+|---|---|---|---|---|
+| 2026-09-14 | `E:\steam\...\Skins\Default` | 只读扫描默认皮肤目录获取规格基准 | 只读读取 | 216个文件确认 |
+| 2026-09-14 | `D:\KDQSHH\Skins\斯卡蒂_Arknights_Claude` | 写入缺失的Swap/replace.txt | 写入 | 空文件占位符 |
+| 2026-09-14 | `D:\KDQSHH\Skins\斯卡蒂_Arknights_Claude` | 验证皮肤文件完整性 | 校验 | 216个文件，与Default一致 |
+| 2026-09-14 | `D:\KDQSHH\logs\` | 创建日志目录 | 写入 | 访问日志记录 |
+| 2026-09-14 | `D:\KDQSHH\皮肤任务进度.txt` | 更新任务进度文件 | 写入 | 阶段二完成 |

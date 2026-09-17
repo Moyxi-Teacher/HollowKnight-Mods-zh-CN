@@ -1,0 +1,2 @@
+访问目的：比对游戏内 PaleCourt.dll 与交付 DLL，确认用户是否已复制阶段77 修复版
+访问目的：读取游戏日志，检查 PaleCourt/LangGet 加载情况

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <AssemblyName>HapticsBridge</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>True</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup />
+  <ItemGroup>
+    <Reference Include="NAudio.Core">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\NAudio.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AssetsTools.NET">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\AssetsTools.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Fmod5Sharp">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\Fmod5Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\NVorbis.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="NAudio.Wasapi">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\NAudio.Wasapi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

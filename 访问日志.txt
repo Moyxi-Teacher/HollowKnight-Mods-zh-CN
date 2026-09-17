@@ -1,0 +1,166 @@
+
+=== 2026-09-16 ModLoader 模组音乐问题排查 ===
+访问路径: E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\
+访问目的: 只读排查——查找哪个 ModLoader(Hollow Knight API) 模组在引导阶段(Load)触发了进主菜单前的音频播放。
+操作类型: 仅列目录 + 读取日志文件，绝不改动/复制/删除任何文件。
+
+=== 2026-09-16 简体中文字体替换模组部署（用户明确授权） ===
+访问路径: E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\Mods\简体中文字体替换\
+访问目的: 将修复后的「简体中文字体替换.dll / .pdb」同步到游戏 Mods 目录，供游戏内加载实测。
+操作类型: 仅覆盖本模组自身目录内的 简体中文字体替换.dll 与 .pdb；不改动原版 DLL、不改动 Managed 根目录、
+          不改动其他任何模组目录。用户已明确指示「可以把模组直接部署在我的游戏 mod 文件夹中」。
+部署产物: MD5 见 Mods 交付目录同名文件；字体文件 霞鹜臻楷.ttf 保持原样不动。
+（本次实际写入：简体中文字体替换.dll / .pdb，最终 MD5 = 311c88d6be42c472c4cb625fc22f059b）
+第 2 次写入（同日）：追加 set_font 补丁 + 兜底扫描器版本，MD5 = 31add7f4a5b683ba7254586f5a54ab58，
+仍仅覆盖本模组自身目录内的 dll/pdb，未触碰原版 DLL 或其他模组。
+第 3 次写入（同日）：追加 TextMeshPro/TextMeshProUGUI.OnEnable 补丁 + GameManager.Update 扫描驱动 +
+语言判定兼容 ZH_CN 等写法版本，MD5 = fc383d1d81f117c921462405ecf01b4d，
+仍仅覆盖本模组自身目录内的 dll/pdb，未触碰原版 DLL 或其他模组。
+第 4 次写入（同日）：追加 TMP_Text.set_text 补丁 + 各补丁触发诊断 + 活动/全量双枚举与字体分布统计版本，
+MD5 = 57a4d7eaf20c6642c68e38b27b884581，仍仅覆盖本模组自身目录内的 dll/pdb，未触碰原版 DLL 或其他模组。
+第 5 次写入（同日）：追加 tk2d 文本系统诊断（tk2dTextMesh / tk2dFontData 统计）、文本系统活动统计、
+活动场景组件类型直方图诊断版本，MD5 = adb400ae0dc96455979de1fee9442e15，
+仍仅覆盖本模组自身目录内的 dll/pdb，未触碰原版 DLL 或其他模组。
+第 6 次写入（同日，关键修复）：确认游戏中文界面使用 UnityEngine.UI.Text（旧版 uGUI 文本）渲染；
+本版新增「new Font(ASCII 路径)」动态字体创建 + UI.Text / TextMesh 字体替换（含 set_font 与 OnEnable 补丁），
+MD5 = 4bceb95fb7b43e912001ce9b6174c5e2，仍仅覆盖本模组自身目录内的 dll/pdb，未触碰原版 DLL 或其他模组。
+第 7 次写入（同日）：实测文字变空白 → 判定 new Font(路径) 在玩家构建下无可用字形；
+改为 AddFontResourceW 会话级注册 + Font.CreateDynamicFontFromOSFont 按字体名创建，并加入字形自检
+（自检不通过则不替换，避免再次空白），MD5 = a940cf0353b1fbf9c75eab9b7e33038a，
+仍仅覆盖本模组自身目录内的 dll/pdb，未触碰原版 DLL 或其他模组。
+第 8 次写入（同日）：实测字体已替换但外观不是霞鹜臻楷 → 判定 Unity 未匹配到该字体名；
+经用户明确同意（AskUserQuestion 选择「允许安装」），执行「当前用户字体库安装」：
+  · 复制字体到 C:\Users\Administrator\AppData\Local\Microsoft\Windows\Fonts\LXGWZhenKai.ttf
+  · 写入注册表 HKCU\Software\Microsoft\Windows NT\CurrentVersion\Fonts 两处键值（LXGW ZhenKai / 霞鹜臻楷）
+  · 未使用管理员权限、未改动系统字体目录 C:\Windows\Fonts、可随时删除还原
+模组同步升级为「动态解析系统字体名 + 字形自检」版本，MD5 = 79760375c4c09f627c4cc134d8033254。
+第 9 次写入（同日）：日志核对确认用户实测跑的是旧版 DLL（日志缺少新版特有的「候选数」输出）；
+本版新增「系统字体清单」诊断（判断 Unity 能否枚举到用户级安装字体），并在找不到霞鹜臻楷时
+不执行任何替换（避免替换成无关字体），MD5 = 3a38937f9d39a0861ed1f19e1b2f5587。
+第 10 次写入（同日，根因修复）：定位到失败环节——模组把字体复制到 ASCII 临时路径时抛
+"Sharing violation"（GDI 注册过的字体文件会被系统占用），导致 asciiFontPath 为 null，
+旧代码随即提前 return，整条替换链一次都没执行（日志里因此没有「候选数」等诊断输出）。
+本版修复：① 复制改用轮换文件名（hk_zh_font_a/b/c.ttf）且失败不再中断主流程；
+② 枚举与诊断无条件执行，GDI 注册在复制失败时直接用原路径（GDI 支持中文路径）；
+③ 新增「字体名核对」——系统找不到字体时会静默回退成别的字体，必须核对实际解析出的主字体名；
+④ 删除会产出空白字形的「new Font(路径)」方式；
+⑤ 新增方式三兜底「手工静态字体」：用 FontEngine 光栅图集自建 characterInfo + material，
+完全不依赖系统字体表。第 10 次写入最终版本追加「只替换含中文的文本」（纯英文/数字保持原字体）
+与空值防护后，最终 MD5 = 38d12f97dc42b007392106c9ea04c917。
+第 11 次写入（同日，防闪退）：用户实测「主菜单不是霞鹜臻楷 + 加载存档闪退」。
+日志确认：GDI 注册成功（AddFontResource=2）、按字面名 LXGW ZhenKai 创建动态字体并自检通过（替换已生效）；
+Unity 的系统字体枚举表只有 149 个系统级字体（用户级安装字体不可见，候选数=0），
+说明替换靠的是 GDI 注册 + 字面名解析，而非枚举匹配。
+崩溃现场（Player.log）：d3d11 创建 4096²/2048² staging 纹理失败（E_OUTOFMEMORY）+ 崩溃处理器接管，
+时间点正是「进入 Town 场景、TMP 字体被实时替换」之后。
+本版防闪退改动：① 移除全部 TMP 实时补丁（SetFont / TMP.set_font / TMP.set_text / TMP.OnEnable×2），
+TMP 一律改由延迟扫描器替换且只替换含中文文本；② 扫描间隔 3s→6s，场景切换中（GameManager.IsInSceneTransition）不替换 TMP；
+③ 图集上传后立即释放 CPU 副本（Apply makeNoLongerReadable=true，省 16MB）；
+④ 新增安全模式开关文件「安全模式-不替换TMP字体.txt」（放入模组目录即只替换旧版界面文本）；
+⑤ 新增「文本类组件」诊断，用于确认主菜单文字由哪个文本系统渲染。
+MD5 = fc1c5e9129b21e87d80cbf4fc43fea2d，仍仅覆盖本模组自身目录内的 dll/pdb，
+未触碰原版 DLL 或其他模组（崩溃日志读取自 LocalLow 与 E 盘游戏目录，均为只读）。
+第 12 次写入（同日，材质对齐 + 界面文本核对）：用户反馈「字体换了但不是霞鹜臻楷」，且防闪退版未再崩溃
+（两份日志均正常进入游戏世界）。日志新发现：① 主菜单文字的真正渲染组件是 AutoLocalizeTextUI
+（StartGameButton / OptionsButton / QuitGameButton / ExtrasButton / AchievementsButton / ControllerMessage），
+其内部持有 uGUI Text 字段 textField——即先前扫描漏掉的那一层；② 游戏内中文由 TMP 字体资产
+「chinese_body」渲染，我们此前把它的材质按 defaultFontAsset 克隆，图集尺寸与 SDF 参数不一致会发虚。
+本版改动：读取游戏自带 TMP 字体资产（优先中文资产）的字形边距与 _GradientScale，
+图集边距优先沿用该参数（限制 2~6），材质显式写入 _TextureWidth/_TextureHeight/_GradientScale，
+并新增 [界面文本核对]（逐个 AutoLocalizeTextUI 打印文本/字体/是否本模组字体）与 [字体核对]
+（动态字体已光栅化字形数、TMP 资产字典字形数）。MD5 = e818b2db731a262dec0c1aecf278e90f，
+仍仅覆盖本模组自身目录内的 dll/pdb，未触碰原版 DLL 或其他模组。
+
+=== 2026-09-17 「改游戏资产」方案（用户明确选择） ===
+访问路径: E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\sharedassets0.assets / .resS
+访问目的: 把游戏自带的两个中文 TMP 字体图集（chinese_body 4096²、chinese_body_bold 2048²）里的字形
+          重制为「霞鹜臻楷」的字形，使游戏原生显示霞鹜臻楷，不再需要任何运行时模组。
+操作类型: 先完整备份 → 再以「同偏移同长度」方式覆盖图集像素（仅改字体，不动资产结构与其他任何文件）。
+备份位置: D:\KDQSHH\字体资产工作\原始备份\sharedassets0.assets（MD5 f306f2454d22cac79902430f40910276）
+          D:\KDQSHH\字体资产工作\原始备份\sharedassets0.assets.resS（MD5 3ff754df06080140eddbb0f4f993fff8）
+还原方式: 把上述两个备份文件复制回游戏目录即可完全恢复原状（游戏目录下同名文件覆盖）。
+已改动: sharedassets0.assets.resS（图集像素），新 MD5 9bfbbb6cb315cac3634030cd53016c03
+
+=== 2026-09-17 图集最终重制（精确字形表） ===
+访问路径: E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\sharedassets0.assets.resS
+访问目的: 用游戏内导出的精确字形表（2643 + 2075 条）重新生成两个中文图集的 SDF 字形（霞鹜臻楷）。
+关键参数: edge=128、斜率=128/6≈21.3 级/像素（依据材质 _GradientScale=6）；写入方向=不翻转
+          （经「图集字节 ↔ 游戏内实际渲染图像」逐像素比对确认）。
+结果: chinese_body 2636 个字形、chinese_body_bold 2069 个字形已重制。
+模组状态: 已把 简体中文字体替换.dll 改名为 .dll.bak（临时禁用，验证纯资产方案；恢复只需改回文件名）。
+还原方式: 用 D:\KDQSHH\字体资产工作\原始备份\ 下的两个文件覆盖回游戏目录即可。
+
+=== 2026-09-17 图集坐标方向修正（乱码问题） ===
+现象: 用户截图显示游戏内中文全部变成"别的字"（乱码）。
+原因: TMP 字形表里的 rect.y 是「自图集底部」计量，而图集字节按图像顺序（自上而下）存放，
+      我此前按「y 自顶部」写入 → 每个格子被写到了镜像位置的格子里 → 显示成别的字。
+判定方式: 用原始备份图集对同一字形做两种解释裁剪对比，逐字确认（中/永/上/下/A 均以"y 自底部"解释才显示正字）。
+修正: 写入行号改为 行 = 图集高度 - y - 字形高度；两图集均按此重写（2636 + 2069 个字形）。
+校验: 从新图集取 中/永/上/下/我/字 六个字，字形与字符完全对应（校验_chinese_body.png / 校验_chinese_body_bold.png）。
+其他: 另已做「霞鹜臻楷(改名为 Noto Serif CJK SC)」的用户级字体安装，用于让界面中文也变成霞鹜臻楷。
+
+=== 2026-09-17 界面字体（uGUI）内嵌数据替换 ===
+访问路径: E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\sharedassets0.assets
+发现: 游戏把中文界面字体「Noto Serif CJK SC」整份内嵌在 sharedassets0.assets 偏移 94416 处，长度 23596100 字节
+      （表目录推算长度与该长度完全一致，解析出 65535 个字形）。主菜单等 uGUI 文字就是用它渲染的。
+操作: 把该段数据替换为「霞鹜臻楷.ttf」并在尾部补零到完全相同的 23596100 字节 → 资产结构、文件大小均不变。
+校验: 从资产中读回该段数据可正常解析为 LXGW ZhenKai（7558 个字形）。
+结果: 界面中文与游戏内中文现在都是霞鹜臻楷，且不需要系统字体安装、不需要管理员权限、不需要任何模组。
+新 MD5: sharedassets0.assets = 3c60a5b263857a22c770405d8ed05a02（原 f306f2454d22cac79902430f40910276 已备份）
+说明: 霞鹜臻楷 7558 个字形 vs 原字体 65535 个字形——极生僻字可能缺失（若发现缺字可再合并原字体补全）。
+
+=== 2026-09-17 图集第三次重制（修正上下颠倒 + 边缘锯齿） ===
+现象: 用户截图——文字上下颠倒，且边缘不干净。
+修正: ① 写入方向改为「上下翻转」（以游戏内实测为准）；② SDF 改为 4 倍超采样 + scipy 精确欧氏距离变换，
+      再降采样，边缘平滑；③ 按「原版该字的墨迹包围盒」定位与缩放，保证大小与位置与原版一致。
+校验: 原版/新版对照图（中 二 十 永）大小位置一致、字形为霞鹜臻楷（原版对新版_最终.png）。
+结果: chinese_body 2636 字、chinese_body_bold 2069 字已重写。
+
+=== 2026-09-17 图集第四次重制（清除邻字残墨） ===
+现象: 用户截图——每个字旁边带着别的字的一部分（像没裁干净）。
+原因: 只覆盖了每个字的格子本身，格子「外面」仍保留原版字体的邻字墨迹，游戏采样时带进画面。
+修正: 重写时先把整张图集清空（全 0），再逐字写入新字形。
+校验: 中/上/下 三格 + 周边 6 像素检查，已无任何外来残墨（格子周边检查2.png）。
+结果: chinese_body 2636 字、chinese_body_bold 2069 字重写完成。
+
+=== 2026-09-17 HollowKnightHaptics 荒芜俯冲/黑暗降临「砸地无震动」修复 ===
+时间: 2026-09-17 18:25 ~ 18:40
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+现象: 用户报告——装了震动模组后，小骑士释放黑暗降临/荒芜俯冲，第一段空中蓄力有震动，
+      第二段砸到地面无震动。
+诊断: 分析 Player.log（5486 行）—— 落地事件 hero_void_quake_impact 触发 14 次、成功播放 0 次；
+      同一动作链的 hero_quake_spell_prepare（15/14）、hero_quake_spell_dash（14/14）均正常。
+      根因：事件名归一化为 herovoidquakeimpact，clips 素材名归一化为 heroquakespellimpactvibration，
+      两者互不包含（void 与 spell 词元不同），显式别名/自动别名/精确匹配/包含匹配四条路径全部落空
+      → 判定 MISS → 回退普通双马达 rumble（玩家感知为「完全没震动」）。
+访问路径: E:\steam\steamapps\common\Hollow Knight\BepInEx\plugins\HollowKnightHaptics\clips\（只读）
+访问目的: 核对 clips 目录内是否存在落地冲击素材，确认可用的最接近替代素材
+操作: ① 备份修改前源码与游戏侧同版本 DLL → D:\KDQSHH\备份\KHaptics_修复前_20260917\
+      ② 修改 D:\KDQSHH\TempTest\decompile\HKMod\HollowKnightHaptics\HapticMixerWrapper.cs：
+         clipAliases 新增 { "herovoidquakeimpact", "hero_quake_spell_impact_vibration" }
+      ③ dotnet build -c Release 编译（0 警告、0 错误）
+      ④ ilspycmd 反编译新 DLL 复核，确认三个别名均已注入
+校验: 素材 hero_quake_spell_impact_vibration.wav 格式符合 HapticEngine.LoadWav 要求
+      （RIFF/WAVE、fmt=1 PCM、立体声、48000 Hz、16 bit、1.90 秒）；
+      新 DLL MD5 = 5c43125fc74c20975f8264b5371d7ce2（修复前游戏侧版本 dd3267558a0dee444f93026e2dc6d29d）
+结果: 产物归档至 D:\KDQSHH\HollowKnightHaptics_修复_砸地震动_20260917\（DLL + PDB + 源码 + 修复说明.md）；
+      E:\steam 为受保护目录，本环境未写入，部署步骤已写入修复说明，待用户手动复制并实测。
+补充: 18:49 经用户明确同意，先备份交付目录旧文件（→ D:\KDQSHH\备份\HKHaptics_修复前_20260917\，
+      后缀 .交付目录旧版），再将修复版覆盖至 D:\KDQSHH\Mods\HollowKnightHaptics\（DLL + PDB），
+      覆盖后校验三方 MD5 一致 = 5c43125fc74c20975f8264b5371d7ce2。
+
+=== 2026-09-17 HollowKnightHaptics「修复态快照」备份补充 ===
+时间: 2026-09-17 19:05
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+依据: 用户指示——按另一个对话（阶段101）的文件改动清单重新备份，只处理改动过的文件
+访问路径: 无（本次未访问 E:\steam 受保护目录，仅操作 D:\KDQSHH 内文件）
+操作: ① 核对 git 改动清单与各版本 MD5（交付目录 / bin・obj 产物 / 修复归档 / 备份目录 四向比对）
+      ② 向 D:\KDQSHH\备份\HKHaptics_修复前_20260917\ 新增 3 个「修复后」备份（纯新增，无覆盖）：
+         HapticMixerWrapper.cs.修复后            3aa63f28b21376e95867650d969ab1cf
+         HollowKnightHaptics.dll.修复后_交付版   5c43125fc74c20975f8264b5371d7ce2
+         HollowKnightHaptics.pdb.修复后_交付版   e4ed554a206ecfe6fc1118d5cba97666
+      ③ 新增快照说明 D:\KDQSHH\备份\HKHaptics_修复前_20260917\修复态快照说明.md
+校验: 新增备份 MD5 与源文件一致；交付目录、bin/obj 构建产物、修复归档目录三方 DLL/PDB 完全一致
+未纳入: bin・obj 构建产物（与交付版同 MD5，可由源码重建）、csproj.FileListAbsolute.txt、
+        任务进度.txt 与访问日志.txt（过程记录文件，非模组产物）
+结果: 备份目录共 7 个文件（4 个修复前 + 3 个修复后），既有文件一律未改动、未覆盖

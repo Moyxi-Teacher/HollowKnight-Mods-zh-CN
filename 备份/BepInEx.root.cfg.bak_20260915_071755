@@ -1,0 +1,13 @@
+[General]
+Enabled=true
+Console=true
+
+[Logging]
+Enabled=true
+LogFile=true
+LogDebug=false
+Console=true
+
+[Chainloader]
+PluginPath=./BepInEx/plugins
+PatchManagerPath=./BepInEx/patchers

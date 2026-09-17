@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Fmod5Sharp</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>14.0</LangVersion>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Fmod5Sharp.Util.vorbis_headers_converted.json" />
+    <EmbeddedResource Include="Fmod5Sharp.Util.vorbis_headers_converted.json" LogicalName="Fmod5Sharp.Util.vorbis_headers_converted.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Memory">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Core">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\NAudio.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="OggVorbisEncoder">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\OggVorbisEncoder.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web">
+      <HintPath>E:\steam\steamapps\common\Hollow Knight\files\BepInEx\plugins\HollowKnightHaptics\HapticsBridge\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

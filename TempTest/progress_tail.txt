@@ -1,0 +1,80 @@
+2. Line 458: `ghAreaNameArea.GetComponent<SetTextMeshProGameText>().convName = "GODS_GLORY";`
+   → 神居快速地图区域名，应显示"神居"
+3. Line 979: `customPart.GetComponentInChildren<SetTextMeshProGameText>().convName = customAreaNameWp.ToUpper();`
+   → 世界地图自定义区域名（白宫），实际值 = "WHITE_PALACE"
+4. Line 1122: `customPart.GetComponentInChildren<SetTextMeshProGameText>().convName = customAreaNameGh.ToUpper();`
+   → 世界地图自定义区域名（神居），实际值 = "GODS_GLORY"
+
+其他 convName 赋值（PathOfPainKey/WorkshopKey/CreditsKey/WpMapKey/GhMapKey）已通过 LanguageStrings 常量正确路由，无问题。
+FSM GetLanguageString 动作（Lines 723/800/1050/1192）及 GameMapHooks line 357 使用的 key 已存在于 ZH 表或新增后完整覆盖。
+
+## 修复内容
+1. LanguageStrings.cs：新增两个常量
+   - WpAreaKey = "WHITE_PALACE"
+   - GhAreaKey = "GODS_GLORY"
+2. AdditionalMaps.cs：4 处硬编码替换为常量引用（lines 339/458/979/1122）
+3. Language.json：在 ZH 的 "Map Zones" 和 "UI" 双 sheet 中新增翻译条目：
+   - "WHITE_PALACE": "白色宫殿"
+   - "GODS_GLORY": "神居"
+
+## 构建与部署验证
+- 构建命令：dotnet build AdditionalMaps.csproj -c Release
+- 构建结果：0 个警告，0 个错误，耗时 2s
+- 构建产物：D:\KDQSHH\ModsWork\AdditionalMaps-master\bin\Release\net472\AdditionalMaps.dll（1187840 bytes）
+- 部署路径1：E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\Mods1\AdditionalMaps（额外地图）\AdditionalMaps.dll
+- 部署路径2：E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\mods2\AdditionalMaps\AdditionalMaps.dll
+- 交付路径：D:\KDQSHH\Mods\AdditionalMaps（额外地图）\AdditionalMaps.dll
+- 三处文件大小均与构建产物一致（1187840 bytes）
+
+## 最终 convName 完整性核查
+- Line 298: PathOfPainKey → "苦痛之路" ✓
+- Line 304: WorkshopKey → "作坊" ✓
+- Line 311: CreditsKey → "@molamolasses的地图" ✓
+- Line 339: WpAreaKey → "白色宫殿" ✓（本次修复）
+- Line 435: CreditsKey → "@molamolasses的地图" ✓
+- Line 458: GhAreaKey → "神居" ✓（本次修复）
+- Line 723: WpMapKey → "白色宫殿地图" ✓
+- Line 800: GhMapKey → "神居地图" ✓
+- Line 979: WpAreaKey → "白色宫殿" ✓（本次修复）
+- Line 1050: "MAP_NAME_WHITE_PALACE" → "白色宫殿" ✓
+- Line 1122: GhAreaKey → "神居" ✓（本次修复）
+- Line 1192: "MAP_NAME_GODHOME" → "神居" ✓
+- GameMapHooks line 357: pair.Key → ZH Map Zones 已有映射 ✓
+
+所有玩家可见文本均已汉化，无遗漏。
+
+## 下一步计划
+- 重启游戏，进入世界地图验证白宫/神居地图区域名是否显示中文
+- 打开快速地图（按 M）验证区域标签是否正确汉化
+- 确认后续阶段工作
+
+
+## 阶段89：DynamicCrystalDash（动态水晶冲刺）API 编译与交付
+**时间**: 2026-09-15 06:12:49
+**目标**: 将 DynamicCrystalDash 模组按 API 编译框架重新配置并交付到 D:\KDQSHH\Mods
+
+### 1. 构建配置
+- 项目路径: D:\KDQSHH\ModsWork\DynamicCrystalDash-HEAD\DynamicCrystalDash.csproj
+- 目标框架: net472
+- LangVersion: 12
+- SignAssembly: false
+- ExportDir: D:\KDQSHH\Mods\DynamicCrystalDash（动态水晶冲刺）
+- 依赖: Assembly-CSharp.dll + Satchel.dll（已通过 HkRefs 引用）
+
+### 2. 编译结果
+- 命令: dotnet build DynamicCrystalDash.csproj -c Release
+- 结果: 0 个警告，0 个错误，耗时 1s
+- 构建产物: D:\KDQSHH\ModsWork\DynamicCrystalDash-HEADin\Release
+et472\DynamicCrystalDash.dll（8192 bytes）
+- 版本信息: 1.0.0.1汉化
+
+### 3. 部署验证
+- 交付 DLL: D:\KDQSHH\Mods\DynamicCrystalDash（动态水晶冲刺）\DynamicCrystalDash\DynamicCrystalDash.dll（8192 bytes）
+- ZIP 包: D:\KDQSHH\Mods\DynamicCrystalDash（动态水晶冲刺）\DynamicCrystalDash\DynamicCrystalDash.zip（8912 bytes，含 .dll/.pdb/ReadMe.md）
+- SHA.txt: 已生成
+- 未写入 E:\steam 游戏目录，严格遵守约束
+
+### 4. 说明
+- DynamicCrystalDash 为无汉化需求的纯功能模组（无玩家可见文本），本次为其建立 API 编译框架
+- 速度上限修正（MaxDashSpeed=200f, MaxChargeTime=8f）已在源码中保留
+- 版本号信息：AssemblyVersion=1.0.0.0, InformationalVersion=1.0.0.1汉化

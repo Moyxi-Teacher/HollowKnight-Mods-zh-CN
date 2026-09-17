@@ -1,0 +1,17 @@
+ModsWork/AlwaysHazardRespawn-main/.vs/AlwaysHazardRespawn/copilot-chat/038fa0f9/sessions
+ModsWork/Benchwarp-tmp
+ModsWork/CustomKnight
+ModsWork/CustomKnight-master/.vs/CustomKnight/copilot-chat/6ac74931/sessions
+ModsWork/HKMP-master/HKMPServer/bin/Release/net472
+ModsWork/HollowKnight.SereCore-master/SereCoreCompat
+ModsWork/SkinBenchRoulette-main/SkinBenchRoulette
+TempTest/FontDiag/bin/Debug/net7.0
+TempTest/FontDiag/obj/Debug/net7.0/ref
+TempTest/FontDiag/obj/Debug/net7.0/refint
+TempTest/InspAsm/bin/Debug/net10.0
+TempTest/InspAsm/obj/Debug/net10.0/ref
+TempTest/InspAsm/obj/Debug/net10.0/refint
+TempTest/VerifyStrings
+TempTest/addmapdeliv
+TempTest/decompile/HKMod/temp_inspect
+TempTest/wavs

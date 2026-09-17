@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>HollowKnightHaptics</AssemblyName>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <TargetFramework>net472</TargetFramework>
+    <!--
+      修复：LangVersion 改为 12。
+      避免 LangVersion=14 可能引入的 field 上下文关键字冲突（CS9273）。
+    -->
+    <LangVersion>12</LangVersion>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <!--
+      参考 DLL 根目录：指向 D:\KDQSHH\ModsWork\HkRefs
+      （从游戏 Managed 目录复制的参考镜像，与当前游戏版本一致）。
+    -->
+    <HkRefs>D:\KDQSHH\ModsWork\HkRefs</HkRefs>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+    <!-- 游戏主程序集（包含 VibrationMixer / VibrationEmission / VibrationData 等） -->
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(HkRefs)\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <!-- BepInEx 核心 -->
+    <Reference Include="BepInEx">
+      <HintPath>$(HkRefs)\BepInEx.dll</HintPath>
+    </Reference>
+    <!-- Harmony 补丁框架 -->
+    <Reference Include="0Harmony">
+      <HintPath>$(HkRefs)\0Harmony.dll</HintPath>
+    </Reference>
+    <!-- UnityEngine.CoreModule（用于 Paths.GameRootPath、Object 等） -->
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(HkRefs)\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <!-- UnityEngine.dll（用于 MonoBehaviour、Transform 等） -->
+    <Reference Include="UnityEngine">
+      <HintPath>$(HkRefs)\UnityEngine.dll</HintPath>
+    </Reference>
+    <!-- UnityEngine.AudioModule：AudioClip 类型转发目标（GetPS5Vibration 返回类型） -->
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>$(HkRefs)\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <!-- UnityEngine.UI：用于游戏内配置菜单面板 -->
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(HkRefs)\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <!-- UnityEngine.UIModule：Canvas 类型转发目标 -->
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>$(HkRefs)\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <!-- UnityEngine.TextRenderingModule：Font / TextAnchor 等文本类型 -->
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>$(HkRefs)\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <!-- UnityEngine.InputLegacyModule：Input 类（用于快捷键监听） -->
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(HkRefs)\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
