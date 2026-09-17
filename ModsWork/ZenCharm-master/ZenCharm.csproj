@@ -1,5 +1,10 @@
-﻿<!-- Credit to SFGrenade https://github.com/SFGrenade -->
+<!-- Credit to SFGrenade https://github.com/SFGrenade -->
 <Project Sdk="Microsoft.NET.Sdk">
+  <!-- 本次构建：仅覆盖参考路径（只读指向游戏 Managed 目录，绝不写入） -->
+  <PropertyGroup>
+    <HkRefs>E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed</HkRefs>
+    <HKRefs>$(HkRefs)</HKRefs>
+  </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>ZenCharm</RootNamespace>
     <AssemblyName>ZenCharm</AssemblyName>
@@ -337,7 +342,7 @@
       <HintPath>$(LocalRefs)/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="SFCore">
-      <HintPath>$(ModsPath)/SFCore/SFCore.dll</HintPath>
+      <HintPath>$(HkRefs)/Mods/SFCore（核心）/SFCore.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

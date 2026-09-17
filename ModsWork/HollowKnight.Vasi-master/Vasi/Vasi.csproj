@@ -1,4 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
+    <!-- 本次构建：仅覆盖参考路径（只读指向游戏 Managed，绝不写入） -->
+    <PropertyGroup>
+        <HkRefs>E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed</HkRefs>
+        <HKRefs>$(HkRefs)</HKRefs>
+    </PropertyGroup>
     <PropertyGroup>
         <ProjectGuid>{BD025D2C-4658-4E34-981E-E81A3B0FFD5E}</ProjectGuid>
         <TargetFramework>net472</TargetFramework>

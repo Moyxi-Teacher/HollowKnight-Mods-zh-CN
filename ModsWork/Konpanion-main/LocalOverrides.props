@@ -1,0 +1,25 @@
+<Project>
+  <!--
+    本次（2026-09-18）构建的本地路径覆盖。
+    工作副本位于 D:\重要文件\Downloads\temp\repo3（临时目录）。
+
+    原 csproj 依赖 $(HkRefs) 与 $(HollowKnightModsDirectory)，
+    且依赖目录名写的是英文（Mods\Satchel、Mods\HKMP、Mods\HkmpPouch），
+    而游戏里实际是带中文括号的目录名。这里统一重定向：
+
+    1. 参考 DLL 全部只读指向游戏 Managed 目录 —— **绝不写入**。
+    2. 产物输出到 D 盘，绝不写进游戏目录。
+  -->
+  <PropertyGroup>
+    <HkRefs>E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed</HkRefs>
+    <HKRefs>$(HkRefs)</HKRefs>
+    <VanillaFiles>$(HkRefs)</VanillaFiles>
+    <ModdingAPi>$(HkRefs)</ModdingAPi>
+    <ModdingAPI>$(HkRefs)</ModdingAPI>
+
+    <!-- Satchel / HKMP / HkmpPouch 均取自游戏实际目录（只读） -->
+    <HollowKnightModsDirectory>E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed</HollowKnightModsDirectory>
+
+    <OutputPath>D:\KDQSHH\Mods\_构建输出\Konpanion\</OutputPath>
+  </PropertyGroup>
+</Project>

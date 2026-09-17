@@ -9,7 +9,7 @@
     <Copyright>Copyright © SFGrenade 2025</Copyright>
     <AssemblyVersion>1.5.1.3</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
-    <InformationalVersion>1.5.1.3汉化</InformationalVersion>
+    <InformationalVersion>1.5.1.3汉化+长椅修复</InformationalVersion>
     <ImplicitUsings>false</ImplicitUsings>
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
     <OutputPath>bin/$(Configuration)/</OutputPath>
