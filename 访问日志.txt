@@ -164,3 +164,30 @@ MD5 = fc1c5e9129b21e87d80cbf4fc43fea2d，仍仅覆盖本模组自身目录内的
 未纳入: bin・obj 构建产物（与交付版同 MD5，可由源码重建）、csproj.FileListAbsolute.txt、
         任务进度.txt 与访问日志.txt（过程记录文件，非模组产物）
 结果: 备份目录共 7 个文件（4 个修复前 + 3 个修复后），既有文件一律未改动、未覆盖
+
+=== 2026-09-17 云端全量备份（GitHub Moyxi/KDQSHH） ===
+时间: 2026-09-17 19:05 ~ 20:55
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+依据: 用户指示——「把整个 D:\KDQSHH 上传到 https://github.com/Moyxi/KDQSHH 仓库，
+      不需要上传 bin/ 和 obj/ 编译产物；云端 Release 不要重复上传；
+      D:\重要文件\Documents\空洞骑士模组项目备份也重新做」
+访问路径: 无（全程未访问 E:\steam 受保护目录，所有操作限于 D:\KDQSHH 与云端 API）
+操作:
+  ① 核查云端真实状态 —— 发现上一轮（17:27）仅推送了 probe.txt（11 字节），
+     项目文件一个都没传上去；Release v1.0-full 附件数为 0（此前 README 描述的是计划而非现实）
+  ② 更新 .gitignore：新增 bin/、obj/ 排除规则，保留 14 个超 100 MiB 文件清单
+  ③ 新建孤儿分支 cloud-20260917，分两批提交以避开 GitHub 单次 push 体积限制：
+     批次1 13aa305 = 862 文件（工程文档、交付模组、参考资料、临时工作区）
+     批次2 db30374 = 12179 文件（ModsWork 全部源码、依赖库、资源）
+     补齐：132 个被模组自带 .gitignore 误挡的文件（PaleCourt StreamingAssets 资源包、
+     DoodleBosses 素材 PNG、.csproj/.sln/.props/.snk 等），以 git add -f 强制纳入
+  ④ 强推 main 覆盖 probe 提交 → 6bbac68（含 README 与空目录清单更新）
+  ⑤ 上传 8 个超 100 MiB 文件至 Release v1.0-full（附件名 ASCII 化，附映射表）
+  ⑥ 重做 D:\重要文件\Documents\空洞骑士模组项目备份（10113 文件 / 116 MB，纯源码文档）
+  ⑦ 新增 / 更新：README_云端备份与恢复.md、_空目录清单.txt（当前 8 个空目录）
+校验: 远程 main 文件数 13041，与本地快照逐文件 git 对象 SHA 对比完全一致（逐字节级）；
+      Release 8 个附件（合计 2.61 GB）大小与本地源文件逐字节一致
+排除: bin/obj 编译产物 3557 个、.vs 缓存 980 个（均可由 dotnet build 重建）；
+      文件数校验 13041 + 8 + 3557 + 980 = 17586 —— 一个文件都没丢
+结果: 云端备份完整可用，本地 D:\KDQSHH 已具备安全删除条件；
+      仓库须永远保持 Private（含 Team Cherry 原版 DLL 与第三方模组作者源码）
