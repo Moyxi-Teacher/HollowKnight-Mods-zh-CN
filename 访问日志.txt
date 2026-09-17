@@ -191,3 +191,401 @@ MD5 = fc1c5e9129b21e87d80cbf4fc43fea2d，仍仅覆盖本模组自身目录内的
       文件数校验 13041 + 8 + 3557 + 980 = 17586 —— 一个文件都没丢
 结果: 云端备份完整可用，本地 D:\KDQSHH 已具备安全删除条件；
       仓库须永远保持 Private（含 Team Cherry 原版 DLL 与第三方模组作者源码）
+
+=== 2026-09-18 长椅故障定位：受保护目录只读访问记录 ===
+时间: 2026-09-18 04:16 ~ 04:30
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+目的: 定位"使用长椅传送后无法在长椅上休息"的故障成因
+      —— 需要（1）确认哪些已装模组引用了长椅状态机，
+              （2）解出长椅状态机「Can Rest?」状态的真实判定逻辑，
+              （3）取得编译诊断模组所需的引用程序集
+访问路径（全部为**只读**，未写入、未修改、未删除、未复制到本目录内任何文件）:
+  · E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\
+  · E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\Mods\
+      —— 目录列举 + 对全部模组 DLL 做二进制字符串检索
+         （关键字：RespawnResting / Bench Control / Can Rest? / atBench / respawnType）
+  · E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\Assembly-CSharp.dll
+  · E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\MMHOOK_PlayMaker.dll
+  · E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\PlayMaker.dll
+  · E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\sharedassets7.assets
+  · E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\level*（只做关键字检索）
+  · E:\steam\steamapps\common\Hollow Knight\BepInEx\LogOutput.log
+操作:
+  ① 二进制检索全部模组 DLL，锁定仅 5 个模组引用 "Bench Control"（Benchwarp、
+     InvincibilityMonitor、ItemChanger、PaleCourt、Satchel），逐一反编译排查：
+     - InvincibilityMonitor 只改 Deepnest_Spider_Town 的 "Bench Control Spider"，排除
+     - Benchwarp 的 FixRespawnType / FixAreaTitleBug / UpdateInteractive 均需特定条件，排除
+     - 另反编译 BenchWarpFix（长椅传送修正）确认其仅做"掉出边界传回德特茅斯"的保险，排除
+  ② 在 sharedassets7.assets 中定位到「Can Rest?」状态定义，逐字节解出 10 个动作的
+     类型、方法名与变量名，得到该状态的完整判定流程（详见任务进度.txt 阶段101-H）
+  ③ 反编译 Assembly-CSharp.dll 中 HK 自有的 PlayMaker 动作类，确认
+     BoolAnyTrue / BoolTest / CallMethodProper / BoolAllTrue / BoolNoneTrue 的确切语义
+结果: 取得决定性证据，推翻此前所有假设；E 盘受保护目录全程只读，文件零改动。
+      反编译产物一律输出至 D:\重要文件\Downloads\temp（临时目录），未回写 E 盘。
+
+=== 2026-09-18 长椅故障续查：Start Rest 状态动作解析（受保护目录只读访问） ===
+时间: 2026-09-18 04:31 ~ 04:35
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+目的: v8 实测后症状变为"判定通过但骑士没有坐下动作"，需确认「Start Rest」状态
+      究竟有哪些动作依赖英雄对象，以确定修复范围
+访问路径（全部为**只读**，未写入、未修改、未删除、未复制）:
+  · E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\sharedassets7.assets
+  · E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\PlayMaker.dll
+      —— 只为查证 FsmOwnerDefault / OwnerDefaultOption 的成员名以正确编译
+  另读取（非受保护目录）:
+  · C:\Users\Administrator\AppData\LocalLow\Team Cherry\Hollow Knight\ModLog.txt
+操作:
+  ① 从 sharedassets7.assets 解出「Start Rest」状态的 14 个动作类型与目标对象，
+     确认其中共 7 处引用 "Hero"：3 处 CallMethodProper（AffectedByGravity /
+     RelinquishControl / CharmUpdate）、Tk2dPlayAnimation（"Sit"）、
+     GetPosition ×2、iTweenMoveTo
+  ② 结合日志中"无 missing behaviour 警告"这一事实，定位到 CallMethodProper 在
+     取不到目标对象时**静默返回**的代码路径，确证根因为失效的英雄对象引用
+结果: 修复范围确定，产出 BenchFix v9；E 盘受保护目录全程只读，文件零改动。
+
+=== 2026-09-18 长椅故障续查（第三次）：引用清单与皮肤排查 ===
+时间: 2026-09-18 04:37 ~ 04:42
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+访问路径（全部为**只读**，未写入、未修改、未删除、未复制）:
+  · E:\steam\...\Managed\Mods\SkinBenchRoulette（皮肤长椅轮换）\SkinBenchRoulette.dll
+      —— 反编译，查其长椅检测钩子（CurrentClip.name == "Sit"）
+  · E:\steam\...\Managed\Mods\CustomKnight（自定义小骑士）\
+      —— 列举目录与 Skins 子目录、读取各皮肤的 replace.txt / skin-config.json
+  · E:\steam\...\Managed\Assembly-CSharp.dll（此前已记录）—— 查 RelinquishControl /
+      RegainControl / IgnoreInput / AcceptInput / AcceptInput 的实现与 acceptingInput 赋值点
+  另读取（非受保护目录）:
+  · ...\Hollow Knight\ModLog.txt、CustomKnight.GlobalSettings.json
+操作:
+  ① 反编译 SkinBenchRoulette，确认其以 CurrentClip.name == "Sit" 判定"已坐下"，
+     并发现其 estaTrocando 在协程被打断时会永久卡死（导致不再换肤）
+  ② 对照正常/异常会话日志，推翻"acceptingInput 可作判据"的假设
+  ③ 检查全部皮肤目录结构（均为整张 Knight.png 图集替换，replace.txt 为空）
+结果: 排除两条错误线索，产出 BenchFix v10（引用清单 + 关键调用追踪 + 动画名快照）；
+      E 盘受保护目录全程只读，文件零改动。
+
+=== 2026-09-18 长椅故障续查（第四次）：PlayMaker 目标对象解析路径 ===
+时间: 2026-09-18 04:43 ~ 04:48
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+访问路径（**只读**，未写入、未修改、未删除、未复制）:
+  · E:\steam\...\Managed\PlayMaker.dll —— 反编译 Fsm.GetOwnerDefaultTarget 与 FsmOwnerDefault
+  另读取（非受保护目录）:
+  · ...\Hollow Knight\ModLog.txt（v10 会话日志）
+操作:
+  ① 以 SkinBenchRoulette 的 CurrentClip.name=="Sit" 判据，确定正常/异常分界线为帧808
+  ② 统计全日志 HeroController 关键方法调用位置，确认重载存档后 RelinquishControl /
+     StopAnimationControl 一次都未被调用，且无任何错误日志 ⇒ 静默不执行
+  ③ 反编译 PlayMaker.dll，确认 CallMethodProper 经 GetOwnerDefaultTarget 直接读取
+     FsmOwnerDefault.GameObject.Value 字段，不解析同名 FSM 变量
+     ⇒ 定位到 v9/v10 修复写错位置（写了变量而非字段）
+结果: 产出 BenchFix v11（直接写字段 + 坐下兜底）；E 盘受保护目录全程只读，零改动。
+
+=== 2026-09-18 长椅故障（第五次）：v11 回归排查与回退 ===
+时间: 2026-09-18 04:48 ~ 04:52
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+访问路径: 无（本次仅读取 C:\...\ModLog.txt 与修改 D:\KDQSHH 下的自有文件，
+          未访问 E:\steam 受保护目录）
+操作:
+  ① 读取 ModLog.txt，确证 v11 的 EnsureSitting() 触发两次并剥夺玩家控制权
+     且未安排恢复路径，导致无法移动、按上键全部被 CANCEL
+  ② 核查 v11 的引用修正仅改动 1 处（Can Rest? 的 CanInput），无副作用
+  ③ 回退：删除 EnsureSitting() 整段；新增纯恢复性的卡死自恢复安全网；
+     编译并交付 BenchFix v12（MD5 bb986a2cd0b500cfe251fd0c5ca4eeeb）
+结果: 失误已定位并回退，交付 v12；E 盘受保护目录本次未被访问。
+
+=== 2026-09-18 长椅故障（第六次）：动作执行追踪与目标解析 ===
+时间: 2026-09-18 04:56 ~ 05:00
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+访问路径（**只读**）:
+  · E:\steam\...\Managed\MMHOOK_PlayMaker.dll —— 查 FsmStateAction 可钩挂方法
+  · E:\steam\...\Managed\PlayMaker.dll      —— 查 FsmStateAction.Finish 实现与成员
+  另读取（非受保护目录）: ...\Hollow Knight\ModLog.txt
+操作:
+  ① 确认 FsmStateAction.OnEnter 为 virtual 且各动作 override 后不调用 base.OnEnter()
+     ⇒ 钩 OnEnter 不可靠；改用 FsmStateAction.Finish（MMHOOK 提供钩子）
+  ② 部署 v13 追踪动作执行，用户实测后确认动作**全部执行**
+  ③ 据此把失败点收敛到 CallMethodProper.DoMethodCall() 内的静默提前返回
+     （GetOwnerDefaultTarget 返回 null），产出 v14：在动作执行前修正引用 + 目标解析追踪
+结果: 交付 BenchFix v14（MD5 9e417b8551dc2d7440a53a6fb526d421）；
+      E 盘受保护目录全程只读，零改动。
+
+=== 2026-09-18 CustomKnight 加载失败修复（含源码获取） ===
+时间: 2026-09-18 05:00 ~ 05:15
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+网络操作: 从用户仓库 https://github.com/Moyxi/KDQSHH 以 sparse-checkout 方式
+          仅获取 ModsWork/CustomKnight-master 与 ModsWork/Satchel-master
+          （用户指示"需要的源码去我的仓库下载，只下载需要的就行"）
+访问路径（**只读**）:
+  · E:\steam\...\Managed\Mods\CustomKnight（自定义小骑士）\ —— 目录列举、DLL 反编译
+  · E:\steam\...\Managed\Mods\ —— 目录列举、DLL 检索
+  · E:\steam\...\Managed\Mods\InvulnerabilityIndicator（无敌指示器）\ —— 反编译核对
+  · E:\steam\...\Managed\mods2\Invulnerability Indicator\ —— 反编译核对
+  · E:\steam\...\Managed\Assembly-CSharp.dll（此前已记录）—— 查 ModLoader 扫描路径
+  另读取（非受保护目录）:
+  · ...\Hollow Knight\ModLog.txt、CustomKnight.GlobalSettings.json(.bak)
+操作:
+  ① 定位 CustomKnight 崩溃点（UIController.GetSkinIcon 裁剪 knight.png）
+  ② 核对 ModLoader 只扫描 <Managed>/Mods（排除 Disabled），不扫描 mods2
+  ③ 从仓库取得 CustomKnight 与 Satchel 源码，给裁剪处加健壮性保护后重编译
+  ④ 构建输出定向至 D:\KDQSHH\Mods\_构建输出，并核对游戏侧文件时间戳未变
+结果: 交付修复版 CustomKnight.dll（MD5 0665e5fada4a3cf213d6da792ba26256）；
+      E 盘受保护目录全程只读，文件零改动（已用时间戳核对）。
+
+=== 2026-09-18 长椅问题根因定论：预加载模式（第七次排查） ===
+时间: 2026-09-18 05:15 ~ 05:25
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+访问路径（**只读**）:
+  · E:\steam\...\Managed\Mods\ —— 全量 DLL 检索（CanInput / CallMethodProper /
+    FsmOwnerDefault / FsmGameObject / GetFsmGameObject 等关键字）
+  · E:\steam\...\Managed\Mods\HKMirror（镜像库）\HKMirror.dll —— 全量类型清单核对（34152 个）
+  · E:\steam\...\Managed\Mods\HKTool（HK工具）\HKTool.FakeHK.dll —— 类型定义核对
+  · E:\steam\...\Managed\PlayMaker.dll —— FsmGameObject.Value 实现
+  · E:\steam\...\Managed\Assembly-CSharp.dll（经本地反编译副本）—— PreloadMode 分支
+  · E:\steam\...\Managed\sharedassets7.assets —— 7 个 FsmOwnerDefault 的原始字节比对
+  另读写（非受保护目录，C 盘）:
+  · ...\Hollow Knight\ModdingApi.GlobalSettings.json
+      修改 PreloadMode: RepackAssets → FullScene（已另存改前备份）
+  另读取: ...\Hollow Knight\ModLog.txt
+操作:
+  ① 逐项排除可能的肇事模组（HKMirror / HKTool.FakeHK / Benchwarp 等），均有反编译证据
+  ② 结合资产字节比对与 PlayMaker 的 FsmGameObject.Value 实现，
+     确认失效引用属"FSM 变量引用"型，只会被资产重打包破坏
+  ③ 定位到 Modding API 的 PreloadMode=RepackAssets（把预加载场景重打包成 AssetBundle）
+     即根因，并改为 FullScene
+结果: 根因定论，产出免装修复方案文档 D:\KDQSHH\长椅问题_根因与免装修复.md；
+      E 盘受保护目录全程只读，文件零改动（仅修改了 C 盘的 Modding API 设置，
+      且已保留改前备份）。
+
+=== 2026-09-18 修复并入 BenchWarpFix（第八次） ===
+时间: 2026-09-18 05:25 ~ 05:35
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+网络操作: 以 sparse-checkout 追加获取用户仓库的 ModsWork/BenchWarpFix-HEAD 源码
+访问路径（**只读**）:
+  · E:\steam\...\Managed\Mods\BenchWarpFix（长椅传送修正）\ —— 目录列举与时间戳核对
+  另读写（非受保护目录）:
+  · C:\...\Hollow Knight\ModdingApi.GlobalSettings.json —— 将 PreloadMode 由
+    FullScene 回退为 RepackAssets（恢复原状；改前备份仍在同目录）
+操作:
+  ① 用户实测否定预加载假设，回退该设置并撤回相应结论
+  ② 从仓库取得 BenchWarpFix 源码，将长椅状态机兼容修复并入其 Initialize/Unload
+     与新增的 FsmState.OnEnter 钩子中，保留原有全部功能
+  ③ 编译并交付至 D:\KDQSHH\Mods\BenchWarpFix（长椅传送修正）\
+结果: 交付并入修复的 BenchWarpFix.dll（MD5 c2e655c61ae310037cc838b505a208c2）；
+      E 盘受保护目录全程只读，文件零改动（已用时间戳核对）。
+
+=== 2026-09-18 长椅根因调查（第九次）：引用解析机制 ===
+时间: 2026-09-18 05:35 ~ 05:45
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+访问路径（**只读**）:
+  · E:\steam\...\Managed\PlayMaker.dll —— 全量反编译，查 NamedVariable / FsmVariables
+    的变量查找与 CastVariable 填充逻辑
+  · E:\steam\...\Managed\Mods\ —— 全量 DLL 检索 "CastVariable"
+  另读取（非受保护目录）: ...\Hollow Knight\ModLog.txt、Player.log
+操作:
+  ① 确认 FsmGameObject.Value 的取值为"直接引用读字段 / 变量引用读 CastVariable"
+  ② 确认 CastVariable 是 [NonSerialized] 运行时字段，由 FsmVariables 查表填充
+  ③ 确认查表失败时 PlayMaker 返回空壳变量且 LogMissingVariable 在发布版为空方法（静默）
+  ④ 确认无任何第三方模组引用 CastVariable
+  ⑤ 产出只读诊断 v9：打印状态机变量表 + 引用解析全过程 + 场景加载序号
+结果: 交付 BenchDiagnostic v9（MD5 e1e2b1afd550fa8e19c737c78a8cb632）；
+      E 盘受保护目录全程只读，文件零改动。
+
+=== 2026-09-18 【根因修复】Konpanion（伴侣） ===
+时间: 2026-09-18 05:45 ~ 06:00
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+网络操作: sparse-checkout 追加获取用户仓库的 ModsWork/Konpanion-main
+访问路径（**只读**）:
+  · E:\steam\...\Managed\Mods\Konpanion（伴侣）\ —— 目录列举、DLL 反编译、时间戳核对
+  · E:\steam\...\Managed\Mods\（全量 DLL 检索 "kompanion"）
+  另读取（非受保护目录）: ...\Hollow Knight\ModLog.txt
+操作:
+  ① 由诊断 v9 日志确认：长椅状态机的英雄引用在重载存档后指向 kompanion（Konpanion
+     创建的伙伴克隆体），而首进游戏时指向 Knight
+  ② 用户实测禁用 Konpanion 后长椅恢复正常，确认因果关系
+  ③ 从仓库取得 Konpanion 源码，在创建伙伴后与每次场景加载后纠正长椅状态机的英雄引用；
+     重定向构建路径（只读引用游戏 Managed、产物输出到 D 盘）后编译
+结果: 交付 Konpanion 修复版（MD5 acf016a6d3dc61deb7d7086adb62fced）；
+      E 盘受保护目录全程只读，文件零改动（已用时间戳核对）。
+
+=== 2026-09-18 Konpanion 修复加强（第二次） ===
+时间: 2026-09-18 05:43
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+访问路径（**只读**）: 无（本次仅读取 C 盘日志与修改 D 盘自有文件）
+操作:
+  ① 读取 ModLog：Konpanion 修复日志显示"原为 null"（说明场景加载那一刻修好了），
+     但玩家交互时引用又是 kompanion ⇒ 判断为"修正后被重新拽走"
+  ② 增强修复：在既有的"创建伙伴后 + 场景加载后"之外，增加每 15 帧的低频守卫；
+     修正日志改为记录前 5 次并附带累计计数
+  ③ 重新编译并交付（MD5 46f7ab78011753de1226e4c12f892575）
+结果: E 盘受保护目录本次未被访问，文件零改动。
+
+=== 2026-09-18 ZenCharm 崩溃修复与汉化补全 ===
+时间: 2026-09-18 05:50 ~ 06:00
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+网络操作: sparse-checkout 追加获取用户仓库的 ModsWork/ZenCharm-master
+访问路径（**只读**）:
+  · E:\steam\...\Managed\Mods\ZenCharm（禅意护符）\ —— 目录列举与时间戳核对
+  另读取（非受保护目录）: ...\Hollow Knight\ModLog.txt
+操作:
+  ① 从日志定位崩溃：MethodAction 包装后仍访问已被替换出状态的原动作的 Fsm；且
+     SetupJoniHealthFSM 缺少一次性守卫导致重复包装
+  ② 修复两处状态机包装（捕获 Fsm 与事件、加守卫、null 检查、异常记录）
+  ③ 补全汉化：护符名 "Zen"→"禅意"、描述译为中文；核查确认无其它玩家可见英文文本
+  ④ 重写 csproj 参考路径（只读指向游戏 Managed，SFCore 用实际目录名）后编译
+结果: 交付 ZenCharm 修复版（MD5 2cd4190ff921330ecfe9a7f600ade180）；
+      E 盘受保护目录全程只读，文件零改动（已用时间戳核对）。
+
+=== 2026-09-18 Konpanion 修复重做（改为直接引用型）===
+时间: 2026-09-18 05:56 ~ 06:05
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+访问路径（**只读**）: 无（本轮仅使用此前获取的源码副本与 C 盘日志，未访问 E 盘）
+操作:
+  ① 查明前一版无效的确切原因：FsmGameObject.Value 的 getter 只检查 CastVariable、
+     不检查 UseVariable ⇒ 对"变量引用"写法，写其自身字段会被完全忽略
+  ② 重做修复：将被污染的引用改为"直接引用型"（清 CastVariable、关 UseVariable、直指英雄）
+  ③ 按用户分支 A 的实测结论，彻底移除"每 15 帧遍历"的周期守卫
+  ④ 重新编译并交付（MD5 2ab08d81b0eb89ad8d6d01b5f03fe7f6），保留原版回退文件
+结果: 交付重做后的 Konpanion；本轮未访问 E 盘受保护目录，游戏侧文件零改动。
+
+=== 2026-09-18 【根因修复】Vasi 工具库 ===
+时间: 2026-09-18 06:00 ~ 06:10
+操作人: Claude（Cherry Studio Agent，Hollow Knight 汉化编译工程师）
+网络操作: sparse-checkout 追加获取用户仓库的 ModsWork/HollowKnight.Vasi-master
+访问路径（**只读**）:
+  · E:\steam\...\Managed\Mods\Vasi（工具库）\ —— 目录列举、反编译、时间戳核对
+  另读取（非受保护目录）: ...\Hollow Knight\ModLog.txt
+操作:
+  ① 从日志堆栈定位：Clone 英雄对象触发 PlayMakerFSM.OnAfterDeserialize →
+     ActionData.CreateAction 反射实例化 Vasi.InvokeMethod 时因缺少无参构造而抛
+     MissingMethodException，克隆过程被打断，导致长椅状态机的英雄引用解析错乱
+  ② 核实仓库源码中该修复早已存在（曾与 FiveKnights 同类问题一并处理），但从未部署
+  ③ 覆盖参考路径后编译并交付修复版 Vasi（MD5 032872f86d504e849277a9c64ad6166c）
+  ④ 同时按用户要求调整禅意护符描述为「进入禅定状态。\r\n\r\n在地面上可更换护符。」
+结果: 交付 Vasi 修复版与 ZenCharm 更新版；E 盘受保护目录全程只读，未写入任何内容。
+
+
+──────────────────────────────────────────────────────────────
+【记录时间】2026-09-18 06:12:35  操作人：AI 汉化编译工程师
+【访问路径】未访问（本轮全程未读取 E 盘受保护目录）
+【访问目的】无
+【说明】本轮只做两件事：
+  1) 依据上一轮游戏侧日志（ModLog.txt，位于 C 盘 LocalLow，非受保护目录）
+     确认 Vasi 修复已生效、引用仍被 kompanion 顶替；
+  2) 构建并交付 长椅诊断 v10 与 Konpanion 修复第三版，产物全部写在 D 盘。
+──────────────────────────────────────────────────────────────
+
+
+══════════════════════════════════════════════════════════════
+【记录时间】2026-09-18 06:15:11  操作人：AI 汉化编译工程师
+【授权状态】用户已明确授权本次部署（原约束中的 E 盘只读限制由用户口头解除）
+【访问路径】E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\Mods\n            （及其下 Vasi（工具库）\、Konpanion（伴侣）\、长椅诊断\ 三个子目录）
+【访问目的】部署 3 个 D 盘产物到游戏目录：
+  1) Vasi.dll            —— 修复 InvokeMethod 缺少无参构造导致的克隆异常
+  2) Konpanion.dll（第三版）—— 拦截被克隆体顶替的英雄引用
+  3) BenchDiagnostic.dll（v10）—— 长椅判定过程诊断
+【写入方式】就地覆盖；覆盖前先把原文件备份到 D:\KDQSHH\备份\ 下（E 盘不做任何改名/删除）
+══════════════════════════════════════════════════════════════
+
+
+--------------------------------------------------------------
+【记录时间】2026-09-18 06:16:07  操作人：AI 汉化编译工程师
+【授权状态】用户明确授权部署（“允许你帮我部署”），并指定：只写 Mods 与 Mods1，mods2 不用管
+【访问路径】E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\Mods\n            E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\Mods1\n【访问目的】写入 3 个已汉化/修复的模组 DLL
+【备份位置】D:\KDQSHH\备份\部署前_20260918_061558
+             备份内容：Mods 下原有的 Konpanion.dll(原版 1f96b51b...)、
+                       Vasi.dll(032872f8...)、BenchDiagnostic.dll(v9 e1e2b1af...)
+【操作结果】6 个目标文件全部写入成功，MD5 与 D 盘产物逐一核对一致
+【未触碰】mods2 目录；未删除任何文件；Mods1 下为新建目录
+--------------------------------------------------------------
+
+----
+【记录时间】2026-09-18 06:20:09  操作人：AI 汉化编译工程师
+【授权状态】用户已授权部署（沿用此前授权，仍限定 Mods 与 Mods1）
+【访问路径】E:\...\Managed\Mods\ 与 Mods1\n【访问目的】更新 Konpanion.dll(第四版) 与 BenchDiagnostic.dll(v11)
+【备份位置】D:\KDQSHH\备份\部署前_20260918_062009
+【操作结果】4 个目标文件写入成功，MD5 与 D 盘产物一致
+【未触碰】mods2 目录；未删除任何文件
+----
+
+----
+【记录时间】2026-09-18 06:24:15  操作人：AI 汉化编译工程师
+【授权状态】用户已授权部署；并指明“别管 mods1 文件夹了”，故本轮只写 Mods
+【访问路径】E:\...\Managed\Mods\Konpanion（伴侣）\ 与 Mods\长椅诊断\n【访问目的】更新 Konpanion.dll（第五版：新增进入 Can Rest? 时摆正引用）
+            与 BenchDiagnostic.dll（v11，修复监控订阅）
+【备份位置】D:\KDQSHH\备份\部署前_20260918_062415
+【操作结果】2 个文件写入成功，MD5 与 D 盘产物一致
+【未触碰】mods2、Mods1；未删除任何文件
+----
+
+----
+【记录时间】2026-09-18 06:29:03  操作人：AI 汉化编译工程师
+【授权状态】用户已授权部署，目标仅 Mods
+【访问路径】E:\...\Managed\Mods\Konpanion（伴侣）\n【访问目的】更新 Konpanion.dll（第六版：修复伴侣自身失效 + 收窄引用钩子范围）
+【备份位置】D:\KDQSHH\备份\部署前_20260918_062903
+【操作结果】写入成功，MD5 = ce93e87e0f13e4d0233de4293a7f3e68
+【未触碰】mods2、Mods1；未删除任何文件
+----
+
+----
+【记录时间】2026-09-18 06:33:44  操作人：AI 汉化编译工程师
+【访问路径】E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\Modding.dll
+【访问目的】只读反编译，用于定位“模组菜单（ModListScreen）光标被鼠标抢走”的具体实现代码
+【写入】无（仅读取；产物写往 D 盘临时目录）
+----
+
+----
+【记录时间】2026-09-18 06:34:24  操作人：AI 汉化编译工程师
+【访问路径】E:\...\Managed\Assembly-CSharp.dll
+【访问目的】只读扫描类型名，定位模组菜单（ModListScreen）实现所在，
+            用于修复“手柄操作时菜单光标被鼠标抢走”的问题
+【写入】无
+----
+
+----
+【记录时间】2026-09-18 06:38:19  操作人：AI 汉化编译工程师
+【访问路径】E:\...\Managed\Mods\InputDevicePriority（输入设备优先）\n【访问目的】部署新模组「输入设备优先」（解决手柄操作时菜单光标被鼠标抢走）
+【操作结果】新增目录与文件，MD5 = 6369916ad270d2891f5c877d330d011b
+【未触碰】任何游戏原版文件、mods2、Mods1
+----
+
+----
+【记录时间】2026-09-18 06:49:35  操作人：AI 汉化编译工程师
+【访问路径】E:\...\Managed\Mods\InputDevicePriority（输入设备优先）\n【访问目的】更新「输入设备优先」至 1.1.0：新增“长列表跟随光标滚动”
+【备份位置】D:\KDQSHH\备份\部署前_20260918_064935
+【操作结果】MD5 = 25e2fc20602c2dc627e7149dfcb9c642
+【未触碰】游戏原版文件、mods2、Mods1
+----
+
+----
+【记录时间】2026-09-18 06:55:04  操作人：AI 汉化编译工程师
+【访问路径】E:\...\Managed\Mods\InputDevicePriority（输入设备优先）\n【访问目的】更新至 1.2.0：修正滚动跟随（改用内容包围盒计算 + 防抖 + 诊断日志）
+【备份位置】D:\KDQSHH\备份\部署前_20260918_065504
+【操作结果】MD5 = 8976a3ba25d04303c491b9c0efcb50ab
+【未触碰】mods2、Mods1、游戏原版文件
+----
+
+----
+【记录时间】2026-09-18 06:58:54  操作人：AI 汉化编译工程师
+【访问路径】E:\...\Managed\Mods\InputDevicePriority（输入设备优先）\n【访问目的】按用户要求移除“列表跟随光标滚动”功能，回退为仅“输入设备优先”
+【操作结果】写入新 DLL，MD5 = 6779423e832c2cc10377576eee0182bb
+【未触碰】mods2、Mods1、游戏原版文件
+----
+
+----
+【记录时间】2026-09-18 07:02:57  操作人：AI 汉化编译工程师
+【访问路径】https://github.com/Moyxi/KDQSHH （用户自有仓库，经用户明确授权写入）
+【访问目的】将今日修改/新增的模组同步至用户仓库（覆盖 DLL 与源码）
+【写入方式】Git Data API 单次提交（blob → tree → commit → 更新 main）
+【提交】52740f24e1
+【未触碰】E 盘游戏目录（本轮除 InputDevicePriority 部署外无其它写入）；
+           仓库内所有未列出的文件一律未改动
+----
+
+----
+【记录时间】2026-09-18 07:06:40  操作人：AI 汉化编译工程师
+【访问路径】https://github.com/Moyxi/KDQSHH （用户自有仓库，经用户明确授权）
+【访问目的】1) 归档各模组构建配置（csproj / props）
+            2) 按用户要求将仓库可见性改为 private
+【提交】7675ec9286（归档构建配置）
+【可见性】已由 public 改为 private，复验 private = true
+【未触碰】E 盘游戏目录；仓库内未列出的文件一律未改动
+----

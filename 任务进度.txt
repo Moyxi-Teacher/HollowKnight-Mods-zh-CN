@@ -4965,3 +4965,1664 @@ dotnet build -c Release 成功，0 警告 0 错误。已复制到 D:\KDQSHH\Mods
 - **下一步计划**：等待用户手动部署新 DLL 至 `E:\...\BepInEx\plugins\HollowKnightHaptics\` 并实测砸地震感
 - **本次操作未访问** `E:\steam` 受保护目录，全部操作限于 `D:\KDQSHH`
 
+---
+
+### 阶段101-C：无敌指示器「退出到主菜单后每帧空引用」修复（2026-09-18）
+
+- **背景**：2026-09-18 02:59 前后 `D:\KDQSHH` 被清空，本阶段所需源码于 03:43 从用户 GitHub 仓库
+  （https://github.com/Moyxi/KDQSHH，commit `12c5182`）稀疏检出恢复：
+  `ModsWork/HK-Invulnerability-Indicator-main`、`ModsWork/HollowKnight.BenchwarpMod-HEAD`、
+  `ModsWork/SkinBenchRoulette-main`、`ModsWork/MapChanger-HEAD`、`ModsWork/HollowKnight.VanillaMapMod-master`、
+  `ModsWork/AlwaysHazardRespawn-main`，以及根目录的 `任务进度.txt`、`访问日志.txt`、`分阶段执行框架.txt`。
+- **问题现象（用户报告）**：使用"长椅传送"传送后无法坐上长椅休息（提示出现但按上键无反应）；
+  能走动、能暂停、能开背包、能进门；换存档问题依旧；重启游戏恢复。
+- **日志对比（决定性）**：同一进程内两次进入游戏 ——
+  首次进入 674 行日志 / 22 条异常（3.3%）；退出到主菜单再进入后 15680 行日志 / **15191 条异常（96.9%）**，
+  全部为 `InvulnerabilityIndicator.Indicator.RestoreAllSprites` 空引用。
+- **根因（源码确认）**：`Indicator` 仅在 `Start()` 缓存一次骑士的 SpriteRenderer；
+  `HeroController` 是 DontDestroyOnLoad 常驻对象，退出到主菜单时不销毁、`Start()` 不二次触发，
+  而骑士渲染器随场景重载被销毁重建 → 缓存永久失效 → 每帧抛异常
+  （且 QoL 的 `Dev:LogUnityErrors` 会把每次异常同步写入 ModLog）。
+- **修复**：新增 `RefreshCacheIfStale()`（每帧检查缓存有效性，失效即重建）、
+  `CacheKnightRenderers()` 增加 `Clear()`、遍历加空引用保护、`Unload()` 保护。
+- **编译**：`dotnet build -c Release` 成功，0 警告 0 错误；ilspycmd 反编译复核通过
+- **产物**：`D:\KDQSHH\Mods\无敌指示器\InvulnerabilityIndicator.dll`（MD5 `30d0b650564e2e7ab3e45a5a3ee4e2c1`）；
+  修复前备份 `D:\KDQSHH\备份\无敌指示器_修复前_20260918\`
+- **验证结果**：用户部署修复版后实测 —— **异常数由 15191 降至 2（修复有效）**，
+  但**长椅问题依旧** → 确认两者无因果关系，长椅问题根因独立。
+
+### 阶段101-D：长椅交互故障排查（进行中，2026-09-18）
+
+**用户实际症状（二次确认）**：能走/暂停/开背包/进门；长椅提示出现但按上键无反应；
+换存档依旧；重启游戏恢复。
+
+**已确认的日志证据**：
+- 两次进入的差异仅在长椅交互本身：
+  第一次 `key REST` → 皮肤轮换记录（坐下成功）；
+  第二次 `key REST` → 直接 `PAUSE_OPTIONS`（未坐下，玩家转按 ESC）。
+
+**已排除的嫌疑（逐项验证）**：
+| 嫌疑 | 排除依据 |
+|---|---|
+| 存档数据损坏 | `user1.json`/`user3.json` 的 atBench=False、respawnType=1、respawnMarkerName=RestBench 均正常 |
+| 按键绑定被破坏 | 全模组扫描，无模组修改 upKey/ClearBindings |
+| 长椅状态机报错 | 日志中 `Bench Control` 0 次 |
+| 无敌指示器每帧异常 | 修复后异常消失，长椅问题依旧 |
+| HKTool 跳过 FSM 动作加载 | 其 `ignoreLoadActionsState` 列表全程为空，钩子纯透传 |
+| MapChanger 干扰长椅 FSM | DLL 中 "Bench Control" 仅为嵌入 JSON 配置数据（只读），源码无长椅操作 |
+| Benchwarp 常规钩子 | 4 个钩子（SetPlayerBoolHook/GetPlayerStringHook/OnNextLevelReady/PlayMakerFSM.OnEnable）逻辑均无副作用 |
+| AlwaysHazardRespawn 动态重生点 | 其 `__DYNAMIC_HAZARD_RESPAWN__` 与 respawnMarkerName 不匹配，不干扰寻址 |
+| 退出时的异常（EasySoulRefill/Konpanion/ZenCharm） | 均与长椅交互无调用关系 |
+
+**已发现的待查线索（未能静态定论）**：
+- Benchwarp `ObjectCache` 把预加载长椅标记 `DontDestroyOnLoad`（静态字段 + 跨场景存活），
+  `NoPreload=false` 时该对象常驻；
+- 退出到主菜单时部分模组（Konpanion/EasySoulRefill）存在未清理状态并抛异常。
+
+**下一步**：已交付**诊断模组** `D:\KDQSHH\Mods\长椅诊断\`（MD5 `f7624d27bd841c2346d222df894451c3`），
+在每次场景加载与每次按上键时输出 atBench / nearBench / acceptingInput / RespawnPoint 列表 /
+Bench Control 状态机状态，用户复现一次后据实定位。
+
+### 阶段101-E：长椅交互故障 —— 根因确认与修复（2026-09-18）
+
+**诊断结果（诊断模组实测数据，唯一决定性证据链）**：
+
+| 时刻 | `atBench` | `Bench Control` 状态机 | 结论 |
+|---|---|---|---|
+| 首次进入存档（新游戏） | False | `Idle Start Pause` | 正常 |
+| 按上键 | → True | `Regain Control`(4) → `Start Rest`(14) | ✅ 成功坐下 |
+| **退出到主菜单 → 重进存档** | **True** | **`Idle Start Pause`(1)** | ❌ **状态不一致** |
+| 按上键 | True | `Init Resting`(15) | 开始休息流程 |
+| 再按上键 | → False | **`Cancel Frame`(1)** | ❌ 被取消 |
+| 此后任意次按上键 | False | `Cancel Frame` | ❌ 永久无响应 |
+
+**根因**：玩家在长椅上退出 → 存档记录 `PlayerData.atBench = true`；
+重新载入时场景内长椅的 `Bench Control` 状态机却停在 `Idle Start Pause`（未进入休息），
+形成"游戏认为玩家在长椅上、状态机认为不在"的矛盾。玩家按上键时，`Init Resting`
+检测到 `atBench` 已为 true（误判"已在长椅上"）→ 转入 `Cancel Frame` 取消本次休息并置回 atBench=false，
+但状态机就此**卡在 `Cancel Frame`** 不再返回空闲 → 表现为"提示出现但按上键毫无反应"。
+首次进入新游戏时 atBench=false 无此矛盾，故一切正常；重启游戏恢复亦源于此。
+
+**已逐项排除**（均有证据）：存档数据损坏、按键绑定破坏、长椅状态机加载失败、
+无敌指示器每帧异常（修复后异常由 15191 降至 2，长椅问题依旧）、HKTool 跳过动作加载、
+MapChanger 干扰、Benchwarp 常规钩子、AlwaysHazardRespawn 动态重生点、
+退出时的模组异常（EasySoulRefill/Konpanion/ZenCharm）。
+
+**修复**：新建模组 **长椅修复 BenchFix**
+`D:\KDQSHH\ModsWork\BenchFix\BenchFix.cs` —— 每次场景加载完成后检查：
+若 `atBench == true` 且当前场景内**无**任何 `Bench Control` 状态机处于休息相关状态
+（状态名不含 "Rest"），则判定为状态不一致，将 `atBench` 复位为 false；
+附带兜底：状态机卡在 `Cancel Frame` 时复位到 `Idle Start Pause`。
+正常休息流程（状态名含 "Rest"）完全不受影响。
+
+- **编译**：`dotnet build -c Release` 成功，0 警告 0 错误；ilspycmd 反编译复核通过
+- **产物**：`D:\KDQSHH\Mods\长椅修复\BenchFix.dll`（MD5 `1b6b0ca8c728c8823df8c4e28081dcb9`）
+- **已知差异**：从长椅存档继续时玩家站立而非坐姿（原版为坐姿），功能等价，按上键即可正常坐下休息
+- **下一步**：用户部署 `BenchFix.dll` 与（可选）保留 `BenchDiagnostic.dll` 后复现验证；
+  确认修复生效后可删除诊断模组
+
+### 阶段101-F：长椅修复 v1 失败复盘与 v2 修复（2026-09-18）
+
+**v1 实测结果**：用户部署后**问题依旧**；日志中 BenchFix 仅有"已加载"三行，**检查逻辑一次都没命中**。
+
+**v1 假设被推翻（第二次诊断数据）**：
+
+| 时刻 | `atBench` | 状态机 | 结果 |
+|---|---|---|---|
+| 重进存档后 | **False** | `Idle Start Pause` | 状态正常 |
+| 按上键 | False | **`Cancel Frame`** | ❌ 照样卡死 |
+
+即 v1 的判断前提"`atBench==true` 才处理"在真实故障中不成立 —— 即便 `atBench` 为 false，
+按上键同样被取消并卡死。v1 因此形同未生效。
+
+**v2 新判断（基于两次故障的唯一共同点）**：只有"从长椅存档继续游戏"（`respawnType=1`）
+之后才会卡死；首次走进 Town（`respawnType=0`）时按上键一切正常。
+游戏从长椅重生时会给长椅状态机设置 `FsmBool RespawnResting = true` 并发送 `RESPAWN` 事件
+（`HeroController.Respawn` 长椅分支）；实测此时状态机并未进入休息状态（停在 `Idle Start Pause`），
+但 **`RespawnResting` 标记残留为 true**，导致玩家按上键时 `Init Resting` 误判
+"已从长椅重生存续"→ 取消 → 卡死在 `Cancel Frame`。
+
+**v2 修复**（`D:\KDQSHH\ModsWork\BenchFix\BenchFix.cs`）：场景加载后延迟 1s / 3s 各检查一次，
+对当前场景的长椅状态机：
+1. 状态机未处于休息状态（状态名不含 "Rest"）→ **把 `RespawnResting` 复位为 false**（核心修复）
+2. `atBench==true` 而状态机未休息 → 复位 `atBench`（兼容第一种故障形态）
+3. 卡在 `Cancel Frame` → 复位到 `Idle Start Pause`
+
+- 编译：0 警告 0 错误（注意：`Mod` 基类非 MonoBehaviour，延迟检查改由 `GameManager.instance.StartCoroutine` 驱动）
+- 产物：`D:\KDQSHH\Mods\长椅修复\BenchFix.dll`（MD5 `f681c152798026cad1fe9e13fac11be9`）；v1 留档为 `BenchFix.dll.v1_旧版`
+
+**诊断模组升级至 v3**（应对"同帧内 Idle → Init Resting → Cancel Frame"无法采样的问题）：
+改为挂钩 `On.HutongGames.PlayMaker.FsmState.OnEnter`，逐一记录 "Bench Control" 状态机的每次状态进入
+（含帧号与上下文，并输出 `RespawnResting` 实时值）。
+产物：`D:\KDQSHH\Mods\长椅诊断\BenchDiagnostic.dll`（MD5 `36e417ff3fc852fd29625244dcb2c392`）
+（csproj 需补 `MMHOOK_PlayMaker.dll` 引用）
+
+- **下一步**：用户同时部署修复 v2 与诊断 v3 后复现验证；若 v2 仍不生效，
+  v3 的状态进入轨迹可直接给出取消的确切触发条件
+
+
+================================================================================
+阶段 101-H：长椅无法休息故障 —— 根因定位（决定性突破）
+时间: 2026-09-18 04:16 ~ 04:30
+================================================================================
+
+【一、复盘：前三版修复为何全部失败】
+
+  v1 假设「存档 atBench 与状态机空闲不一致」——条件从未命中；
+  v2 假设「RespawnResting 残留导致误判」——**方向判断反了，且误伤正常休息状态**；
+  v3 退化为只观察不修改。
+
+  共同错误有两点：
+   (1) 一直靠"猜"状态机变量含义，没有拿到状态机的真实定义；
+   (2) **读取时机错误** —— 在 FsmState.OnEnter（进入状态瞬间）读取变量，
+       而「Can Rest?」的 10 个动作会在进入后**立即把这些变量全部重写**，
+       因此 OnEnter 时刻读到的是"上一个状态遗留的旧值"。
+       据此推出的经验公式「可以休息 = RespawnResting OR (Can Input AND On Ground)」
+       是**错误的**，已在说明文档中明确标注作废。
+
+【二、决定性证据：从游戏资源中直接解出状态机定义】
+
+  受保护目录只读访问（详见访问日志.txt 同日条目）。
+  在 `hollow_knight_Data\sharedassets7.assets` 中定位到「Can Rest?」状态，
+  逐字节解出该状态的 10 个动作：
+
+    动作0  CallMethodProper  → Hero.CanInput()               写入 "Can Input"
+    动作1  BoolTest          → 不通过则发送 CANCEL
+    动作2  CallMethodProper  → GetState("onGround")          写入 "On Ground"
+    动作3  CallMethodProper  → GetState("attacking")         写入 "Attacking"
+    动作4  CallMethodProper  → GetState("upAttacking")       写入 "Attacking Up"
+    动作5  CallMethodProper  → GetState("downAttacking")     写入 "Attacking Down"
+    动作6  CallMethodProper  → GetState("dashing")           写入 "Dashing"
+    动作7  CallMethodProper  → GetState("backDashing")       写入 "Backdashing"
+    动作8  BoolTest          → 不通过则发送 CANCEL
+    动作9  BoolAnyTrue([攻击/冲刺类变量]) → 任一项为真则发送 CANCEL
+    全部通过 → FINISHED → Broadcast Event → 骑士坐下并保存
+
+  动作语义已在 Assembly-CSharp.dll（HK 自有 PlayMaker 动作）中逐类核实：
+    · BoolAnyTrue.DoAnyTrue()：**任一项为真**即 Fsm.Event(sendEvent)
+    · BoolTest.OnEnter()：Value ? Event(isTrue) : Event(isFalse)
+    · CallMethodProper.DoMethodCall()：若目标对象引用失效 → **直接 return，变量不被刷新**
+
+【三、故障机理（结论）】
+
+  该状态要求先把 7 个变量刷新为玩家此刻的真实状态，再做判定。
+  一旦刷新未生效（指向 "Hero" 的对象引用失效等），`Can Input` 会停留在旧值 false，
+  于是每次按上键都被 CANCEL —— 表现即"上键提示出现，但按了没反应"。
+  这也解释了故障为何只在"退回主菜单→重新加载存档"之后出现：
+  那是唯一会重建长椅状态机、使其内部对象引用可能失效的时机。
+
+【四、本轮产物】
+
+  1. 诊断模组 v7（决定性采集）
+     · 新增 FsmState.OnExit 采集：离开「Can Rest?」时（动作已全部执行完）导出全部变量
+     · 新增自动判定结论：直接指出被取消的是哪一步（Can Input / On Ground / 攻击 / 冲刺）
+     · 新增玩家实时状态输出：CanInput()、cState.onGround、各攻击冲刺标志、刚体类型与重力
+       —— 与状态机变量逐项对照，可区分"刷新失效"与"角色状态本身异常"
+     产物：D:\KDQSHH\Mods\长椅诊断\BenchDiagnostic.dll
+           MD5 889af231f31ba9f18d516bea36a00994（13312 字节）
+     说明：D:\KDQSHH\Mods\长椅诊断\使用说明.md
+
+  2. 修复模组 v8（安全修复）
+     · 挂钩 FsmState.OnEnter，在进入「Can Rest?」的瞬间（动作执行之前）
+       把 7 个变量直接写入 HeroController 的实时状态
+     · 写入来源与游戏自身动作**完全相同**：正常时写入值与游戏随后刷新的值一致
+       → 行为零改变；仅在游戏刷新失效时补上真值 → 绕过故障
+     · **不修改** PlayerData、**不修改** RespawnResting、**不切换**状态机状态
+     产物：D:\KDQSHH\Mods\长椅修复\BenchFix.dll
+           MD5 7cea6f07b2a044994ec7cbdba9706374（6656 字节）
+     说明：D:\KDQSHH\Mods\长椅修复\修复说明.md
+
+【五、编译与校验】
+
+  · dotnet build -c Release：两个工程均 0 警告 0 错误
+  · 已用 ilspycmd 反编译产物 DLL 复核，确认 v7/v8 的新代码确实进入交付文件
+  · 部署方式：用户手动复制（E 盘受保护，本流程不写入游戏目录）
+
+【六、排除项（本轮新增证据）】
+
+  · BinarySearch 全部已装模组 DLL：仅 5 个引用 "Bench Control"
+    → InvincibilityMonitor 只改 Deepnest_Spider_Town 的 "Bench Control Spider"，排除
+    → Benchwarp 的 FixRespawnType / FixAreaTitleBug / UpdateInteractive 均需特定条件，排除
+    → ItemChanger / PaleCourt / Satchel 属常规 FSM 工具用法，排除
+  · BenchWarpFix（长椅传送修正，作者 SFGrenade）：反编译确认仅做
+    "英雄掉出地图边界时传回德特茅斯"的保险逻辑，与休息无关，排除
+  · 全部日志中无任何长椅相关报错；存档数据正常；按键绑定无冲突
+    （状态机确实收到了 UP PRESSED 事件，问题在判定环节而非输入环节）
+
+【七、下一步计划】
+
+  1. 用户部署诊断 v7 复现，回传 [长椅诊断] 日志
+     · 若「判定结论」显示变量值与"玩家真实状态"不一致 → 确认刷新失效，v8 即为最终修复
+     · 若两者一致却仍被取消 → 转查骑士物理状态（刚体重力被关闭导致 onGround 恒为 false），
+       届时按该方向补一版物理状态还原
+  2. 定稿后清理临时诊断模组与工作目录，并按附录F补充归档
+
+================================================================================
+阶段 101-I：长椅故障 —— v8 实测结果与根因确证
+时间: 2026-09-18 04:31 ~ 04:35
+================================================================================
+
+【一、v8 实测反馈（用户）】
+
+  「点击休息有效果，但是没有做到长椅上的动作了」
+
+  即：**判定环节已修复**（按上键有反应、能保存），但**骑士没有坐下**。
+  相较此前的"按了没反应"，前进了一大步。
+
+【二、实机日志证据】
+
+  ModLog.txt（2026-09-18 04:31）中「Can Rest?」的动作清单与此前从
+  sharedassets7.assets 解出的定义**逐项完全一致**，机制确认无误：
+
+    [CallMethodProper behaviour=HeroController methodName=CanInput]
+    [BoolTest boolVariable:Can Input=…]
+    [CallMethodProper behaviour=HeroController methodName=GetState] ×6
+    [BoolTest boolVariable:On Ground=…]
+    [BoolAnyTrue boolVariables[Attacking, Attacking Down, Attacking Up,
+                              Backdashing, Dashing] sendEvent=CANCEL]
+
+  状态进入轨迹（帧4681 起）显示判定通过后一路走到 Resting：
+
+    In Range → Hide Prompt → Can Rest? → Broadcast Event → Start Rest →
+    Start Tilt? → Save Frame → Rest Burst → Pause → Save Game →
+    Add To Bench List → Update Map → Charm Rest? → Resting Init → Resting
+
+  **关键线索：整个日志中没有任何 "CallMethodProper: … missing behaviour: …" 警告。**
+  对照 Assembly-CSharp.dll 中该动作的实现：
+
+    GameObject ownerDefaultTarget = base.Fsm.GetOwnerDefaultTarget(gameObject);
+    if (ownerDefaultTarget == null) return;        // ← 静默返回，无任何日志
+    component = ownerDefaultTarget.GetComponent(behaviour.Value) as MonoBehaviour;
+    if (component == null) { LogWarning("...missing behaviour..."); return; }
+
+  ⇒ 无警告 = 走的是**静默返回**那条路 ⇒ **指向英雄的对象引用取不到**。
+
+【三、根因（确证）】
+
+  长椅状态机里所有"让骑士做事"的动作都要先拿到英雄对象。解自 sharedassets7.assets：
+
+    「Can Rest?」：7 处 CallMethodProper 指向 "Hero"
+    「Start Rest」：共 7 处指向 "Hero" ——
+        3 处 CallMethodProper（AffectedByGravity / RelinquishControl / CharmUpdate）、
+        Tk2dPlayAnimation（"Sit" 坐下动画）、
+        GetPosition ×2 与 iTweenMoveTo（把骑士挪到坐下位置）
+
+  引用失效时这些动作全部静默落空：
+    ·「Can Rest?」的 7 个变量不刷新 → Can Input 停在旧值 false → 按上键被取消（v9 之前）
+    ·「Start Rest」的坐下动作全部落空 → 状态机以为已坐下并保存，骑士却原地站着（v8 实测症状）
+
+  这也解释了故障为何只在"退回主菜单→重新加载存档"后出现：
+  英雄对象是 DontDestroyOnLoad 的跨场景对象，重载存档后状态机里指向它的引用解析失败。
+
+【四、本轮产物：BenchFix v9】
+
+  修复一（直击根因）：长椅状态机启用时扫描全部状态与动作，把失效的英雄引用重新指向
+    当前英雄对象。判定条件收得很紧以防改错：
+      · 只处理 ownerOption == SpecifyGameObject 的 FsmOwnerDefault；
+      · 只处理解析结果为空、或 behaviour==HeroController 却指向非当前英雄的引用；
+      · 目标只认两种百分之百确定的情形：引用名为 "Hero"，或 behaviour 为 "HeroController"；
+        其余对象一律保持原样，仅在日志中报告；
+      · 修好后清空该动作的方法缓存。
+  修复二：保留 v8 的判定变量同步（已实测有效）作双保险。
+
+  产物：D:\KDQSHH\Mods\长椅修复\BenchFix.dll
+        MD5 6cccce4bda93e567cd8e63e958ab4a16（10752 字节）
+  说明：D:\KDQSHH\Mods\长椅修复\修复说明.md
+  编译：dotnet build -c Release，0 警告 0 错误；已用 ilspycmd 反编译交付 DLL 复核代码
+
+【五、部署状态说明】
+
+  用户当前游戏侧已装 v8（MD5 7cea6f07b2a044994ec7cbdba9706374），需替换为 v9。
+  诊断模组仍为 v4（用户未更新为 v7）；因实机动作清单已与解析结果完全一致，
+  本轮不再要求更新诊断模组，避免多余往返。
+
+【六、下一步计划】
+
+  1. 用户部署 v9 后复现验证：预期骑士走到长椅坐下、保存与 Resting 状态正常
+  2. 若坐下动作仍缺失：日志会列出全部失效引用（含"未处理"项），据此继续修复
+  3. 定稿后清理临时诊断模组、按附录F归档
+
+================================================================================
+
+================================================================================
+阶段 101-J：v9 实测结果 —— 排除两个假设，转入运行时追踪
+时间: 2026-09-18 04:37 ~ 04:42
+================================================================================
+
+【一、v9 实测反馈】
+
+  用户：「问题依旧」—— 症状仍是"点击休息有效果，但没有坐到长椅上的动作"。
+
+【二、v9 实机日志要点】
+
+  · 两处引用检查各报告「修复 1 处」：
+      长椅 RestBench（场景 Crossroads_30）
+      · 已修复「Can Rest?」的 CallMethodProper（引用名 "Hero" → Knight）
+      · 其余全部为"无法修复"（引用名为 Self / HUD Canvas / Charm Effects /
+        Burst Anim / Particle F / Particle B / Particle Rest / Inventory /
+        Charm Msg / Game Map 等，均为 FSM 内的局部对象，非英雄）
+  · 状态轨迹显示每次按上键都完整走到底：
+      In Range → Hide Prompt → Can Rest? → Broadcast Event → Start Rest →
+      Start Tilt? → Save Frame → Rest Burst → Pause → Save Game →
+      Add To Bench List → Update Map → Charm Prompt? → Resting Init → Resting
+  · **英雄对象的实际名字是 Knight（不是 Hero）**，引用名 "Hero" 只是编辑器遗留名字。
+
+【三、两个假设被推翻（如实记录）】
+
+  1) 「坐下时 acceptingInput 应为 false，异常时为 true」——**错误**。
+     翻查正常会话日志（帧428/596/2115 的「Start Rest」），正常坐下时
+     acceptingInput 同样是 True。该线索作废，不可作为判据。
+
+  2) 「皮肤轮换模组靠 CurrentClip.name == "Sit" 判断坐下，日志里只换肤 2 次
+      ⇒ 坐下动画从未播放」——**不成立**。
+     SkinBenchRoulette 自身有缺陷：estaTrocando 在协程被场景切换打断时会永久卡在
+     true，导致 OnHeroUpdate 直接 return，此后既不再检测也不换肤。
+     因此"不再换肤"不能反推"坐下动画没播"。
+
+【四、已确认的有效信息】
+
+  · 判定修复有效（v8/v9 的变量同步 + 引用修复），状态机不再被 CANCEL
+  · atBench 由普通动作 SetPlayerDataBool 正确写入 True（普通动作链正常）
+  · 当前保存皮肤：RegalKnight (purple) (Made by Knightmere)
+    （CustomKnight.GlobalSettings.json 的 DefaultSkin 与 saveSkins["0"]）
+  · 各皮肤目录均只有整张 Knight.png 图集，Swap/replace.txt 为空 —— 属整图集替换
+
+【五、本轮产物：BenchFix v10（运行时追踪版）】
+
+  【A】引用清单：打印长椅状态机中**每一处** SpecifyGameObject 引用
+       （状态 / 动作 / 方法名 / 引用名 / 当前指向对象名或 null），
+       修正 v9 中"无 behaviour 字段就静默跳过"的漏洞
+  【B】HeroController 关键调用追踪：RelinquishControl / RegainControl /
+       AffectedByGravity / StopAnimationControl / StartAnimationControl /
+       IgnoreInput / AcceptInput —— 记录"调用前/返回后"快照，
+       用以区分"没被调用"与"调用了但空转"
+       （已确认 RelinquishControl 内含 if (!controlReqlinquished && !cState.dead)，
+        已 relinquished 时整个函数什么都不做）
+  【C】坐下过程快照：Start Rest / Start Tilt? / Rest Burst / Resting 等状态输出
+       acceptingInput、controlReqlinquished、刚体、**当前动画名**、坐标
+       —— 动画名是否为 "Sit" 是判定"逻辑层 vs 贴图层"的分水岭
+  【D】保留 v9 引用修复 + v8 判定变量同步
+
+  产物：D:\KDQSHH\Mods\长椅修复\BenchFix.dll
+        MD5 418bdb7cf5aa35b91c102aecf5d3f76a（15872 字节）
+  说明：D:\KDQSHH\Mods\长椅修复\修复说明.md
+  编译：0 警告 0 错误；已用 ilspycmd 复核交付 DLL
+
+【六、给用户的免费验证（无需新装模组）】
+
+  把皮肤换回 Default（游戏内按 Delete 打开皮肤列表，见 CustomKnight 键位设置），
+  再去长椅按上键：
+    · 若坐下动作恢复 → 问题在该皮肤的 Knight.png 图集，逻辑层未坏
+    · 若仍无 → 结合 v10 日志继续定位
+
+【七、下一步计划】
+
+  1. 用户部署 v10 并复现，回传 [长椅修复] 日志
+  2. 依三组数据判定：引用坏 / 调用空转 / 动画未播，给出针对性修复
+  3. 定稿后清理临时诊断模组、按附录F归档
+
+================================================================================
+
+================================================================================
+阶段 101-K：v10 数据定案 —— 找到"静默不执行"的真正原因
+时间: 2026-09-18 04:43 ~ 04:48
+================================================================================
+
+【一、v10 日志的决定性对比】
+
+  同一份日志内，正常与异常的分界线非常清晰：
+
+    Resting 帧302 / 574 / 808   → acceptingInput=**False**，皮肤轮换模组成功换肤（= Sit 动画播放过）
+    Resting 帧1822/2647/3158/3540/3812 → acceptingInput=**True**，无换肤（= Sit 动画未播放）
+
+  判据说明：SkinBenchRoulette 的判断条件正是 CurrentClip.name == "Sit"，
+  "换过肤" ⇔ "坐下动画播放过"，可直接作为客观判据。
+  （此前一轮曾误将该模组的"不再换肤"归因于它的 estaTrocando 卡死 —— 现已由
+    "前三次换肤均在 acceptingInput=False 时发生"这一对应关系排除。）
+
+【二、HeroController 调用追踪结果（全日志）】
+
+  RelinquishControl / StopAnimationControl / RegainControl / StartAnimationControl
+  的调用**全部集中在行1104~1707（第一次会话）**；
+  退回主菜单重新加载存档之后，直到日志结束**一次都没有被调用**。
+
+  而状态机轨迹显示 Init Resting 2 / Init Resting / Start Rest 均正常进入并走完。
+  日志中**没有任何** CallMethodProper error / "missing behaviour" 警告。
+
+  ⇒ 这些 CallMethodProper 是**静默不执行**，走的是无日志的提前返回路径。
+
+【三、真正的根因（PlayMaker.dll 源码确证）】
+
+  CallMethodProper 取目标对象的实现：
+
+    public GameObject GetOwnerDefaultTarget(FsmOwnerDefault ownerDefault) {
+        if (ownerDefault == null) return null;
+        if (ownerOption != OwnerDefaultOption.UseOwner) return ownerDefault.GameObject.Value;
+        return GameObject;
+    }
+
+  FsmOwnerDefault 的成员：
+    [SerializeField] private OwnerDefaultOption ownerOption;
+    [SerializeField] private FsmGameObject gameObject;
+    public FsmGameObject GameObject { get; set; }
+
+  ⇒ **它读的是 FsmGameObject.Value 这个字段本身，不会解析同名 FSM 变量。**
+
+  而 v9/v10 的修复在 UseVariable == true 时写的是 **FSM 变量** —— 动作根本不看变量，
+  所以"修了等于没修"。这同时解释了 v10 清单为何显示"引用正常"（我的 Resolve 走了变量分支）
+  而动作依旧静默失败。
+
+  （另：HeroController.RelinquishControl 内含
+     if (!controlReqlinquished && !cState.dead) —— 已 relinquished 时整个函数空转，
+     即"调用成功"与"产生效果"是两回事，故不能只看调用与否。）
+
+【四、本轮产物：BenchFix v11】
+
+  修复一（核心）：对目标百分之百确定是英雄的引用（引用名 "Hero" 或 behaviour=="HeroController"），
+     **无条件把 GameObject.Value 字段本身指向当前英雄**，不再以"当前是否非空"为前提；
+     同时把同名 FSM 变量也写上；每次修正记录原字段值与 UseVariable 取值。
+     这将使 Init Resting 2 / Init Resting / Start Rest 中的 RelinquishControl、
+     StopAnimationControl、AffectedByGravity、CharmUpdate 与 Tk2dPlayAnimation "Sit" 真正被调用。
+  修复二（兜底）：若状态机已到 Resting（游戏认定已坐下）却仍 atBench==true 且玩家可操作，
+     由模组补做 RelinquishControl → StopAnimationControl → 播放动画 "Sit"。
+     仅在上述异常条件下介入。
+  修复三：保留 v8 判定变量同步。
+
+  产物：D:\KDQSHH\Mods\长椅修复\BenchFix.dll
+        MD5 03ede2f56e3f98a62ac039bc5148953e（16896 字节）
+  说明：D:\KDQSHH\Mods\长椅修复\修复说明.md
+  编译：0 警告 0 错误；已用 ilspycmd 复核交付 DLL
+
+【五、下一步计划】
+
+  1. 用户部署 v11 复现验证；日志会显示"已强制指向英雄对象（原字段值：...）"与修复规模
+  2. 若仍缺失坐下：日志会出现"⚑ 状态机已到「Resting」但骑士仍处于可操作状态…补做坐下操作"
+     一行，据此判断兜底是否触发、以及触发后是否产生效果
+  3. 定稿后清理临时诊断模组、按附录F归档
+
+================================================================================
+
+================================================================================
+阶段 101-L：【失误与回退】v11 造成玩家被锁死
+时间: 2026-09-18 04:48 ~ 04:52
+================================================================================
+
+【一、事故经过】
+
+  用户反馈（原文）：「问题更加严重了，无法移动，也无法保存（之前是可以休息保存，
+  但是没有坐上椅子的动作）」
+
+  —— v10 的状态是"可休息、可保存、缺坐下动作"（基本可玩）；
+     v11 之后变为"无法移动、无法保存"，属我方引入的严重回归。
+
+【二、原因（已由日志确证）】
+
+  v11 新增的"坐下兜底" EnsureSitting() 在状态机进入 Resting 时主动调用了
+  HeroController.RelinquishControl()，其效果是剥夺玩家操作权
+  （acceptingInput=false, controlReqlinquished=true）。
+
+  ModLog.txt 行2723 / 3799：
+    [长椅修复] ⚑ 状态机已到「Resting」但骑士仍处于可操作状态，补做坐下操作
+    [长椅修复]   补做完成：acceptingInput=False controlReqlinquished=True
+
+  而**未安排任何恢复路径**，导致：
+    · 骑士被锁住 ⇒ 无法移动
+    · CanInput() 恒为 false ⇒ 后续每次按上键都在「Can Rest?」被 CANCEL
+      （日志末尾连续出现 Can Rest? → Cancel Frame）
+
+  经核查，v11 的"强制修正引用"实际只改动了 1 处引用（Can Rest? 的 CanInput，
+  三个场景实例各一次），经日志核对无副作用。破坏完全来自兜底逻辑。
+
+【三、处置：BenchFix v12（紧急回退）】
+
+  · 删除 v11 的 EnsureSitting() 整段逻辑，**不再主动剥夺玩家控制权**
+  · 保留：引用修正（直接写 GameObject.Value 字段）＋ v8 判定变量同步（已验证有效）
+  · 新增：卡死自恢复安全网（纯恢复性）
+      条件：atBench == false 且 controlReqlinquished == true 且 acceptingInput == false
+            持续约 3 秒（正常游玩不可能出现该组合）
+      动作：仅调用 RegainControl() 归还控制权，不做任何其他改动
+
+  产物：D:\KDQSHH\Mods\长椅修复\BenchFix.dll
+        MD5 bb986a2cd0b500cfe251fd0c5ca4eeeb（16896 字节）
+  编译：0 警告 0 错误；已用 ilspycmd 复核交付 DLL，确认 EnsureSitting 已不存在、
+        安全网代码已进入交付文件
+  说明：D:\KDQSHH\Mods\长椅修复\修复说明.md（含致歉与恢复步骤）
+
+【四、给用户的恢复步骤】
+
+  1. 退回主菜单 → 重新加载存档
+  2. 若仍无法移动 → 重启游戏（该状态为运行时状态，不写入存档）
+  3. 立刻替换为 v12
+
+【五、下一步计划】
+
+  1. 先确认用户恢复可玩，不再进行任何会改变游戏状态的自动操作
+  2. "坐下动作缺失"转为只读定位：不再修改引用，
+     改为追踪 Init Resting 2 / Init Resting / Start Rest 三个状态的**动作是否执行**
+     （已排除引用问题——清单显示全部正常指向当前英雄）
+  3. 任何后续修复必须先声明"是否会改变玩家状态、是否有恢复路径"
+
+================================================================================
+
+================================================================================
+阶段 101-M：v12 确认可用，转入"动作是否执行"的只读观测
+时间: 2026-09-18 04:52 ~ 04:56
+================================================================================
+
+【一、v12 实测反馈（用户）】
+
+  「能休息、能保存，仍没有坐下动作。」
+
+  ⇒ 卡死问题已解决，回到 v10 的可用状态；剩余问题收敛为单一的"坐下动作缺失"。
+
+【二、已排除项汇总】
+
+  · 引用指向错误对象 —— 已排除（清单显示 Init Resting 2 / Init Resting / Start Rest
+    的引用全部正常指向当前英雄 Knight）
+  · 引用为空 —— 已排除（v11/v12 已把 GameObject.Value 字段直接写为当前英雄）
+  · 方法调用报错 —— 已排除（日志无 CallMethodProper error / missing behaviour）
+  · 剩下唯一可能：**动作根本没有被执行**（PlayMaker 层面被跳过）
+
+【三、关键技术确认】
+
+  FsmStateAction.Finish() 的实现（PlayMaker.dll）：
+      public void Finish() {
+          if (!finished) { active = false; finished = true; State.FinishAction(this); }
+      }
+  每个动作完成时都会经过它，且 MMHOOK_PlayMaker 提供
+  On.HutongGames.PlayMaker.FsmStateAction.Finish 钩子
+  ⇒ 钩住它即可确切得知长椅状态机中**哪些动作真的执行了**。
+
+  另：FsmStateAction.OnEnter 为 virtual，各动作 override 后**不调用 base.OnEnter()**
+  （如 CallMethodProper.OnEnter），因此钩 OnEnter 不可靠，必须钩 Finish。
+
+【四、本轮产物：BenchFix v13（只读观测）】
+
+  · 新增「动作执行追踪」：钩 FsmStateAction.Finish，记录长椅状态机每个动作的
+    状态名 / 动作类型 / 方法名（或动画名）/ 帧号
+  · 修正动画读取：弃用 HeroController.animCtrl 字段（此前恒读到 null），
+    改用 GetComponent("tk2dSpriteAnimator") + CurrentClip.name，
+    与 SkinBenchRoulette 的判断方式保持一致
+  · **不新增任何改变游戏状态的代码**；保留 v12 的引用修正、v8 判定同步、
+    以及纯恢复性的卡死自恢复安全网
+
+  产物：D:\KDQSHH\Mods\长椅修复\BenchFix.dll
+        MD5 d29210d35239892ed3e5536d4fcadf55（17920 字节）
+  编译：0 警告 0 错误；已用 ilspycmd 复核（确认 EnsureSitting 不存在、v13 代码已进入）
+  说明：D:\KDQSHH\Mods\长椅修复\修复说明.md
+
+【五、下一步计划】
+
+  1. 用户部署 v13 复现，回传 [长椅修复] 日志
+  2. 判读：
+     · 若 [Start Rest] CallMethodProper(RelinquishControl) 未出现在"动作执行"清单
+       ⇒ 动作被 PlayMaker 跳过，需查 FsmState 的动作启用状态与 Finished 标志
+     · 若出现但仍无坐下 ⇒ 调用落空，方向转向方法调用的实际返回值与前置条件
+     · 同时可核对「Resting」时的动画名是否为 Sit
+  3. 定稿后清理临时诊断模组、按附录F归档
+
+【六、纪律约定（本次事故后确立）】
+
+  后续任何会改变游戏状态的改动，必须先声明"是否有恢复路径"，
+  并在代码中确保恢复路径存在；未确认根因前只做只读观测。
+
+================================================================================
+
+================================================================================
+阶段 101-N：v13 结果 —— 动作全部执行，失败点收敛到 DoMethodCall 内部
+时间: 2026-09-18 04:57 ~ 05:00
+================================================================================
+
+【一、v13 实测（用户「问题依旧」），但日志给出了关键结论】
+
+  动作执行追踪显示，重载存档后这些动作**全部执行了**：
+
+    ✔ [Start Rest] CallMethodProper(RelinquishControl)（帧2703）
+    ✔ [Start Rest] CallMethodProper(StopAnimationControl)（帧2703）
+    ✔ [Start Rest] CallMethodProper(CharmUpdate)（帧2703）
+    ✔ [Start Rest] Tk2dPlayAnimation（帧2703）
+    ✔ [Start Rest] iTweenMoveTo（帧2731）
+    ✔ [Init Resting 2] CallMethodProper(RelinquishControl)（帧2203）
+    ✔ [Init Resting] CallMethodProper(RelinquishControl)（帧2205）
+
+  ⇒ "动作被 PlayMaker 跳过"的假设**被推翻**。
+
+【二、失败点收敛】
+
+  CallMethodProper.OnEnter() 结构为：DoMethodCall(); Finish();
+  ⇒ Finish 被调用**不能**说明方法被调用。
+
+  DoMethodCall() 的全部失败路径中，唯一既无日志、又不报错的是：
+
+    GameObject ownerDefaultTarget = base.Fsm.GetOwnerDefaultTarget(gameObject);
+    if (ownerDefaultTarget == null) return;        // 静默返回
+
+  其余路径都会留痕：behaviour 为空（审计显示非空）、component 取不到（LogWarning，无）、
+  方法名无效（LogError，无）、调用抛异常（LogError，无）。
+
+  ⇒ **动作执行的那一刻，GetOwnerDefaultTarget() 返回了 null。**
+  ⇒ 而状态机启用时的审计读到的是 Knight（正常）
+  ⇒ **该引用在"审计之后、动作执行之前"被重置了。**
+
+【三、本轮产物：BenchFix v14】
+
+  核心：挂钩 FsmState.OnEnter，在 orig(self) **之前**（PlayMaker 先 OnEnter、后执行动作）
+        重新把该状态内目标确定为英雄的引用指向当前英雄，
+        只写 FsmOwnerDefault.GameObject.Value 字段（动作运行时读的就是它），
+        并记录原字段值与 UseVariable 取值。
+  新增：目标解析追踪 —— 每个动作完成时打印动作执行那一刻的
+        OwnerOption / UseVariable / 字段值 / GetOwnerDefaultTarget 结果。
+  安全性：**只改引用字段，不触碰任何玩家状态**（不剥夺控制权、不切状态、不改存档）。
+        保留 v12 的引用修正、v8 判定同步、纯恢复性安全网。
+
+  产物：D:\KDQSHH\Mods\长椅修复\BenchFix.dll
+        MD5 9e417b8551dc2d7440a53a6fb526d421（18944 字节）
+  编译：dotnet build -c Release，0 警告 0 错误
+        （过程中一次 CS1002：Python 补丁里的 \n 被写成真实换行，已改为字符串拼接）
+  校验：ilspycmd 反编译交付 DLL，确认 EnsureSitting 不存在、v14 代码已进入
+
+【四、下一步判读规则】
+
+  · 若日志出现「⚙ 进入「Start Rest」前修正了 N 处英雄引用」且
+    目标解析显示 GetOwnerDefaultTarget=Knight，但骑士仍不坐下
+    ⇒ 调用本身未生效，转查方法内部前置条件（如 RelinquishControl 中的
+       if (!controlReqlinquished && !cState.dead) 判断）
+  · 若目标解析仍为 null ⇒ 修正未生效，改为在动作执行的同一帧更靠后的时机修正
+
+================================================================================
+
+================================================================================
+阶段 101-O：坐下动作修复确认 + 自定义小骑士加载失败修复
+时间: 2026-09-18 05:00 ~ 05:15
+================================================================================
+
+【一、v14 结果：坐下动作已修复 ✓】
+
+  用户确认「修复了」—— 长椅坐下动作恢复正常。
+  v14 的关键改动：在 FsmState.OnEnter 的 orig(self) **之前**（PlayMaker 先 OnEnter、
+  后执行动作）重新把该状态内目标确定为英雄的引用写为当前英雄，
+  使 CallMethodProper 能真正取到目标对象并调用方法。
+
+【二、连带出现的两个问题（均非 v14 造成，经核查确认）】
+
+  1) 无敌指示器：「Found multiple mods with name 无敌指示器」→ Duplicate，加载被拒
+     · 用户已自行删除重复副本，此项关闭
+  2) 自定义小骑士（CustomKnight）：初始化抛异常，整个模组加载失败
+
+【三、CustomKnight 故障的定位与修复】
+
+  异常：
+    UnityEngine.UnityException: Texture '' is not configured correctly to allow GetPixels
+      at Satchel.TextureUtils.GetCropped
+      at CustomKnight.NewUI.UIController.GetSkinIcon      ← UIController.cs:159
+      at ... CustomKnight.Initialize
+
+  根因（源码已从用户 GitHub 仓库取得：ModsWork/CustomKnight-master）：
+    · GetSkinIcon 会从皮肤的 knight.png 中裁剪一块做图标：
+        skin.GetTexture(knight).GetCropped(new Rect(2802, 4096-3155, 86, 120))
+    · StaticSkin.GetTexture 的实现为：
+        texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+        texture.LoadImage(texBytes);        // 失败抛异常 → 被 catch → 纹理仍是 2×2 空图
+    · 一旦某张 knight.png 读取/解码失败或尺寸不足，GetPixels 即抛 UnityException
+    · 该异常**没有任何保护**，直接冒泡到 Initialize → 整个模组加载失败
+      （皮肤菜单与换肤功能全部不可用）
+    · 与"当前选中哪个皮肤"无关：只要目录里存在一张有问题的 knight.png，
+      生成图标遍历到它就会崩
+
+  修复（最小改动，仅加健壮性保护）：
+    · 裁剪前先校验：纹理存在且尺寸 >= 2888 x 1061（裁剪所需的实际最小尺寸）
+    · 不满足则跳过裁剪，退回原代码已有的兜底返回值
+    · 失败时把出问题的皮肤名写入日志，便于后续定位
+    · 汉化文本、皮肤切换、长椅检测、随机算法一律未改动
+
+  产物：D:\KDQSHH\Mods\CustomKnight（自定义小骑士）\CustomKnight.dll
+        MD5 0665e5fada4a3cf213d6da792ba26256（5392896 字节）
+  说明：D:\KDQSHH\Mods\CustomKnight（自定义小骑士）\修复说明.md
+  编译：dotnet build -c Release，0 警告 0 错误
+
+【四、构建合规性】
+
+  · 源码经 sparse-checkout 从用户仓库仅取 CustomKnight-master 与 Satchel-master
+    （工作副本位于 D:\重要文件\Downloads\temp\repo3，临时目录）
+  · LocalBuildProperties.props 中：参考 DLL 只读指向游戏 Managed 目录；
+    产物输出目录改为 D:\KDQSHH\Mods\_构建输出（D 盘）
+  · 仓库自带 Directory.Build.targets 已屏蔽"复制到游戏目录"目标
+  · **已核对游戏侧 CustomKnight.dll 时间戳仍为 Sep 14 21:32，全程未向 E 盘写入**
+
+【五、当前模组状态汇总】
+
+  · 长椅修复 BenchFix v14 —— 判定 + 坐下动作均已修复 ✓
+  · 自定义小骑士 CustomKnight —— 加载失败已修复，待用户部署验证
+  · 无敌指示器 —— 重复副本已由用户删除 ✓
+
+【六、下一步计划】
+
+  1. 用户部署 CustomKnight 修复版后验证：模组能正常加载、皮肤菜单可用
+  2. 若日志出现「[图标生成] 皮肤「xxx」...」行，即为该皮肤 knight.png 有问题，
+     可按说明移出或另存为标准 PNG；不影响模组加载
+  3. 收尾：清理临时工作副本，按附录F归档
+
+================================================================================
+
+================================================================================
+阶段 101-P：长椅问题根因定论 —— 预加载模式 RepackAssets（非模组冲突）
+时间: 2026-09-18 05:15 ~ 05:25
+================================================================================
+
+【一、用户诉求】
+
+  「现在都好了，但是我不想安装单独的长椅修复模组，
+    能不能找出是什么原因引发了之前的问题并修复那个模组」
+
+【二、根因定论：Modding API 的预加载模式 RepackAssets】
+
+  ModdingApi.GlobalSettings.json 中 "PreloadMode": "RepackAssets"
+  ⇒ 会把 104 个预加载场景重新打包进一个 AssetBundle
+     （日志：Repacked 104 preload scenes from 398917 to 10316 objects (15.91MB)）
+  ⇒ 重打包过程中，长椅状态机里「指向 resources 中英雄对象」的引用无法随包带走，
+     加载后解析为空。
+
+【三、完整证据链】
+
+  1) 解出「Can Rest?」10 个动作后发现 7 个 CallMethodProper 的引用方式分两类：
+       · CanInput              ：引用 FSM 变量（UseVariable=True，名字 "Hero"）→ 运行时解析为空
+       · GetState × 6          ：直接对象引用（UseVariable=False）      → 运行时正常
+     而 PlayMaker 的 FsmGameObject.Value 实现为：
+       get { if (CastVariable == null) return value;
+             return CastVariable.RawValue as GameObject; }
+     ⇒ 只有"变量引用"型会受重打包影响 —— 与实测只有 CanInput 坏掉完全吻合。
+
+  2) 资产字节比对（sharedassets7.assets 中 7 个 FsmOwnerDefault）：
+     7 份数据几乎完全一致，仅 CanInput 那一个在 ownerOption/name 之前多出一个
+     非零字段（07 00 00 00，其余 6 个为 0）—— 与"该引用指向外部对象/变量"一致。
+
+  3) CallMethodProper 取不到目标对象时**静默返回**（无日志、无报错），
+     解释了为何全程没有任何 CallMethodProper error / missing behaviour 告警。
+
+  4) 预加载发生在游戏启动时，首次进游戏走的是正常场景加载、
+     重载存档才走预加载缓存 ⇒ 与用户观察到的"首次正常、重载存档后失效"完全吻合。
+
+【四、已排除对象（均有反编译证据）】
+
+  · HKMirror（镜像库）：34152 个类型全部是 HKMirror.Hooks.* / HKMirror.Reflection.*
+    包装类，**未定义任何 HutongGames.* 类型**，不构成类型冲突
+  · HKTool.FakeHK.dll：空壳程序集，无任何类型定义
+  · Benchwarp / InvincibilityMonitor / ItemChanger / PaleCourt / Satchel：
+    引用 "Bench Control" 的方式与「Can Rest?」动作无关
+  · 皮肤类模组、无敌指示器：与长椅判定链路无交集
+
+【五、处置（可回退）】
+
+  已修改 C:\Users\Administrator\AppData\LocalLow\Team Cherry\Hollow Knight\
+        ModdingApi.GlobalSettings.json
+    "PreloadMode": "RepackAssets"  →  "FullScene"
+  备份：ModdingApi.GlobalSettings.json.改PreloadMode前_20260918（同目录）
+  说明：FullScene 是 Modding API 的原生模式（重打包组件不可用时会自动回退到它），
+        非 hack；游戏内亦可在 Mods 设置里切换。
+
+  文档：D:\KDQSHH\长椅问题_根因与免装修复.md
+
+【六、验证方案（用户执行，无需新装模组）】
+
+  1. 删除（或改名停用）E:\...\Managed\Mods\长椅修复\
+  2. 启动游戏 → 进存档 → 长椅传送 → 退回主菜单 → 重载存档 → 长椅旁按上键
+  3. 预期：正常坐下休息与保存，且不再需要「长椅修复」
+
+【七、后续计划】
+
+  · 验证通过：永久删除 BenchFix / BenchDiagnostic，项目记录中写明根因是预加载模式
+  · 验证未通过：回退设置，改走备选方案 —— 把该修复逻辑并入用户已在用的
+    BenchWarpFix（长椅传送修正），同样不新增模组
+
+================================================================================
+
+================================================================================
+阶段 101-Q：预加载假设被实测否定 + 修复并入「长椅传送修正」
+时间: 2026-09-18 05:25 ~ 05:35
+================================================================================
+
+【一、预加载模式假设被否定】
+
+  用户实测「验证不通过」⇒ PreloadMode=FullScene 并未解决问题。
+  · 已把 C:\...\Hollow Knight\ModdingApi.GlobalSettings.json 的 PreloadMode
+    回退为 RepackAssets（恢复原状）
+  · 结论：阶段 101-P 中"RepackAssets 破坏跨文件引用"的推断不成立，
+    该推断基于代码与字节比对，但未通过实测，予以撤回
+  · 仍然成立的部分（有直接证据）：
+      - 「Can Rest?」的 CanInput 动作为"FSM 变量引用"型（UseVariable=True）
+      - CallMethodProper 取不到目标对象时静默返回（无日志无报错）
+      - 引用修正 + 判定变量同步 可使长椅恢复正常（v14 实测有效）
+
+【二、改走备选方案：把修复并入用户已在用的模组】
+
+  用户诉求：不新增单独的长椅修复模组，而是把修复并入已有的模组。
+  选择：**BenchWarpFix（长椅传送修正）** —— 用户已在用，且定位完全相符
+        （本就是处理长椅传送引发的问题）。
+
+  做法（源码取自用户仓库 ModsWork/BenchWarpFix-HEAD）：
+    · 完整保留原有功能：掉出地图边界时自动传回德特茅斯
+    · 追加"长椅状态机兼容修复"：
+        1) 挂钩 FsmState.OnEnter，在 orig 之前把该状态内目标确定为英雄的引用
+           重新指向当前英雄（只处理 SpecifyGameObject，且仅当引用名为 "Hero"
+           或 behaviour 为 "HeroController"），并清除动作的方法缓存
+        2) 进入「Can Rest?」时同步 7 个判定变量为玩家实时状态
+    · 未并入 v11 中"主动剥夺玩家控制权"的兜底逻辑（该逻辑曾导致锁死，已彻底删除）
+    · InformationalVersion 更新为 1.5.1.3汉化+长椅修复 以便识别
+
+  产物：D:\KDQSHH\Mods\BenchWarpFix（长椅传送修正）\BenchWarpFix.dll
+        MD5 c2e655c61ae310037cc838b505a208c2（11264 字节）
+  说明：D:\KDQSHH\Mods\BenchWarpFix（长椅传送修正）\修复说明.md
+  编译：dotnet build -c Release，0 错误（1 个 MSB3246 警告来自通配符引用
+        碰到非托管 DLL，无害）
+
+【三、构建合规】
+
+  · LocalOverrides.targets 中：HkRefs 只读指向游戏 Managed；
+    ExportDir 定向到 D:\KDQSHH\Mods\_构建输出
+  · 仓库根 Directory.Build.targets 已用空目标屏蔽 "Copy mod to game dir"
+  · **已核对游戏侧 BenchWarpFix.dll 时间戳仍为 Sep 14 03:30，未向 E 盘写入**
+  · 构建结束后已清理 D 盘的临时输出目录
+
+【四、下一步】
+
+  1. 用户部署：删除 Mods\长椅修复\ 整个目录，覆盖 BenchWarpFix.dll 后测试
+  2. 通过 ⇒ 清理交付目录中的 BenchFix / BenchDiagnostic，问题闭环
+  3. 未通过 ⇒ 把 BenchWarpFix 侧日志发我，继续定位
+
+================================================================================
+
+================================================================================
+阶段 101-R：回到根因调查 —— 锁定"英雄引用为何解析为空"
+时间: 2026-09-18 05:35 ~ 05:45
+================================================================================
+
+【一、用户明确诉求】
+
+  「现在不是我不想新增模组，是我想找出真正引起这个问题的模组或设置并把它修复」
+  ⇒ 回到根因调查，不采用"把修复并入别的模组"的绕过方案。
+
+【二、本轮取得的关键机制证据】
+
+  1) PlayMaker 的取名逻辑（PlayMaker.dll 反编译）：
+       public GameObject Value {
+           get { if (base.CastVariable == null) return value;      // 直接引用：读自身字段
+                 return base.CastVariable.RawValue as GameObject; } // 变量引用：读 FSM 变量
+       }
+     ⇒ 「Can Rest?」中 6 个 GetState 为 UseVariable=False（读自身字段，正常），
+       只有 CanInput 为 UseVariable=True（读 FSM 变量，解析为空）。
+
+  2) CastVariable 的本质（NamedVariable 反编译）：
+       [NonSerialized] protected object obj;
+       public NamedVariable CastVariable { get => obj as NamedVariable; set => obj = value; }
+     ⇒ 它不是自动解析的，而是运行时由 FsmVariables 查表时填充的字段。
+
+  3) 查表失败时的行为（FsmVariables 反编译）：
+       LogMissingVariable(name);                      // ← 发布版是**空方法**，不留日志
+       return new FsmFloat(name) { CastVariable = GetVariable(name) };
+     ⇒ 变量不存在时返回**空壳变量**，且完全静默 —— 这正是长期查不到原因的关键。
+
+  4) 排查确认：CastVariable 在 Assembly-CSharp.dll 与**全部模组 DLL** 中均无引用
+     ⇒ 只由 PlayMaker 内部使用，不存在第三方模组直接篡改它的情况。
+
+【三、本轮产物：长椅诊断 v9（只读）】
+
+  一次回答三个问题：
+    ① 状态机变量表里**有没有**名为 "Hero" 的 GameObject 变量？值是什么？
+    ② 那个引用的 CastVariable 解析到了什么？自身字段又是什么？
+    ③ 第几次场景加载开始出现问题（区分首次正常 / 重载后异常）
+
+  采集点：
+    · OnNextLevelReady（每次场景加载后）—— 此时玩家尚未交互、其它模组修复也未介入，
+      读到的是**原始状态**
+    · 每次进入「Can Rest?」时
+
+  产物：D:\KDQSHH\Mods\长椅诊断\BenchDiagnostic.dll
+        MD5 e1e2b1afd550fa8e19c737c78a8cb632（12800 字节）
+  说明：D:\KDQSHH\Mods\长椅诊断\使用说明.md
+  编译：0 警告 0 错误（过程中修正：插值字符串内的三元表达式需加括号；变量列表泛型类型）
+
+  注：BenchWarpFix（含修复）可照常保留 —— 修复不影响本次要读的变量表与 CastVariable。
+
+【四、判读规则（拿到日志后）】
+
+  · 变量表里没有 "Hero" 变量 ⇒ 引用指向了不存在的变量 ⇒ 找谁删/重建了变量表
+  · 有 "Hero" 变量但值为 null ⇒ 找谁应该赋值却没赋
+  · 有变量且值正确但 CastVariable 为 null ⇒ 解析环节问题
+  · 第 1 次场景加载正常、第 2 次起为 null ⇒ 存档切换过程中被破坏 ⇒ 按时间点锁定
+
+【五、已撤回的结论】
+
+  阶段 101-P 中"PreloadMode=RepackAssets 破坏跨文件引用"的推断**已被实测否定**，
+  设置已回退原样，该结论作废。
+
+================================================================================
+
+================================================================================
+阶段 101-S：本轮工作收尾
+时间: 2026-09-18 05:45
+================================================================================
+
+【一、本轮已解决的问题】
+
+  1) 震动模组：hero_void_quake_impact 缺失映射 —— 已修复
+  2) 无敌指示器：每帧 NRE（陈旧 SpriteRenderer 缓存）—— 已修复
+     （另有一次"重复模组"加载失败，已由用户删除重复副本解决）
+  3) 长椅：按上键被取消 + 骑士不坐下 —— 已修复
+     · 判定环节：同步「Can Rest?」依赖的 7 个判定变量
+     · 坐下环节：修正状态机中指向英雄的对象引用
+     · 修复已并入用户已在用的 BenchWarpFix（长椅传送修正）
+  4) 自定义小骑士：初始化崩溃导致整个模组加载失败 —— 已修复
+     （GetSkinIcon 裁剪 knight.png 时未做保护，异常冒泡中断 Initialize）
+  5) Modding API 的 PreloadMode 改动已回退原样（该推断被实测否定）
+
+【二、当前交付物】
+
+  · D:\KDQSHH\Mods\BenchWarpFix（长椅传送修正）\BenchWarpFix.dll
+      MD5 c2e655c61ae310037cc838b505a208c2（含长椅状态机兼容修复）
+  · D:\KDQSHH\Mods\CustomKnight（自定义小骑士）\CustomKnight.dll
+      MD5 0665e5fada4a3cf213d6da792ba26256（修复加载失败）
+  · D:\KDQSHH\Mods\无敌指示器\InvulnerabilityIndicator.dll
+      MD5 4b7b61775d5058b24c0f56390be2c05f（修复每帧 NRE）
+
+  临时工具（问题定位完成后可删除，保留作日后排查用）：
+  · D:\KDQSHH\Mods\长椅诊断\ —— 只读诊断模组（v9）
+  · D:\KDQSHH\Mods\长椅修复\ —— 早期独立修复版，其功能已并入 BenchWarpFix，
+                              不再需要单独安装
+
+【三、根因调查状态（未最终定论，如实记录）】
+
+  已确认（有源码级证据）：
+    · 「Can Rest?」的 CanInput 动作是"FSM 变量引用"型，其余 6 个 GetState 是
+      "直接对象引用"型 —— 只有前者会解析为空
+    · PlayMaker 在查不到同名变量时会返回空壳变量，且 LogMissingVariable 在
+      发布版是空方法（完全静默），这是长期难以定位的原因
+    · CastVariable 无任何第三方模组引用，只由 PlayMaker 内部使用
+
+  未定论：状态机变量表里名为 "Hero" 的 GameObject 变量是否存在、其值为何为空。
+  长椅诊断 v9 即为回答此问题而准备（只读，一次采样即可判读）。
+  用户表示暂不继续。
+
+================================================================================
+
+================================================================================
+阶段 101-T：【根因定论】长椅失效的真正原因 —— Konpanion（伴侣）
+时间: 2026-09-18 05:45 ~ 06:00
+================================================================================
+
+【一、根因（用户实测确认）】
+
+  用户禁用「伴侣」（Konpanion）后，长椅**恢复正常** ⇒ 肇事模组确认。
+
+  直接证据（长椅诊断 v9 日志）：
+    第 1 次场景加载（首进游戏）：状态机 RestBench 的英雄引用 = Knight      ✅
+    重载存档之后                ：同一状态机的英雄引用 = **kompanion**    ❌
+  而 "kompanion" 这个名字**只存在于 Konpanion 一个模组**中，
+  是它克隆小骑士对象时给克隆体取的名字。
+
+【二、成因】
+
+  Konpanion 创建伙伴的流程（Konpanion.cs）：
+      HeroController.instance.gameObject.SetActive(false);
+      var knight = HeroController.instance.gameObject.createCompanionFromPrefab();  // 克隆小骑士
+      HeroController.instance.gameObject.SetActive(true);
+      ...
+      knight.name = "kompanion";
+  而 Satchel 的 createCompanionFromPrefab 内部：
+      GameObject Companion = GameObject.Instantiate(CompanionPrefab);
+      ...
+      UnityEngine.Object.DontDestroyOnLoad(Companion);      // ← 放进持久场景
+  ⇒ 克隆体被放进 DontDestroyOnLoad 场景，与英雄同处一个持久场景，
+     导致**关卡场景里指向英雄的跨场景引用在重新解析时落到克隆体上**。
+
+  为什么只在长椅上暴露：长椅状态机 "Bench Control" 的「Can Rest?」状态要从英雄对象上
+  取 HeroController 组件调用 CanInput()/GetState()；引用指向克隆体后取不到组件，
+  而 PlayMaker 的 CallMethodProper 在取不到目标对象时是**直接 return**（不报错、不写日志），
+  于是表现为"按上键无法休息、骑士也不坐下"。
+
+  ⇒ 这也解释了此前为何反复排查都找不到方向：**没有任何模组去改那个引用**，
+     是克隆动作造成的引用重定向，且全程静默。
+
+【三、本轮产物：Konpanion（伴侣）修复版】
+
+  在**创建伙伴之后**、以及**每次场景加载之后**，把长椅状态机里"目标确定为英雄"的
+  引用重新指向真正的英雄对象（挂钩 On.GameManager.OnNextLevelReady + 在
+  createKnightCompanion 末尾调用一次）。
+
+  判断条件（确保不会改错）：
+    · 只处理 ownerOption == SpecifyGameObject 的 FsmOwnerDefault
+    · 只在能百分之百确定目标时动手：引用名为 "Hero" 或 behaviour == "HeroController"
+    · 已指向英雄的引用跳过；修好后清除动作的方法缓存
+  不改动：PlayerData、玩家控制权、状态机状态；不影响原有伙伴功能。
+
+  产物：D:\KDQSHH\Mods\Konpanion（伴侣）\Konpanion.dll
+        MD5 acf016a6d3dc61deb7d7086adb62fced（21504 字节）
+  说明：D:\KDQSHH\Mods\Konpanion（伴侣）\修复说明.md
+  编译：0 警告 0 错误
+        （过程修正：LocalOverrides.props 重定向依赖路径；csproj 补 MMHOOK_Assembly-CSharp
+          引用；插入代码时类/命名空间括号位置需修正）
+
+【四、重要结论：此前的两处兜底修复不再需要】
+
+  · D:\KDQSHH\Mods\长椅修复\（BenchFix）—— 独立兜底，可删除
+  · D:\KDQSHH\Mods\BenchWarpFix（长椅传送修正）\ 中并入的那份兜底 —— 根因修好后亦无必要；
+    用户可保留（无害）或换回原版
+
+  本次是**修复肇事模组本身**，与之前"在别的模组里兜底"性质不同。
+
+【五、构建合规】
+
+  · 源码经 sparse-checkout 从用户仓库仅取 ModsWork/Konpanion-main
+  · LocalOverrides.props：参考 DLL 只读指向游戏 Managed；产物输出到 D 盘
+  · **已核对游戏侧 Konpanion.dll 时间戳仍为 Sep 14 04:50，全程未写 E 盘**
+
+【六、下一步】
+
+  用户部署后完整验证：重新启用伴侣 → 临时停用长椅修复 → 传送 → 重载存档 → 试长椅
+  通过 ⇒ 清理 BenchFix / BenchDiagnostic，问题彻底闭环
+
+================================================================================
+
+================================================================================
+阶段 101-U：Konpanion 修复未生效 + 出现新症状（如实记录）
+时间: 2026-09-18 05:46 ~ 05:55
+================================================================================
+
+【一、用户反馈】
+
+  「还是不行，而且连椅子上"休息"的俩字也没了」
+  ⇒ ① 长椅仍不能休息；② 交互提示文字消失（**新症状**，比修改前更糟）
+
+【二、日志分析结果】
+
+  1) 修正逻辑确实在执行（累计第 5 次），但未能解决问题：
+       [伴侣] 已纠正长椅状态机中指向伙伴克隆体的英雄引用
+              （「Can Rest?」CallMethodProper，原为 kompanion；累计第 5 次）
+
+  2) 场景 Crossroads_30 中始终存在 3 个长椅状态机，其引用状态不一致：
+       第 3 次场景加载：长椅#1=Knight / WhiteBench=Knight / 长椅#2=kompanion
+       第 5 次场景加载：三者均为 Knight
+
+  3) **整份日志中玩家只有过一次「进入 Can Rest?」的记录**（第 1 次场景加载时）
+     ⇒ 重载存档后玩家根本没触发过休息判定 —— 因为提示没出现，无从按起
+     ⇒ 当前最要紧的问题是"提示消失"，而非引用
+
+  4) 顺带发现一个**独立的**模组 bug（与本问题无关，另行告知用户）：
+       NullReferenceException
+         at ZenCharm.ZenCharm.<SetupJoniHealthFSM>b__0 ()
+         at SFCore.Utils.MethodAction.OnEnter ()
+         at HutongGames.PlayMaker.FsmState.ActivateActions ()
+     为「禅意护符」自身缺陷，本盘出现 2 次
+
+【三、诚实结论】
+
+  · 我的修改**没有解决问题**
+  · 且**无法解释**提示为何消失 —— 修改只写状态机引用字段，逻辑上不应影响提示对象
+  · 第 5 次加载时三个长椅引用全部正确却仍不通 ⇒ 说明可能还有未发现的环节
+  · 继续叠加猜测只会制造更多不确定性
+
+【四、处置：提供原版回退 + 三项分支判定】
+
+  已用**未修改的源码**（git checkout 还原后重新编译）产出原版 DLL 供回退：
+    D:\KDQSHH\Mods\Konpanion（伴侣）\回退用_原版\Konpanion.dll
+    MD5 1f96b51b9329e2c78ed173a4cda2d95c（18432 字节）
+  我的修复版源码已备份至：D:\重要文件\Downloads\temp\Konpanion.cs.我的修复版备份
+
+  请用户回退后复现，并按以下分支反馈：
+    A. 提示回来但长椅仍不能休息 ⇒ 提示消失确与我的修改有关 ⇒ 重新设计（不再每15帧遍历）
+    B. 提示仍无               ⇒ 提示消失是别的模组造成 ⇒ 转查提示消失原因
+    C. 提示回来且可休息       ⇒ 问题已解决，收工
+
+  说明文档：D:\KDQSHH\Mods\Konpanion（伴侣）\回退与排查说明.md
+
+【五、构建合规】
+
+  · 原版 DLL 由未修改源码编译，用于回退
+  · 全程只读引用游戏 Managed；已核对游戏侧文件时间戳未变，未写 E 盘
+
+================================================================================
+
+================================================================================
+阶段 101-V：禅意护符（ZenCharm）崩溃修复 + 汉化补全
+时间: 2026-09-18 05:50 ~ 06:00
+================================================================================
+
+【一、用户反馈与指令】
+
+  用户选择分支 A（回退后提示恢复，但长椅仍不能休息 ⇒ 提示消失确与 Konpanion 修改有关），
+  并追加两项任务：
+    ① 顺手修掉禅意护符的崩溃
+    ② 检查禅意护符内是否还有未汉化文本并汉化
+
+【二、崩溃原因（已定位）】
+
+  日志异常：
+    NullReferenceException
+      at ZenCharm.ZenCharm+<>c__DisplayClass20_0.<SetupJoniHealthFSM>b__0 ()
+      at SFCore.Utils.MethodAction.OnEnter ()
+      at HutongGames.PlayMaker.FsmState.ActivateActions ()
+
+  根因有二：
+    1) 模组以 MethodAction 替换状态机的原动作后，lambda 里仍通过**已被替换出状态的原动作**
+       取 FSM（oldAction.Fsm）—— 原动作离开状态后不再持有有效状态机引用 ⇒ 运行时空引用
+    2) SetupJoniHealthFSM **缺少一次性守卫**，每次场景加载都会重复包装；第二次取原动作时
+       它已不存在，GetAction 返回 null ⇒ **这正是日志中第 3、5 次场景加载才报错的原因**
+       （SetupCharmFSM 有 Initialized 守卫，故只报 Joni 那处）
+
+【三、修复内容（两处状态机包装均处理）】
+
+  · 改为直接捕获状态机与事件对象，不再经由原动作：
+      var fsm = joniHealthFsm.Fsm;
+      var trueEvent = oldAction.isTrue; var falseEvent = oldAction.isFalse;
+      ... fsm.Event(trueEvent);
+  · 新增 JoniFsmSetup 一次性守卫（并在 OnReturnToMainMenu / Unload 中重置）
+  · SetupCharmFSM 增加 oldAction == null 提前返回
+  · SetupJoniHealthFSM 的异常不再静默吞掉，改为记录错误日志
+  · 核对：oldAction.Fsm 引用已全部清除（0 处）
+
+【四、汉化补全】
+
+  · 护符名称 GetName()： "Zen" → "禅意"
+  · 护符描述 GetDescription()：
+      原文 "Acheive a zen state.\r\n\r\nAllows changing other charm notches while
+            away from a bench but touching the ground."
+      现译 "进入禅定状态。\r\n\r\n离开长椅时，只要脚踩实地，即可更换其它护符。"
+  · 核查结论：除上述两处外，**没有其它面向玩家的英文文本**；
+    模组显示名（禅意护符）与菜单说明此前已汉化；
+    其余两处为 Logger 调试/错误日志，非玩家可见文本，按惯例保留英文
+  · 原文中的拼写错误 "Acheive"（应为 Achieve）随汉化自然消除
+
+【五、产物】
+
+  D:\KDQSHH\Mods\ZenCharm（禅意护符）\ZenCharm.dll
+  MD5 2cd4190ff921330ecfe9a7f600ade180（50176 字节）
+  说明：D:\KDQSHH\Mods\ZenCharm（禅意护符）\修复说明.md
+  编译：0 警告 0 错误
+  过程备注：补丁分两次写入（首次因后续断言失败未落盘），最终以整段替换 + 显式反斜杠
+            构造 \r\n 的方式完成（避免 heredoc 中转义被吞导致写入真实换行）
+
+【六、构建合规】
+
+  · 源码经 sparse-checkout 从用户仓库仅取 ModsWork/ZenCharm-master
+  · csproj 中 HkRefs 覆盖为只读指向游戏 Managed；SFCore 引用修正为实际目录名「SFCore（核心）」
+  · **已核对游戏侧 ZenCharm.dll 时间戳未变，全程未写 E 盘**
+
+【七、Konpanion 下一步（分支 A 结论）】
+
+  新的确凿发现：变量表里 `Hero` **变量本身**被设成了 kompanion
+  （GameObject 变量 "Hero" = "kompanion"(实例 -133104)），
+  ⇒ 之前只修动作引用字段、未覆盖变量表，这正是修改未能根治的原因。
+  下一步设计（待实施）：不再采用"每 15 帧遍历全部 FSM"的做法（已证实会干扰提示显示），
+  改为仅针对 bench FSM 的**变量表与动作引用**在**场景加载后**与**伙伴创建后**各修正一次，
+  且不触碰任何其它对象。
+
+================================================================================
+
+================================================================================
+阶段 101-W：Konpanion 修复重做（改为"直接引用型"，彻底摆脱变量表）
+时间: 2026-09-18 05:56 ~ 06:05
+================================================================================
+
+【一、前一版失败的确切原因（本轮查明）】
+
+  PlayMaker 的 FsmGameObject.Value 实现：
+      get {
+          if (base.CastVariable == null) return value;          // ← 只看 CastVariable
+          return base.CastVariable.RawValue as GameObject;      // ← 非 null 时永远读变量表
+      }
+  **getter 不检查 UseVariable，只看 CastVariable。**
+
+  而「Can Rest?」的 CanInput 动作恰是"变量引用"写法（CastVariable 非空），
+  ⇒ 无论怎么写它自己的 value 字段都会被忽略，读到的始终是变量表的值；
+  ⇒ 而变量表里的 Hero 同样被克隆动作波及（日志实测 GameObject 变量 "Hero" = "kompanion"）
+  ⇒ **这就是"改了等于没改"的原因**
+
+【二、本轮的做法】
+
+  对目标确定为英雄的引用，**彻底切断与变量表的联系**：
+      od.GameObject.CastVariable = null;    // 清掉变量解析结果
+      od.GameObject.UseVariable  = false;   // 关闭变量引用写法
+      od.GameObject.Value        = hero;    // 直接指向英雄
+  ⇒ 与同一状态里另外 6 个 GetState 动作（本来就是直接引用、从未出问题）行为完全一致
+  ⇒ 变量表被污染也不再影响它
+  另：变量表里的同名变量也一并纠正（有则改之）
+
+【三、移除周期遍历】
+
+  **前一版"每 15 帧遍历全部 FSM"的做法已彻底移除** —— 经用户回退验证（分支 A），
+  该做法会导致长椅的"休息"提示消失。
+  现在仅在两个明确时机各修正一次：
+    ① 创建伙伴之后（紧随克隆动作）
+    ② 每次场景加载之后（OnNextLevelReady；场景加载会重建状态机，需重新应用）
+  判断条件不变：只处理 SpecifyGameObject 型，且仅当引用名为 "Hero" 或
+  behaviour == "HeroController" 时才动手。
+
+【四、产物】
+
+  D:\KDQSHH\Mods\Konpanion（伴侣）\Konpanion.dll
+  MD5 2ab08d81b0eb89ad8d6d01b5f03fe7f6（21504 字节）
+  回退用原版仍保留：回退用_原版\Konpanion.dll（MD5 1f96b51b9329e2c78ed173a4cda2d95c）
+  说明：D:\KDQSHH\Mods\Konpanion（伴侣）\修复说明.md（已更新，含前一版失败原因）
+  编译：0 警告 0 错误；已用 ilspycmd 复核交付 DLL（CastVariable=null / UseVariable=false /
+        _guardTick 已不存在）
+
+【五、构建合规】
+
+  全程只读引用游戏 Managed；已核对游戏侧文件时间戳未变，未写 E 盘。
+
+【六、下一步】
+
+  用户部署后验证：启用伴侣 → 传送 → 退回主菜单 → 重载存档 → 长椅旁按上键
+  通过 ⇒ 长椅问题彻底闭环（根因修复，无需任何额外修复模组）
+
+================================================================================
+
+================================================================================
+阶段 101-X：【根因闭合】长椅问题的真正源头 —— Vasi.InvokeMethod 缺少无参构造函数
+时间: 2026-09-18 06:00 ~ 06:10
+================================================================================
+
+【一、完整根因链（终于闭合）】
+
+  Konpanion 克隆小骑士对象
+     ↓ UnityEngine.Object.Instantiate(GameObject)
+  触发被克隆对象上所有 PlayMakerFSM 的 OnAfterDeserialize
+     ↓ Fsm.InitData() → FsmState.LoadActions() → ActionData.CreateAction()
+     ↓ （用 Activator.CreateInstance 反射实例化每个动作类型）
+  遇到 Vasi.InvokeMethod —— **没有公开的无参构造函数**
+     ↓
+  MissingMethodException: Default constructor not found for type Vasi.InvokeMethod
+     ↓
+  克隆 / 反序列化过程被打断 → 场景对英雄的跨场景引用解析错乱
+     ↓
+  长椅状态机的 Hero 变量被解析成伙伴克隆体 kompanion
+     ↓
+  「Can Rest?」取不到 HeroController 组件 → CallMethodProper 静默返回 → 长椅失效
+
+  日志堆栈（自下而上）直接印证：
+    Modding.ModHooks:OnHeroUpdate()
+    Konpanion.Konpanion:update()
+    Konpanion.Konpanion:createKnightCompanion(GameObject)
+    Satchel.EnemyUtils:createCompanionFromPrefab(GameObject, Boolean)
+    UnityEngine.Object:Instantiate(GameObject)        ← 克隆英雄对象
+    PlayMakerFSM.OnAfterDeserialize ()
+    HutongGames.PlayMaker.Fsm.InitData ()
+    HutongGames.PlayMaker.ActionData.LoadActions (...)
+    HutongGames.PlayMaker.ActionData.CreateAction (...)
+    MissingMethodException: Default constructor not found for type Vasi.InvokeMethod
+
+  ⇒ Konpanion 的克隆只是**触发器**，真正让过程崩掉的是 Vasi.InvokeMethod。
+  ⇒ 这也解释了为何此前所有针对 Konpanion 的修复都只能缓解、无法根治。
+
+【二、修复内容】
+
+  Vasi/InvokeMethod.cs 补上 PlayMaker 反射实例化所要求的公开无参构造函数，
+  并把调用改为空值安全（_action?.Invoke()）。
+
+  重要：该修复**此前已写入仓库源码**（与 Tasks #70 中对 FiveKnights 同类问题的处理一致），
+  但**从未编译部署到游戏** —— 游戏里装的一直是缺少无参构造的旧版（Sep 12 01:16）。
+
+【三、产物】
+
+  D:\KDQSHH\Mods\Vasi（工具库）\Vasi.dll
+  MD5 032872f86d504e849277a9c64ad6166c（34816 字节）
+  说明：D:\KDQSHH\Mods\Vasi（工具库）\修复说明.md
+  编译：0 警告 0 错误；已用 ilspycmd 确认产物中 InvokeMethod 已含无参构造函数
+
+【四、同时完成的用户要求：禅意护符描述调整】
+
+  按用户要求，把描述后半句改为「在地面上可更换护符。」（前半句「进入禅定状态。」保持原样）：
+    最终文本："进入禅定状态。\r\n\r\n在地面上可更换护符。"
+  产物：D:\KDQSHH\Mods\ZenCharm（禅意护符）\ZenCharm.dll
+        MD5 1adcdc70083b02d11ab5d609c97ce611
+
+【五、连带结论：多份兜底修复均可撤除】
+
+  Vasi 修好后，克隆不再中断，Konpanion 亦不再干扰长椅。因此：
+    · Konpanion 建议换回原版（D:\KDQSHH\Mods\Konpanion（伴侣）\回退用_原版\）
+    · 独立「长椅修复」（BenchFix）不再需要
+    · 并入 BenchWarpFix 的兜底不再需要
+    · 长椅诊断模组可保留（只读）或删除
+
+【六、构建合规】
+
+  全程只读引用游戏 Managed；未向 E 盘写入任何内容。
+
+================================================================================
+
+
+══════════════════════════════════════════════════════════════
+阶段 101-Y　长椅问题：Vasi 修复验证 + 伴侣第三版修复
+【开始时间】2026-09-18 06:12:35
+【本阶段结论】
+  1. Vasi（工具库）修复**已验证生效**：日志中 Vasi.InvokeMethod 的
+     MissingMethodException 归零，克隆路径不再抛异常。
+  2. 但英雄引用**仍被 kompanion 顶替**（场景加载后解析到克隆体），
+     说明"时机型修复"存在空窗：克隆体可能在场景加载之后才重建。
+  3. 用户已按建议把 Konpanion 换回原版，故修正日志为空 —— 污染无人阻拦，
+     与"问题依旧"的反馈一致。
+
+【本阶段产出】
+  · D:\KDQSHH\Mods\长椅诊断\BenchDiagnostic.dll
+      版本 v10，MD5 4bc41a6139d02822237ec8eeb69e9318，17408 字节
+      新增：Can Rest? 进入/执行完/离开全程记录 + 判定结论 + 玩家实时状态 +
+            关键状态轨迹（只读，不修改任何数据）
+  · D:\KDQSHH\Mods\Konpanion（伴侣）\Konpanion.dll
+      版本第三版，MD5 7d601686d9a4c37040e0dcfaaeaad09d，22528 字节
+      第一道：状态机引用纠正（时机型，保留）；
+      第二道：Fsm.GetOwnerDefaultTarget 钩子 —— 变量引用且变量名为 Hero
+              而解析结果非小骑士本体时，改回本体（时机无关，新增）。
+      已彻底移除"每 15 帧遍历"的周期守卫。
+
+【遇到的问题及处理】
+  · 问题：第二版修复从未在"Vasi 已修好"的环境下验证过，
+    此前"引用已正确但长椅仍坏"的观测不可采信。
+  · 处理：本次同时交付 v10 诊断与第三版修复，一次运行即可判定
+    "修复是否命中"以及"未命中时卡在哪一步"。
+
+【下一步计划】
+  1. 用户部署 Vasi.dll、Konpanion.dll（第三版）、BenchDiagnostic.dll（v10）；
+  2. 进存档 → 传送 → 回主菜单 → 读档 → 长椅按上键 → 退出；
+  3. 回收 ModLog.txt，依据 ◆ 离开「Can Rest?」的判定结论定位或收尾。
+══════════════════════════════════════════════════════════════
+
+
+==============================================================
+阶段 101-Z  部署（用户授权写入 E 盘游戏目录）
+【开始时间】2026-09-18 06:16:07
+【授权】用户口头解除 E 盘只读限制：“允许你帮我部署”，并指定目标为 Mods 与 Mods1。
+
+【已部署文件】6 份（Mods 与 Mods1 各一份）
+  · Vasi（工具库）\Vasi.dll   MD5 032872f86d504e849277a9c64ad6166c
+  · Konpanion（伴侣）\Konpanion.dll   MD5 7d601686d9a4c37040e0dcfaaeaad09d
+  · 长椅诊断\BenchDiagnostic.dll   MD5 4bc41a6139d02822237ec8eeb69e9318
+
+【备份】覆盖前原件已复制到：D:\KDQSHH\备份\部署前_20260918_061558
+         （E 盘未做任何改名或删除，仅就地覆盖）
+
+【顺带发现（待观察，本次未处理）】
+  · Managed 下存在 Mods / Mods1 / mods2 三个模组目录；
+    mods2 内含 Konpanion、Vasi 等旧副本，但日志显示其未被加载（Konpanion 只初始化过一次），
+    按用户指示本次不触碰。
+  · 上一轮日志中存在 Konpanion.CompanionControl.getFollowTarget() 的报错
+    （CompanionControl.decideNextState -> <Idle>d__33.MoveNext -> <MainLoop>d__40.MoveNext），
+    待新一轮日志回收后一并分析。
+
+【下一步】用户启动游戏测试：进存档 -> 传送 -> 回主菜单 -> 读档 -> 长椅按上键 -> 退出，
+          回收 ModLog.txt 后依据 “离开 Can Rest?” 的判定结论定位或收尾。
+==============================================================
+
+
+==============================================================
+阶段 101-AA  长椅问题：定位到两道防线互相抵消，出第四版
+【开始时间】2026-09-18 06:20:19
+【日志实证（新一轮 ModLog，3008 行）】
+  1. 第 1 次场景加载：CanInput 目标 = Knight，判定【应可休息】—— 游戏刚启动时是好的。
+  2. 第 3 次场景加载后：UseVariable=False、值=Knight，说明状态机修复已生效。
+  3. 读档后按上键：目标变成 kompanion(-133104)，判定【被取消】动作1 Can Input=false，
+     而玩家实时 CanInput()=True —— 变量说的和实际相反，即调用被静默丢弃。
+
+【根因（新）】
+  · 第三版的"状态机修复"把 UseVariable 改成 false，
+    而"解析钩子"要求 UseVariable == true 才生效 —— 两道防线互相抵消，钩子 0 次命中。
+  · 污染发生在 OnNextLevelReady 之后（克隆体在关卡内重建），彼时无防线在岗。
+
+【本阶段产出】
+  · D:\KDQSHH\Mods\Konpanion（伴侣）\Konpanion.dll（第四版）
+      MD5 915e59264e1643d09f2d133ceecff8e8，22528 字节
+      钩子判定条件简化为"变量名恰为 Hero"，不再看 UseVariable；
+      新增存活日志（钩子首次命中即记录），用于确认钩子是否真的被调用。
+  · D:\KDQSHH\Mods\长椅诊断\BenchDiagnostic.dll（v11）
+      MD5 e85fee2833ad726cf640e2e77e7dadba，18944 字节
+      新增每帧引用监控，记录 CanInput 目标在何时由谁变成谁（含帧号与玩家状态）。
+
+【部署】已按用户授权写入
+  Mods\Konpanion（伴侣）\、Mods1\Konpanion（伴侣）\、
+  Mods\长椅诊断\、Mods1\长椅诊断\  共 4 个文件，MD5 核对一致；
+  覆盖前已备份到 D:\KDQSHH\备份\；mods2 未触碰。
+
+【下一步】用户测试后回收日志，重点看：
+  · 是否出现"英雄引用解析钩子已生效"（判断钩子是否被调用）
+  · 是否出现"已拦截被顶替的英雄引用"
+  · ⚡ CanInput 目标变化 发生在第几帧/什么状态（若钩子仍未拦住）
+==============================================================
+
+
+==============================================================
+阶段 101-AB  钩子 0 命中的真正原因：补丁未写入（CRLF 问题），并改用状态进入修复
+【开始时间】2026-09-18 06:24:23
+【日志实证（第 3 份 ModLog，2989 行）】
+  · 「英雄引用解析钩子已生效」 0 次
+  · 「已拦截被顶替的英雄引用」 0 次
+  · 「已纠正长椅状态机…」     5 次（说明状态机修复本身在跑）
+  · 「开始监控 / ⚡ CanInput 目标变化」 0 次（监控完全没跑）
+
+【根因（本次为工具链失误，非游戏侧）】
+  · 自 v11 起改用 rb 读取源码（保留 CRLF），而补丁锚点字符串是 LF ——
+    多行锚点全部匹配失败，且替换未加断言，静默跳过：
+      × Konpanion：On.Fsm.GetOwnerDefaultTarget / On.FsmState.OnEnter 的**订阅语句**
+        写进了方法定义却从未订阅 → 钩子 0 命中
+      × BenchDiagnostic：ModHooks.HeroUpdateHook 订阅同样未写入 → 监控从未运行
+  · 结论：上一轮交付的两个 DLL 里，新增的防线实际处于"装了但没接线"状态。
+
+【本阶段产出】
+  · Konpanion.dll（第五版）MD5 04a180c1bb954976e7b15829c393b1e9，23552 字节
+      新增第一道防线：On.HutongGames.PlayMaker.FsmState.OnEnter ——
+      进入「Can Rest?」的那一刻、**在动作执行之前**摆正英雄引用
+      （状态切换钩子体量大、不会被内联，且此方案此前在独立长椅修复模组中
+        已经过用户验证有效）。
+      同时补上此前漏掉的两处订阅（Fsm.GetOwnerDefaultTarget 与 FsmState.OnEnter）。
+  · BenchDiagnostic.dll（v11 修订）MD5 16deee43c9a4c441f97d938b7c129251，19456 字节
+      补上 HeroUpdateHook 订阅；监控重建加 60 帧节流
+      （Resources.FindObjectsOfTypeAll 开销大，逐帧扫描会拖慢主菜单）。
+
+【工程教训（已记录，避免复发）】
+  1) 补丁替换必须带断言，禁止静默跳过；
+  2) 多行锚点前先统一换行符（.replace('
+','
+')），写回时再还原；
+  3) 交付前用 grep 复核关键语句确已写入。
+
+【部署】按用户指示只写 Mods：Konpanion.dll、BenchDiagnostic.dll，MD5 核对一致；
+        覆盖前备份至 D:\KDQSHH\备份\；mods2 与 Mods1 均未触碰。
+
+【下一步】测试后重点看日志：
+  · [伴侣] 进入「Can Rest?」时已摆正英雄引用（命中即说明新防线在工作）
+  · ⚡ CanInput 目标变化（拿到污染时机）
+  · ◆ 离开「Can Rest?」的判定结论
+==============================================================
+
+
+==============================================================
+阶段 101-AC  长椅问题解决 + 伴侣失效修复
+【开始时间】2026-09-18 06:29:03
+【长椅问题：已解决 ✔】
+  用户反馈“修复了”。日志佐证（第 4 份 ModLog，4545 行）：
+    · 解析钩子已生效 1 次、已拦截被顶替的英雄引用 5 次（全部为 kompanion → 小骑士本体）
+    · 三次「Can Rest?」判定均为【应可休息】全部检查通过，CanInput 目标解析 = Knight
+  结论：起决定作用的是 On.Fsm.GetOwnerDefaultTarget 钩子
+        （FsmState.OnEnter 那道因值已被钩子改对而无需再动，日志计数为 0）。
+
+【伴侣模组失效：另有其因，非本次修复所致】
+  日志证据：回主菜单时
+    NullReferenceException -> CompanionControl.getFollowTarget()
+      -> decideNextState() -> <Idle>d__33 -> <MainLoop>d__40
+  源码根因：getFollowTarget() 中 followTarget 被销毁后重新绑定，
+            而此刻 HeroController.instance 也为 null -> 空引用；
+            而 MainLoop 是**协程**，协程内抛异常会整个终止，
+            表现即“伴侣从此不再跟随/不动”。
+  该异常在上一份日志（阶段 101-AB 之前的测试）中同样存在，属原版模组固有缺陷。
+
+【本阶段改动（Konpanion 第六版）】
+  1. getFollowTarget()：英雄未就绪时安全回退到自身，且不缓存回退值
+     （回到游戏后会自动重新绑定英雄）；
+  2. 钩子打击面收窄：只在 Fsm.Name == "Bench Control" 时干预，
+     不再影响其它模组的状态机；
+  3. update()：伙伴对象被销毁时重建（原先只看 Count，销毁后会永久不重建）；
+  4. createKnightCompanion()：英雄未就绪时安全返回；
+     克隆过程加 try/finally，保证英雄 SetActive(true) 一定执行
+     （否则克隆中途异常会把英雄永久留在失活状态 —— 即此前 Vasi 事故的后果）；
+  5. FsmState.OnEnter 修复改用独立计数器，便于验证。
+
+【产出与部署】
+  · D:\KDQSHH\Mods\Konpanion（伴侣）\Konpanion.dll
+      MD5 ce93e87e0f13e4d0233de4293a7f3e68
+  · 已写入 E:\...\Managed\Mods\Konpanion（伴侣）\，覆盖前备份至 D:\KDQSHH\备份\部署前_20260918_062903
+  · mods2 与 Mods1 未触碰
+
+【下一步】用户复测：长椅是否仍正常 + 伴侣是否恢复跟随。
+==============================================================
+
+
+==============================================================
+阶段 102-A  新需求：手柄操作时菜单光标不被鼠标抢走
+【开始时间】2026-09-18 06:38:19
+【问题】连接手柄调整模组设置时，模组菜单的光标每次都被鼠标抢走。
+        需求：手柄操作时不被鼠标抢；放下手柄用鼠标点击时仍能正常操作。
+
+【根因（反编译游戏侧 Assembly-CSharp.dll 确认）】
+  1. 菜单鼠标开关 HollowKnightInputModule.allowMouseInput 默认 true；
+  2. InputHandler.StopMouseInput()/EnableMouseInput() 这两个方法
+     在整个 Assembly-CSharp 里**没有任何调用点** —— 游戏从未真正关闭过鼠标输入；
+  3. 输入模块的判定 `MouseHasMoved => (cur - last).sqrMagnitude > 0f`
+     阈值为 0，鼠标任何微小抖动都被算作"在用鼠标"。
+  （模组菜单类为 Modding 命名空间下的 ModListMenu，使用 HK 原生 MenuButton，
+    未对鼠标做任何特殊处理；BetterModList 只改列表分栏显示，与本问题无关。）
+
+【产出】新模组「输入设备优先」InputDevicePriority
+  · D:\KDQSHH\Mods\InputDevicePriority（输入设备优先）\InputDevicePriority.dll
+      MD5 6369916ad270d2891f5c877d330d011b（6656 字节）
+  · 挂 On.InControl.HollowKnightInputModule.ShouldActivateModule（真正派发鼠标事件之前）
+    在菜单中按"最后使用的设备"设置 allowMouseInput：
+      手柄/键盘有输入 → 关闭鼠标（光标不被抢）
+      鼠标真实移动>4px 或点击 → 开启鼠标
+      未接手柄 → 完全不干预；游戏进行中（UI 导航关闭）→ 完全不干预
+  · 已部署至 E:\...\Managed\Mods\InputDevicePriority（输入设备优先）  · 未改动任何游戏原版文件；mods2、Mods1 未触碰
+
+【下一步】用户测试：接手柄进模组菜单用摇杆操作是否还会被抢；
+          放下手柄用鼠标点击是否仍能操作。
+==============================================================
+
+
+==============================================================
+阶段 102-B  「输入设备优先」新增：长列表跟随光标滚动
+【开始时间】2026-09-18 06:49:35
+【新问题】手柄光标能动了，但模组菜单不会跟着光标滚动，
+        长列表里光标移出可视区后就看不到、也选不到后面的模组。
+
+【根因（反编译游戏侧确认）】
+  · 模组列表用 ScrollRect + Scrollbar 滚动面板；
+    官方给每个列表项挂 ScrollPaneSelector 想在选中时滚入可视区，但：
+      1) OnSelect 带 `if (eventData is AxisEventData)` 前提，其它来源的选中不触发；
+      2) 其位置换算公式与实际滚动模型对不上，且反编译可见有一行结果被丢弃。
+  · 滚动模型（出自 AddScrollPaneContent）：
+      scrollPaneRt.anchoredPosition = (内容高 - 可视高) * scrollbar.value
+
+【处置】不依赖官方公式，自实现"选中项变化即滚入可视区"：
+  · 在 ShouldActivateModule（每帧）内比对 EventSystem.currentSelectedGameObject；
+  · 取该对象上的 ScrollPaneSelector 获得 PaneRect / MaskRect / Scrollbar；
+  · 用 pane.InverseTransformPoint 换算选中项上/下边距内容顶部的距离；
+  · offset = clamp(目标偏移, 0, 内容高-可视高)，scrollbar.value = offset / 该范围；
+  · 仅在选中变化时调整一次，不逐帧覆盖滚动条，不影响手动拖动。
+
+【产出】
+  · D:\KDQSHH\Mods\InputDevicePriority（输入设备优先）\InputDevicePriority.dll
+      v1.1.0  MD5 25e2fc20602c2dc627e7149dfcb9c642（8192 字节）
+  · 已部署至 E:\...\Managed\Mods\InputDevicePriority（输入设备优先）\（覆盖前已备份）
+  · 说明文档已更新（功能一 + 功能二）
+  · 未改动游戏原版文件；mods2、Mods1 未触碰
+
+【下一步】用户复测：手柄上下移动光标，列表是否跟着滚动；
+          鼠标点击列表项是否也能跟随滚动。
+==============================================================
+
+
+==============================================================
+阶段 102-C  滚动跟随修正（1.1.0 效果异常：抖动 + 光标移出可视区）
+【开始时间】2026-09-18 06:55:04
+【用户反馈】1.1.0 生效后列表会抖动，虽然能跟着往上滚，但看不到光标。
+
+【判断】典型“滚过头”症状：算出的内容高度与实际不符 → 偏移量超出真实可滚动范围 →
+        把选中项滚出可视区；同时 ScrollRect 与手动写入的 scrollbar 值互相回写产生抖动。
+
+【1.2.0 修正】
+  1. 内容高度改用 RectTransformUtility.CalculateRelativeRectTransformBounds(mask, pane)
+     取“内容包围盒高度”——与 ScrollRect 内部同款算法；
+     不再用 pane.rect.height（该写法下 pane 自身 rect 高度未必等于真实内容高）。
+  2. 边距 pad 收窄为 min(12, 可视高*0.25)，避免小面板下边距过大。
+  3. 增加防抖：目标与当前偏移相差 < 0.5 时直接返回，不做无意义的重复写入。
+  4. 新增诊断日志（前 8 次滚动），一次即可核对：
+       内容高 / 可视高 / pane.rect.height / 项上 / 项下 / 当前偏移 / 目标偏移 / 滚动值
+  5. csproj 增加 UnityEngine.UIModule 引用（RectTransformUtility 所在程序集）。
+
+【产出】InputDevicePriority.dll v1.2.0  MD5 8976a3ba25d04303c491b9c0efcb50ab
+        已部署至 E:\...\Managed\Mods\InputDevicePriority（输入设备优先）\（覆盖前已备份）
+
+【下一步】用户复测；若仍有异常，把日志里 “滚动跟随：” 那一行发我，
+          其中的内容高与 pane.rect.height 对比可直接定位问题。
+==============================================================
+
+
+==============================================================
+阶段 103  「输入设备优先」功能精简 + 同步至 GitHub 仓库
+【开始时间】2026-09-18 07:02:57
+【一、按用户要求移除「列表跟随光标滚动」】
+  · 用户反馈 1.1.0 效果异常（列表抖动、光标移出可视区）后决定不要该功能。
+  · 处置：InputDevicePriority 回退为仅保留「输入设备优先」（手柄操作时抑制鼠标抢光标），
+    移除 FollowSelection / ScrollToShow / 相关字段与诊断日志。
+  · 新 DLL MD5 6779423e832c2cc10377576eee0182bb（6656 字节），
+    已写回 D 盘交付目录与 E:\...\Managed\Mods\InputDevicePriority（输入设备优先）\。
+
+【二、同步至用户 GitHub 仓库】
+  · 仓库：https://github.com/Moyxi/KDQSHH（1.35 GB，完整克隆不现实，
+    改用 Git Data API 只推送改动文件）
+  · 提交：52740f24e1（分支 main）
+  · 上传内容（5 个 DLL + 7 个源码文件）：
+      Mods/Vasi（工具库）/Vasi.dll
+      Mods/Konpanion（伴侣）/Konpanion.dll
+      Mods/ZenCharm（禅意护符）/ZenCharm.dll
+      Mods/CustomKnight（自定义小骑士）/CustomKnight.dll
+      Mods/InputDevicePriority（输入设备优先）/InputDevicePriority.dll   ← 新增目录
+      ModsWork/BenchWarpFix-HEAD/src/BenchWarpFix.cs
+      ModsWork/CustomKnight-master/CustomKnight/NewUI/UIController.cs
+      ModsWork/Konpanion-main/Konpanion.cs
+      ModsWork/Konpanion-main/CompanionControl.cs
+      ModsWork/ZenCharm-master/ZenCharm.cs
+      ModsWork/InputDevicePriority/InputDevicePriority.cs / .csproj / Properties/AssemblyInfo.cs ← 新增
+  · **有意未上传**：各模组 *.csproj、LocalOverrides.props、LocalBuildProperties.props 中
+    指向本机 E 盘游戏目录的构建路径覆盖项 —— 属本地环境配置，不应进入公开仓库。
+    若需一并归档请告知，可另行提交。
+
+【三、本地工作副本说明】
+  · 源码工作副本位于 D:\重要文件\Downloads	empepo3（临时目录）。
+  · 若后续仍需维护，建议迁移至 D:\KDQSHH 下以便长期保存。
+
+【下一步】等待用户指示。
+==============================================================
+
+
+==============================================================
+阶段 104  构建配置归档 + 仓库转私有
+【开始时间】2026-09-18 07:06:40
+【一、归档构建配置】commit 7675ec9286
+  ModsWork/BenchWarpFix-HEAD/BenchWarpFix.csproj
+  ModsWork/CustomKnight-master/CustomKnight/LocalBuildProperties.props
+  ModsWork/HollowKnight.Vasi-master/Vasi/Vasi.csproj
+  ModsWork/Konpanion-main/Konpanion.csproj
+  ModsWork/Konpanion-main/LocalOverrides.props        ← 新增文件
+  ModsWork/ZenCharm-master/ZenCharm.csproj
+  （这些文件含指向本机游戏目录的参考路径覆盖项；因仓库已转私有，归档无外泄顾虑）
+
+【二、仓库可见性】
+  由 public 改为 private，复验：
+      仓库 Moyxi/KDQSHH   private = true   visibility = private
+  影响提示：此后仅仓库所有者与被授权协作者可访问；
+            外部若曾 clone / fork 过，其本地副本不受影响。
+
+【仓库当前状态】
+  main HEAD = 7675ec9286
+  今日两次提交：
+    52740f24e1  模组 DLL 与源码更新
+    7675ec9286  构建配置归档
+
+【下一步】等待用户指示。
+==============================================================

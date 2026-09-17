@@ -1,0 +1,155 @@
+using System;
+using System.Collections;
+using Modding;
+using UnityEngine;
+
+namespace BenchFix
+{
+    /// <summary>
+    /// 【修复模组 v2】长椅无法休息修正。
+    ///
+    /// 实测故障链（诊断模组数据）：
+    ///   从"在长椅上保存的存档"继续游戏后（respawnType=1），玩家走到长椅旁按上键，
+    ///   长椅状态机进入 "Init Resting" 后**立即**转入 "Cancel Frame" 取消休息，
+    ///   并就此卡在 "Cancel Frame"，之后按上键再无任何反应；
+    ///   而首次进入新游戏（respawnType=0 走到长椅）时一切正常。
+    ///
+    /// 判断：游戏从长椅重生时会给长椅状态机设置 FsmBool "RespawnResting" = true，
+    ///   并发送 "RESPAWN" 事件。正常情况下该事件会让玩家坐到长椅上；
+    ///   但实测此时状态机并未进入休息状态，而 "RespawnResting" 标记残留为 true，
+    ///   于是玩家按上键时 "Init Resting" 误判"已从长椅重生/已在长椅上" → 取消 → 卡死在 Cancel Frame。
+    ///
+    /// 本模组在每次场景加载后延迟检查并清理这些残留状态：
+    ///   1) 若状态机并未处于休息状态，则把 FsmBool "RespawnResting" 复位为 false；
+    ///   2) 若 PlayerData.atBench 为 true 而状态机未休息，则把 atBench 复位为 false；
+    ///   3) 若状态机卡在 "Cancel Frame"，复位到空闲状态。
+    ///   正常休息流程（状态名含 "Rest"）完全不受影响。
+    /// </summary>
+    public class BenchFix : Mod, ITogglableMod
+    {
+        private const string TAG = "[长椅修复]";
+        private const string BENCH_FSM_NAME = "Bench Control";
+        private const string IDLE_STATE = "Idle Start Pause";
+        private const string STUCK_STATE = "Cancel Frame";
+        private const string RESPAWN_RESTING = "RespawnResting";
+
+        public BenchFix() : base("长椅修复") { }
+
+        public override string GetVersion() => "2.0.0";
+
+        public override void Initialize()
+        {
+            Log($"{TAG} 已加载 v2：清理长椅重生的残留标记，修复按上键被取消的问题");
+            On.GameManager.OnNextLevelReady += OnNextLevelReady;
+        }
+
+        public void Unload()
+        {
+            On.GameManager.OnNextLevelReady -= OnNextLevelReady;
+            Log($"{TAG} 已卸载");
+        }
+
+        private void OnNextLevelReady(On.GameManager.orig_OnNextLevelReady orig, GameManager self)
+        {
+            orig(self);
+            // 延迟到场景与状态机完全就绪后再检查（游戏自身的重生流程在本帧稍后才跑完）
+            try
+            {
+                if (GameManager.instance != null)
+                    GameManager.instance.StartCoroutine(DelayedFix());
+            }
+            catch (Exception e) { Log($"{TAG} 启动检查失败: {e.Message}"); }
+        }
+
+        private IEnumerator DelayedFix()
+        {
+            // 等游戏自身的 RESPAWN 流程走完
+            yield return new WaitForSeconds(1.0f);
+            SafeFix("1 秒后");
+
+            yield return new WaitForSeconds(2.0f);
+            SafeFix("3 秒后");
+        }
+
+        private void SafeFix(string when)
+        {
+            try { Fix(when); }
+            catch (Exception e) { Log($"{TAG} 检查异常({when}): {e.Message}"); }
+        }
+
+        private void Fix(string when)
+        {
+            PlayerData pd = PlayerData.instance;
+            if (pd == null) return;
+
+            string currentScene = GameManager.instance != null ? GameManager.instance.sceneName : null;
+            bool foundBench = false;
+            bool foundResting = false;
+            bool clearedRespawnFlag = false;
+            bool resetStuckState = false;
+
+            foreach (var fsm in Resources.FindObjectsOfTypeAll<PlayMakerFSM>())
+            {
+                if (fsm == null || fsm.FsmName != BENCH_FSM_NAME) continue;
+                if (fsm.gameObject == null || !fsm.gameObject.activeInHierarchy) continue;
+                if (!string.IsNullOrEmpty(currentScene) && fsm.gameObject.scene.name != currentScene) continue;
+
+                foundBench = true;
+
+                string state = "?";
+                try { state = fsm.Fsm?.ActiveStateName ?? "?"; }
+                catch { }
+
+                bool resting = state.IndexOf("Rest", StringComparison.OrdinalIgnoreCase) >= 0;
+                if (resting)
+                {
+                    foundResting = true;
+                    continue;
+                }
+
+                // —— 状态机不在休息状态：清理可能残留的重生标记 ——
+                try
+                {
+                    var rb = fsm.Fsm?.Variables?.GetFsmBool(RESPAWN_RESTING);
+                    if (rb != null && rb.Value)
+                    {
+                        rb.Value = false;
+                        clearedRespawnFlag = true;
+                        Log($"{TAG}({when}) 已清除残留标记 {fsm.gameObject.name}.{RESPAWN_RESTING}: true → false（状态机当前为「{state}」，并未在休息）");
+                    }
+                }
+                catch { }
+
+                // —— 卡在取消状态：复位到空闲 ——
+                if (state == STUCK_STATE)
+                {
+                    try
+                    {
+                        fsm.Fsm.SetState(IDLE_STATE);
+                        resetStuckState = true;
+                        Log($"{TAG}({when}) 状态机卡在「{STUCK_STATE}」，已复位到「{IDLE_STATE}」");
+                    }
+                    catch (Exception e) { Log($"{TAG}({when}) 复位状态机失败: {e.Message}"); }
+                }
+            }
+
+            if (!foundBench || foundResting) return;
+
+            // —— 状态机未在休息：修正 atBench 不一致 ——
+            try
+            {
+                if (pd.atBench)
+                {
+                    pd.atBench = false;
+                    Log($"{TAG}({when}) 已修正状态不一致：atBench: true → false（长椅状态机未在休息）");
+                }
+            }
+            catch { }
+
+            if (!clearedRespawnFlag && !resetStuckState)
+            {
+                // 无需修正时保持安静，避免刷日志
+            }
+        }
+    }
+}

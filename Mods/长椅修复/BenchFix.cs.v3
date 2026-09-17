@@ -1,0 +1,145 @@
+using System;
+using System.Collections;
+using Modding;
+using UnityEngine;
+
+namespace BenchFix
+{
+    /// <summary>
+    /// 【修复模组 v3 - 安全版】长椅"按上键无反应"的兜底恢复。
+    ///
+    /// 复盘（重要）：
+    ///   v1 假设 atBench 不一致 —— 诊断证明 atBench=False 时同样故障，假设不成立，逻辑从未命中。
+    ///   v2 清理 RespawnResting/atBench —— 实测**误伤**：诊断显示玩家当时其实是正常坐在长椅上
+    ///     （状态机处于 "Pause 3"、atBench=true），v2 却因"状态名不含 Rest"把它判为未休息并清除，
+    ///     反而把玩家从长椅上"踢"了下来。这说明状态名 "Pause 3" 也是休息流程的一部分，
+    ///     靠猜状态名判断是危险的。
+    ///
+    /// 因此 v3 采取**最小且无害**的策略：
+    ///   · 绝不修改 PlayerData.atBench、绝不修改 RespawnResting、绝不修改状态机状态；
+    ///   · 只做一件事：若玩家站在长椅旁（nearBench=true）且状态机长时间停留在 "Cancel Frame"
+    ///     （已知的卡死态），则记录日志并**仅在该状态下**把状态机切回空闲，
+    ///     让玩家可以重新按上键尝试 —— 属于恢复手段，不改变任何数据。
+    ///
+    /// 本版默认**不自动动作**，只记录；确认无损后再开启恢复（EnableRecovery）。
+    /// </summary>
+    public class BenchFix : Mod, ITogglableMod
+    {
+        private const string TAG = "[长椅修复]";
+        private const string BENCH_FSM_NAME = "Bench Control";
+        private const string IDLE_STATE = "Idle Start Pause";
+        private const string STUCK_STATE = "Cancel Frame";
+
+        /// <summary>是否启用"解卡"恢复。默认关闭，只观察不动作。</summary>
+        private static bool EnableRecovery = false;
+
+        private int _stuckFrames = 0;
+
+        public BenchFix() : base("长椅修复") { }
+
+        public override string GetVersion() => "3.0.0";
+
+        public override void Initialize()
+        {
+            Log($"{TAG} 已加载 v3 安全版：默认只观察不动作（避免误伤正常休息状态）");
+            On.GameManager.OnNextLevelReady += OnNextLevelReady;
+            ModHooks.HeroUpdateHook += OnHeroUpdate;
+        }
+
+        public void Unload()
+        {
+            On.GameManager.OnNextLevelReady -= OnNextLevelReady;
+            ModHooks.HeroUpdateHook -= OnHeroUpdate;
+            Log($"{TAG} 已卸载");
+        }
+
+        private void OnNextLevelReady(On.GameManager.orig_OnNextLevelReady orig, GameManager self)
+        {
+            orig(self);
+            _stuckFrames = 0;
+            try
+            {
+                if (GameManager.instance != null)
+                    GameManager.instance.StartCoroutine(ReportAfterDelay());
+            }
+            catch { }
+        }
+
+        private IEnumerator ReportAfterDelay()
+        {
+            yield return new WaitForSeconds(3f);
+            try { ReportState("进入场景 3 秒后"); }
+            catch (Exception e) { Log($"{TAG} 报告异常: {e.Message}"); }
+        }
+
+        private void ReportState(string when)
+        {
+            PlayerData pd = PlayerData.instance;
+            string scene = GameManager.instance != null ? GameManager.instance.sceneName : null;
+
+            foreach (var fsm in Resources.FindObjectsOfTypeAll<PlayMakerFSM>())
+            {
+                if (fsm == null || fsm.FsmName != BENCH_FSM_NAME) continue;
+                if (fsm.gameObject == null || !fsm.gameObject.activeInHierarchy) continue;
+                if (!string.IsNullOrEmpty(scene) && fsm.gameObject.scene.name != scene) continue;
+
+                string state = "?";
+                try { state = fsm.Fsm?.ActiveStateName ?? "?"; } catch { }
+                bool rbVal = false;
+                try { var rb = fsm.Fsm?.Variables?.GetFsmBool("RespawnResting"); if (rb != null) rbVal = rb.Value; } catch { }
+
+                Log($"{TAG}（{when}）长椅 {fsm.gameObject.name}：状态=「{state}」 RespawnResting={rbVal} " +
+                    $"atBench={(pd != null ? pd.atBench.ToString() : "?")}（仅观察，不做任何修改）");
+            }
+        }
+
+        /// <summary>每帧观察：若玩家在长椅旁且状态机停留在已知卡死态，计数并（可选）恢复。</summary>
+        private void OnHeroUpdate()
+        {
+            try
+            {
+                PlayerData pd = PlayerData.instance;
+                var hc = HeroController.instance;
+                if (pd == null || hc == null) return;
+
+                string scene = GameManager.instance != null ? GameManager.instance.sceneName : null;
+
+                foreach (var fsm in Resources.FindObjectsOfTypeAll<PlayMakerFSM>())
+                {
+                    if (fsm == null || fsm.FsmName != BENCH_FSM_NAME) continue;
+                    if (fsm.gameObject == null || !fsm.gameObject.activeInHierarchy) continue;
+                    if (!string.IsNullOrEmpty(scene) && fsm.gameObject.scene.name != scene) continue;
+
+                    string state = "?";
+                    try { state = fsm.Fsm?.ActiveStateName ?? "?"; } catch { }
+                    if (state != STUCK_STATE) { _stuckFrames = 0; continue; }
+
+                    _stuckFrames++;
+                    if (_stuckFrames == 300)   // 约 5 秒
+                    {
+                        Log($"{TAG} 检测到状态机已停留在「{STUCK_STATE}」约 5 秒（玩家位置 {hc.transform.position}，" +
+                            $"atBench={pd.atBench}）。此状态不会自行恢复，按上键也不会响应。");
+                        if (EnableRecovery)
+                        {
+                            try
+                            {
+                                fsm.Fsm.SetState(IDLE_STATE);
+                                Log($"{TAG} 已把状态机复位到「{IDLE_STATE}」（仅恢复状态机，未改动任何数值）");
+                            }
+                            catch (Exception e) { Log($"{TAG} 复位失败: {e.Message}"); }
+                        }
+                        else
+                        {
+                            Log($"{TAG} 恢复功能当前为关闭状态（仅观察）");
+                        }
+                    }
+                    else if (_stuckFrames == 301)
+                    {
+                        _stuckFrames = 0;
+                    }
+                }
+            }
+            catch { }
+        }
+    }
+}
