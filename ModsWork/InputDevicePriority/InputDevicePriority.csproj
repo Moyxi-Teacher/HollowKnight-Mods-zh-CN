@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>InputDevicePriority</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <SignAssembly>False</SignAssembly>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+    <!-- 只读引用：游戏 Managed 目录（不写入） -->
+    <HkManaged>E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed</HkManaged>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="InputDevicePriority.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(HkManaged)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="MMHOOK_Assembly-CSharp">
+      <HintPath>$(HkManaged)\MMHOOK_Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(HkManaged)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(HkManaged)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(HkManaged)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(HkManaged)\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>$(HkManaged)\UnityEngine.UIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

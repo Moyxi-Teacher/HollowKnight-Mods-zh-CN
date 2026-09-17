@@ -4,6 +4,12 @@ namespace CustomKnight.NewUI
 {
     internal static class UIController
     {
+        // GetSkinIcon 中裁剪 knight.png 所需的**最小尺寸**：
+        //   裁剪区域为 (2802, 4096-3155, 86, 120) = (2802, 941, 86, 120)
+        //   GetPixels(x, y, w, h) 要求 x+w <= 纹理宽度、y+h <= 纹理高度
+        private const int NEED_W = 2802 + 86;             // 2888
+        private const int NEED_H = (4096 - 3155) + 120;   // 1061
+
         private static GameObject UI, content, viewport;
         private static ScrollRect scrollRect;
 
@@ -156,7 +162,41 @@ namespace CustomKnight.NewUI
                 {
                     defaultOrb = defaultSkin.GetTexture(orbFull);
                 }
-                var tex = skin.GetTexture(knight).GetCropped(new Rect(2802f, 4096f - 3155f, 86f, 120f));
+                // 【修复 2026-09-18】原代码此行直接对 skin.GetTexture(knight) 做裁剪：
+                //   · StaticSkin.GetTexture 读取失败时只记日志并返回 null；
+                //   · 图片解码失败时纹理仍停留在 new Texture2D(2, 2, ...) 的尺寸。
+                // 两种情况都会让 GetCropped / GetPixels 抛出 UnityException，
+                // 进而中断整个 CustomKnight.Initialize，导致模组加载失败
+                // （皮肤菜单与换肤功能全部不可用）。
+                // 这里加保护：失败时退回到"不使用裁剪图标"，并把出问题的皮肤写进日志。
+                Texture2D tex = null;
+                try
+                {
+                    var knightTex = skin.GetTexture(knight);
+                    if (knightTex != null && knightTex.width >= NEED_W && knightTex.height >= NEED_H)
+                    {
+                        tex = knightTex.GetCropped(new Rect(2802f, 4096f - 3155f, 86f, 120f));
+                    }
+                    else
+                    {
+                        CustomKnight.Instance?.Log(
+                            $"[图标生成] 皮肤「{skin.GetName()}」的 knight.png 不可用（" +
+                            (knightTex == null ? "读取失败" : $"{knightTex.width}x{knightTex.height}") +
+                            "），已跳过裁剪");
+                    }
+                }
+                catch (Exception e)
+                {
+                    CustomKnight.Instance?.Log(
+                        $"[图标生成] 皮肤「{skin.GetName()}」生成图标时出错，已跳过：{e.Message}");
+                }
+
+                if (tex == null)
+                {
+                    // 沿用原代码在极端情况下的返回值
+                    return defaultOrb;
+                }
+
                 if (defaultOrb != Texture2D.blackTexture)
                 {
                     tex = SheetItem.Overlay(defaultOrb, tex, 50, 65);

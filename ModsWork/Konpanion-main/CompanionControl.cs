@@ -50,7 +50,13 @@ namespace Konpanion
         
         public GameObject getFollowTarget(){
             if(followTarget == null){
-                followTarget = HeroController.instance.gameObject;
+                // 回主菜单 / 读档时 HeroController.instance 可能已销毁，直接取 .gameObject
+                // 会抛空引用；而 MainLoop 是协程，协程内抛异常会**整个终止** ——
+                // 表现就是"伴侣从此不再跟随、不动"。这里安全回退到自身，
+                // 且**不缓存**回退值，等英雄回来会自动重新绑定。
+                var hc = HeroController.instance;
+                if(hc == null || hc.gameObject == null) return gameObject;
+                followTarget = hc.gameObject;
             }
             return followTarget;
         }
