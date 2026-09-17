@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <HollowKnightRefs>D:\KDQSHH\ModsWork\HkRefs</HollowKnightRefs>
+  </PropertyGroup>
+  <PropertyGroup>
+    <CopyOutputDir>D:\KDQSHH\Mods</CopyOutputDir>
+  </PropertyGroup>
+</Project>

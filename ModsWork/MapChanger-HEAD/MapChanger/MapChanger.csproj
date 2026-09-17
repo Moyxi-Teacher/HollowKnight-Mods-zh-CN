@@ -1,0 +1,232 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    统一构建配置由 D:\KDQSHH\ModsWork\Directory.Build.props / .targets 提供：
+    SignAssembly=false、引用路径指向 HkRefs、覆盖"复制到游戏目录"为空、LangVersion=12。
+  -->
+  <PropertyGroup>
+    <RootNamespace>MapChanger</RootNamespace>
+    <AssemblyName>MapChanger</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyTitle>MapChanger</AssemblyTitle>
+    <Product>地图变更</Product>
+    <Description>地图变更 - Hollow Knight 汉化模组</Description>
+    <Copyright>Copyright © syyePhenomenol 2022</Copyright>
+    <Authors>syyePhenomenol</Authors>
+    <AssemblyVersion>1.3.11.0</AssemblyVersion>
+    <FileVersion>1.3.11.0</FileVersion>
+    <InformationalVersion>1.3.11.0汉化</InformationalVersion>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Deterministic>false</Deterministic>
+    <NoWarn>CS7035</NoWarn>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <LangVersion>12</LangVersion>
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <Import Project="LocalOverrides.targets" Condition="Exists('LocalOverrides.targets')" />
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>portable</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <!-- 条件编译符号 HAS_DEBUGMOD 在 DebugMod.dll 存在时启用（运行时通过 Dependencies.HasDebugMod 守卫） -->
+  <PropertyGroup Condition="Exists('$(HollowKnightModsDirectory)\DebugMod\DebugMod.dll')">
+    <DefineConstants>$(DefineConstants);HAS_DEBUGMOD</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(HollowKnightRefs)\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="DebugMod" Condition="Exists('$(HollowKnightModsDirectory)\DebugMod\DebugMod.dll')">
+      <HintPath>$(HollowKnightModsDirectory)\DebugMod\DebugMod.dll</HintPath>
+    </Reference>
+    <Reference Include="MagicUI">
+      <HintPath>$(HollowKnightModsDirectory)\MagicUI\MagicUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Satchel">
+      <HintPath>$(HollowKnightModsDirectory)\Satchel\Satchel.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_Assembly-CSharp">
+      <HintPath>$(HollowKnightRefs)\MMHOOK_Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_PlayMaker">
+      <HintPath>$(HollowKnightRefs)\MMHOOK_PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>$(HollowKnightRefs)\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>$(HollowKnightRefs)\MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>$(HollowKnightRefs)\MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(HollowKnightRefs)\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PlayMaker">
+      <HintPath>$(HollowKnightRefs)\PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(HollowKnightRefs)\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(HollowKnightRefs)\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>$(HollowKnightRefs)\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(HollowKnightRefs)\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreModule">
+      <HintPath>$(HollowKnightRefs)\UnityEngine.TextCoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>$(HollowKnightRefs)\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(HollowKnightRefs)\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>$(HollowKnightRefs)\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Vasi">
+      <HintPath>$(HollowKnightModsDirectory)\Vasi\Vasi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\fsmOverrides.json" />
+    <EmbeddedResource Include="Resources\locations.json" />
+    <EmbeddedResource Include="Resources\mappedScenes.json" />
+    <EmbeddedResource Include="Resources\mappedScenesAM.json" />
+    <EmbeddedResource Include="Resources\minimalMap.json" />
+    <EmbeddedResource Include="Resources\miscObjects.json" />
+    <EmbeddedResource Include="Resources\roomSprites.json" />
+    <EmbeddedResource Include="Resources\Sprites\GUI\Arrow.png" />
+    <EmbeddedResource Include="Resources\Sprites\GUI\ArrowInCircle.png" />
+    <EmbeddedResource Include="Resources\Sprites\GUI\PanelLeft.png" />
+    <EmbeddedResource Include="Resources\Sprites\GUI\PanelRight.png" />
+    <EmbeddedResource Include="Resources\Sprites\GUI\Selector.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BackgroundCircle.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BackgroundDiamond.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BackgroundHexagon.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BackgroundPentagon.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BackgroundSquare.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Bench.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Blank.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Border.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BorderCircle.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BorderDiamond.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BorderHexagon.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BorderPentagon.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\BorderSquare.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Charm.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Cocoon.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Dreamer.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Egg.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\EssenceBoss.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Beast.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\BenchGrey.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\BlackEgg.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ChitMarker1.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ChitMarker2.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ChitMarker3.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ChitMarker4.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Colosseum.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\CrystalHeart1.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\CrystalHeart2.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Cyclone.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\DashSlash1.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\DashSlash2.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\DreamGate1.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\DreamGate2.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Flower.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Godtuner.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\GreatSlash1.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\GreatSlash2.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\GrimmFlame.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Grubfather.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\HallownestSeal.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\HotSpring.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Hunter.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Iselda.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\IsmasTear.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Jiji.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\KeySly.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\KingsBrand.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Knight.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\LegEater.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Lemm.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Millibelle.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Mushroom.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Nailsmith.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\PillMarker1.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\PillMarker2.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\PillMarker3.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\PillMarker4.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Salubra.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ScarabMarker1.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ScarabMarker2.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ScarabMarker3.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ScarabMarker4.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Seer.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Shade.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ShellMarker1.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ShellMarker2.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ShellMarker3.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ShellMarker4.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\ShopsCombined.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Sly.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Soul.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Teacher.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Tram.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\WarriorsGrave.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Extra\Watcher.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Flame.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Geo.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Grub.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Journal.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Key.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Lever.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Lore.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Map.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Mask.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Notch.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Ore.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Relic.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Rock.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Root.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Shop.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Skill.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Stag.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Totem.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Unknown.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\UnknownGeoRock.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\UnknownGrub.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\UnknownLifeblood.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\UnknownTotem.png" />
+    <EmbeddedResource Include="Resources\Sprites\Pins\Vessel.png" />
+    <EmbeddedResource Include="Resources\tileMaps.json" />
+    <EmbeddedResource Include="Resources\trackingItems.json" />
+  </ItemGroup>
+
+  <!-- 禁止复制到游戏目录（保护只读目录） -->
+  <Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="false" />
+</Project>

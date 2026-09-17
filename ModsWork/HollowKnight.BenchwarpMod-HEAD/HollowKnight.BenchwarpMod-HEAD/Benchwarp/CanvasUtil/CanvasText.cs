@@ -1,0 +1,114 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+namespace Benchwarp.CanvasUtil
+{
+    public class CanvasText
+    {
+        private readonly GameObject textObj;
+        
+        private readonly Vector2 size;
+
+        private bool active;
+
+        public CanvasText(GameObject parent, Vector2 pos, Vector2 sz, Font font, string text, int fontSize = 13, FontStyle style = FontStyle.Normal, TextAnchor alignment = TextAnchor.UpperLeft)
+        {
+            if (Mathf.Abs(sz.x) < Mathf.Epsilon || Mathf.Abs(sz.y) < Mathf.Epsilon)
+            {
+                size = new Vector2(1920f, 1080f);
+            }
+            else
+            {
+                size = sz;
+            }
+
+            textObj = new GameObject();
+            textObj.AddComponent<CanvasRenderer>();
+            RectTransform textTransform = textObj.AddComponent<RectTransform>();
+            textTransform.sizeDelta = size;
+
+            CanvasGroup group = textObj.AddComponent<CanvasGroup>();
+            group.interactable = false;
+            group.blocksRaycasts = false;
+
+            Text t = textObj.AddComponent<Text>();
+            t.text = text;
+            t.font = font;
+            t.fontSize = fontSize;
+            t.fontStyle = style;
+            t.alignment = alignment;
+
+            textObj.transform.SetParent(parent.transform, false);
+
+            Vector2 position = new((pos.x + size.x / 2f) / 1920f, (1080f - (pos.y + size.y / 2f)) / 1080f);
+            textTransform.anchorMin = position;
+            textTransform.anchorMax = position;
+
+            active = true;
+        }
+        
+        public void SetPosition(Vector2 pos)
+        {
+            if (textObj != null)
+            {
+                RectTransform textTransform = textObj.GetComponent<RectTransform>();
+
+                Vector2 position = new((pos.x + size.x / 2f) / 1920f, (1080f - (pos.y + size.y / 2f)) / 1080f);
+                textTransform.anchorMin = position;
+                textTransform.anchorMax = position;
+            }
+        }
+
+        public Vector2 GetPosition()
+        {
+            if (textObj != null)
+            {
+                Vector2 anchor = textObj.GetComponent<RectTransform>().anchorMin;
+
+                return new Vector2(anchor.x * 1920f - size.x / 2f, 1080f - anchor.y * 1080f - size.y / 2f);
+            }
+
+            return Vector2.zero;
+        }
+
+        public void UpdateText(string text)
+        {
+            if (textObj != null)
+            {
+                textObj.GetComponent<Text>().text = text;
+            }
+        }
+
+        public void SetActive(bool a)
+        {
+            active = a;
+
+            if (textObj != null)
+            {
+                textObj.SetActive(active);
+            }
+        }
+
+        public void MoveToTop()
+        {
+            if (textObj != null)
+            {
+                textObj.transform.SetAsLastSibling();
+            }
+        }
+
+        public void SetTextColor(Color color)
+        {
+            if (textObj != null)
+            {
+                Text t = textObj.GetComponent<Text>();
+                t.color = color;
+            }
+        }
+
+        public void Destroy()
+        {
+            UObject.Destroy(textObj);
+        }
+    }
+}

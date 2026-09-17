@@ -1,0 +1,84 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SkinBenchRoulette</RootNamespace>
+    <AssemblyName>SkinBenchRoulette</AssemblyName>
+    <AssemblyVersion>1.2.0</AssemblyVersion>
+    <InformationalVersion>1.2.0汉化</InformationalVersion>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+    <ProjectGuid>09dacc5f-d050-4588-809a-181e3873c68a</ProjectGuid>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <!-- 本地构建属性：引用目录与部署输出目录 -->
+  <Import Project="LocalBuildProperties.props" Condition="Exists('LocalBuildProperties.props')" />
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(ModdingAPI)\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_Assembly-CSharp">
+      <HintPath>$(ModdingAPI)\MMHOOK_Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(ModdingAPI)\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PlayMaker">
+      <HintPath>$(VanillaFiles)\PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine">
+      <HintPath>$(VanillaFiles)\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(VanillaFiles)\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>$(VanillaFiles)\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(VanillaFiles)\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>$(VanillaFiles)\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>$(VanillaFiles)\UnityEngine.IMGUIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>$(VanillaFiles)\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>$(VanillaFiles)\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(VanillaFiles)\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>$(VanillaFiles)\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <!-- Satchel（仅编译引用，不随模组输出，避免与 Mods\Satchel 重复加载） -->
+    <Reference Include="Satchel">
+      <HintPath>$(SatchelDirectory)\Satchel.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <!-- CustomKnight（自定义小骑士）：运行时由 ModLoader 解析到其专属文件夹，因此仅编译引用、不拷贝 -->
+    <Reference Include="CustomKnight">
+      <HintPath>$(CustomKnightReference)</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- 生成后自动部署到 Mods 目录的新模组文件夹 -->
+  <Target Name="PostBuildDeploy" AfterTargets="Build">
+    <MakeDir Directories="$(HollowKnightModsDirectory)\SkinBenchRoulette（皮肤长椅轮换）" />
+    <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="$(HollowKnightModsDirectory)\SkinBenchRoulette（皮肤长椅轮换）" SkipUnchangedFiles="true" Condition="Exists('$(TargetPath)')" />
+  </Target>
+</Project>

@@ -1,0 +1,169 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <ProjectGuid>{6E567A40-4903-4522-935D-5B33E82E2016}</ProjectGuid>
+
+        <RootNamespace>HKVocals</RootNamespace>
+        <AssemblyTitle>HKVocals</AssemblyTitle>
+        <AssemblyVersion>0.0.1.4</AssemblyVersion>
+        <Deterministic>true</Deterministic>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <LangVersion>12</LangVersion>
+        <TargetFramework>net472</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>CS1591</NoWarn>
+        <SignAssembly>false</SignAssembly>
+        <HollowKnightFolder>D:\KDQSHH\ModsWork\HkRefs</HollowKnightFolder>
+        <OutputDirectory>D:\KDQSHH\TempTest\HKVocalOutput</OutputDirectory>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <InformationalVersion>0.0.1.4汉化</InformationalVersion>
+    </PropertyGroup>
+
+    <!-- Create a LocalBuildProperties.props file which defines HollowKnightFolder (references dir) 
+    and OutputDirectory (where the post-build event sends the dll to) -->
+    <Import Project="LocalBuildProperties_example.props" Condition="Exists('LocalBuildProperties_example.props')" />
+    <Import Project="LocalBuildProperties.props" Condition="Exists('LocalBuildProperties.props')" />
+
+    <!-- Same References -->
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp">
+            <HintPath>$(HollowKnightFolder)\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="Core.FsmUtil">
+            <HintPath>$(HollowKnightFolder)\Mods\Core.FsmUtil\Core_FsmUtil.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="FrogCore">
+            <HintPath>$(HollowKnightFolder)\Mods\FrogCore\FrogCore.dll</HintPath>
+        </Reference>
+        <Reference Include="SFCore">
+            <HintPath>$(HollowKnightFolder)\Mods\SFCore\SFCore.dll</HintPath>
+        </Reference>
+        <Reference Include="HKMirror">
+            <HintPath>$(HollowKnightFolder)\Mods\HKMirror\HKMirror.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="MMHOOK_PlayMaker">
+            <HintPath>$(HollowKnightFolder)\MMHOOK_PlayMaker.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Mono.Cecil">
+            <HintPath>$(HollowKnightFolder)\Mono.Cecil.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="MonoMod.RuntimeDetour">
+            <HintPath>$(HollowKnightFolder)\MonoMod.RuntimeDetour.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="MonoMod.RuntimeDetour">
+            <HintPath>$(HollowKnightFolder)\MonoMod.RuntimeDetour.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="MonoMod.Utils">
+            <HintPath>$(HollowKnightFolder)\MonoMod.Utils.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="PlayMaker">
+            <HintPath>$(HollowKnightFolder)\PlayMaker.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="SFCore">
+            <HintPath>$(HollowKnightFolder)\Mods\SFCore\SFCore.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.VideoModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.VideoModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.AudioModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.CoreModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.AnimationModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.AnimationModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.ImageConversionModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.IMGUIModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.JSONSerializeModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.JSONSerializeModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.Physics2DModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.Physics2DModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.TextRenderingModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.UI.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UIModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.UIModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="MMHOOK_Assembly-CSharp">
+            <HintPath>$(HollowKnightFolder)\MMHOOK_Assembly-CSharp.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Newtonsoft.Json">
+            <HintPath>$(HollowKnightFolder)\Newtonsoft.Json.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.InputLegacyModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="netstandard">
+            <HintPath>$(HollowKnightFolder)\netstandard.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="mscorlib">
+            <HintPath>$(HollowKnightFolder)\mscorlib.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Satchel">
+            <HintPath>$(HollowKnightFolder)\Mods\Satchel\Satchel.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.AssetBundleModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.AssetBundleModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.AudioModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.UnityWebRequestModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\*" />
+        <EmbeddedResource Include="Resources\AchievementKeys\*" />
+    </ItemGroup>
+
+    <Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="false" />
+    <Target Name="CreateReleaseZip" AfterTargets="PostBuildEvent" Condition="false" />
+
+</Project>

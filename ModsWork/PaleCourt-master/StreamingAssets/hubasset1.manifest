@@ -1,0 +1,38 @@
+ManifestFileVersion: 0
+CRC: 1491988863
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0f357a050fa76c9184a87b2f6f459ea5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d1c854dacc82e4a97d6ef035c85e5beb
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 62
+  Script: {instanceID: 0}
+- Class: 68
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AllFiles/white_palace_floor_set_02 (16).prefab
+Dependencies:
+- /github/workspace/Unity/AssetBundles/StandaloneWindows/owarenadep

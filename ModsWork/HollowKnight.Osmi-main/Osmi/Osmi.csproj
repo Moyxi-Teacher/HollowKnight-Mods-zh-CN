@@ -1,0 +1,140 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AssemblyTitle>Osmi</AssemblyTitle>
+		<Version>0.2.2</Version>
+			<!-- 用户决策(2026-09-11)：InformationalVersion = 原版数字 + "汉化"（菜单悬停显示） -->
+			<InformationalVersion>0.2.2.0汉化</InformationalVersion>
+		<Description>A Hollow Knight library mod</Description>
+		<Authors>Clazex</Authors>
+
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Copyright>Copyright © 2022-2023 Clazex</Copyright>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/Clazex/HollowKnight.Osmi#readme</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Clazex/HollowKnight.Osmi</RepositoryUrl>
+
+		<LangVersion>10.0</LangVersion>
+		<TargetFramework>net472</TargetFramework>
+		<DebugType>portable</DebugType>
+		<RootNamespace>Osmi</RootNamespace>
+
+		<Optimize>True</Optimize>
+		<Deterministic>True</Deterministic>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<NoWarn>CS1591</NoWarn>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<PathMap>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)'))=./</PathMap>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<ProjectRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)/../'))</ProjectRoot>
+		<HKRefs Condition="$(HKRefs) == ''">$(HkRefs)</HKRefs>
+		<HKModdingApi Condition="$(HKModdingApi) == ''">$(HKRefs)</HKModdingApi>
+		<HKModRefs Condition="$(HKModRefs) == ''">$(HKRefs)/Mods</HKModRefs>
+		<HKModOutputPath Condition="$(HKModOutputPath) == ''">$(HKModRefs)</HKModOutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources/**" />
+
+		<None Include="../.editorconfig" />
+		<None Include="../.gitignore" />
+		<None Include="../LICENSE" />
+		<None Include="../package.json" />
+		<None Include="../README.md" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(HKModdingApi)/Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="mscorlib">
+			<HintPath>$(HKRefs)/mscorlib.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="System">
+			<HintPath>$(HKRefs)/System.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>$(HKRefs)/UnityEngine.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.AudioModule">
+			<HintPath>$(HKRefs)/UnityEngine.AudioModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>$(HKRefs)/UnityEngine.CoreModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.ImageConversionModule">
+			<HintPath>$(HKRefs)/UnityEngine.ImageConversionModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.Physics2DModule">
+			<HintPath>$(HKRefs)/UnityEngine.Physics2DModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Mono.Cecil">
+			<HintPath>$(HKModdingApi)/Mono.Cecil.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="MonoMod.RuntimeDetour">
+			<HintPath>$(HKModdingApi)/MonoMod.RuntimeDetour.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="MonoMod.Utils">
+			<HintPath>$(HKModdingApi)/MonoMod.Utils.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="PlayMaker">
+			<HintPath>$(HKRefs)/PlayMaker.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="MMHOOK_Assembly-CSharp">
+			<HintPath>$(HKModdingApi)/MMHOOK_Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="MMHOOK_PlayMaker">
+			<HintPath>$(HKModdingApi)/MMHOOK_PlayMaker.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>$(HKModdingApi)/Newtonsoft.Json.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="all" />
+
+		<PackageReference Include="Fody" Version="6.6.4" PrivateAssets="all" />
+		<PackageReference Include="InfoOf.Fody" Version="2.1.1" PrivateAssets="all" />
+		<PackageReference Include="HKReflect.Fody" Version="0.2.0" PrivateAssets="all" />
+	</ItemGroup>
+
+	<!-- 受保护目录约束：禁止将编译产物复制到游戏目录（CopyMod），
+	     也禁止生成导出 zip（CreateReleaseZip）；本工程仅需 DLL。 -->
+	<Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="false">
+		<Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb;$(TargetDir)$(TargetName).xml" DestinationFolder="$(HKModOutputPath)/$(TargetName)" SkipUnchangedFiles="true" />
+	</Target>
+
+	<Target Name="CreateReleaseZip" AfterTargets="PostBuildEvent" Condition=" '$(Configuration)' == 'Release' AND false ">
+		<RemoveDir Directories="$(ProjectRoot)/dist" />
+		<MakeDir Directories="$(ProjectRoot)/dist/tmp" />
+
+		<Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb;$(TargetDir)$(TargetName).xml;$(ProjectRoot)/README.md;$(ProjectRoot)/LICENSE" DestinationFolder="$(ProjectRoot)/dist/tmp" />
+		<ZipDirectory SourceDirectory="$(ProjectRoot)/dist/tmp" DestinationFile="$(ProjectRoot)/dist/$(TargetName)-v$(Version).zip" />
+
+		<RemoveDir Directories="$(ProjectRoot)/dist/tmp" />
+
+		<GetFileHash Files="$(ProjectRoot)/dist/$(TargetName)-v$(Version).zip" Algorithm="SHA256">
+			<Output TaskParameter="Items" ItemName="FilesWithHashes" />
+		</GetFileHash>
+		<WriteLinesToFile File="$(ProjectRoot)/dist/SHA.txt" Lines="@(FilesWithHashes->'%(FileHash)')" Encoding="UTF-8" />
+	</Target>
+</Project>

@@ -1,0 +1,89 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    转换自非 SDK 工程（UnofficialPatch 原 csproj）为 SDK 风格。
+    目标框架 net472，所有引用指向 $(HkRefs)（D:\KDQSHH\ModsWork\HkRefs）。
+    不删除任何源码引用，仅补全 BepInEx/0Harmony 依赖以支持编译。
+  -->
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>UnofficialPatch</RootNamespace>
+    <AssemblyName>UnofficialPatch</AssemblyName>
+    <AssemblyTitle>非官方补丁修正</AssemblyTitle>
+    <Description>A Hollow Knight Mod — Unofficial Patch (localized)</Description>
+    <!-- 用户决策（2026-09-11）：版本号 = 原版数字 + "汉化" 后缀 -->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0汉化</InformationalVersion>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <ImplicitUsings>false</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <OutputPath>bin/$(Configuration)/</OutputPath>
+    <PathMap>$(MSBuildProjectDirectory)=source</PathMap>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>$(HkRefs)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(HkRefs)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>$(HkRefs)\Assembly-CSharp-firstpass.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="PlayMaker">
+      <HintPath>$(HkRefs)\PlayMaker.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(HkRefs)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(HkRefs)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(HkRefs)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputModule">
+      <HintPath>$(HkRefs)\UnityEngine.InputModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(HkRefs)\UnityEngine.UI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Plugin.cs" />
+    <Compile Include="FsmUtil.cs" />
+    <Compile Include="Patches\FasterLoadPatch.cs" />
+    <Compile Include="Patches\BasinFountainPatch.cs" />
+    <Compile Include="Patches\DoubleJumpFixPatch.cs" />
+    <Compile Include="Patches\PantheonZeroMaskPatch.cs" />
+    <Compile Include="Patches\CameraKeepRumblingPatch.cs" />
+    <Compile Include="Patches\CrossingOomaPatch.cs" />
+    <Compile Include="Patches\GodTamerBeastRollPatch.cs" />
+    <Compile Include="Patches\GreyPrinceNailSlamPatch.cs" />
+    <Compile Include="Patches\HUDDisplayCheckerPatch.cs" />
+    <Compile Include="Patches\TransitionDeathPatch.cs" />
+    <!-- 排除历史 obj/stale 产物 -->
+    <Compile Remove="obj\**\*.cs" />
+    <Compile Remove="bin\**\*.cs" />
+  </ItemGroup>
+</Project>

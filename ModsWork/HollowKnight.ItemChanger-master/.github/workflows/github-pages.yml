@@ -1,0 +1,54 @@
+name: Docs
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  pages: write
+  id-token: write
+
+# cancels any pending pages deployments so there is only one workflow running at any given time
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.output.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+
+      - name: Setup DocFX
+        run: dotnet tool update -g docfx
+
+      - name: Download ItemChanger release
+        run: wget https://github.com/homothetyhk/HollowKnight.ItemChanger/releases/latest/download/ItemChanger.zip
+
+      - name: Unzip ItemChanger release
+        run: unzip ItemChanger.zip
+
+      - name: DocFX build
+        working-directory: docs
+        run: docfx docfx.json
+        continue-on-error: false
+
+      - name: Upload assets
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs/_site
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

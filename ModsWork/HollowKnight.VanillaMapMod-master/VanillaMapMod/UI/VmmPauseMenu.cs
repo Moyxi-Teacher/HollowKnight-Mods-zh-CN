@@ -1,0 +1,52 @@
+using System.Collections.Generic;
+using MapChanger;
+using MapChanger.UI;
+
+namespace VanillaMapMod.UI;
+
+internal class VmmPauseMenu : PauseMenuLayout
+{
+    internal VmmPauseMenu()
+        : base(nameof(VanillaMapMod), "地图加强") { }
+
+    protected override bool ActiveCondition()
+    {
+        return base.ActiveCondition()
+            && MapChangerMod.IsEnabled()
+            && ModeManager.CurrentMode().Mod is nameof(VanillaMapMod);
+    }
+
+    protected override PauseMenuTitle GetTitle()
+    {
+        return new VmmPauseMenuTitle();
+    }
+
+    private sealed class VmmPauseMenuTitle : PauseMenuTitle
+    {
+        protected override TextFormat GetDefaultTextFormat()
+        {
+            return new("地图加强", Colors.GetColor(ColorSetting.UI_Neutral));
+        }
+    }
+
+    protected override IEnumerable<MainButton> GetMainButtons()
+    {
+        return
+        [
+            new ModEnabledButton(),
+            new ModPinsButton(),
+            new VanillaPinsButton(),
+            new PoolsGridControlButton(),
+            new ModeButton(),
+            new PinShapeButton(),
+            new PinSizeButton(),
+            new FastMapUpdateButton(),
+            new UIScaleButton(),
+        ];
+    }
+
+    protected override IEnumerable<ExtraButtonGrid> GetExtraButtonGrids()
+    {
+        return [new PoolsGrid()];
+    }
+}

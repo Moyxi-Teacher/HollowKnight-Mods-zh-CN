@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <HkRefs>D:\KDQSHH\ModsWork\HkRefs</HkRefs>
+    <HollowKnightRefs>$(HkRefs)</HollowKnightRefs>
+    <ModdingAPI>$(HkRefs)</ModdingAPI>
+    <VanillaFiles>$(HkRefs)</VanillaFiles>
+    <HollowKnightModsDirectory>D:\KDQSHH\Mods</HollowKnightModsDirectory>
+  </PropertyGroup>
+</Project>

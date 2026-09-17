@@ -1,0 +1,13 @@
+{
+  "完成阶段": "阶段2a：建立 HkRefs 参考 DLL 环境",
+  "完成时间": "2026-09-11",
+  "完成操作": [
+    "在 D:/KDQSHH/ModsWork/HkRefs 建立参考 DLL 目录",
+    "从游戏 Managed 文件夹复制游戏核心引用 DLL（104个文件，包括 Assembly-CSharp、UnityEngine 等）",
+    "在 D:/KDQSHH/ModsWork/HkRefs/Mods 创建子目录并复制已确认存在的子模组依赖 DLL（SFCore、Satchel、Vasi、ItemChanger、MenuChanger、HKMirror、FrogCore、Core.FsmUtil、ConnectionMetadataInjector、Benchwarp、RandomCompanions等）",
+    "创建补充依赖目录：D:/KDQSHH/References，复制 HkRefs 核心 DLL到其中"
+  ],
+  "状态": "完成",
+  "验证": "通过",
+  "下一步": "阶段2b：补齐签名密钥与构建 targets"
+}

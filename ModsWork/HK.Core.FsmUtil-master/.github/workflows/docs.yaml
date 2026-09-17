@@ -1,0 +1,55 @@
+name: docs
+
+on:
+  push:
+    branches: [ master, docs ]
+
+jobs:
+  docfx:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v7
+        with:
+          ref: master
+          path: master
+
+      - name: Setup MAPI
+        uses: BadMagic100/setup-hk@v3
+        with:
+          apiPath: HkRefs
+          dependencyFilePath: master/ModDependencies.txt
+
+      # should be part of the installed software of the runner
+      #- name: Setup .NET
+      #  uses: actions/setup-dotnet@v6
+      #  with:
+      #    dotnet-version: 9
+      #    cache: true
+
+      - name: Build docs
+        uses: nunit/docfx-action@v4.1.0
+        with:
+          args: master/docs/docfx.json
+
+      #- name: Setup .NET
+      #  uses: actions/setup-dotnet@v6
+      #- name: Setup ms-build, mono
+      #  run: sudo apt-get install -y nuget mono-devel mono-xbuild
+      #- name: Download DocFX
+      #  working-directory: docs
+      #  run: |
+      #    wget https://github.com/dotnet/docfx/releases/download/v2.61.0/docfx-linux-x64-v2.61.0.zip -O docfx.zip
+      #    unzip docfx.zip -d docfx
+      #- name: Build docs
+      #  working-directory: docs
+      #  run: |
+      #    docfx/docfx
+
+      - name: Publish
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: master/docs/_site
+          force_orphan: true

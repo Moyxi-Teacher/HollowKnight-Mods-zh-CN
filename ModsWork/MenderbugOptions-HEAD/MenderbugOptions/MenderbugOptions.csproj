@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>MenderbugOptions</RootNamespace>
+    <AssemblyName>MenderbugOptions</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyTitle>蛀虫选项</AssemblyTitle>
+    <Product>蛀虫选项</Product>
+    <Description>蛀虫选项 - Hollow Knight 汉化模组</Description>
+    <Copyright>Copyright © Exempt-Medic 2022</Copyright>
+    <Authors>Exempt-Medic</Authors>
+    <AssemblyVersion>1.0.0.1544</AssemblyVersion>
+    <FileVersion>1.0.0.1544</FileVersion>
+    <InformationalVersion>1.0.0.1544汉化</InformationalVersion>
+    <Deterministic>false</Deterministic>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <LangVersion>12</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <Import Project="LocalOverrides.targets" Condition="Exists('LocalOverrides.targets')" />
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(HollowKnightRefs)/Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_Assembly-CSharp">
+      <HintPath>$(HollowKnightRefs)/MMHOOK_Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_PlayMaker">
+      <HintPath>$(HollowKnightRefs)/MMHOOK_PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="PlayMaker">
+      <HintPath>$(HollowKnightRefs)/PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="Satchel">
+      <HintPath>$(HollowKnightRefs)/Mods/Satchel/Satchel.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(HollowKnightRefs)/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(HollowKnightRefs)/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="LocalOverrides.targets" />
+  </ItemGroup>
+</Project>

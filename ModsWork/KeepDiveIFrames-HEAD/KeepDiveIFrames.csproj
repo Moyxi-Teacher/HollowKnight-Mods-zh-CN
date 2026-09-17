@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    统一构建配置由 D:\KDQSHH\ModsWork\Directory.Build.props / .targets 提供：
+    SignAssembly=false、引用路径指向 HkRefs、覆盖"复制到游戏目录"为空。
+    HintPath 使用 $(HkRefs) 变量（由 Directory.Build.props 定义）。
+  -->
+  <PropertyGroup>
+    <RootNamespace>KeepDiveIFrames</RootNamespace>
+    <AssemblyName>KeepDiveIFrames</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyTitle>KeepDiveIFrames</AssemblyTitle>
+    <Product>保持下冲无敌帧</Product>
+    <Description>保持下冲无敌帧 - Hollow Knight 汉化模组</Description>
+    <Copyright>Copyright ©  2024</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0.0汉化</InformationalVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(HkRefs)/Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_Assembly-CSharp">
+      <HintPath>$(HkRefs)/MMHOOK_Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_PlayMaker">
+      <HintPath>$(HkRefs)/MMHOOK_PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>$(HkRefs)/MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>$(HkRefs)/MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="PlayMaker">
+      <HintPath>$(HkRefs)/PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="Satchel">
+      <HintPath>$(HkRefs)/Mods/Satchel/Satchel.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(HkRefs)/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(HkRefs)/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

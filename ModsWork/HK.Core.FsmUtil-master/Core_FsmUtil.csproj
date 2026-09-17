@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);OLD_HK_VERSION_HAVE_FALSE_WHEN_MAPI_UPDATED</DefineConstants>
+    <TargetFramework>net472</TargetFramework>
+    <Product>Core_FsmUtil</Product>
+    <RootNamespace>Core.FsmUtil</RootNamespace>
+    <AssemblyName>Core_FsmUtil</AssemblyName>
+    <AssemblyTitle>Core_FsmUtil</AssemblyTitle>
+    <Description>A Hollow Knight Mod</Description>
+    <Copyright>Copyright © HK Modding 2025</Copyright>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <!-- 用户决策(2026-09-11)：InformationalVersion = 原版数字 + "汉化"（菜单悬停显示） -->
+    <InformationalVersion>1.1.2.0汉化</InformationalVersion>
+    <ImplicitUsings>false</ImplicitUsings>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <OutputPath>bin/$(Configuration)/</OutputPath>
+    <LangVersion>latest</LangVersion>
+    <PathMap>$(MSBuildProjectDirectory)=source</PathMap>
+    <HollowKnightRefs>../HkRefs</HollowKnightRefs>
+    <ExportDir>bin/Publish</ExportDir>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <Import Project="LocalOverrides.targets" Condition="Exists('LocalOverrides.targets')" />
+  <Import Project="build_steps.targets" />
+  <!-- 用户决策(2026-09-11)：关闭强名称签名，保持与原版 DLL（未签名）一致 -->
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(HollowKnightRefs)/*.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources" />
+    <Folder Include="src" />
+    <Folder Include="test" />
+    <None Include=".gitignore" />
+    <None Include="LICENSE" />
+    <None Include="ModDependencies.txt" />
+    <None Include="README.md" />
+  </ItemGroup>
+</Project>

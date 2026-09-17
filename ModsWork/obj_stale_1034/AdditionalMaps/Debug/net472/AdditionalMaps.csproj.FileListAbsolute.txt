@@ -1,0 +1,5 @@
+D:\KDQSHH\ModsWork\obj\AdditionalMaps\Debug\net472\AdditionalMaps.csproj.AssemblyReference.cache
+D:\KDQSHH\ModsWork\obj\AdditionalMaps\Debug\net472\AdditionalMaps.GeneratedMSBuildEditorConfig.editorconfig
+D:\KDQSHH\ModsWork\obj\AdditionalMaps\Debug\net472\AdditionalMaps.AssemblyInfoInputs.cache
+D:\KDQSHH\ModsWork\obj\AdditionalMaps\Debug\net472\AdditionalMaps.AssemblyInfo.cs
+D:\KDQSHH\ModsWork\obj\AdditionalMaps\Debug\net472\AdditionalMaps.csproj.CoreCompileInputs.cache

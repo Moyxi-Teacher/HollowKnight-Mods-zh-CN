@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <HkRefs>D:\KDQSHH\ModsWork\HkRefs</HkRefs>
+    <ModdingAPI>$(HkRefs)</ModdingAPI>
+    <VanillaFiles>$(HkRefs)</VanillaFiles>
+    <SatchelDirectory>$(HkRefs)\Mods\Satchel</SatchelDirectory>
+    <CustomKnightReference>$(HkRefs)\Mods\Custom Knight\CustomKnight.dll</CustomKnightReference>
+    <HollowKnightModsDirectory>D:\KDQSHH\Mods</HollowKnightModsDirectory>
+  </PropertyGroup>
+</Project>

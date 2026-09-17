@@ -1,0 +1,8 @@
+<Project>
+  <!-- 阶段2b修改：原指向 D:\SteamLibrary（作者本机路径，本机不存在），改为指向本地参考镜像 HkRefs -->
+  <PropertyGroup>
+    <VanillaFiles>$(HkRefs)</VanillaFiles>
+    <ModdingAPI>$(HkRefs)</ModdingAPI>
+    <HollowKnightModsDirectory>$(HkRefs)/Mods</HollowKnightModsDirectory>
+  </PropertyGroup>
+</Project>

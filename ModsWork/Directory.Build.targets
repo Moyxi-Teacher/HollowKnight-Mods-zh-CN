@@ -1,0 +1,47 @@
+<Project>
+  <!--
+    阶段2b：构建后处理控制（在所有 csproj 导入之后生效，可覆盖同名 Target）
+
+    1. 屏蔽 build_steps.targets 中的 "Copy mod to game dir" 目标：
+       该目标会把编译产物复制到 $(HollowKnightRefs)/Mods/ 目录（即 HkRefs 参考镜像）。
+       为保持 HkRefs 作为纯参考镜像不被污染（避免影响其他模组的通配符引用与比对验证），
+       此处用同名空 Target 覆盖之。交付物统一由阶段4复制到 D:\KDQSHH\Mods\<模组汉化名文件夹>。
+       注意：框架规定"编译完不要复制到游戏目录"，此覆盖同时确保不会触碰
+       E:\steam\steamapps\common\Hollow Knight（该目录全程只读）。
+
+    2. 安全排除：将项目内非标准命名的 obj*/bin* 历史残留目录中的 .cs 文件
+       从编译项中排除（SDK 默认只排除名为 obj/bin 的目录，
+       清理时若把 obj 改名会导致残留 AssemblyInfo.cs 被重复编译，产生 CS0579）。
+  -->
+  <Target Name="Copy mod to game dir" />
+
+  <!--
+    语言版本环境兼容修复（不修改任何 csproj）：
+    本机仅安装 .NET 10 SDK，csproj 中的 LangVersion=latest/latestMajor 会被解析为
+    C# 14，其新引入的 `field` 上下文关键字与大量模组源码中的变量名 `field` 冲突
+    （错误 CS9273），属于构建环境版本差异，并非模组代码问题。
+    此处在所有 csproj 导入之后统一覆盖 LangVersion 为 12（C# 12 无此关键字，
+    且支持模组已使用的集合表达式等语法）。个别模组若确需更高版本，可单独豁免。
+  -->
+  <PropertyGroup>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
+
+  <!--
+    用户决策（2026-09-11）：关闭强名称签名。
+    原因：原版 DLL（游戏 Mods 目录）全部为 PublicKeyToken=null（未签名），
+    按框架附录D修复标准"除汉化文本字符串外无任何差异"，签名状态应保持一致。
+    此处强制 SignAssembly=false 覆盖各 csproj 中可能存在的 Release 签名条件，
+    使所有模组编译产物与原版一致均为未签名。
+  -->
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="**/obj_*/**/*.cs" />
+    <Compile Remove="**/bin_*/**/*.cs" />
+    <Compile Remove="**/obj_stale*/**/*.cs" />
+    <Compile Remove="**/bin_stale*/**/*.cs" />
+  </ItemGroup>
+</Project>

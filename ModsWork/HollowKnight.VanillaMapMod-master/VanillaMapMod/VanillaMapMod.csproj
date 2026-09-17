@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>VanillaMapMod</RootNamespace>
+		<AssemblyName>VanillaMapMod</AssemblyName>
+		<TargetFramework>net472</TargetFramework>
+		<AssemblyTitle>VanillaMapMod</AssemblyTitle>
+		<Product>VanillaMapMod</Product>
+		<Description>A Hollow Knight mod that adds extra pins for all item locations on the map.</Description>
+		<Copyright>Copyright © syyePhenomenol 2022</Copyright>
+		<Authors>syyePhenomenol</Authors>
+		<AssemblyVersion>2.1.6.0</AssemblyVersion>
+		<FileVersion>2.1.6.0</FileVersion>
+		<InformationalVersion>2.1.6.0汉化</InformationalVersion>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<NoWarn>CS7035</NoWarn>
+		<OutputPath>bin\$(Configuration)\</OutputPath>
+		<LangVersion>12</LangVersion>
+	</PropertyGroup>
+
+	<Import Project="LocalOverrides.targets" Condition="Exists('LocalOverrides.targets')" />
+
+	<ItemGroup>
+		<None Update="language.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>$(HkRefs)\Assembly-CSharp.dll</HintPath>
+		</Reference>
+		<Reference Include="ConnectionMetadataInjector">
+			<HintPath>$(HkRefs)\Mods\ConnectionMetadataInjector\ConnectionMetadataInjector.dll</HintPath>
+		</Reference>
+		<Reference Include="MagicUI">
+			<HintPath>$(HkRefs)\Mods\MagicUI\MagicUI.dll</HintPath>
+		</Reference>
+		<Reference Include="MapChanger">
+			<HintPath>$(HkRefs)\Mods\MapChanger\MapChanger.dll</HintPath>
+		</Reference>
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>$(HkRefs)\Newtonsoft.Json.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>$(HkRefs)\UnityEngine.CoreModule.dll</HintPath>
+		</Reference>
+		<Reference Include="UnityEngine.UI">
+			<HintPath>$(HkRefs)\UnityEngine.UI.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="false">
+		<RemoveDir Directories="$(ExportDir)/$(TargetName)/" />
+		<MakeDir Directories="$(ExportDir)/$(TargetName)/" />
+		<MakeDir Directories="$(ExportDir)/$(TargetName)/zip/" />
+		<MakeDir Condition="!Exists('$(HkRefs)/Mods/$(TargetName)/')" Directories="$(HkRefs)/Mods/$(TargetName)/" />
+		<Copy SourceFiles="$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(HkRefs)/Mods/$(TargetName)/" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ExportDir)/$(TargetName)/" />
+		<Copy SourceFiles="../README.md;$(TargetPath);$(TargetDir)/$(TargetName).pdb" DestinationFolder="$(ExportDir)/$(TargetName)/zip/" />
+		<ZipDirectory SourceDirectory="$(ExportDir)/$(TargetName)/zip/" DestinationFile="$(ExportDir)/$(TargetName)/$(TargetName).zip" />
+		<RemoveDir Directories="$(ExportDir)/$(TargetName)/zip/" />
+	</Target>
+
+</Project>

@@ -1,0 +1,4681 @@
+[
+  {
+    "Self": "Room_temple[left1]",
+    "Target": "Crossroads_02[door1]",
+    "Area": "Black Egg Temple"
+  },
+  {
+    "Self": "Room_temple[door1]",
+    "Target": "Room_Final_Boss_Atrium[left1]",
+    "Area": "Black Egg Temple"
+  },
+  {
+    "Self": "Room_Final_Boss_Atrium[left1]",
+    "Target": "Room_temple[door1]",
+    "Area": "Black Egg Temple"
+  },
+  {
+    "Self": "Room_Final_Boss_Atrium[right1]",
+    "Target": "Room_Final_Boss_Core[left1]",
+    "Area": "Black Egg Temple"
+  },
+  {
+    "Self": "Room_Final_Boss_Core[left1]",
+    "Target": "Room_Final_Boss_Atrium[right1]",
+    "Area": "Black Egg Temple"
+  },
+  {
+    "Self": "Tutorial_01[right1]",
+    "Target": "Town[left1]",
+    "Area": "King's Pass"
+  },
+  {
+    "Self": "Tutorial_01[top1]",
+    "Area": "King's Pass",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Tutorial_01[top2]",
+    "Target": "Cliffs_02[bot1]",
+    "Area": "King's Pass"
+  },
+  {
+    "Self": "Town[left1]",
+    "Target": "Tutorial_01[right1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Town[bot1]",
+    "Target": "Crossroads_01[top1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Town[right1]",
+    "Target": "Mines_10[left1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Town[top1]",
+    "Area": "Dirtmouth",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Town[door_station]",
+    "Target": "Room_Town_Stag_Station[left1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Town[door_sly]",
+    "Target": "Room_shop[left1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Town[door_mapper]",
+    "Target": "Room_mapper[left1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Town[door_jiji]",
+    "Target": "Room_Ouiji[left1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Town[door_bretta]",
+    "Target": "Room_Bretta[right1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Town[room_divine]",
+    "Target": "Grimm_Divine[left1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Town[room_grimm]",
+    "Target": "Grimm_Main_Tent[left1]",
+    "Area": "Dirtmouth"
+  },
+  {
+    "Self": "Room_shop[left1]",
+    "Target": "Town[door_sly]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_shop[door1]",
+    "Target": "Room_Sly_Storeroom[top1]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_Sly_Storeroom[top1]",
+    "Target": "Room_shop[door1]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_Town_Stag_Station[left1]",
+    "Target": "Town[door_station]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_mapper[left1]",
+    "Target": "Town[door_mapper]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_Bretta[right1]",
+    "Target": "Town[door_bretta]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_Bretta[door1]",
+    "Target": "Room_Bretta_Basement[top1]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_Bretta_Basement[top1]",
+    "Target": "Room_Bretta[door1]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_Ouiji[left1]",
+    "Target": "Town[door_jiji]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_Jinn[left1]",
+    "Target": "Town[door_jiji]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Grimm_Divine[left1]",
+    "Target": "Town[room_divine]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Grimm_Main_Tent[left1]",
+    "Target": "Town[room_grimm]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Crossroads_01[top1]",
+    "Target": "Town[bot1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_01[left1]",
+    "Target": "Crossroads_07[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_01[right1]",
+    "Target": "Crossroads_02[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_02[left1]",
+    "Target": "Crossroads_01[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_02[door1]",
+    "Target": "Room_temple[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_02[right1]",
+    "Target": "Crossroads_39[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_03[right1]",
+    "Target": "Crossroads_15[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_03[right2]",
+    "Target": "Mines_33[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_03[left1]",
+    "Target": "Crossroads_21[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_03[left2]",
+    "Target": "Crossroads_47[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_03[bot1]",
+    "Target": "Crossroads_19[top1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_03[top1]",
+    "Target": "Crossroads_16[bot1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_04[left1]",
+    "Target": "Crossroads_19[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_04[top1]",
+    "Target": "Crossroads_27[bot1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_04[door_Mender_House]",
+    "Target": "Room_Mender_House[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_04[door1]",
+    "Target": "Room_ruinhouse[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_04[door_charmshop]",
+    "Target": "Room_Charm_Shop[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_04[right1]",
+    "Target": "Crossroads_50[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_05[left1]",
+    "Target": "Crossroads_07[right2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_05[right1]",
+    "Target": "Crossroads_40[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_06[left1]",
+    "Target": "Crossroads_33[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_06[door1]",
+    "Target": "Crossroads_ShamanTemple[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_06[right1]",
+    "Target": "Crossroads_10[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_07[left1]",
+    "Target": "Crossroads_38[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_07[left2]",
+    "Target": "Crossroads_11_alt[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_07[left3]",
+    "Target": "Crossroads_25[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_07[right1]",
+    "Target": "Crossroads_01[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_07[right2]",
+    "Target": "Crossroads_05[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_07[bot1]",
+    "Target": "Crossroads_33[top1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_08[left1]",
+    "Target": "Crossroads_33[right2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_08[left2]",
+    "Target": "Crossroads_18[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_08[right1]",
+    "Target": "Crossroads_30[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_08[right2]",
+    "Target": "Crossroads_13[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_09[left1]",
+    "Target": "Crossroads_36[right2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_09[right1]",
+    "Target": "Crossroads_33[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_10[left1]",
+    "Target": "Crossroads_06[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_10[right1]",
+    "Target": "Crossroads_21[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_11_alt[left1]",
+    "Target": "Fungus1_01[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_11_alt[right1]",
+    "Target": "Crossroads_07[left2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_12[left1]",
+    "Target": "Crossroads_35[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_12[right1]",
+    "Target": "Crossroads_33[left2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_13[left1]",
+    "Target": "Crossroads_08[right2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_13[right1]",
+    "Target": "Crossroads_42[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_14[left1]",
+    "Target": "Crossroads_39[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_14[left2]",
+    "Target": "Crossroads_16[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_14[right1]",
+    "Target": "Crossroads_48[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_14[right2]",
+    "Target": "Crossroads_45[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_15[left1]",
+    "Target": "Crossroads_03[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_15[right1]",
+    "Target": "Crossroads_27[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_16[left1]",
+    "Target": "Crossroads_40[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_16[right1]",
+    "Target": "Crossroads_14[left2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_16[bot1]",
+    "Target": "Crossroads_03[top1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_18[right1]",
+    "Target": "Crossroads_08[left2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_18[right2]",
+    "Target": "Crossroads_52[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_18[bot1]",
+    "Target": "Fungus2_06[top1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_19[right1]",
+    "Target": "Crossroads_04[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_19[top1]",
+    "Target": "Crossroads_03[bot1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_19[left1]",
+    "Target": "Crossroads_42[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_19[left2]",
+    "Target": "Crossroads_43[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_21[left1]",
+    "Target": "Crossroads_10[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_21[right1]",
+    "Target": "Crossroads_03[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_21[top1]",
+    "Target": "Crossroads_22[bot1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_22[bot1]",
+    "Target": "Crossroads_21[top1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_25[right1]",
+    "Target": "Crossroads_07[left3]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_25[left1]",
+    "Target": "Crossroads_36[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_27[right1]",
+    "Target": "Crossroads_46[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_27[bot1]",
+    "Target": "Crossroads_04[top1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_27[left1]",
+    "Target": "Crossroads_15[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_27[left2]",
+    "Target": "Crossroads_31[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_30[left1]",
+    "Target": "Crossroads_08[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_31[right1]",
+    "Target": "Crossroads_27[left2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_33[top1]",
+    "Target": "Crossroads_07[bot1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_33[left1]",
+    "Target": "Crossroads_09[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_33[left2]",
+    "Target": "Crossroads_12[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_33[right1]",
+    "Target": "Crossroads_06[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_33[right2]",
+    "Target": "Crossroads_08[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_35[bot1]",
+    "Target": "Fungus3_26[top1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_35[right1]",
+    "Target": "Crossroads_12[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_36[right1]",
+    "Target": "Crossroads_25[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_36[right2]",
+    "Target": "Crossroads_09[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_37[right1]",
+    "Target": "Crossroads_49[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_38[right1]",
+    "Target": "Crossroads_07[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_39[right1]",
+    "Target": "Crossroads_14[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_39[left1]",
+    "Target": "Crossroads_02[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_40[right1]",
+    "Target": "Crossroads_16[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_40[left1]",
+    "Target": "Crossroads_05[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_42[left1]",
+    "Target": "Crossroads_13[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_42[right1]",
+    "Target": "Crossroads_19[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_43[left1]",
+    "Target": "Crossroads_49[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_43[right1]",
+    "Target": "Crossroads_19[left2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_45[right1]",
+    "Target": "Mines_01[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_45[left1]",
+    "Target": "Crossroads_14[right2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_46[left1]",
+    "Target": "Crossroads_27[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_46b[right1]",
+    "Target": "RestingGrounds_02[left1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "Crossroads_ShamanTemple[left1]",
+    "Target": "Crossroads_06[door1]",
+    "Area": "Ancestral Mound"
+  },
+  {
+    "Self": "Crossroads_47[right1]",
+    "Target": "Crossroads_03[left2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_48[left1]",
+    "Target": "Crossroads_14[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_49[right1]",
+    "Target": "Crossroads_43[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_49[left1]",
+    "Target": "Crossroads_37[right1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_49[elev_entrance]",
+    "Target": "Crossroads_49b[elev_entrance]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Crossroads_49b[right1]",
+    "Target": "Ruins1_28[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Crossroads_49b[elev_entrance]",
+    "Target": "Crossroads_49[elev_entrance]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Crossroads_50[right1]",
+    "Target": "RestingGrounds_06[left1]",
+    "Area": "Blue Lake"
+  },
+  {
+    "Self": "Crossroads_50[left1]",
+    "Target": "Crossroads_04[right1]",
+    "Area": "Blue Lake"
+  },
+  {
+    "Self": "Crossroads_52[left1]",
+    "Target": "Crossroads_18[right2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Room_ruinhouse[left1]",
+    "Target": "Crossroads_04[door1]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_Charm_Shop[left1]",
+    "Target": "Crossroads_04[door_charmshop]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Room_Mender_House[left1]",
+    "Target": "Crossroads_04[door_Mender_House]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Fungus1_01[left1]",
+    "Target": "Fungus1_01b[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_01[right1]",
+    "Target": "Crossroads_11_alt[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_01b[left1]",
+    "Target": "Fungus1_02[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_01b[right1]",
+    "Target": "Fungus1_01[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_02[left1]",
+    "Target": "Fungus1_17[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_02[right1]",
+    "Target": "Fungus1_01b[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_02[right2]",
+    "Target": "Fungus1_06[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_03[left1]",
+    "Target": "Fungus1_31[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_03[right1]",
+    "Target": "Fungus1_17[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_03[bot1]",
+    "Target": "Fungus1_05[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_04[left1]",
+    "Target": "Fungus1_25[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_04[right1]",
+    "Target": "Fungus1_21[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_05[right1]",
+    "Target": "Fungus1_14[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_05[bot1]",
+    "Target": "Fungus1_10[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_05[top1]",
+    "Target": "Fungus1_03[bot1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_06[left1]",
+    "Target": "Fungus1_02[right2]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_06[bot1]",
+    "Target": "Fungus1_07[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_07[top1]",
+    "Target": "Fungus1_06[bot1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_07[left1]",
+    "Target": "Fungus1_19[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_07[right1]",
+    "Target": "Fungus1_08[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_08[left1]",
+    "Target": "Fungus1_07[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_09[left1]",
+    "Target": "Fungus1_15[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_09[right1]",
+    "Target": "Fungus1_30[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_10[left1]",
+    "Target": "Fungus1_30[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_10[right1]",
+    "Target": "Fungus1_19[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_10[top1]",
+    "Target": "Fungus1_05[bot1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_11[top1]",
+    "Target": "Fungus1_19[bot1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_11[right1]",
+    "Target": "Fungus1_34[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_11[right2]",
+    "Target": "Fungus1_37[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_11[left1]",
+    "Target": "Fungus1_29[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_11[bot1]",
+    "Target": "Fungus3_01[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_12[left1]",
+    "Target": "Fungus1_13[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_12[right1]",
+    "Target": "Fungus1_29[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_13[right1]",
+    "Target": "Fungus1_12[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_13[left1]",
+    "Target": "Fungus3_22[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_14[left1]",
+    "Target": "Fungus1_05[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_15[door1]",
+    "Target": "Room_nailmaster_02[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_15[right1]",
+    "Target": "Fungus1_09[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_16_alt[right1]",
+    "Target": "Fungus1_22[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_17[left1]",
+    "Target": "Fungus1_03[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_17[right1]",
+    "Target": "Fungus1_02[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_19[left1]",
+    "Target": "Fungus1_10[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_19[right1]",
+    "Target": "Fungus1_07[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_19[bot1]",
+    "Target": "Fungus1_11[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_20_v02[bot1]",
+    "Target": "Fungus1_21[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_20_v02[bot2]",
+    "Target": "Fungus1_32[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_20_v02[right1]",
+    "Target": "Fungus1_28[left2]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_21[bot1]",
+    "Target": "Fungus1_22[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_21[top1]",
+    "Target": "Fungus1_20_v02[bot1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_21[left1]",
+    "Target": "Fungus1_04[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_21[right1]",
+    "Target": "Fungus1_32[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_22[bot1]",
+    "Target": "Fungus1_30[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_22[top1]",
+    "Target": "Fungus1_21[bot1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_22[left1]",
+    "Target": "Fungus1_16_alt[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_23[left1]",
+    "Target": "Fungus3_48[right2]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus1_23[right1]",
+    "Target": "Fungus3_13[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus1_24[left1]",
+    "Target": "Fungus3_05[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus1_25[right1]",
+    "Target": "Fungus1_04[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_25[left1]",
+    "Target": "Fungus1_26[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_26[right1]",
+    "Target": "Fungus1_25[left1]",
+    "Area": "Lake of Unn"
+  },
+  {
+    "Self": "Fungus1_26[left1]",
+    "Target": "Fungus1_Slug[right1]",
+    "Area": "Lake of Unn"
+  },
+  {
+    "Self": "Fungus1_26[door_SlugShrine]",
+    "Target": "Room_Slug_Shrine[left1]",
+    "Area": "Lake of Unn"
+  },
+  {
+    "Self": "Fungus1_28[left1]",
+    "Target": "Cliffs_01[right3]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Fungus1_28[left2]",
+    "Target": "Fungus1_20_v02[right1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Fungus1_29[left1]",
+    "Target": "Fungus1_12[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_29[right1]",
+    "Target": "Fungus1_11[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_30[top1]",
+    "Target": "Fungus1_22[bot1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_30[top3]",
+    "Target": "Fungus1_31[bot1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_30[left1]",
+    "Target": "Fungus1_09[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_30[right1]",
+    "Target": "Fungus1_10[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_31[top1]",
+    "Target": "Fungus1_32[bot1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_31[bot1]",
+    "Target": "Fungus1_30[top3]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_31[right1]",
+    "Target": "Fungus1_03[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_32[bot1]",
+    "Target": "Fungus1_31[top1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_32[top1]",
+    "Target": "Fungus1_20_v02[bot2]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_32[left1]",
+    "Target": "Fungus1_21[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_34[door1]",
+    "Target": "Fungus1_35[left1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_34[left1]",
+    "Target": "Fungus1_11[right1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_35[left1]",
+    "Target": "Fungus1_34[door1]",
+    "Area": "Stone Sanctuary"
+  },
+  {
+    "Self": "Fungus1_35[right1]",
+    "Target": "Fungus1_36[left1]",
+    "Area": "Stone Sanctuary"
+  },
+  {
+    "Self": "Fungus1_36[left1]",
+    "Target": "Fungus1_35[right1]",
+    "Area": "Stone Sanctuary"
+  },
+  {
+    "Self": "Fungus1_37[left1]",
+    "Target": "Fungus1_11[right2]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus1_Slug[right1]",
+    "Target": "Fungus1_26[left1]",
+    "Area": "Lake of Unn"
+  },
+  {
+    "Self": "Room_Slug_Shrine[left1]",
+    "Target": "Fungus1_26[door_SlugShrine]",
+    "Area": "Lake of Unn"
+  },
+  {
+    "Self": "Room_nailmaster_02[left1]",
+    "Target": "Fungus1_15[door1]",
+    "Area": "Greenpath"
+  },
+  {
+    "Self": "Fungus3_01[top1]",
+    "Target": "Fungus1_11[bot1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_01[right1]",
+    "Target": "Fungus3_25[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_01[left1]",
+    "Target": "Fungus3_24[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_01[right2]",
+    "Target": "Fungus3_02[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_02[left1]",
+    "Target": "Fungus3_01[right2]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_02[left2]",
+    "Target": "Fungus3_03[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_02[left3]",
+    "Target": "Fungus3_35[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_02[right1]",
+    "Target": "Fungus3_47[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_02[right2]",
+    "Target": "Fungus2_01[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_03[right1]",
+    "Target": "Fungus3_02[left2]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_03[left1]",
+    "Target": "Fungus3_34[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_24[right1]",
+    "Target": "Fungus3_01[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_24[left1]",
+    "Target": "Fungus3_44[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_24[top1]",
+    "Target": "Fungus3_30[bot1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_25[right1]",
+    "Target": "Fungus3_25b[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_25[left1]",
+    "Target": "Fungus3_01[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_25b[right1]",
+    "Target": "Fungus3_26[left2]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_25b[left1]",
+    "Target": "Fungus3_25[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_26[top1]",
+    "Target": "Crossroads_35[bot1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_26[left1]",
+    "Target": "Fungus3_28[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_26[left2]",
+    "Target": "Fungus3_25b[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_26[left3]",
+    "Target": "Fungus3_27[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_26[right1]",
+    "Target": "Fungus2_33[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_27[left1]",
+    "Target": "Fungus3_47[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_27[right1]",
+    "Target": "Fungus3_26[left3]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_28[right1]",
+    "Target": "Fungus3_26[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_30[bot1]",
+    "Target": "Fungus3_24[top1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_35[right1]",
+    "Target": "Fungus3_02[left3]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_44[bot1]",
+    "Target": "Fungus3_34[top1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_44[door1]",
+    "Target": "Room_Fungus_Shaman[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_44[right1]",
+    "Target": "Fungus3_24[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_47[left1]",
+    "Target": "Fungus3_02[right1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_47[right1]",
+    "Target": "Fungus3_27[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Fungus3_47[door1]",
+    "Target": "Fungus3_archive[left1]",
+    "Area": "Fog Canyon"
+  },
+  {
+    "Self": "Room_Fungus_Shaman[left1]",
+    "Target": "Fungus3_44[door1]",
+    "Area": "Overgrown Mound"
+  },
+  {
+    "Self": "Fungus3_archive[left1]",
+    "Target": "Fungus3_47[door1]",
+    "Area": "Teacher's Archives"
+  },
+  {
+    "Self": "Fungus3_archive[bot1]",
+    "Target": "Fungus3_archive_02[top1]",
+    "Area": "Teacher's Archives"
+  },
+  {
+    "Self": "Fungus3_archive_02[top1]",
+    "Target": "Fungus3_archive[bot1]",
+    "Area": "Teacher's Archives"
+  },
+  {
+    "Self": "Fungus2_01[left1]",
+    "Target": "Fungus3_02[right2]",
+    "Area": "Queen's Station"
+  },
+  {
+    "Self": "Fungus2_01[left2]",
+    "Target": "Fungus2_02[right1]",
+    "Area": "Queen's Station"
+  },
+  {
+    "Self": "Fungus2_01[left3]",
+    "Target": "Fungus2_34[right1]",
+    "Area": "Queen's Station"
+  },
+  {
+    "Self": "Fungus2_01[right1]",
+    "Target": "Fungus2_03[left1]",
+    "Area": "Queen's Station"
+  },
+  {
+    "Self": "Fungus2_02[right1]",
+    "Target": "Fungus2_01[left2]",
+    "Area": "Queen's Station"
+  },
+  {
+    "Self": "Fungus2_34[right1]",
+    "Target": "Fungus2_01[left3]",
+    "Area": "Queen's Station"
+  },
+  {
+    "Self": "Fungus2_03[left1]",
+    "Target": "Fungus2_01[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_03[bot1]",
+    "Target": "Fungus2_18[top1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_03[right1]",
+    "Target": "Fungus2_04[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_04[top1]",
+    "Target": "Fungus2_05[bot1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_04[right1]",
+    "Target": "Fungus2_28[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_04[left1]",
+    "Target": "Fungus2_03[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_04[right2]",
+    "Target": "Fungus2_28[left2]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_05[bot1]",
+    "Target": "Fungus2_04[top1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_05[right1]",
+    "Target": "Fungus2_06[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_06[top1]",
+    "Target": "Crossroads_18[bot1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_06[left1]",
+    "Target": "Fungus2_05[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_06[left2]",
+    "Target": "Fungus2_33[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_06[right1]",
+    "Target": "Fungus2_26[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_06[right2]",
+    "Target": "Fungus2_07[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_07[left1]",
+    "Target": "Fungus2_06[right2]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_07[right1]",
+    "Target": "Fungus2_08[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_08[left1]",
+    "Target": "Fungus2_07[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_08[left2]",
+    "Target": "Fungus2_09[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_08[right1]",
+    "Target": "Fungus2_32[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_09[left1]",
+    "Target": "Fungus2_10[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_09[right1]",
+    "Target": "Fungus2_08[left2]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_10[right1]",
+    "Target": "Fungus2_09[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_10[right2]",
+    "Target": "Fungus2_21[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_10[bot1]",
+    "Target": "Fungus2_11[top1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_11[top1]",
+    "Target": "Fungus2_10[bot1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_11[left1]",
+    "Target": "Fungus2_18[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_11[left2]",
+    "Target": "Fungus2_17[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_11[right1]",
+    "Target": "Fungus2_12[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_12[left1]",
+    "Target": "Fungus2_11[right1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_12[bot1]",
+    "Target": "Fungus2_13[top1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_13[top1]",
+    "Target": "Fungus2_12[bot1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_13[left2]",
+    "Target": "Fungus2_14[right1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_13[left3]",
+    "Target": "Fungus2_23[right1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_14[top1]",
+    "Target": "Fungus2_17[bot1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_14[right1]",
+    "Target": "Fungus2_13[left2]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_14[bot3]",
+    "Target": "Fungus2_15[top3]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_15[top3]",
+    "Target": "Fungus2_14[bot3]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_15[right1]",
+    "Target": "Fungus2_31[left1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_15[left1]",
+    "Target": "Fungus2_25[right1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_17[left1]",
+    "Target": "Fungus2_29[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_17[right1]",
+    "Target": "Fungus2_11[left2]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_17[bot1]",
+    "Target": "Fungus2_14[top1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_18[right1]",
+    "Target": "Fungus2_11[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_18[bot1]",
+    "Target": "Fungus2_19[top1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_18[top1]",
+    "Target": "Fungus2_03[bot1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_19[top1]",
+    "Target": "Fungus2_18[bot1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_19[left1]",
+    "Target": "Fungus2_20[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_20[right1]",
+    "Target": "Fungus2_19[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_20[left1]",
+    "Target": "Deepnest_01[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_21[right1]",
+    "Target": "Ruins1_01[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_21[left1]",
+    "Target": "Fungus2_10[right2]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_23[right1]",
+    "Target": "Fungus2_13[left3]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_23[right2]",
+    "Target": "Waterways_09[left1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_26[left1]",
+    "Target": "Fungus2_06[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_28[left1]",
+    "Target": "Fungus2_04[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_28[left2]",
+    "Target": "Fungus2_04[right2]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_29[right1]",
+    "Target": "Fungus2_17[left1]",
+    "Area": "Fungal Core"
+  },
+  {
+    "Self": "Fungus2_29[bot1]",
+    "Target": "Fungus2_30[top1]",
+    "Area": "Fungal Core"
+  },
+  {
+    "Self": "Fungus2_30[bot1]",
+    "Target": "Fungus2_25[top2]",
+    "Area": "Fungal Core",
+    "OneWay": "In"
+  },
+  {
+    "Self": "Fungus2_30[top1]",
+    "Target": "Fungus2_29[bot1]",
+    "Area": "Fungal Core"
+  },
+  {
+    "Self": "Fungus2_31[left1]",
+    "Target": "Fungus2_15[right1]",
+    "Area": "Mantis Village"
+  },
+  {
+    "Self": "Fungus2_32[left1]",
+    "Target": "Fungus2_08[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_33[right1]",
+    "Target": "Fungus2_06[left2]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Fungus2_33[left1]",
+    "Target": "Fungus3_26[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Deepnest_01[right1]",
+    "Target": "Fungus2_20[left1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Deepnest_01[bot1]",
+    "Target": "Deepnest_01b[top1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Deepnest_01[bot2]",
+    "Target": "Deepnest_01b[top2]",
+    "Area": "Fungal Wastes",
+    "OneWay": "In"
+  },
+  {
+    "Self": "Deepnest_01[left1]",
+    "Target": "Fungus3_39[right1]",
+    "Area": "Fungal Wastes"
+  },
+  {
+    "Self": "Deepnest_01b[top1]",
+    "Target": "Deepnest_01[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_01b[top2]",
+    "Area": "Deepnest",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Deepnest_01b[right1]",
+    "Target": "Deepnest_02[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_01b[right2]",
+    "Target": "Deepnest_02[left2]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_01b[bot1]",
+    "Target": "Deepnest_17[top1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_02[left1]",
+    "Target": "Deepnest_01b[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_02[left2]",
+    "Target": "Deepnest_01b[right2]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_02[right1]",
+    "Target": "Deepnest_36[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_03[right1]",
+    "Target": "Deepnest_30[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_03[left1]",
+    "Target": "Deepnest_34[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_03[top1]",
+    "Target": "Deepnest_33[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_03[left2]",
+    "Target": "Deepnest_31[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_09[left1]",
+    "Target": "Deepnest_10[right1]",
+    "Area": "Distant Village"
+  },
+  {
+    "Self": "Deepnest_10[right1]",
+    "Target": "Deepnest_09[left1]",
+    "Area": "Distant Village"
+  },
+  {
+    "Self": "Deepnest_10[right2]",
+    "Target": "Deepnest_41[left1]",
+    "Area": "Distant Village"
+  },
+  {
+    "Self": "Deepnest_10[right3]",
+    "Target": "Deepnest_41[left2]",
+    "Area": "Distant Village"
+  },
+  {
+    "Self": "Deepnest_10[door1]",
+    "Target": "Deepnest_Spider_Town[left1]",
+    "Area": "Distant Village"
+  },
+  {
+    "Self": "Deepnest_10[door2]",
+    "Target": "Room_spider_small[left1]",
+    "Area": "Distant Village"
+  },
+  {
+    "Self": "Room_spider_small[left1]",
+    "Target": "Deepnest_10[door2]",
+    "Area": "Distant Village"
+  },
+  {
+    "Self": "Deepnest_Spider_Town[left1]",
+    "Target": "Deepnest_10[door1]",
+    "Area": "Beast's Den"
+  },
+  {
+    "Self": "Deepnest_14[right1]",
+    "Target": "Deepnest_17[left1]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_14[left1]",
+    "Target": "Deepnest_26[right1]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_14[bot1]",
+    "Target": "Deepnest_33[top1]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_14[bot2]",
+    "Target": "Deepnest_33[top2]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_16[left1]",
+    "Target": "Deepnest_17[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_16[bot1]",
+    "Target": "Fungus2_25[top1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_17[left1]",
+    "Target": "Deepnest_14[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_17[right1]",
+    "Target": "Deepnest_16[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_17[top1]",
+    "Target": "Deepnest_01b[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_17[bot1]",
+    "Target": "Deepnest_30[top1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Fungus2_25[top1]",
+    "Target": "Deepnest_16[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Fungus2_25[top2]",
+    "Area": "Deepnest",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Fungus2_25[right1]",
+    "Target": "Fungus2_15[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_26[left1]",
+    "Target": "Deepnest_26b[right1]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_26[left2]",
+    "Target": "Deepnest_26b[right2]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_26[right1]",
+    "Target": "Deepnest_14[left1]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_26[bot1]",
+    "Target": "Deepnest_35[top1]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_26b[right2]",
+    "Target": "Deepnest_26[left2]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_26b[right1]",
+    "Target": "Deepnest_26[left1]",
+    "Area": "Failed Tramway"
+  },
+  {
+    "Self": "Deepnest_30[left1]",
+    "Target": "Deepnest_03[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_30[top1]",
+    "Target": "Deepnest_17[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_30[right1]",
+    "Target": "Deepnest_37[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_31[right1]",
+    "Target": "Deepnest_03[left2]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_31[right2]",
+    "Target": "Deepnest_32[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_32[left1]",
+    "Target": "Deepnest_31[right2]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_33[top1]",
+    "Target": "Deepnest_14[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_33[top2]",
+    "Target": "Deepnest_14[bot2]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_33[bot1]",
+    "Target": "Deepnest_03[top1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_34[left1]",
+    "Target": "Deepnest_39[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_34[right1]",
+    "Target": "Deepnest_03[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_34[top1]",
+    "Target": "Deepnest_35[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_35[left1]",
+    "Target": "Deepnest_40[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_35[top1]",
+    "Target": "Deepnest_26[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_35[bot1]",
+    "Target": "Deepnest_34[top1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_36[left1]",
+    "Target": "Deepnest_02[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_37[left1]",
+    "Target": "Deepnest_30[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_37[right1]",
+    "Target": "Abyss_03_b[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_37[top1]",
+    "Target": "Deepnest_38[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_37[bot1]",
+    "Target": "Deepnest_44[top1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_38[bot1]",
+    "Target": "Deepnest_37[top1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_39[left1]",
+    "Target": "Deepnest_41[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_39[top1]",
+    "Target": "Deepnest_42[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_39[door1]",
+    "Target": "Deepnest_45_v02[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_39[right1]",
+    "Target": "Deepnest_34[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_40[right1]",
+    "Target": "Deepnest_35[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_41[right1]",
+    "Target": "Deepnest_39[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_41[left1]",
+    "Target": "Deepnest_10[right2]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_41[left2]",
+    "Target": "Deepnest_10[right3]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_42[bot1]",
+    "Target": "Deepnest_39[top1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_42[left1]",
+    "Target": "Room_Mask_Maker[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_42[top1]",
+    "Target": "Deepnest_43[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_43[bot1]",
+    "Target": "Deepnest_42[top1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Deepnest_43[left1]",
+    "Target": "Fungus3_50[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Deepnest_43[right1]",
+    "Target": "Fungus3_08[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Deepnest_44[top1]",
+    "Target": "Deepnest_37[bot1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_45_v02[left1]",
+    "Target": "Deepnest_39[door1]",
+    "Area": "Weaver's Den"
+  },
+  {
+    "Self": "Room_Mask_Maker[right1]",
+    "Target": "Deepnest_42[left1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Deepnest_East_01[bot1]",
+    "Target": "Abyss_03_c[top1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_01[right1]",
+    "Target": "Hive_03_c[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_01[top1]",
+    "Target": "Deepnest_East_02[bot1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_02[bot1]",
+    "Target": "Deepnest_East_01[top1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_02[bot2]",
+    "Target": "Hive_03[top1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_02[top1]",
+    "Target": "Waterways_14[bot2]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_02[right1]",
+    "Target": "Deepnest_East_03[left2]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_03[left1]",
+    "Target": "Ruins2_07[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_03[left2]",
+    "Target": "Deepnest_East_02[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_03[top1]",
+    "Target": "Deepnest_East_07[bot1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_03[top2]",
+    "Area": "Kingdom's Edge",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Deepnest_East_03[right1]",
+    "Target": "Deepnest_East_04[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_03[right2]",
+    "Target": "Deepnest_East_06[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_04[left1]",
+    "Target": "Deepnest_East_03[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_04[left2]",
+    "Target": "Deepnest_East_07[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_04[right2]",
+    "Target": "Deepnest_East_15[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_04[right1]",
+    "Target": "Deepnest_East_11[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_06[top1]",
+    "Target": "Deepnest_East_18[bot1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_06[left1]",
+    "Target": "Deepnest_East_03[right2]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_06[bot1]",
+    "Target": "Deepnest_East_14b[top1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_06[door1]",
+    "Target": "Room_nailmaster_03[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_06[right1]",
+    "Target": "Deepnest_East_16[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_07[bot1]",
+    "Target": "Deepnest_East_03[top1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_07[bot2]",
+    "Target": "Deepnest_East_03[top2]",
+    "Area": "Kingdom's Edge",
+    "OneWay": "In"
+  },
+  {
+    "Self": "Deepnest_East_07[left1]",
+    "Target": "Deepnest_East_08[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_07[left2]",
+    "Target": "Ruins2_11_b[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_07[right1]",
+    "Target": "Deepnest_East_04[left2]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_08[right1]",
+    "Target": "Deepnest_East_07[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_08[top1]",
+    "Target": "Deepnest_East_09[bot1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_09[right1]",
+    "Target": "Room_Colosseum_01[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_09[left1]",
+    "Target": "Ruins2_10b[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_09[bot1]",
+    "Target": "Deepnest_East_08[top1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_10[left1]",
+    "Target": "Deepnest_East_18[right2]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_11[right1]",
+    "Target": "Deepnest_East_12[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_11[left1]",
+    "Target": "Deepnest_East_04[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_11[top1]",
+    "Target": "Deepnest_East_13[bot1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_11[bot1]",
+    "Target": "Deepnest_East_18[top1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_12[right1]",
+    "Target": "Deepnest_East_Hornet[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_12[left1]",
+    "Target": "Deepnest_East_11[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_13[bot1]",
+    "Target": "Deepnest_East_11[top1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_14[top2]",
+    "Target": "Deepnest_East_16[bot1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_14[left1]",
+    "Target": "Deepnest_East_14b[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_14[door1]",
+    "Target": "Deepnest_East_17[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_14b[right1]",
+    "Target": "Deepnest_East_14[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_14b[top1]",
+    "Target": "Deepnest_East_06[bot1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_15[left1]",
+    "Target": "Deepnest_East_04[right2]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_16[left1]",
+    "Target": "Deepnest_East_06[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_16[bot1]",
+    "Target": "Deepnest_East_14[top2]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_17[left1]",
+    "Target": "Deepnest_East_14[door1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_18[top1]",
+    "Target": "Deepnest_East_11[bot1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_18[bot1]",
+    "Target": "Deepnest_East_06[top1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_18[right2]",
+    "Target": "Deepnest_East_10[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Room_nailmaster_03[left1]",
+    "Target": "Deepnest_East_06[door1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Deepnest_East_Hornet[left1]",
+    "Target": "Deepnest_East_12[right1]",
+    "Area": "Cast Off Shell"
+  },
+  {
+    "Self": "Deepnest_East_Hornet[left2]",
+    "Target": "Room_Wyrm[right1]",
+    "Area": "Cast Off Shell"
+  },
+  {
+    "Self": "Room_Wyrm[right1]",
+    "Target": "Deepnest_East_Hornet[left2]",
+    "Area": "Cast Off Shell"
+  },
+  {
+    "Self": "GG_Lurker[left1]",
+    "Target": "Room_Colosseum_Spectate[right1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Hive_01[left1]",
+    "Target": "Abyss_03_c[right1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_01[right1]",
+    "Target": "Hive_02[left2]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_01[right2]",
+    "Target": "Hive_02[left3]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_02[left1]",
+    "Target": "Hive_03_c[right3]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_02[left2]",
+    "Target": "Hive_01[right1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_02[left3]",
+    "Target": "Hive_01[right2]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_03_c[left1]",
+    "Target": "Deepnest_East_01[right1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_03_c[right2]",
+    "Target": "Hive_04[left2]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_03_c[right3]",
+    "Target": "Hive_02[left1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_03_c[top1]",
+    "Target": "Hive_03[bot1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_03[bot1]",
+    "Target": "Hive_03_c[top1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_03[right1]",
+    "Target": "Hive_04[left1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_03[top1]",
+    "Target": "Deepnest_East_02[bot2]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_04[left1]",
+    "Target": "Hive_03[right1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_04[left2]",
+    "Target": "Hive_03_c[right2]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_04[right1]",
+    "Target": "Hive_05[left1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Hive_05[left1]",
+    "Target": "Hive_04[right1]",
+    "Area": "Hive"
+  },
+  {
+    "Self": "Room_Colosseum_01[left1]",
+    "Target": "Deepnest_East_09[right1]",
+    "Area": "Colosseum"
+  },
+  {
+    "Self": "Room_Colosseum_01[bot1]",
+    "Target": "Room_Colosseum_02[top1]",
+    "Area": "Colosseum"
+  },
+  {
+    "Self": "Room_Colosseum_02[top1]",
+    "Target": "Room_Colosseum_01[bot1]",
+    "Area": "Colosseum"
+  },
+  {
+    "Self": "Room_Colosseum_02[top2]",
+    "Target": "Room_Colosseum_Spectate[bot1]",
+    "Area": "Colosseum"
+  },
+  {
+    "Self": "Room_Colosseum_Spectate[bot1]",
+    "Target": "Room_Colosseum_02[top2]",
+    "Area": "Colosseum"
+  },
+  {
+    "Self": "Room_Colosseum_Spectate[right1]",
+    "Target": "GG_Lurker[left1]",
+    "Area": "Colosseum"
+  },
+  {
+    "Self": "Abyss_01[left1]",
+    "Target": "Waterways_05[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Abyss_01[left2]",
+    "Target": "Waterways_06[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Abyss_01[left3]",
+    "Target": "Abyss_02[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Abyss_01[right1]",
+    "Target": "Ruins2_04[left2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Abyss_01[right2]",
+    "Target": "Waterways_07[left1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Abyss_02[right1]",
+    "Target": "Abyss_01[left3]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_02[bot1]",
+    "Target": "Abyss_03[top1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_03[bot1]",
+    "Target": "Abyss_17[top1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_03[bot2]",
+    "Target": "Abyss_04[top1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_03[top1]",
+    "Target": "Abyss_02[bot1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_03_b[left1]",
+    "Target": "Deepnest_37[right1]",
+    "Area": "Deepnest"
+  },
+  {
+    "Self": "Abyss_03_c[right1]",
+    "Target": "Hive_01[left1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Abyss_03_c[top1]",
+    "Target": "Deepnest_East_01[bot1]",
+    "Area": "Kingdom's Edge"
+  },
+  {
+    "Self": "Abyss_04[top1]",
+    "Target": "Abyss_03[bot2]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_04[left1]",
+    "Target": "Abyss_18[right1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_04[bot1]",
+    "Target": "Abyss_06_Core[top1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_04[right1]",
+    "Target": "Abyss_05[left1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_05[left1]",
+    "Target": "Abyss_04[right1]",
+    "Area": "Palace Grounds"
+  },
+  {
+    "Self": "Abyss_05[right1]",
+    "Target": "Abyss_22[left1]",
+    "Area": "Palace Grounds"
+  },
+  {
+    "Self": "Abyss_06_Core[top1]",
+    "Target": "Abyss_04[bot1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_06_Core[left1]",
+    "Target": "Abyss_08[right1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_06_Core[left3]",
+    "Target": "Abyss_12[right1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_06_Core[right2]",
+    "Target": "Abyss_16[left1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_06_Core[bot1]",
+    "Target": "Abyss_15[top1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_08[right1]",
+    "Target": "Abyss_06_Core[left1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_09[right1]",
+    "Target": "Abyss_10[left1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_09[right2]",
+    "Target": "Abyss_Lighthouse_room[left1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_09[right3]",
+    "Target": "Abyss_10[left2]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_09[left1]",
+    "Target": "Abyss_16[right1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_10[left1]",
+    "Target": "Abyss_09[right1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_10[left2]",
+    "Target": "Abyss_09[right3]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_12[right1]",
+    "Target": "Abyss_06_Core[left3]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_15[top1]",
+    "Target": "Abyss_06_Core[bot1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_16[left1]",
+    "Target": "Abyss_06_Core[right2]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_16[right1]",
+    "Target": "Abyss_09[left1]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Abyss_17[top1]",
+    "Target": "Abyss_03[bot1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_18[left1]",
+    "Target": "Abyss_19[right1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_18[right1]",
+    "Target": "Abyss_04[left1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_19[left1]",
+    "Target": "Abyss_21[right1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_19[right1]",
+    "Target": "Abyss_18[left1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_19[bot1]",
+    "Target": "Abyss_20[top1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_19[bot2]",
+    "Target": "Abyss_20[top2]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_20[top1]",
+    "Target": "Abyss_19[bot1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_20[top2]",
+    "Target": "Abyss_19[bot2]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_21[right1]",
+    "Target": "Abyss_19[left1]",
+    "Area": "Ancient Basin"
+  },
+  {
+    "Self": "Abyss_22[left1]",
+    "Target": "Abyss_05[right1]",
+    "Area": "Palace Grounds"
+  },
+  {
+    "Self": "Abyss_Lighthouse_room[left1]",
+    "Target": "Abyss_09[right2]",
+    "Area": "Abyss"
+  },
+  {
+    "Self": "Waterways_01[top1]",
+    "Target": "Ruins1_05b[bot1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_01[left1]",
+    "Target": "Waterways_04[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_01[right1]",
+    "Target": "Waterways_03[left1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_01[bot1]",
+    "Target": "Waterways_02[top1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_02[top1]",
+    "Target": "Waterways_01[bot1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_02[top2]",
+    "Target": "Waterways_05[bot1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_02[top3]",
+    "Target": "Waterways_04[bot1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_02[bot1]",
+    "Target": "Waterways_08[top1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_02[bot2]",
+    "Target": "Waterways_06[top1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_03[left1]",
+    "Target": "Waterways_01[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_04[bot1]",
+    "Target": "Waterways_02[top3]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_04[right1]",
+    "Target": "Waterways_01[left1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_04[left1]",
+    "Target": "Waterways_04b[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_04[left2]",
+    "Target": "Waterways_04b[right2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_04b[right1]",
+    "Target": "Waterways_04[left1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_04b[right2]",
+    "Target": "Waterways_04[left2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_04b[left1]",
+    "Target": "Waterways_09[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_05[right1]",
+    "Target": "Abyss_01[left1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_05[bot1]",
+    "Target": "Waterways_02[top2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_05[bot2]",
+    "Target": "Waterways_15[top1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_06[right1]",
+    "Target": "Abyss_01[left2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_06[top1]",
+    "Target": "Waterways_02[bot2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_07[right1]",
+    "Target": "Waterways_13[left1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_07[right2]",
+    "Target": "Waterways_13[left2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_07[left1]",
+    "Target": "Abyss_01[right2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_07[door1]",
+    "Target": "Ruins_House_03[left2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_07[top1]",
+    "Target": "Waterways_14[bot1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_08[top1]",
+    "Target": "Waterways_02[bot1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_08[left1]",
+    "Target": "Waterways_12[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_08[left2]",
+    "Target": "GG_Pipeway[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_09[right1]",
+    "Target": "Waterways_04b[left1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_09[left1]",
+    "Target": "Fungus2_23[right2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_12[right1]",
+    "Target": "Waterways_08[left1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_13[left1]",
+    "Target": "Waterways_07[right1]",
+    "Area": "Isma's Grove"
+  },
+  {
+    "Self": "Waterways_13[left2]",
+    "Target": "Waterways_07[right2]",
+    "Area": "Isma's Grove"
+  },
+  {
+    "Self": "Waterways_14[bot1]",
+    "Target": "Waterways_07[top1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_14[bot2]",
+    "Target": "Deepnest_East_02[top1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "Waterways_15[top1]",
+    "Target": "Waterways_05[bot2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "GG_Pipeway[right1]",
+    "Target": "Waterways_08[left2]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "GG_Pipeway[left1]",
+    "Target": "GG_Waterways[right1]",
+    "Area": "Royal Waterways"
+  },
+  {
+    "Self": "GG_Waterways[right1]",
+    "Target": "GG_Pipeway[left1]",
+    "Area": "Junk Pit"
+  },
+  {
+    "Self": "GG_Waterways[door1]",
+    "Target": "Room_GG_Shortcut[left1]",
+    "Area": "Junk Pit"
+  },
+  {
+    "Self": "Room_GG_Shortcut[left1]",
+    "Target": "GG_Waterways[door1]",
+    "Area": "Junk Pit"
+  },
+  {
+    "Self": "Room_GG_Shortcut[top1]",
+    "Target": "Ruins1_04[bot1]",
+    "Area": "Junk Pit"
+  },
+  {
+    "Self": "Ruins1_01[left1]",
+    "Target": "Fungus2_21[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_01[top1]",
+    "Target": "Ruins1_17[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_01[bot1]",
+    "Target": "Ruins1_02[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_02[top1]",
+    "Target": "Ruins1_01[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_02[bot1]",
+    "Target": "Ruins1_03[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_03[top1]",
+    "Target": "Ruins1_02[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_03[left1]",
+    "Target": "Ruins1_04[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_03[right1]",
+    "Target": "Ruins1_05c[left2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_03[right2]",
+    "Target": "Ruins1_05b[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_04[right1]",
+    "Target": "Ruins1_03[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_04[door1]",
+    "Target": "Room_nailsmith[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_04[bot1]",
+    "Target": "Room_GG_Shortcut[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05b[left1]",
+    "Target": "Ruins1_03[right2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05b[top1]",
+    "Target": "Ruins1_05c[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05b[bot1]",
+    "Target": "Waterways_01[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05b[right1]",
+    "Target": "Ruins1_27[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05c[left2]",
+    "Target": "Ruins1_03[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05c[bot1]",
+    "Target": "Ruins1_05b[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05c[top1]",
+    "Target": "Ruins1_05[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05c[top2]",
+    "Target": "Ruins1_05[bot2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05c[top3]",
+    "Target": "Ruins1_05[bot3]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05[bot1]",
+    "Target": "Ruins1_05c[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05[bot2]",
+    "Target": "Ruins1_05c[top2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05[bot3]",
+    "Target": "Ruins1_05c[top3]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05[right1]",
+    "Target": "Ruins1_09[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05[right2]",
+    "Target": "Ruins1_18[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_05[top1]",
+    "Target": "Ruins1_31[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_06[left1]",
+    "Target": "Ruins1_17[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_06[right1]",
+    "Target": "Ruins1_31[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_09[top1]",
+    "Target": "Ruins1_23[bot1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_09[left1]",
+    "Target": "Ruins1_05[right1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_17[top1]",
+    "Target": "Ruins1_28[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_17[right1]",
+    "Target": "Ruins1_06[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_17[bot1]",
+    "Target": "Ruins1_01[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_18[left1]",
+    "Target": "Ruins1_05[right2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_18[right1]",
+    "Target": "Ruins2_03b[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_18[right2]",
+    "Target": "Ruins2_01[left2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_23[top1]",
+    "Target": "Ruins1_30[bot1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_23[right1]",
+    "Target": "Ruins1_25[left2]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_23[right2]",
+    "Target": "Ruins1_25[left3]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_23[bot1]",
+    "Target": "Ruins1_09[top1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_23[left1]",
+    "Target": "Ruins1_31[right1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_24[left1]",
+    "Target": "Ruins1_32[right1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_24[right1]",
+    "Target": "Ruins1_30[left1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_24[left2]",
+    "Target": "Ruins1_32[right2]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_24[right2]",
+    "Target": "Ruins1_30[left2]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_25[left1]",
+    "Target": "Ruins1_30[right1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_25[left2]",
+    "Target": "Ruins1_23[right1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_25[left3]",
+    "Target": "Ruins1_23[right2]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_27[left1]",
+    "Target": "Ruins1_05b[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_27[right1]",
+    "Target": "Ruins2_01_b[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_28[left1]",
+    "Target": "Crossroads_49b[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_28[right1]",
+    "Target": "Ruins1_29[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_28[bot1]",
+    "Target": "Ruins1_17[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_29[left1]",
+    "Target": "Ruins1_28[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_30[left1]",
+    "Target": "Ruins1_24[right1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_30[left2]",
+    "Target": "Ruins1_24[right2]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_30[bot1]",
+    "Target": "Ruins1_23[top1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_30[right1]",
+    "Target": "Ruins1_25[left1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_31[bot1]",
+    "Target": "Ruins1_05[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_31[left1]",
+    "Target": "Ruins1_06[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_31[left2]",
+    "Target": "Ruins1_31b[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_31[left3]",
+    "Target": "Ruins1_31b[right2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_31[right1]",
+    "Target": "Ruins1_23[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_31b[right1]",
+    "Target": "Ruins1_31[left2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_31b[right2]",
+    "Target": "Ruins1_31[left3]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins1_32[right1]",
+    "Target": "Ruins1_24[left1]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Ruins1_32[right2]",
+    "Target": "Ruins1_24[left2]",
+    "Area": "Soul Sanctum"
+  },
+  {
+    "Self": "Room_nailsmith[left1]",
+    "Target": "Ruins1_04[door1]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Ruins2_01[top1]",
+    "Target": "Ruins2_03b[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_01[bot1]",
+    "Target": "Ruins2_01_b[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_01[left2]",
+    "Target": "Ruins1_18[right2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_01_b[top1]",
+    "Target": "Ruins2_01[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_01_b[left1]",
+    "Target": "Ruins1_27[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_01_b[right1]",
+    "Target": "Ruins2_04[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_03b[top1]",
+    "Target": "Ruins2_03[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_03b[top2]",
+    "Target": "Ruins2_03[bot2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_03b[left1]",
+    "Target": "Ruins1_18[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_03b[bot1]",
+    "Target": "Ruins2_01[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_03[top1]",
+    "Target": "Ruins2_Watcher_Room[bot1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_03[bot1]",
+    "Target": "Ruins2_03b[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_03[bot2]",
+    "Target": "Ruins2_03b[top2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_04[left1]",
+    "Target": "Ruins2_01_b[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_04[left2]",
+    "Target": "Abyss_01[right1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_04[right1]",
+    "Target": "Ruins2_06[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_04[right2]",
+    "Target": "Ruins2_06[left2]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_04[door_Ruin_House_01]",
+    "Target": "Ruins_House_01[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_04[door_Ruin_House_02]",
+    "Target": "Ruins_House_02[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_04[door_Ruin_House_03]",
+    "Target": "Ruins_House_03[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_04[door_Ruin_Elevator]",
+    "Target": "Ruins_Elevator[left1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins2_05[left1]",
+    "Target": "Ruins2_10b[right2]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_05[top1]",
+    "Target": "Ruins2_09[bot1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_05[bot1]",
+    "Target": "Ruins2_06[top1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_06[left1]",
+    "Target": "Ruins2_04[right1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_06[left2]",
+    "Target": "Ruins2_04[right2]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_06[right1]",
+    "Target": "Ruins2_08[left1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_06[right2]",
+    "Target": "Ruins2_07[left1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_06[top1]",
+    "Target": "Ruins2_05[bot1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_07[right1]",
+    "Target": "Deepnest_East_03[left1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_07[left1]",
+    "Target": "Ruins2_06[right2]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_07[top1]",
+    "Target": "Ruins2_11_b[bot1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_08[left1]",
+    "Target": "Ruins2_06[right1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_09[bot1]",
+    "Target": "Ruins2_05[top1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_10[right1]",
+    "Target": "RestingGrounds_10[left1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "Ruins2_10[left1]",
+    "Target": "RestingGrounds_06[right1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "Ruins2_10[elev_entrance]",
+    "Target": "Ruins2_10b[elev_entrance]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "Ruins2_10b[right1]",
+    "Target": "Deepnest_East_09[left1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_10b[right2]",
+    "Target": "Ruins2_05[left1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_10b[left1]",
+    "Target": "Ruins_Bathhouse[right1]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_10b[elev_entrance]",
+    "Target": "Ruins2_10[elev_entrance]",
+    "Area": "King's Station"
+  },
+  {
+    "Self": "Ruins2_11_b[right1]",
+    "Target": "Deepnest_East_07[left2]",
+    "Area": "Tower of Love"
+  },
+  {
+    "Self": "Ruins2_11_b[left1]",
+    "Target": "Ruins2_11[right1]",
+    "Area": "Tower of Love"
+  },
+  {
+    "Self": "Ruins2_11_b[bot1]",
+    "Target": "Ruins2_07[top1]",
+    "Area": "Tower of Love"
+  },
+  {
+    "Self": "Ruins2_11[right1]",
+    "Target": "Ruins2_11_b[left1]",
+    "Area": "Tower of Love"
+  },
+  {
+    "Self": "Ruins2_Watcher_Room[bot1]",
+    "Target": "Ruins2_03[top1]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins_House_01[left1]",
+    "Target": "Ruins2_04[door_Ruin_House_01]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins_House_02[left1]",
+    "Target": "Ruins2_04[door_Ruin_House_02]",
+    "Area": "City of Tears"
+  },
+  {
+    "Self": "Ruins_House_03[left1]",
+    "Target": "Ruins2_04[door_Ruin_House_03]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Ruins_House_03[left2]",
+    "Target": "Waterways_07[door1]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Ruins_Elevator[left1]",
+    "Target": "Ruins2_04[door_Ruin_Elevator]",
+    "Area": "Pleasure House"
+  },
+  {
+    "Self": "Ruins_Elevator[left2]",
+    "Target": "Ruins_Bathhouse[door1]",
+    "Area": "Pleasure House"
+  },
+  {
+    "Self": "Ruins_Bathhouse[door1]",
+    "Target": "Ruins_Elevator[left2]",
+    "Area": "Pleasure House"
+  },
+  {
+    "Self": "Ruins_Bathhouse[right1]",
+    "Target": "Ruins2_10b[left1]",
+    "Area": "Pleasure House"
+  },
+  {
+    "Self": "RestingGrounds_02[right1]",
+    "Target": "RestingGrounds_04[left1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_02[left1]",
+    "Target": "Crossroads_46b[right1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_02[bot1]",
+    "Target": "RestingGrounds_06[top1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_02[top1]",
+    "Area": "Resting Grounds",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "RestingGrounds_04[left1]",
+    "Target": "RestingGrounds_02[right1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_04[right1]",
+    "Target": "RestingGrounds_05[left1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_05[left1]",
+    "Target": "RestingGrounds_04[right1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_05[left2]",
+    "Target": "RestingGrounds_07[right1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_05[left3]",
+    "Target": "RestingGrounds_17[right1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_05[right1]",
+    "Target": "RestingGrounds_08[left1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_05[right2]",
+    "Target": "RestingGrounds_09[left1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_05[bot1]",
+    "Target": "RestingGrounds_10[top1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_06[left1]",
+    "Target": "Crossroads_50[right1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_06[right1]",
+    "Target": "Ruins2_10[left1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_06[top1]",
+    "Target": "RestingGrounds_02[bot1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_07[right1]",
+    "Target": "RestingGrounds_05[left2]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_08[left1]",
+    "Target": "RestingGrounds_05[right1]",
+    "Area": "Spirits' Glade"
+  },
+  {
+    "Self": "RestingGrounds_09[left1]",
+    "Target": "RestingGrounds_05[right2]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_10[left1]",
+    "Target": "Ruins2_10[right1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_10[top1]",
+    "Target": "RestingGrounds_05[bot1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_10[top2]",
+    "Target": "RestingGrounds_12[bot1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_12[bot1]",
+    "Target": "RestingGrounds_10[top2]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_12[door_Mansion]",
+    "Target": "Room_Mansion[left1]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "RestingGrounds_17[right1]",
+    "Target": "RestingGrounds_05[left3]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "Room_Mansion[left1]",
+    "Target": "RestingGrounds_12[door_Mansion]",
+    "Area": "Resting Grounds"
+  },
+  {
+    "Self": "Mines_01[bot1]",
+    "Target": "Mines_02[top1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_01[left1]",
+    "Target": "Crossroads_45[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_02[top1]",
+    "Target": "Mines_01[bot1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_02[top2]",
+    "Target": "Mines_03[bot1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_02[left1]",
+    "Target": "Mines_33[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_02[right1]",
+    "Target": "Mines_29[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_03[right1]",
+    "Target": "Mines_17[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_03[bot1]",
+    "Target": "Mines_02[top2]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_03[top1]",
+    "Target": "Mines_05[bot1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_04[right1]",
+    "Target": "Mines_07[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_04[top1]",
+    "Target": "Mines_37[bot1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_04[left1]",
+    "Target": "Mines_17[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_04[left2]",
+    "Target": "Mines_29[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_04[left3]",
+    "Target": "Mines_29[right2]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_05[right1]",
+    "Target": "Mines_19[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_05[top1]",
+    "Target": "Mines_11[bot1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_05[bot1]",
+    "Target": "Mines_03[top1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_05[left1]",
+    "Target": "Mines_30[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_05[left2]",
+    "Target": "Mines_06[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_06[right1]",
+    "Target": "Mines_05[left2]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_06[left1]",
+    "Target": "Mines_36[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_07[right1]",
+    "Target": "Mines_28[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_07[left1]",
+    "Target": "Mines_04[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_10[right1]",
+    "Target": "Mines_30[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_10[left1]",
+    "Target": "Town[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_10[bot1]",
+    "Target": "Mines_16[top1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_11[right1]",
+    "Target": "Mines_18[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_11[top1]",
+    "Target": "Mines_13[bot1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_11[bot1]",
+    "Target": "Mines_05[top1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_13[right1]",
+    "Target": "Mines_20[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_13[top1]",
+    "Area": "Crystal Peak",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Mines_13[bot1]",
+    "Target": "Mines_11[top1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_16[top1]",
+    "Target": "Mines_10[bot1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_17[right1]",
+    "Target": "Mines_04[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_17[left1]",
+    "Target": "Mines_03[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_18[top1]",
+    "Target": "Mines_32[bot1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_18[left1]",
+    "Target": "Mines_11[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_18[right1]",
+    "Target": "Mines_20[left2]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_19[left1]",
+    "Target": "Mines_05[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_19[right1]",
+    "Target": "Mines_20[left3]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_20[left1]",
+    "Target": "Mines_13[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_20[left2]",
+    "Target": "Mines_18[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_20[left3]",
+    "Target": "Mines_19[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_20[bot1]",
+    "Target": "Mines_37[top1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_20[right1]",
+    "Target": "Mines_23[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_20[right2]",
+    "Target": "Mines_31[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_23[left1]",
+    "Target": "Mines_20[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_23[right1]",
+    "Target": "Mines_25[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_23[right2]",
+    "Target": "Mines_24[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_23[top1]",
+    "Area": "Crystal Peak",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Mines_24[left1]",
+    "Target": "Mines_23[right2]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_25[left1]",
+    "Target": "Mines_23[right1]",
+    "Area": "Hallownest's Crown"
+  },
+  {
+    "Self": "Mines_25[top1]",
+    "Target": "Mines_34[bot1]",
+    "Area": "Hallownest's Crown"
+  },
+  {
+    "Self": "Mines_28[left1]",
+    "Target": "Mines_07[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_28[bot1]",
+    "Target": "RestingGrounds_02[top1]",
+    "Area": "Crystal Peak",
+    "OneWay": "In"
+  },
+  {
+    "Self": "Mines_28[door1]",
+    "Target": "Mines_35[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_29[left1]",
+    "Target": "Mines_02[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_29[right1]",
+    "Target": "Mines_04[left2]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_29[right2]",
+    "Target": "Mines_04[left3]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_30[left1]",
+    "Target": "Mines_10[right1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_30[right1]",
+    "Target": "Mines_05[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_31[left1]",
+    "Target": "Mines_20[right2]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_32[bot1]",
+    "Target": "Mines_18[top1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_33[right1]",
+    "Target": "Mines_02[left1]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Mines_33[left1]",
+    "Target": "Crossroads_03[right2]",
+    "Area": "Forgotten Crossroads"
+  },
+  {
+    "Self": "Mines_34[bot1]",
+    "Target": "Mines_25[top1]",
+    "Area": "Hallownest's Crown"
+  },
+  {
+    "Self": "Mines_34[bot2]",
+    "Target": "Mines_23[top1]",
+    "Area": "Hallownest's Crown",
+    "OneWay": "In"
+  },
+  {
+    "Self": "Mines_34[left1]",
+    "Target": "Mines_13[top1]",
+    "Area": "Hallownest's Crown",
+    "OneWay": "In"
+  },
+  {
+    "Self": "Mines_35[left1]",
+    "Target": "Mines_28[door1]",
+    "Area": "Crystallized Mound"
+  },
+  {
+    "Self": "Mines_36[right1]",
+    "Target": "Mines_06[left1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_37[bot1]",
+    "Target": "Mines_04[top1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Mines_37[top1]",
+    "Target": "Mines_20[bot1]",
+    "Area": "Crystal Peak"
+  },
+  {
+    "Self": "Fungus3_04[left1]",
+    "Target": "Fungus3_21[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_04[left2]",
+    "Target": "Fungus3_13[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_04[right1]",
+    "Target": "Fungus3_34[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_04[right2]",
+    "Target": "Fungus3_05[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_05[left1]",
+    "Target": "Fungus3_04[right2]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_05[right1]",
+    "Target": "Fungus1_24[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_05[right2]",
+    "Target": "Fungus3_11[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_08[left1]",
+    "Target": "Deepnest_43[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_08[right1]",
+    "Target": "Fungus3_11[left2]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_08[top1]",
+    "Target": "Fungus3_10[bot1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_10[top1]",
+    "Target": "Fungus3_13[bot1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_10[bot1]",
+    "Target": "Fungus3_08[top1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_11[left1]",
+    "Target": "Fungus3_05[right2]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_11[left2]",
+    "Target": "Fungus3_08[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_11[right1]",
+    "Target": "Fungus3_39[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_13[left1]",
+    "Target": "Fungus1_23[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_13[left2]",
+    "Target": "Fungus3_40[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_13[left3]",
+    "Target": "Fungus3_49[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_13[bot1]",
+    "Target": "Fungus3_10[top1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_13[right1]",
+    "Target": "Fungus3_04[left2]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_21[right1]",
+    "Target": "Fungus3_04[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_21[top1]",
+    "Target": "Fungus3_22[bot1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_22[right1]",
+    "Target": "Fungus1_13[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_22[left1]",
+    "Target": "Fungus3_23[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_22[bot1]",
+    "Target": "Fungus3_21[top1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_23[right1]",
+    "Target": "Fungus3_22[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_23[left1]",
+    "Target": "Fungus3_48[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_34[right1]",
+    "Target": "Fungus3_03[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_34[left1]",
+    "Target": "Fungus3_04[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_34[top1]",
+    "Target": "Fungus3_44[bot1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_39[right1]",
+    "Target": "Deepnest_01[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_39[left1]",
+    "Target": "Fungus3_11[right1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_40[right1]",
+    "Target": "Fungus3_13[left2]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_40[top1]",
+    "Target": "Fungus3_48[bot1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_48[right1]",
+    "Target": "Fungus3_23[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_48[right2]",
+    "Target": "Fungus1_23[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_48[door1]",
+    "Target": "Room_Queen[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_48[bot1]",
+    "Target": "Fungus3_40[top1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_49[right1]",
+    "Target": "Fungus3_13[left3]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Fungus3_50[right1]",
+    "Target": "Deepnest_43[left1]",
+    "Area": "Queen's Gardens"
+  },
+  {
+    "Self": "Room_Queen[left1]",
+    "Target": "Fungus3_48[door1]",
+    "Area": "Misc"
+  },
+  {
+    "Self": "Cliffs_01[right1]",
+    "Target": "Cliffs_02[left1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_01[right2]",
+    "Target": "Cliffs_04[left1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_01[right3]",
+    "Target": "Fungus1_28[left1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_01[right4]",
+    "Target": "Cliffs_06[left1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_02[right1]",
+    "Target": "Town[top1]",
+    "Area": "Howling Cliffs",
+    "OneWay": "In"
+  },
+  {
+    "Self": "Cliffs_02[bot1]",
+    "Target": "Tutorial_01[top2]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_02[bot2]",
+    "Target": "Tutorial_01[top1]",
+    "Area": "Howling Cliffs",
+    "OneWay": "In"
+  },
+  {
+    "Self": "Cliffs_02[door1]",
+    "Target": "Room_nailmaster[left1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_02[left1]",
+    "Target": "Cliffs_01[right1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_02[left2]",
+    "Target": "Cliffs_03[right1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_03[right1]",
+    "Target": "Cliffs_02[left2]",
+    "Area": "Stag Nest"
+  },
+  {
+    "Self": "Cliffs_04[right1]",
+    "Target": "Cliffs_05[left1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_04[left1]",
+    "Target": "Cliffs_01[right2]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_05[left1]",
+    "Target": "Cliffs_04[right1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Cliffs_06[left1]",
+    "Target": "Cliffs_01[right4]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "Room_nailmaster[left1]",
+    "Target": "Cliffs_02[door1]",
+    "Area": "Howling Cliffs"
+  },
+  {
+    "Self": "White_Palace_01[left1]",
+    "Target": "White_Palace_11[door2]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_01[right1]",
+    "Target": "White_Palace_02[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_01[top1]",
+    "Target": "White_Palace_03_hub[bot1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_02[left1]",
+    "Target": "White_Palace_01[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_03_hub[left1]",
+    "Target": "White_Palace_14[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_03_hub[left2]",
+    "Target": "White_Palace_04[right2]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_03_hub[right1]",
+    "Target": "White_Palace_15[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_03_hub[top1]",
+    "Target": "White_Palace_06[bot1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_03_hub[bot1]",
+    "Target": "White_Palace_01[top1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_04[top1]",
+    "Target": "White_Palace_14[bot1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_04[right2]",
+    "Target": "White_Palace_03_hub[left2]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_05[left1]",
+    "Target": "White_Palace_15[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_05[left2]",
+    "Target": "White_Palace_15[right2]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_05[right1]",
+    "Target": "White_Palace_16[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_05[right2]",
+    "Target": "White_Palace_16[left2]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_06[left1]",
+    "Target": "White_Palace_18[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_06[top1]",
+    "Target": "White_Palace_07[bot1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_06[bot1]",
+    "Target": "White_Palace_03_hub[top1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_07[top1]",
+    "Target": "White_Palace_12[bot1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_07[bot1]",
+    "Target": "White_Palace_06[top1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_08[left1]",
+    "Target": "White_Palace_13[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_08[right1]",
+    "Target": "White_Palace_13[left3]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_09[right1]",
+    "Target": "White_Palace_13[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_11[door2]",
+    "Target": "White_Palace_01[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_12[right1]",
+    "Target": "White_Palace_13[left2]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_12[bot1]",
+    "Target": "White_Palace_07[top1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_13[right1]",
+    "Target": "White_Palace_08[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_13[left1]",
+    "Target": "White_Palace_09[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_13[left2]",
+    "Target": "White_Palace_12[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_13[left3]",
+    "Target": "White_Palace_08[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_14[bot1]",
+    "Target": "White_Palace_04[top1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_14[right1]",
+    "Target": "White_Palace_03_hub[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_15[left1]",
+    "Target": "White_Palace_03_hub[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_15[right1]",
+    "Target": "White_Palace_05[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_15[right2]",
+    "Target": "White_Palace_05[left2]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_16[left1]",
+    "Target": "White_Palace_05[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_16[left2]",
+    "Target": "White_Palace_05[right2]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_17[right1]",
+    "Target": "White_Palace_19[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_17[bot1]",
+    "Target": "White_Palace_18[top1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_18[top1]",
+    "Target": "White_Palace_17[bot1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_18[right1]",
+    "Target": "White_Palace_06[left1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_19[top1]",
+    "Target": "White_Palace_20[bot1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_19[left1]",
+    "Target": "White_Palace_17[right1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "White_Palace_20[bot1]",
+    "Target": "White_Palace_19[top1]",
+    "Area": "White Palace"
+  },
+  {
+    "Self": "GG_Atrium[top1]",
+    "Target": "GG_Atrium_Roof[bot1]",
+    "Area": "Godhome",
+    "OneWay": "In"
+  },
+  {
+    "Self": "GG_Atrium[top2]",
+    "Target": "GG_Atrium_Roof[bot2]",
+    "Area": "Godhome"
+  },
+  {
+    "Self": "GG_Atrium[Door_Workshop]",
+    "Target": "GG_Workshop[left1]",
+    "Area": "Godhome"
+  },
+  {
+    "Self": "GG_Atrium[door1_blueRoom]",
+    "Target": "GG_Blue_Room[left1]",
+    "Area": "Godhome"
+  },
+  {
+    "Self": "GG_Atrium_Roof[bot1]",
+    "Target": "GG_Atrium[top1]",
+    "Area": "Godhome",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "GG_Atrium_Roof[bot2]",
+    "Target": "GG_Atrium[top2]",
+    "Area": "Godhome"
+  },
+  {
+    "Self": "GG_Atrium_Roof[door_Land_of_Storms]",
+    "Target": "GG_Land_of_Storms[door1]",
+    "Area": "Godhome"
+  },
+  {
+    "Self": "GG_Workshop[left1]",
+    "Target": "GG_Atrium[Door_Workshop]",
+    "Area": "Godhome"
+  },
+  {
+    "Self": "GG_Blue_Room[left1]",
+    "Target": "GG_Atrium[door1_blueRoom]",
+    "Area": "Godhome"
+  },
+  {
+    "Self": "GG_Land_of_Storms[door1]",
+    "Target": "GG_Atrium_Roof[door_Land_of_Storms]",
+    "Area": "Godhome"
+  },
+  {
+    "Self": "Room_Town_Stag_Station[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Crossroads_47[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Fungus1_16_alt[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Fungus2_02[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Fungus3_40[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Ruins1_29[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Ruins2_08[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "RestingGrounds_09[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Deepnest_09[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Abyss_22[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Cliffs_03[door_stagExit]",
+    "Area": "Stag",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Room_Tram_RG[door1]",
+    //"Target": "Crossroads_46[door_tram]",
+    "Area": "Tram",
+    "OneWay": "Out"
+  },
+  {
+    "Self": "Room_Tram[door1]",
+    "Target": "Abyss_03[door_tram_arrive]",
+    "Area": "Tram"
+  },
+  /*
+  // these softlock if the tram is not unlocked and in position
+  {
+    "Self": "Crossroads_46[door_tram]",
+    "Target": "Room_Tram_RG[door1]",
+    "Area": "Tram"
+  },
+  {
+    "Self": "Crossroads_46b[door_tram]",
+    "Target": "Room_Tram_RG[door1]",
+    "Area": "Tram"
+  },
+  */
+  {
+    "Self": "Abyss_03[door_tram_arrive]",
+    "Target": "Room_Tram[door1]",
+    "Area": "Tram"
+  },
+  {
+    "Self": "Abyss_03_b[door_tram_arrive]",
+    "Target": "Room_Tram[door1]",
+    "Area": "Tram"
+  },
+  {
+    "Self": "Abyss_03_c[door_tram_arrive]",
+    "Target": "Room_Tram[door1]",
+    "Area": "Tram"
+  }
+]

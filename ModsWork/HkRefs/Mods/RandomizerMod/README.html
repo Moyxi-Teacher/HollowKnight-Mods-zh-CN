@@ -1,0 +1,261 @@
+<!DOCTYPE html []>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="MarkdownViewer++" />
+    <title>README.md</title>
+    <style type="text/css">
+            
+/* Avoid page breaks inside the most common attributes, especially for exports (i.e. PDF) */
+td, h1, h2, h3, h4, h5, p, ul, ol, li {
+    page-break-inside: avoid; 
+}
+
+        </style>
+  </head>
+  <body>
+    <h2 id="randomizer-4">Randomizer 4</h2>
+    <p>Welcome to Randomizer 4, the newest version of the Hollow Knight item and transition randomizer released for the Hollow Knight 1.5 update.</p>
+    <p>If you are new to the randomizer community, please consider joining the Hollow Knight discord server and the Hollow Knight Speedrunning discord server!</p>
+    <h2 id="dependencies">Dependencies</h2>
+    <p>Randomizer 4 requires the following to run:</p>
+    <ul>
+      <li>The Hollow Knight Modding API for the latest patch (1.5+). Randomizer 4 is not compatible with patches 1.4.3.2 or earlier.</li>
+      <li>The MenuChanger and ItemChanger mods.</li>
+      <li>The RandomizerCore and RandomizerCore.Json libraries.</li>
+    </ul>
+    <p>Additionally, the following mods are strongly recommended:</p>
+    <ul>
+      <li>Benchwarp, which can be required by randomizer logic for warping to the start location.</li>
+      <li>QoL, which can be required to restore skips expected in certain modes.</li>
+    </ul>
+    <h2 id="tips">Tips</h2>
+    <ul>
+      <li>Several items can be used to kill baldurs, including: Vengeful Spirit (or upgrades), Desolate Dive (or upgrades), Grubberfly's Elegy, Glowing Womb, Dash Slash with Dash, Weaversong, Spore Shroom, Cyclone Slash, Mark of Pride, and even just Dash on its own!
+<ul><li>With default skip settings, only Vengeful Spirit, Desolate Dive, Grubberfly's Elegy, and Glowing Womb can be required in logic.
+Baldur HP is reduced to 5 to make slower baldur kills less tedious, and to reduce RNG.</li></ul></li>
+      <li>Pogos may be required (for example, with standard settings Garpedes must be pogoed to collect the vessel fragment in Deepnest). Pogos which damage enemies are only required with the Enemy Pogos skip setting, and pogos which break background objects are only required with the Background Object Pogos skip setting. See the LOGIC README for more details.</li>
+      <li>Several items are randomized progressively, meaning that collecting any item in a given family always gives the first upgrade, collecting another gives the second upgrade, etc. For such items, any of the pickups in the family may be forced by randomizer logic. The families this pertains to are:
+<ul><li>Dream Nail, Dream Gate, Awoken Dream Nail</li><li>Mothwing Cloak, Shade Cloak</li><li>Vengeful Spirit, Shade Soul</li><li>Desolate Dive, Descending Dark</li><li>Howling Wraiths, Abyss Shriek</li><li>Fragile Heart, Unbreakable Heart, and likewise for the other fragile charms</li></ul></li>
+      <li>Grimmchild has special behavior: collecting it automatically activates the Nightmare Lantern. Additionally, if Charms are randomized and Grimmkin Flames are not randomized, collecting Grimmchild gives the first 6 Grimmkin Flames.</li>
+      <li>The lifeblood door in Abyss opens if you enter the room with a single lifeblood mask. In logic, it requires a lifeblood charm.</li>
+      <li>The randomizer adds extra platforms to various places that prevent softlocks. For example, there are several platforms added to Ancient Basin to prevent having to quit-out after checking certain locations without vertical movement. These platforms may disappear once the player has sufficient abilities to no longer need them.</li>
+      <li>If the player waits at the start location without waking up, the soul meter will be filled. This can be required at start locations which may not have soul. The player can return to start using the "Set Start" and "Warp" functions of Benchwarp.
+<ul><li>Warping to start after equipping charms at a bench may be required by the randomizer.</li><li>Warping to start while carrying the Delicate Flower is not required by the randomizer to complete the Grey Mourner's quest.</li></ul></li>
+      <li>With skips allowed, the player is advised to take care to not get locked out of certain required pogos. Obtain:
+<ul><li>No more than 1 nail upgrade before claw or wings</li><li>No more than 3 nail upgrades before claw</li><li>In Split Claw mode, instead obtain no more than 2 nail upgrades with only a single claw piece, and any number of nail upgrades with a single claw piece as well as wings</li></ul></li>
+      <li>There are several logs created per file in the Randomizer 4 folder in the save directory to help you with your playthrough.
+<ul><li>Tracker Log: this log continuously records item locations and transition connections as you discover them.</li><li>Helper Log: this log computes which locations/transitions are accessible with your current equipment.
+<ul><li>Tip: if you sequence break out of logic, locations and transitions which are put into logic by the sequence break will be labeled with an asterisk until they are reachable without sequence breaks.</li></ul></li><li>Spoiler Log: this log lists the exact locations of every randomized item and/or transition.</li></ul></li>
+      <li>For players of Randomizer 3, some new items and locations have been added to the old pools:
+<ul><li>Charms now includes Fragile and Unbreakable charms. Fragile charms can be repaired at Leg Eater. Divine sells 3 items, one for each Unbreakable charm. To purchase an item from Divine, you must equip the corresponding Heart, Greed, or Strength charm as in vanilla, and pay 5% of the vanilla geo cost (600 for Heart, 450 for Greed, 750 for Strength).</li><li>Rancid Eggs now includes the Tuk Defender's Crest egg. To obtain Tuk's item, you must talk to Tuk with Defender's Crest equipped.</li></ul></li>
+      <li>Multiple items at one location: Randomizer/ItemChanger support placing any number of items at a given location. This is usually not used by the randomizer except for a few special cases.
+<ul><li>Focus and Lore_Tablet-Focus are both randomized. Then the Focus location does not exist, and two items are placed at Lore_Tablet-Focus.</li><li>World_Sense and Lore_Tablet-World_Sense are both randomized. Then the World_Sense location does not exist, and two items are placed at Lore_Tablet-World_Sense.</li></ul></li>
+    </ul>
+    <h2 id="settings">Settings</h2>
+    <p>There are many settings available to customize the randomizer, and even more settings can be added by installing connection mods, which integrate with the randomizer. Information about the types of settings included with the base randomizer can be found in the subsections below.</p>
+    <p>Settings presets can be selected from the first menu page of the randomizer. To edit individual settings, click "More Randomizer Settings" in the bottom left for base randomizer settings, or "Connections" in the bottom left for connection mod settings.</p>
+    <p>To manage settings and settings profiles, from the first menu page, click "More Randomizer Settings" in the bottom left, then "Manage Settings Profiles" in the bottom right of the next page. On this page, you can create a shareable code for the current settings, and save/load settings profiles.</p>
+    <ul>
+      <li>Both the code and the settings profiles only modify base randomizer settings. Connection mod settings must be entered by hand. The code is linked to the randomizer version and will not be accepted if a different version of the mod is installed.</li>
+      <li>The RandoSettingsManager mod can be used to synchronize randomizer settings and most connection mod settings. Controls can again be found under "Manage Settings Profiles". Note that RandoSettingsManager codes require an internet connection to use, and may expire.</li>
+    </ul>
+    <h3 id="pool-settings">Pool Settings</h3>
+    <p>These settings control which items are randomized.</p>
+    <ul>
+      <li>Dreamers: Lurien, Monomon, Herrah, and World Sense. World Sense is the Black Egg Temple pickup to view completion percentage</li>
+      <li>Skills: all spells, nail arts, and movement abilities</li>
+      <li>Charms</li>
+      <li>Keys: all key objects, as well as King's Brand, Godtuner, and Collector's Map</li>
+      <li>Mask Shards</li>
+      <li>Vessel Fragments</li>
+      <li>Pale Ore</li>
+      <li>Charm Notches</li>
+      <li>Geo Chests: all geo chests, except the one above Baldur Shell and those in the Junk Pit</li>
+      <li>Relics: all Wanderer's Journals, Hallownest Seals, King's Idols, and Arcane Eggs.</li>
+      <li>Rancid Eggs</li>
+      <li>Stags</li>
+      <li>Maps</li>
+      <li>Whispering Roots</li>
+      <li>Grubs</li>
+      <li>Lifeblood Cocoons</li>
+      <li>Soul Totems</li>
+      <li>Grimmkin Flames</li>
+      <li>Geo Rocks</li>
+      <li>Boss Essence: essence drops from Dream Warriors and Dream Bosses</li>
+      <li>Boss Geo: geo drops from Gruz Mother, Massive Moss Charger, Vengefly King, Gorgeous Husk, Crystal/Enraged Guardian and both Soul Warriors</li>
+      <li>Lore Tablets</li>
+      <li>Journal Entries: The Hunter's Journal, along with the Goam, Garpede, Charged Lumafly, Void Tendrils and Seal of Binding locations.</li>
+      <li>Junk Pit Chests</li>
+    </ul>
+    <h3 id="skip-settings">Skip Settings</h3>
+    <p>These settings control which difficult skips the randomizer may potentially require. Beginners are strongly recommended to leave these settings to their defaults, as many skip categories include skips that are quite difficult or obscure.</p>
+    <p>More detail about each setting is available in the LOGIC_README.md.</p>
+    <h3 id="novelty-settings">Novelty Settings</h3>
+    <p>These settings add new and unusual features to the randomizer:</p>
+    <ul>
+      <li>Randomize Swim: All pools of water become dangerous, and a new Swim item is randomized which allows swimming in water normally.</li>
+      <li>Randomize Elevator Pass: The large City of Tears elevators to Forgotten Crossroads and Resting Grounds will be closed until the new Elevator Pass item is obtained. Additionally, a new randomized location is added in place of the toll machine next to the left elevator.</li>
+      <li>Randomize Nail: Adds three extra items to the pool that allow swinging the nail left, right and up; by default in this mode, the nail can only be swung down.</li>
+      <li>Randomize Focus: Removes the ability to heal and adds it as a randomized item. Additionally, a new randomized location is added in front of the Focus tutorial tablet in King's Pass.</li>
+      <li>Split Claw: Replaces Mantis Claw with two items, a "Left Mantis Claw" that works only on left walls, and a "Right Mantis Claw" that works only on the right. Replaces the Mantis Claw location with two locations in Mantis Village.</li>
+      <li>Split Cloak: Replaces Mothwing Cloak with two items, a "Left Mothwing Cloak" that lets you dash to the left, and a "Right Mothwing Cloak" that dashes to the right. Also adds a new location dropped after defeating Hornet in Greenpath. Shade Cloak is not split, meaning that there are effectively 3 dash upgrades in this mode: the ability to dash left, to dash right, and to shadowdash.
+<ul><li>Dash items remain progressive. In this mode, Shade Cloak has a random directional bias, and will give the dash of that direction if it has not yet been obtained.</li></ul></li>
+      <li>Split Superdash: Replaces Crystal Heart with two items, a "Left Crystal Heart" that lets you superdash to the left, and a "Right Crystal Heart" that superdashes to the right. Also adds a new location left of the bridge next to the Crystal Heart location.</li>
+      <li>Egg Shop: instead of summoning your shade, Jiji will now let you buy items for rancid eggs. If you've given her enough rancid eggs, any items you've reached the cost for will be summoned.</li>
+    </ul>
+    <h3 id="cost-settings">Cost Settings</h3>
+    <p>These settings control how certain randomized costs are generated for the following:</p>
+    <ul>
+      <li>Grubs (e.g. number required for a Grubfather location)</li>
+      <li>Essence (e.g. number required for a Seer location)</li>
+      <li>Rancid Eggs (e.g. number required for an Egg Shop location)</li>
+      <li>Charms (e.g. number required for certain Salubra locations when Salubra Charm Notches are randomized)</li>
+    </ul>
+    <p>For each category, there is a minimum, maximum, and tolerance. The costs will be taken uniformly at random between the minimum and maximum (inclusive), and the locations will be randomized under the constraint that for the cost to be affordable, the number of reachable items must exceed the cost by tolerance. Concretely, if the grub cost settings give a minimum of 1, a maximum of 23, and a tolerance of 2, then a possible cost is 19, and that cost will be in logic when 19 + 2 = 21 grubs are reachable.</p>
+    <h3 id="long-location-settings">Long Location Settings</h3>
+    <p>Settings which allow selectively not randomizing certain long locations, or modifying certain item previews.</p>
+    <ul>
+      <li>White Palace Rando: Allows removing all randomized items and locations in Path of Pain, or White Palace as a whole, and leaving them vanilla. For historical reasons, the King Fragment item and location are not affected by this setting, and are always randomized with the Charms pool.
+<ul><li>In transition randomizer, this setting also unrandomizes transitions. The Exclude Path of Pain setting unrandomizes all transitions in Path of Pain and the transition leading to Path of Pain. The Exclude White Palace setting unrandomizes all transitions in White Palace and Path of Pain.</li></ul></li>
+      <li>Boss Essence Rando: Allows selecting which bosses are included in the Boss Essence pool; for example, giving the option to remove White Defender and Grey Prince Zote, or to remove all Dream Bosses leaving only Dream Warriors.</li>
+    </ul>
+    <p>For each preview setting, toggling the setting off will result in the corresponding location(s) no longer allowing preview of their items. For locations which carry randomized costs, the preview setting has four options:</p>
+    <ul>
+      <li>Cost And Name: default preview behavior</li>
+      <li>Cost Only: item names will be redacted from the preview</li>
+      <li>Name Only: cost details will be redacted from the preview</li>
+      <li>None: all details except number of items will be redacted from the preview</li>
+    </ul>
+    <h3 id="start-location-settings">Start Location Settings</h3>
+    <p>These settings control how the start location of the randomizer is determined. The key field is Start Location Type, with the following choices:</p>
+    <ul>
+      <li>Fixed: The start location will be that chosen by the user in the menu.</li>
+      <li>Random: The start location will be chosen uniformly at random from the highlighted options.</li>
+      <li>Random Excluding KP: The same as above, except that King's Pass will not be one of the options.</li>
+    </ul>
+    <p>The possible random starts depend on the randomization settings as a whole, as some start locations do not lead to viable starts with certain settings. More starts can be unlocked by including more skips, more transition randomization, and more start item randomization.</p>
+    <h3 id="start-item-settings">Start Item Settings</h3>
+    <p>These settings control what items will be given to the player when the game begins:</p>
+    <ul>
+      <li>Start Geo: Gives a random amount of geo between the minimum and maximum inclusive.</li>
+      <li>Vertical: Controls whether the player starts with Mantis Claw, Monarch Wings, or both.</li>
+      <li>Horizontal: Controls whether the player starts with Mothwing Cloak, Crystal Heart, or both.</li>
+      <li>Charms: Controls what random equipped charms the player may start with.</li>
+      <li>Stags: Controls what unlocked stags the player may start with.</li>
+      <li>Misc Items: Controls what various other items the player may start with, including: Dream Nail, Isma's Tear, Vengeful Spirit, Desolate Dive, Howling Wraiths, Cyclone Slash, Great Slash, Dash Slash, Simple Key, Elegant Key, Tram Pass, King's Brand, Love Key, Lumafly Lantern, Shopkeeper's Key, and City Crest.</li>
+    </ul>
+    <h3 id="misc-settings">Misc Settings</h3>
+    <p>Settings which do not fit into the other classifications.</p>
+    <ul>
+      <li>Randomize Notch Costs: This setting randomizes the costs of all 40 charms uniformly so that the costs add to a total between the Min Random Notch Total and the Max Random Notch Total (inclusive). These numbers default to 70 and 110 respectively, relative to the vanilla total of 90. Note that the notch cost of each charm is constrained between 0 and 6. The notch cost will subsequently be displayed as part of the charm name. This does not affect future cost modifications, such as when Carefree Melody or Void Heart are obtained.</li>
+      <li>Extra Platforms: Adds small platforms near locations where the player would otherwise softlock, mainly in areas like Royal Waterways or Ancient Basin where vertical movement is often needed.</li>
+      <li>Salubra Notches: Allows the player to choose whether Salubra Charm Notches are randomized as part of the Charm Notches pool, are always vanilla or random, or should behave as in Randomizer 2 and 3, where each notch is automatically given when the player collects 5, 10, 18, and 25 charms.
+<ul><li>Salubra's Blessing will now be randomized as well when the Salubra Notches are randomized (or randomized with the Charm Notches pool). On other settings, Salubra's Blessing will be sold as usual once the player has 40 charms.</li></ul></li>
+      <li>Mask Shards: Allows replacing randomized mask shards with double or quadruple shards, adding up to the same number of masks.</li>
+      <li>Vessel Fragments: Allows replacing randomized vessel fragments with double or triple fragments, adding up to the same number of vessels.
+<ul><li>These last two settings may be desired to reduce the number of items, particularly in opposition to Duplicate Items.</li></ul></li>
+      <li>Steel Soul: if enabled, starts the game in Steel Soul (perma-death) mode. The Shade Skips setting will be automatically disabled.</li>
+      <li>Fireball Upgrade: this setting controls whether the upgrade from Vengeful Spirit can be deferred or reversed. If the setting is "Deferred", then after obtaining Shade Soul, the game will still act as though the player has Vengeful Spirit until the player presses attack while selecting the Vengeful Spirit icon in the inventory, which will irreversibly upgrade Vengeful Spirit to Shade Soul. If the setting is "Toggleable", then after obtaining Shade Soul, the player may freely swap between the two spells using the same method in the inventory. Certain skips, mainly involving slopeballs, require base Vengeful Spirit and are not possible with Shade Soul. If the Slopeballs skip setting is active, this setting is locked to "Toggleable".</li>
+    </ul>
+    <h3 id="cursed-settings">Cursed Settings</h3>
+    <ul>
+      <li>Longer Progression Chains: Applies a random priority penalty to each of Mothwing Cloak, Mantis Claw, Crystal Heart, Monarch Wings, Shade Cloak, Dream Nail, Vengeful Spirit, Desolate Dive, Howling Wraiths, Void Heart, Split Cloak items, and Split Claw items, making them less likely to be early progression.</li>
+      <li>Replace Junk With One Geo: Replaces randomized Mask Shards, Vessel Fragments, Pale Ore, Charm Notches, Geo, Rancid Eggs (when Egg Shop is not randomized), Relics, and Soul with One Geo pickups. The removed items are then unobtainable, making the resulting seed much more difficult.</li>
+      <li>Remove Spell Upgrades: Removes Shade Soul, Descending Dark, and Abyss Shriek. Additionally, modifies spells so that they cannot be upgraded beyond the first level, even with duplicate items.</li>
+      <li>Deranged: locations will not receive their vanilla items unless there are no alternatives. Transitions will not receive their vanilla targets unless there are no alternatives.</li>
+      <li>Cursed Masks: This is a numerical setting which can take values between 0 and 4. When it is greater than 0, the Knight starts with that many fewer masks, and the equivalent number of mask shards are added to randomization. In other words, with a setting of 4, the Knight starts with 1 mask, and an additional 16 mask shards are randomized. Be warned that this setting interacts with Replace Junk With One Geo to remove the added mask shards, if both are active.</li>
+      <li>Cursed Notches: This is a numerical setting which can take values between 0 and 2. When it is greater than 0, the Knight starts with that many fewer charm notches, and the equivalent number of charm notches are added to randomization. In other words, with a setting of 2, the Knight starts with 1 notch, and an additional 2 charm notches are randomized. Be warned that this setting interacts with Replace Junk With One Geo to remove the charm notches, if both are active.</li>
+      <li>Randomize Mimics: Add the four non-colo mimic locations to the randomization pool (some grubs may turn into mimics). With grubs unrandomized, instead randomize the mimics and grubs among themselves.</li>
+      <li>Maximum Grubs Replaced By Mimics: When Randomize Mimics is enabled, this setting allows the randomizer to replace grubs with mimics. The maximum here is inclusive. Grub replacement can happen whether grubs are randomized or not. The number of replaced grubs will be clamped to 46 - CostSettings.MaximumGrubCost - CostSettings.GrubTolerance, to ensure all grub costs remain payable.</li>
+    </ul>
+    <h3 id="transition-settings">Transition Settings</h3>
+    <p>Settings which control which transitions between rooms are randomized. There are three main transition randomizer modes:</p>
+    <ul>
+      <li>None: no transitions are randomized</li>
+      <li>Map Area Randomizer: transitions between map areas are randomized.
+<ul><li>Maps refer to the maps purchased from Cornifer or Iselda, and the initial map of King's Pass and Dirtmouth.</li></ul></li>
+      <li>Full Area Randomizer: transitions between titled areas are randomized.
+<ul><li>A titled area is defined to be an area with title text, i.e. a name which pops up as onscreen text.</li><li>Transitions between titled areas agree with the transitions between map areas where possible. The remaining transitions are chosen subjectively, though in most cases the obvious choice is taken.</li></ul></li>
+      <li>Room Randomizer: almost all room transitions are randomized, excluding:
+<ul><li>Warps of any kind, including those entering dream areas</li><li>Trams and elevators</li><li>Transitions within Godhome, the Shrine of Believers and the Black Egg Temple</li><li>The transitions leading to Sly's storeroom, Bretta's basement, or to any trial of the colosseum</li></ul></li>
+    </ul>
+    <p>There are additional settings which control the randomization of transitions:</p>
+    <ul>
+      <li>Area Constraint: Forces the randomizer to connect transitions to the same area if possible. This does not guarantee that areas are connected, but it gives a high likelihood that a transition will stay within the same area.</li>
+      <li>Transition Matching: Controls how transition directions affect randomization. Note that independent of this setting, one-way transitions always map to one-way transitions.
+<ul><li>Matching Directions: left transitions must map to right transitions, top transitions must map to bottom transitions, and so on.
+<ul><li>Door transitions are assigned directions so that the transition count is balanced. Since there are two more doors and right transitions total than left transitions (due to the door in Dirtmouth leading to a right transition in Bretta's room), one door will act as a left transition and all others will act as a right transition.</li></ul></li><li>Matching Transitions and no Door to Door: This settings is the same as the above, except that additionally there can be no door to door transitions.</li><li>Nonmatching Directions: Directions are not considered in randomization, and one transition can map to any other.</li></ul></li>
+      <li>Coupled: Determines whether transitions must be reversible, in the sense that entering a transition and then going back returns to the original place. With decoupled transitions, going back can lead to a new transition.</li>
+    </ul>
+    <p>Some important Room Randomizer tips:</p>
+    <ul>
+      <li>The nightmare lantern must be lit to check Grimmchild</li>
+      <li>Sly must be rescued to use his shop</li>
+    </ul>
+    <h3 id="progression-depth-settings">Progression Depth Settings</h3>
+    <p>These settings control how item-location placements are determined at the end of the randomizer:</p>
+    <ul>
+      <li>Multi Location Penalty: for a location among the following: <em>Sly</em>, <em>Sly_(Key)</em>, <em>Iselda</em>, <em>Salubra</em>, or <em>Leg_Eater</em>, moves all but one of its placements to the end of the location list, to strongly reduce its chances of having multiple progression items.</li>
+      <li>Duplicate Item Penalty: for each item invisible to logic (e.g. those added by Duplicate Items), moves it to the front of the item list. This means that these items are placed immediately after progression, generally in deep non-shop locations.</li>
+    </ul>
+    <p>The remaining settings relate to the depth priority transform. Briefly, this determines whether locations which became reachable later in randomization should be weighted more strongly than other locations. For example, a Transform Type of Linear and a Coefficient of 3 imply that a location placed one step later in randomization should be advanced past 3% of the locations relative to the original order.</p>
+    <p>To elaborate, randomization proceeds in steps, where a step forces certain items to be placed which unlock new locations. The depth of an item is the number of steps before it is placed, and the depth of a location is the number of steps before it becomes reachable.</p>
+    <p>For each randomization group, its items and locations begin with randomized priorities evenly spaced from 0 to 1. Without any restrictions, item placements would be done by selecting the lowest priority required item and placing it at the lowest priority reachable location. However, the depth priority transform uses the depth and priority of the item, and the depth of the candidate location to modify the location's priority before determining the minimum priority location.</p>
+    <p>The first component of the depth priority transform is the Item Location Priority Interaction. For an item, the item priority depth is a number calculated as the number of steps in which the average priorities of the forced items is less than the priority of the current item. In other words, item priority depth is at most the depth of the item, and is smaller by the number of spheres in which on average, higher priority items were forced. The Item Location Priority Interaction determines how item priority depth should be factored into the transform. It has the following values:</p>
+    <ul>
+      <li>Cliff: if the item priority depth is <strong>less</strong> than the location depth, then the priority transform has no effect. Otherwise, item priority depth does not modify the transform.</li>
+      <li>Fade: Location depth is adjusted downward by the item priority depth for the second part of the transform. Specifically, location depth is unmodified when it is less than the item priority depth, and linearly fades to 0 from the item priority depth to 2 times the item priority depth.</li>
+      <li>Cap: Location depth is capped above by the item priority depth for the second part of the transform.</li>
+      <li>Ignore: Item priority depth does not modify the transform.
+In general, the idea for this setting is to weight low priority items to be placed in earlier locations, even when the item was forced very late in randomization. For example, before this setting was added, the depth priority transform produced a seed where Spore Shroom was placed very late, and then in a subsequent step, Lurien, Monomon, and Herrah were all put in Spore Shroom-required lore tablets. With this setting, the effect of the depth priority transform would not have to be the same for all 3 dreamers, and so it would be less likely to produce such a predictable placement.</li>
+    </ul>
+    <p>The Priority Transform Type controls how the location priority is modified according to the location depth (subject to the interactions above). In general, with a Priority Transform Coefficient <em>a</em> and a Transform Type corresponding to a function <em>f</em> (identity, square, square root, natural log), the formula is <em>newPriority = oldPriority - (a/100)*f(depth)</em>.</p>
+    <p>The above comments all extend to transitions accordingly, where "items" are target transitions and "locations" are source transitions.</p>
+    <h3 id="duplicate-item-settings">Duplicate Item Settings</h3>
+    <p>These settings control which important items are duplicated. Duplicate items generated by the randomizer are modified to be invisible to logic, and may be penalized in randomization depending on the Progression Depth Settings. <strong>When there are not enough locations for the number of items, extra locations are created from the randomized shops</strong>, meaning normal shops, Grubfather, Seer, or Egg Shop. If somehow none of these shops are present in the randomization group, extra copies of Sly are added.</p>
+    <p>However, there is one important exception: the default Simple Key Handling is to create two Simple Keys which are identical to normal Simple Keys. This increases the odds of Simple Key progression, to make up for the fact that all Simple Key locks require 4 Simple Keys in logic in Randomizer 4.</p>
+    <h3 id="split-group-randomizer-settings">Split Group Randomizer Settings</h3>
+    <p>These settings allow controlling the randomization groups. Normally, items and locations are randomized in one group, so that any item can end up at any location. With split groups, the items in a group can only end up at the locations of that group. <strong>These settings do not control which items and locations are randomized</strong>--for that, see Pool Settings. Rather, these settings control what group an item or location would be placed in if it were randomized.</p>
+    <p>The settings consist of numeric fields for each pool.</p>
+    <ul>
+      <li>Entering -1 for a pool will cause that pool to be ignored by split group rando.</li>
+      <li>Entering 0 for a pool will put that pool in the main randomization group.</li>
+      <li>Entering a positive number for a pool will put that pool in a new randomization group for that number.
+Items or locations in more than one pool, such as shops, will be randomly divided among the groups, weighted by their initial distribution.</li>
+      <li>The difference between entering -1 and entering 0 is that the items and locations in a pool with -1 will not factor into the weighting. This can be important for compatibility with other mods which edit randomization groups.</li>
+    </ul>
+    <p>In summary, use these settings to arrange pools so that the pools with the same number are randomized with each other.</p>
+    <p>The Randomize On Start option sets each pool setting to one of 0, 1, or 2, randomly and uniformly. Randomization is only applied to pools which were already set to one of 0, 1, or 2, to allow selecting pools to be unaffected by randomization.</p>
+    <ul>
+      <li>It is recommended to disable Duplicate Items with this setting. If skills end up in a group with few locations, there is a high likelihood of several skills being forced into a shop.</li>
+    </ul>
+    <p>The definitions used for these settings are slightly broader than those in pool settings, to accomodate other settings that add items:</p>
+    <ul>
+      <li>Dreamers</li>
+      <li>Skills, including split skills, Swim, Focus</li>
+      <li>Charms</li>
+      <li>Keys: City Crest, Lumafly Lantern, Tram Pass, Simple Keys, Shopkeeper's Key, Elegant Key, Love Key, King's Brand, Godtuner, and Collector's Map</li>
+      <li>Mask Shards</li>
+      <li>Vessel Fragments</li>
+      <li>Charm Notches, including Salubra Notches</li>
+      <li>Pale Ore</li>
+      <li>Geo Chests, including Junk Pit Chests</li>
+      <li>Rancid Eggs</li>
+      <li>Relics</li>
+      <li>Whispering Roots</li>
+      <li>Boss Essence</li>
+      <li>Grubs</li>
+      <li>Mimics</li>
+      <li>Maps</li>
+      <li>Stags</li>
+      <li>Lifeblood Cocoons</li>
+      <li>Grimmkin Flames</li>
+      <li>Journal Entries</li>
+      <li>Geo Rocks</li>
+      <li>Boss Geo</li>
+      <li>Soul Totems</li>
+      <li>Lore Tablets</li>
+    </ul>
+  </body>
+</html>

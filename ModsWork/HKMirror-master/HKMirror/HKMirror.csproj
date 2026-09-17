@@ -1,0 +1,169 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <ProjectGuid>{B66C8E1B-C360-4881-B21F-8C1583AE2398}</ProjectGuid>
+        <RootNamespace>HKMirror</RootNamespace>
+        <AssemblyTitle>HKMirror</AssemblyTitle>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <FileVersion>2.1.0.0</FileVersion>
+        <InformationalVersion>2.1.0.0汉化</InformationalVersion>
+        <Deterministic>true</Deterministic>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <LangVersion>latest</LangVersion>
+        <TargetFramework>net472</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>CS1591, CS0618, CS0612</NoWarn>
+        <HollowKnightFolder>$(HkRefs)</HollowKnightFolder>
+        <OutputDirectory>$(HkRefs)/Mods</OutputDirectory>
+    </PropertyGroup>
+
+    <!-- Same References -->
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>$(HollowKnightFolder)\Assembly-CSharp.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="MMHOOK_PlayMaker, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>$(HollowKnightFolder)\MMHOOK_PlayMaker.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="MonoMod.RuntimeDetour">
+            <HintPath>$(HollowKnightFolder)\MonoMod.RuntimeDetour.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="MonoMod.Utils">
+            <HintPath>$(HollowKnightFolder)\MonoMod.Utils.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="PlayMaker">
+            <HintPath>$(HollowKnightFolder)\PlayMaker.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.AIModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.AIModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.AnimationModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.AnimationModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.AudioModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.CoreModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.ImageConversionModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.ImageConversionModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.IMGUIModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.IMGUIModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.InputLegacyModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.JSONSerializeModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.JSONSerializeModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.ParticleSystemModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.ParticleSystemModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.Physics2DModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.Physics2DModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.PhysicsModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.ScreenCaptureModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.ScreenCaptureModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.SharedInternalsModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.SharedInternalsModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.SpriteShapeModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.SpriteShapeModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.TextRenderingModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.TextRenderingModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.TilemapModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.TilemapModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.UI.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UIModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.UIModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="MMHOOK_Assembly-CSharp">
+            <HintPath>$(HollowKnightFolder)\MMHOOK_Assembly-CSharp.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="Newtonsoft.Json">
+            <HintPath>$(HollowKnightFolder)\Newtonsoft.Json.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="netstandard">
+            <HintPath>$(HollowKnightFolder)\netstandard.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="mscorlib">
+            <HintPath>$(HollowKnightFolder)\mscorlib.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.UnityWebRequestWWWModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="UnityEngine.VideoModule">
+            <HintPath>$(HollowKnightFolder)\UnityEngine.VideoModule.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+        <Reference Include="XGamingRuntime">
+            <HintPath>$(HollowKnightFolder)\XGamingRuntime.dll</HintPath>
+            <Private>false</Private>
+        </Reference>
+    </ItemGroup>
+
+    <!-- 受保护目录约束：禁止将编译产物复制到游戏目录。
+         仅执行汉化文本/菜单改动，不改变部署行为。 -->
+    <Target AfterTargets="PostBuildEvent" Name="CopyMod" Condition="false">
+        <Copy DestinationFolder="$(OutputDirectory)\$(TargetName)" SkipUnchangedFiles="true" SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb;$(TargetDir)$(TargetName).xml" />
+    </Target>
+
+    <Target AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'" Name="CreateReleaseZip">
+        <MakeDir Directories="$(ProjectDir)Output" />
+        <Delete Files="$(ProjectDir)/$(TargetName).zip" />
+        <Copy DestinationFolder="$(ProjectDir)/Output/" SourceFiles="$(TargetPath)" />
+        <Copy DestinationFolder="$(ProjectDir)/Output/" SourceFiles="$(TargetDir)$(TargetName).pdb" />
+        <Copy DestinationFolder="$(ProjectDir)/Output/" SourceFiles="$(TargetDir)$(TargetName).xml" />
+        <Copy ContinueOnError="true" DestinationFolder="$(ProjectDir)/Output/" SourceFiles="$(SolutionDir)/README.md" />
+        <ZipDirectory DestinationFile="$(ProjectDir)/$(TargetName).zip" SourceDirectory="$(ProjectDir)/Output" />
+        <RemoveDir Directories="$(ProjectDir)Output" />
+
+        <GetFileHash Algorithm="SHA256" Files="$(ProjectDir)/$(TargetName).zip">
+            <Output ItemName="FilesWithHashes" TaskParameter="Items" />
+        </GetFileHash>
+        <Message Importance="High" Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
+    </Target>
+
+</Project>

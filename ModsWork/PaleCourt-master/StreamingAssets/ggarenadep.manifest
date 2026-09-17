@@ -1,0 +1,657 @@
+ManifestFileVersion: 0
+CRC: 1913584015
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d3e5b0a761102a7d2d19db22a1f67106
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1c231330a2ca5302cdcdd7bf394ac798
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 49
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 60
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 62
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 96
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: ed99be16583af6d4c8fefc8a4d2fe40d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d3b88fd4101e5b743a039be7ee1636d3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d6e3328d2e0f30a46b5b67e9d0ad42cc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b8edd8ae2b6b1a94fbc22ace3204a5eb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fcaf4f8a369b9bd4d89c8355475e31a6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0a5294b9660f9914e8615be5f542a9ae, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3c9b822f28c48294a82ceceae41b2c0e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6d7a3ec542f88e946aef300abc6e466a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a1afdf010fe91cd4388689f65a353b45, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ccec4df7be8a481479ebc815a95c02cb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d07c825afd1f7bf43be8dc28584eba77, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8eb7ffd51fa8aa94ab07d66539c27af6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 889aace5c0a835a4a85ea3c1003c77ed, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9ac3add9d5606ab499be9f02d75dee42, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b7026ecedd1d3f340a94c74edd628c88, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 62339560f6cbb204ebb7f3bdb9db3a5c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3d6da4dcc7460be42987e896a90a01da, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a718dc0590b722e4498ab8de8a6eaa7b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 58e73c94c4ba3a74c87260562a7de9ea, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 771eb9ca99b61bc4e91d06ae0460bb83, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a948d376b6a18254cb388246e648ecfb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8aefd5332b18a634584f09421e389da4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9c30e7f3fcf22c94a88bb135361016e3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 408c383b3885bbb4ba25ddbc51c7a2dc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c4655f8003eeb7e438cc3165668e12f9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 681ceaa615859d147b4d2b481276a18c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 101f28405aab3af4dad3a17498b7b5ed, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e35d3509ed75ef54f93397cf7b19bd15, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fcabe738c9b330247a2ec834e174e9f5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1206fe2133ea3bb448bccd8989103c1a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 09984293e483589459444de743fd4cae, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0face07b26779be408484926eb7276fb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 32a467a0c30bf214b97803833c066327, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7079795657ef2c541853f5fb876c7b3a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 20c27b9c364ca524b88f4121087211b1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9060d4b3559b79a4fb6dbc9b984a3f90, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4aad377e63367374bafaf66d1586ba58, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5a8c6f56cf04def40af24943e4d0d5f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fa0707e89397b3a4eb3c9bc269092b2d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 221058c905a4d414d9b824cf8119a83f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cf23c8f9c6a141543b85fca1c17eabad, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7a71a38d579719a4eb744ff6b87e6b67, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cc59023512f5d374d8689a2eec529112, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ab483aef8e39ae840a0cf9cc41a0907c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4682225a20b95524abce7ff747948d5a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7f2fd251c56fd0649b1910ecfc113463, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2d389e50d038c124fb365ac530444a87, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 558cf5f183cbe2b418fa7363cb28d2a2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: df76b00f04057d44eaa102bdf0f0a18a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e0b3d1e325f07e34796ae547d19a3273, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9f14c2292050a1443a482f4b6c8c0864, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d665adf9574543f4789786f9368d7318, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 63e685133c749e44c92e62ac2cb0eaad, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ddb3396fb4cda8d459106e40a6a8c138, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b11bfb7b970d0e24b82c4d3ca6dee004, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 221
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Texture2D/SpriteAtlasTexture-Pause_fleurs (Group 1)-1024x1024-fmt4.png
+- Assets/AudioClip/props_grass_stud_move_2.wav
+- Assets/PrefabInstance/Journal Update Msg.prefab
+- Assets/Resources/blendvertexcolor.shader
+- Assets/AudioClip/enemy_death_sword.wav
+- Assets/Material/russian_body Material.mat
+- Assets/Material/Particle_BlackOrb.mat
+- Assets/Material/atlas0 material_28.mat
+- Assets/PrefabInstance/Hollow Shade_0.prefab
+- Assets/AudioClip/hero_quake_spell_dash.wav
+- Assets/Texture2D/caustic_small_019.png
+- Assets/Mesh/MeshHeg8.asset
+- Assets/Material/Particle_Grass.mat
+- Assets/Material/japanese_body Material_0.mat
+- Assets/Texture2D/caustic_small_024.png
+- Assets/PrefabInstance/Dream Impact.prefab
+- Assets/Mesh/MeshIsma4.asset
+- Assets/Mesh/MeshZemer4.asset
+- Assets/Texture2D/grave_marker_flower003.png
+- Assets/AnimatorController/fireball_impact_effect0003.controller
+- Assets/Texture2D/caustic_small_011.png
+- Assets/AnimationClip/GG_battle_transition_out.anim
+- Assets/ScriptableObject/Perpetua-SDF.asset
+- Assets/ScriptableObject/DreamFight.asset
+- Assets/AudioClip/grass_cut_3.wav
+- Assets/PrefabInstance/Audio Player Actor.prefab
+- Assets/AnimationClip/GreenGrass3Push.anim
+- Assets/AudioClip/grass_cut_2.wav
+- Assets/PrefabInstance/Prompts Anim.prefab
+- Assets/Shader/UIBlendModesMultiply.shader
+- Assets/Mesh/MeshHeg6.asset
+- Assets/AudioClip/breakable_pole_death.wav
+- Assets/PrefabInstance/Dream Nail Get Cln.prefab
+- Assets/Texture2D/rock_02.png
+- Assets/Texture2D/atlas0_215.png
+- Assets/AnimationClip/caustic_small_0.anim
+- Assets/AudioClip/grass_move_1.wav
+- Assets/Texture2D/caustic_small_036.png
+- Assets/Texture2D/SpriteAtlasTexture-Shiny_Item_Anims (Group 0)-512x512-fmt12.png
+- Assets/AudioClip/hero_quake_spell_prepare.wav
+- Assets/AudioClip/sword_hit_reject.wav
+- Assets/PrefabInstance/Geo Small.prefab
+- Assets/Material/atlas0 material_8.mat
+- Assets/AudioClip/dream_essence_corpse_collect.wav
+- Assets/Texture2D/russian_title Atlas.png
+- Assets/zemer/flower_floor_Ze'mer_floor_1.png
+- Assets/Texture2D/SpriteAtlasTexture-Core (Group 2)-256x512-fmt10.png
+- Assets/AudioClip/dream_enter_pt_2.wav
+- Assets/AnimationClip/spell_impact.anim
+- Assets/Texture2D/caustic_small_020.png
+- Assets/Material/atlas0 material_42.mat
+- Assets/Texture2D/caustic_small_006.png
+- Assets/Texture2D/SpriteAtlasTexture-GG_Main-4096x4096-fmt12.png
+- Assets/Material/russian_title_fallback Material.mat
+- Assets/Texture2D/SpriteAtlasTexture-Green (Group 0)-1024x1024-fmt4.png
+- Assets/Material/perpetua_tmpro Material.mat
+- Assets/AudioClip/hollow_shade_fly.wav
+- Assets/Texture2D/caustic_small_041.png
+- Assets/Material/atlas0 material_9.mat
+- Assets/Texture2D/atlas0_2.png
+- Assets/Texture2D/atlas0_68.png
+- Assets/PrefabInstance/Godseeker Cln.prefab
+- Assets/Texture2D/caustic_small_000.png
+- Assets/PrefabInstance/Hit Shade.prefab
+- Assets/Texture2D/caustic_small_026.png
+- Assets/Texture2D/caustic_small_013.png
+- Assets/Texture2D/queen_0019_a.png
+- Assets/AudioClip/hollow_shade_sword.wav
+- Assets/AnimatorController/Soul_burst0002.controller
+- Assets/AudioClip/props_grass_stud_move_3.wav
+- Assets/Resources/UIBlendScreen.mat
+- Assets/Texture2D/dream_particle_03.png
+- Assets/Shader/SpritesDefault-ColorFlash.shader
+- Assets/AudioClip/hero_void_quake_impact.wav
+- Assets/Texture2D/caustic_small_027.png
+- Assets/Material/atlas0 material_24.mat
+- Assets/Shader/UIBlurUIBlur.shader
+- Assets/AudioClip/button.wav
+- Assets/Material/atlas0 material_39.mat
+- Assets/Texture2D/caustic_small_005.png
+- Assets/Material/atlas0 material_33.mat
+- Assets/PrefabInstance/Orb Get Black.prefab
+- Assets/Texture2D/fungd_wall_08.png
+- Assets/Texture2D/acid_root_floor.png
+- Assets/PrefabInstance/Spell Effects 2.prefab
+- Assets/ScriptableObject/breakable_pole_death.asset
+- Assets/AudioClip/hollow_shade_startle.wav
+- Assets/AnimatorOverrideController/GreenGrass1.overrideController
+- Assets/Texture2D/queen_0006_a.png
+- Assets/Texture2D/caustic_small_009.png
+- Assets/Texture2D/SpriteAtlasTexture-Dream_Gate-256x256-fmt12.png
+- Assets/Texture2D/acid_plant_0004_acid_leaf3.png
+- Assets/AudioClip/enemy_damage.wav
+- Assets/Texture2D/SpriteAtlasTexture-Red_Banners-1024x1024-fmt12.png
+- Assets/Texture2D/acid_plant_0001_acid_leaf5.png
+- Assets/AnimatorController/ground_plink_000.controller
+- Assets/PrefabInstance/Slash Effect GhostDark2.prefab
+- Assets/Mesh/MeshZemer7.asset
+- Assets/Texture2D/acid_plant_0006_acid_leaf1.png
+- Assets/Shader/UIBlendModesLinearDodge.shader
+- Assets/AudioClip/grass_cut_4.wav
+- Assets/ScriptableObject/WhiteDefender.asset
+- Assets/AudioClip/grass_cut_5.wav
+- Assets/ScriptableObject/chinese_body_bold.asset
+- Assets/Material/japanese_body Material.mat
+- Assets/Mesh/MeshZemer9.asset
+- Assets/AudioClip/grass_move_3.wav
+- Assets/PrefabInstance/Slash Effect GhostDark1.prefab
+- Assets/AnimatorController/battle_end.controller
+- Assets/Texture2D/atlas0_149.png
+- Assets/PrefabInstance/Switches and gates_0.prefab
+- Assets/Mesh/MeshDryya4.asset
+- Assets/zemer/flower_detail_Ze'mer_arena_5.png
+- Assets/PrefabInstance/Arrow Prompt.prefab
+- Assets/PrefabInstance/Charm Get Msg.prefab
+- Assets/PrefabInstance/UI Journal Anim.prefab
+- Assets/Texture2D/SpriteAtlasTexture-GG-1024x1024-fmt12.png
+- Assets/AnimatorController/battle_enter.controller
+- Assets/AudioClip/grass_move_5.wav
+- Assets/PrefabInstance/Geo Large.prefab
+- Assets/Texture2D/orange_puff_animated.png
+- Assets/ScriptableObject/chinese_body.asset
+- Assets/Texture2D/atlas0_14.png
+- Assets/AudioClip/soul_pickup_7.wav
+- Assets/AnimatorController/caustic_small_000.controller
+- Assets/PrefabInstance/Lamp_Bug.prefab
+- Assets/Texture2D/gg_white_flower_collect.png
+- Assets/AudioClip/props_grass_stud_move_4.wav
+- Assets/Material/Particle_wispy smoke.mat
+- Assets/Texture2D/soul_orb.png
+- Assets/Resources/shaders/tmpro_sdf-mobile.shader
+- Assets/Texture2D/chinese_body_bold Atlas.png
+- Assets/zemer/flower_detail_Ze'mer_arena_4.png
+- Assets/Texture2D/atlas0_24.png
+- Assets/PrefabInstance/Sharp Shadow Impact.prefab
+- Assets/ScriptableObject/trajan_bold_tmpro.asset
+- Assets/Texture2D/caustic_small_033.png
+- Assets/AudioClip/GG3_part_A.wav
+- Assets/Shader/UIBlendModesLinearLight.shader
+- Assets/Texture2D/charm_sprite_01.png
+- Assets/ScriptableObject/damages_hero.asset
+- Assets/Texture2D/queen_0018_a.png
+- Assets/Texture2D/caustic_small_018.png
+- Assets/Texture2D/caustic_small_017.png
+- Assets/PrefabInstance/Spell Effects Neutral.prefab
+- Assets/Texture2D/atlas0_37.png
+- Assets/AnimationClip/Grass1Idleanim.anim
+- Assets/Texture2D/caustic_small_047.png
+- Assets/Resources/shaders/tmpro_sdf.shader
+- Assets/Material/russian_body_fallback Material.mat
+- Assets/Resources/fonts & materials/ARIAL SDF.asset
+- Assets/AudioClip/soul_pickup_2.wav
+- Assets/PrefabInstance/Block Hit v2.prefab
+- Assets/Texture2D/caustic_small_004.png
+- Assets/PrefabInstance/Geo.prefab
+- Assets/PrefabInstance/Godseeker Crowd Anim.prefab
+- Assets/AudioClip/hero_void_scream_spell.wav
+- Assets/Mesh/MeshHeg4.asset
+- Assets/Material/atlas0 material_215.mat
+- Assets/AnimationClip/GG_battle_transition_in.anim
+- Assets/AudioClip/soul_pickup_1.wav
+- Assets/PrefabInstance/dream_essence_corpse_get.prefab
+- Assets/AudioClip/gate_slam.wav
+- Assets/Texture2D/caustic_small_040.png
+- Assets/Texture2D/acid_plant_0003_acid_leaf4.png
+- Assets/Material/Particle_WhiteOrb.mat
+- Assets/Texture2D/atlas0.png
+- Assets/PrefabInstance/Dream Particles.prefab
+- Assets/Texture2D/Charms_prompt.png
+- Assets/Mesh/MeshZemer3.asset
+- Assets/PrefabInstance/Spell Effects.prefab
+- Assets/Texture2D/caustic_small_037.png
+- Assets/AudioClip/boss_explode_clean.wav
+- Assets/TextAsset/low_hit_nail_impact.bytes
+- Assets/AudioClip/soul_pickup_4.wav
+- Assets/Texture2D/pop_up_backboard_circ.png
+- Assets/AudioClip/S53-30 Dream Battle.wav
+- Assets/PrefabInstance/Knight Dream Custcene Anim.prefab
+- Assets/Mesh/MeshZemer6.asset
+- Assets/PrefabInstance/EnemyHitEffects.prefab
+- Assets/Mesh/MeshHeg2.asset
+- Assets/AudioClip/GG3_part_B2.wav
+- Assets/AudioClip/shiny_item_loop.wav
+- Assets/Texture2D/SpriteAtlasTexture-Ruins (Group 0)-2048x1024-fmt12.png
+- Assets/PrefabInstance/Black Wave Default R.prefab
+- Assets/ScriptableObject/MiscWind.asset
+- Assets/Texture2D/caustic_small_003.png
+- Assets/Texture2D/caustic_small_022.png
+- Assets/PrefabInstance/Death Wave Infected R.prefab
+- Assets/Material/Particle_Lift_Dust.mat
+- Assets/Mesh/MeshDryya8.asset
+- Assets/AudioClip/hollow_shade_idle.wav
+- Assets/Texture2D/SpriteAtlasTexture-Crossroads (Group 0)-4096x4096-fmt12.png
+- Assets/PrefabInstance/Terrain.prefab
+- Assets/AnimationClip/ground_plink_0.anim
+- Assets/Material/atlas0 material_36.mat
+- Assets/Material/atlas0 material_30.mat
+- Assets/Material/chinese_body_bold Material.mat
+- Assets/Mesh/MeshIsma7.asset
+- Assets/Texture2D/level_tile.png
+- Assets/AudioClip/gg_transition_out.wav
+- Assets/Mesh/MeshHeg5.asset
+- Assets/AudioClip/geo_hit_ground_1.wav
+- Assets/zemer/flower_detail_Ze'mer_arena_2.png
+- Assets/Texture2D/SpriteAtlasTexture-Ruins (Group 0)-4096x4096-fmt12.png
+- Assets/Material/atlas0 material_31.mat
+- Assets/Texture2D/SpriteAtlasTexture-White_Palace (Group 0)-4096x4096-fmt12.png
+- Assets/Texture2D/atlas0_5.png
+- Assets/Material/Particle_orange_smoke.mat
+- Assets/Material/Perpetua-SDF Material.mat
+- Assets/Texture2D/SpriteAtlasTexture-Green (Group 1)-4096x4096-fmt12.png
+- Assets/Texture2D/russian_body Atlas.png
+- Assets/ScriptableObject/russian_title_fallback.asset
+- Assets/PrefabInstance/Charm Tutorial Msg.prefab
+- Assets/Mesh/MeshIsma2.asset
+- Assets/Texture2D/acid_plant_0014_root7.png
+- Assets/Texture2D/TrajanPro-Bold SDF Atlas.png
+- Assets/PrefabInstance/Knight Dream Cutscene Cln.prefab
+- Assets/Mesh/MeshDryya5.asset
+- Assets/AudioClip/gg_crowd_loop.wav
+- Assets/Texture2D/caustic_small_045.png
+- Assets/PrefabInstance/dream_gate_object.prefab
+- Assets/Texture2D/japanese_title Atlas.png
+- Assets/AudioClip/soul_pickup_5.wav
+- Assets/Material/atlas0 material_29.mat
+- Assets/ScriptableObject/perpetua_tmpro.asset
+- Assets/Texture2D/fungd_vase_03.png
+- Assets/AudioClip/gate_open.wav
+- Assets/Texture2D/atlas0_12.png
+- Assets/PrefabInstance/Slash Impact R.prefab
+- Assets/PrefabInstance/Slash Effect Shade.prefab
+- Assets/Texture2D/russian_body_fallback Atlas.png
+- Assets/PrefabInstance/Death Puff Med.prefab
+- Assets/Mesh/MeshZemer5.asset
+- Assets/PrefabInstance/gg_battle_transitions.prefab
+- Assets/AnimatorController/battle_end_final.controller
+- Assets/Resources/UIBlendLighten.mat
+- Assets/Material/Particle_Shade.mat
+- Assets/ScriptableObject/gg_music_control.asset
+- Assets/Texture2D/japanese_body_bold Atlas.png
+- Assets/Texture2D/fungd_vase_05.png
+- Assets/Shader/SpritesLit.shader
+- Assets/Texture2D/caustic_small_025.png
+- Assets/Texture2D/default_mote.png
+- Assets/Texture2D/pop_up_backboard.png
+- Assets/AudioClip/props_grass_stud_move_5.wav
+- Assets/ScriptableObject/Boss1.asset
+- Assets/Texture2D/atlas0_18.png
+- Assets/Texture2D/japanese_body Atlas.png
+- Assets/AnimationClip/Dream_essence_corpse.anim
+- Assets/Material/Particle_rubble.mat
+- Assets/AnimatorController/Warning_Fleur0007.controller
+- Assets/PrefabInstance/Strike Nail R.prefab
+- Assets/Mesh/MeshDryya2.asset
+- Assets/Material/russian_title Material.mat
+- Assets/Texture2D/fungd_wall_09.png
+- Assets/Material/Particle_Dream_01.mat
+- Assets/AnimatorOverrideController/GreenGrass2.overrideController
+- Assets/Texture2D/dream_particle_01.png
+- Assets/Texture2D/SpriteAtlasTexture-Buttons_Main-1024x1024-fmt12.png
+- Assets/ScriptableObject/follow_camera.asset
+- Assets/Material/atlas0 material_26.mat
+- Assets/PrefabInstance/UI Msg Get Item.prefab
+- Assets/Material/TrajanPro-Bold SDF.mat
+- Assets/AudioClip/gg_room_transition.wav
+- Assets/AnimationClip/GG_battle_transition_out_final.anim
+- Assets/Mesh/MeshDryya7.asset
+- Assets/Mesh/MeshHeg9.asset
+- Assets/AudioClip/hero_parry.wav
+- Assets/Texture2D/SpriteAtlasTexture-Core (Group 1)-1024x1024-fmt4.png
+- Assets/Texture2D/chinese_body Atlas.png
+- Assets/PrefabInstance/Audio Player NoDestroy.prefab
+- Assets/ScriptableObject/japanese_body_bold.asset
+- Assets/ScriptableObject/nail_clash_tink.asset
+- Assets/AnimationClip/SimpleGrassIdle.anim
+- Assets/Texture2D/atlas0_42.png
+- Assets/AudioClip/grass_move_4.wav
+- Assets/Texture2D/SpriteAtlasTexture-Core (Group 0)-4096x2048-fmt12.png
+- Assets/AnimationClip/GreenGrass2Idle.anim
+- Assets/Texture2D/SpriteAtlasTexture-UI (Group 0)-2048x2048-fmt12.png
+- Assets/Texture2D/Wall_Jump_Prompt.png
+- Assets/Texture2D/particle_01.png
+- Assets/Material/atlas0 material_218.mat
+- Assets/ScriptableObject/color_fader.asset
+- Assets/Texture2D/caustic_small_001.png
+- Assets/Texture2D/caustic_small_010.png
+- Assets/Mesh/MeshIsma5.asset
+- Assets/PrefabInstance/Audio Player Actor 2D.prefab
+- Assets/AudioClip/soul_pickup_6.wav
+- Assets/AnimationClip/SimpleGrassPush.anim
+- Assets/Material/Particle_Crossroads.mat
+- Assets/PrefabInstance/Geo_0.prefab
+- Assets/AudioClip/props_grass_stud_move_1.wav
+- Assets/Material/atlas0 material_151.mat
+- Assets/AnimationClip/warning_fleur.anim
+- Assets/Texture2D/acid_plant_0002_acid_leaf4.png
+- Assets/Texture2D/queen_0005_a.png
+- Assets/Mesh/MeshIsma1.asset
+- Assets/AudioClip/gg_room_transition_2_bit_shorter.wav
+- Assets/AnimatorController/GG_crowd0002.controller
+- Assets/Texture2D/acid_plant_0000_root9.png
+- Assets/Texture2D/White_Flower_Petals.png
+- Assets/Material/Crossroads_Material.mat
+- Assets/ScriptableObject/TrajanPro-Bold SDF.asset
+- Assets/PrefabInstance/Spell Effects Black.prefab
+- Assets/Texture2D/caustic_small_021.png
+- Assets/AudioClip/geo_small_collect_2_0.wav
+- Assets/Texture2D/mansion_grave_roots_0001_2.png
+- Assets/ScriptableObject/Cave.asset
+- Assets/AnimatorController/dream_gate.controller
+- Assets/ScriptableObject/korean_body.asset
+- Assets/Texture2D/queen_0004_a.png
+- Assets/PrefabInstance/Relic Get Msg.prefab
+- Assets/Texture2D/backboard.png
+- Assets/Texture2D/perpetua_tmpro Atlas.png
+- Assets/Material/simsun_tmpro Material.mat
+- Assets/Texture2D/caustic_small_028.png
+- Assets/ScriptableObject/russian_title.asset
+- Assets/ScriptableObject/japanese_body.asset
+- Assets/PrefabInstance/Hit Flash Black.prefab
+- Assets/PrefabInstance/Geo Med.prefab
+- Assets/Texture2D/caustic_small_012.png
+- Assets/Texture2D/caustic_small_044.png
+- Assets/Texture2D/SpriteAtlasTexture-White_Palace_Ext-2048x2048-fmt12.png
+- Assets/ScriptableObject/map_set_room_compass.asset
+- Assets/Material/Cherry-Sprites-Default.mat
+- Assets/PrefabInstance/Prompts Cln.prefab
+- Assets/Mesh/MeshDryya6.asset
+- Assets/Material/Blur.mat
+- Assets/Texture2D/queen_0007_a.png
+- Assets/Texture2D/rock_particles.png
+- Assets/ScriptableObject/russian_body.asset
+- Assets/AnimationClip/Dream_Gate_loop.anim
+- Assets/Texture2D/caustic_small_032.png
+- Assets/AudioClip/geo_small_collect_2.wav
+- Assets/PrefabInstance/Dust Effects.prefab
+- Assets/PrefabInstance/Block Hit.prefab
+- Assets/Texture2D/caustic_small_046.png
+- Assets/Texture2D/atlas0_9.png
+- Assets/PrefabInstance/White Wave Lone.prefab
+- Assets/Texture2D/gg_traitor_flowers.png
+- Assets/PrefabInstance/Nail Clash Effect.prefab
+- Assets/PrefabInstance/Shade Orb.prefab
+- Assets/Material/ARIAL SDF Material.mat
+- Assets/Texture2D/acid_plant_0005_acid_leaf2.png
+- Assets/PrefabInstance/Shade Cast Ring.prefab
+- Assets/Texture2D/queen_0002_a.png
+- Assets/Texture2D/light_effect_v02.png
+- Assets/Texture2D/hot_spring_smoke.png
+- Assets/PrefabInstance/Audio Player UI.prefab
+- Assets/zemer/flower_detail_Ze'mer_arena_1.png
+- Assets/Texture2D/atlas0_26.png
+- Assets/AudioClip/geo_small_collect_1.wav
+- Assets/Texture2D/mansion_grave_roots_0002_1.png
+- Assets/ScriptableObject/godseeker_crowd.asset
+- Assets/Material/Particle_flower_petals.mat
+- Assets/Texture2D/SpriteAtlasTexture-Ruin_Irons-2048x2048-fmt12.png
+- Assets/Texture2D/gg_traitor_flowers_small.png
+- Assets/AudioClip/spell_information_screen.wav
+- Assets/PrefabInstance/SceneBorder.prefab
+- Assets/ScriptableObject/SmallImpact.asset
+- Assets/AnimationClip/GreenGrass2Push.anim
+- Assets/AnimationClip/Grass1Push.anim
+- Assets/Texture2D/atlas0_29.png
+- Assets/Material/korean_body Material.mat
+- Assets/PrefabInstance/Lamp Bug Cln.prefab
+- Assets/Shader/SpritesCherry-Default.shader
+- Assets/ScriptableObject/russian_body_fallback.asset
+- Assets/Texture2D/queen_0017_a.png
+- Assets/Material/trajan_bold_tmpro Material.mat
+- Assets/PrefabInstance/Hollow Shade.prefab
+- Assets/Texture2D/caustic_small_034.png
+- Assets/Mesh/MeshZemer1.asset
+- Assets/PrefabInstance/Shadow Ball.prefab
+- Assets/AudioClip/GG9_transition_0.5_second.wav
+- Assets/ScriptableObject/None.asset
+- Assets/Texture2D/queen_0003_a.png
+- Assets/Texture2D/inv_rancid_egg.png
+- Assets/Texture2D/SpriteAtlasTexture-Green (Group 1)-2048x2048-fmt12.png
+- Assets/Texture2D/Perpetua-SDF Atlas.png
+- Assets/Texture2D/SpriteAtlasTexture-Ruins_BG (Group 0)-2048x2048-fmt12.png
+- Assets/Mesh/MeshDryya3.asset
+- Assets/PrefabInstance/Item Get Effect R.prefab
+- Assets/Texture2D/particle_grass_01.png
+- Assets/Texture2D/acid_plant_0020_root1.png
+- Assets/AudioClip/geo_hit_ground_2.wav
+- Assets/Shader/UIBlendModesScreen.shader
+- Assets/Texture2D/caustic_small_007.png
+- Assets/Material/Particle_Steam.mat
+- Assets/Texture2D/item_get_ball_o0001.png
+- Assets/Texture2D/caustic_small_038.png
+- Assets/ScriptableObject/hero_detect_bool.asset
+- Assets/ScriptableObject/inspect_safewalk.asset
+- Assets/Material/Particle_Dream_03.mat
+- Assets/PrefabInstance/Spatter Orange.prefab
+- Assets/AudioClip/Boss Battle 1.wav
+- Assets/Texture2D/trail_black.png
+- Assets/AudioClip/Hunter_Journal_Long.wav
+- Assets/Mesh/MeshHeg1.asset
+- Assets/Texture2D/korean_body Atlas.png
+- Assets/AnimatorController/dream_essence_corpse_get.controller
+- Assets/PrefabInstance/Fireball Hit.prefab
+- Assets/PrefabInstance/Dream Effects.prefab
+- Assets/Texture2D/caustic_small_029.png
+- Assets/Texture2D/caustic_small_008.png
+- Assets/Material/Trail Black.mat
+- Assets/PrefabInstance/Switches and gates.prefab
+- Assets/Texture2D/caustic_small_039.png
+- Assets/Texture2D/caustic_small_043.png
+- Assets/Mesh/MeshZemer8.asset
+- Assets/Texture2D/caustic_small_002.png
+- Assets/AnimatorOverrideController/SimpleGrass.overrideController
+- Assets/Texture2D/black_soul_orb.png
+- Assets/AnimatorOverrideController/GreenGrass3.overrideController
+- Assets/ScriptableObject/tileMapData.asset
+- Assets/Texture2D/mansion_grave_roots_0000_3.png
+- Assets/Texture2D/caustic_small_042.png
+- Assets/Material/SwayingGrass_Greenpath.mat
+- Assets/Material/japanese_title Material.mat
+- Assets/AudioClip/soul_pickup_3.wav
+- Assets/PrefabInstance/Shade.prefab
+- Assets/Material/Particle_Radiant_Moth_Feathers.mat
+- Assets/Mesh/MeshHeg3.asset
+- Assets/PrefabInstance/Corpse Splat.prefab
+- Assets/AnimationClip/Soul_burst000.anim
+- Assets/Texture2D/atlas0_216.png
+- Assets/Texture2D/caustic_small_023.png
+- Assets/Texture2D/caustic_small_031.png
+- Assets/Texture2D/atlas0_22.png
+- Assets/PhysicsMaterial2D/Terrain.asset
+- Assets/Texture2D/trajan_bold_tmpro Atlas.png
+- Assets/AnimationClip/GG_crowd_temp_anim.anim
+- Assets/AnimationClip/fullstop_blink.anim
+- Assets/Material/atlas0 material_12.mat
+- Assets/PrefabInstance/Hollow Shade Depart.prefab
+- Assets/Texture2D/caustic_small_016.png
+- Assets/AnimatorController/fullstop0002.controller
+- Assets/Texture2D/caustic_small_035.png
+- Assets/PrefabInstance/Spells Anim.prefab
+- Assets/Mesh/MeshIsma3.asset
+- Assets/AudioClip/S76b-458 White Defender.wav
+- Assets/ScriptableObject/destroy_after_anim.asset
+- Assets/AnimationClip/GreenGrass1Push.anim
+- Assets/ScriptableObject/deactivate_after_anim.asset
+- Assets/AudioClip/Hunter_Journal_Short.wav
+- Assets/ScriptableObject/japanese_title.asset
+- Assets/Texture2D/ARIAL SDF Atlas.png
+- Assets/PrefabInstance/Strikes.prefab
+- Assets/Material/atlas0 material_70.mat
+- Assets/ScriptableObject/hero_detect_region.asset
+- Assets/Mesh/MeshIsma6.asset
+- Assets/Texture2D/wispy_smoke_particle_effect.png
+- Assets/ScriptableObject/GG Heavy.asset
+- Assets/AudioClip/hero_damage_0.wav
+- Assets/AudioClip/grass_move_2.wav
+- Assets/AudioClip/grass_cut_1.wav
+- Assets/PrefabInstance/Hollow Shade Death.prefab
+- Assets/ScriptableObject/GG Normal.asset
+- Assets/AnimationClip/GreenGrass1Idle.anim
+- Assets/AnimatorController/Grass1Animator.controller
+- Assets/AudioClip/hollow_shade_fireball.wav
+- Assets/AudioClip/grass_move_6.wav
+- Assets/Mesh/MeshZemer2.asset
+- Assets/Texture2D/russian_title_fallback Atlas.png
+- Assets/Texture2D/gg_vignette_white.png
+- Assets/AudioClip/shiny_item_pickup.wav
+- Assets/PhysicsMaterial2D/Geo Small.asset
+- Assets/Mesh/MeshHeg7.asset
+- Assets/Mesh/MeshDryya1.asset
+- Assets/PrefabInstance/Audio Player Music.prefab
+- Assets/Texture2D/caustic_small_014.png
+- Assets/Texture2D/caustic_small_015.png
+- Assets/AnimationClip/GreenGrass3Idle.anim
+- Assets/Mesh/MeshIsma8.asset
+- Assets/PrefabInstance/UI Journal Cln.prefab
+- Assets/Material/Particle_rocks_s.mat
+- Assets/Texture2D/caustic_small_030.png
+Dependencies: []

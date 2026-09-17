@@ -1,0 +1,36 @@
+ManifestFileVersion: 0
+CRC: 350286887
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1a2af7722516dbee4e0927036d830123
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c46fee4a305b4e96977ad43eb25158c0
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/AllFiles/Pale_Court_Style_1.prefab
+Dependencies:
+- /github/workspace/Unity/AssetBundles/StandaloneWindows/workshopdep

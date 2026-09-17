@@ -1,0 +1,8 @@
+<Project>
+    <PropertyGroup>
+        <!-- 指向 HkRefs 参考 DLL 目录（由 Directory.Build.props 提供变量） -->
+        <References>$(HkRefs)</References>
+        <!-- 输出目录：本地 Release 目录 -->
+        <OutputDirectory>$(MSBuildThisFileDirectory)bin\Release\net472</OutputDirectory>
+    </PropertyGroup>
+</Project>

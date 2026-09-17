@@ -1,0 +1,1979 @@
+{
+  "Abyss_01": {
+    "RoomSprites": [
+      "Waterways/Abyss_01"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_02": {
+    "RoomSprites": [
+      "Waterways/Abyss_02"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_03": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_03"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_03_b": {
+    "RoomSprites": [
+      "Deepnest/Abyss_03_b"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Abyss_03_c": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Abyss_03_c"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Abyss_04": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_04"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_05": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_05"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_06_Core": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_06_Core",
+      "Ancient Basin/Abyss_06_Core_b"
+    ],
+    "ColorSetting": "Map_Abyss"
+  },
+  "Abyss_08": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_08"
+    ],
+    "ColorSetting": "Map_Abyss"
+  },
+  "Abyss_09": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_09"
+    ],
+    "ColorSetting": "Map_Abyss"
+  },
+  "Abyss_10": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_10"
+    ],
+    "ColorSetting": "Map_Abyss"
+  },
+  "Abyss_12": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_12"
+    ],
+    "ColorSetting": "Map_Abyss"
+  },
+  "Abyss_16": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_16"
+    ],
+    "ColorSetting": "Map_Abyss"
+  },
+  "Abyss_17": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_17"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_18": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_18",
+      "Ancient Basin/Abyss_18_b"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_19": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_19"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_20": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_20"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_21": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_21"
+    ],
+    "ColorSetting": "Map_Ancient_Basin"
+  },
+  "Abyss_22": {
+    "RoomSprites": [
+      "Ancient Basin/Abyss_22"
+    ],
+    "ColorSetting": "Map_Abyss"
+  },
+  "Cliffs_01": {
+    "RoomSprites": [
+      "Cliffs/Cliffs_01",
+      "Cliffs/Cliffs_01_b"
+    ],
+    "ColorSetting": "Map_Howling_Cliffs"
+  },
+  "Cliffs_02": {
+    "RoomSprites": [
+      "Cliffs/Cliffs_02",
+      "Cliffs/Cliffs_02_b"
+    ],
+    "ColorSetting": "Map_Howling_Cliffs"
+  },
+  "Cliffs_04": {
+    "RoomSprites": [
+      "Cliffs/Cliffs_04"
+    ],
+    "ColorSetting": "Map_Howling_Cliffs"
+  },
+  "Cliffs_05": {
+    "RoomSprites": [
+      "Cliffs/Cliffs_05"
+    ],
+    "ColorSetting": "Map_Howling_Cliffs"
+  },
+  "Cliffs_06": {
+    "RoomSprites": [
+      "Cliffs/Cliffs_06",
+      "Cliffs/Cliffs_06_b"
+    ],
+    "ColorSetting": "Map_Howling_Cliffs"
+  },
+  "Crossroads_01": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_01"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_02": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_02"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_03": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_03"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_04": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_04",
+      "Crossroads/Crossroads_04_b"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_05": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_05"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_06": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_06"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_07": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_07"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_08": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_08"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_09": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_09"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_10": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_10"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_11_alt": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_11_alt"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_12": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_12"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_13": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_13"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_14": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_14"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_15": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_15"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_16": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_16"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_18": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_18",
+      "Crossroads/Crossroads_18_b"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_19": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_19"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_21": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_21",
+      "Crossroads/Crossroads_21_b"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_22": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_22"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_25": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_25"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_27": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_27"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_30": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_30"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_31": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_31"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_33": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_33"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_35": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_35",
+      "Crossroads/Crossroads_35_b"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_36": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_36"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_37": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_37"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_38": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_38"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_39": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_39"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_40": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_40"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_42": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_42"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_43": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_43"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_45": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_45"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_46": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_46"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_46b": {
+    "RoomSprites": [
+      "Resting_Grounds/Crossroads_46b"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "Crossroads_47": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_47"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_48": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_48"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_49": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_49"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Crossroads_49b": {
+    "RoomSprites": [
+      "City of Tears/Crossroads_49b"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Crossroads_50": {
+    "RoomSprites": [
+      "Resting_Grounds/Crossroads_50"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "Crossroads_52": {
+    "RoomSprites": [
+      "Crossroads/Crossroads_52"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Deepnest_01": {
+    "RoomSprites": [
+      "Fungal Wastes/Deepnest_01"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Deepnest_01b": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_01b"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_02": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_02"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_03": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_03"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_09": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_09"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_10": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_10"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_14": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_14"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_16": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_16"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_17": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_17"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_26": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_26"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_26b": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_26b"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_30": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_30",
+      "Deepnest/Deepnest_30_b"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_31": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_31"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_32": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_32"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_33": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_33"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_34": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_34"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_35": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_35"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_36": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_36"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_37": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_37"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_38": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_38"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_39": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_39"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_40": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_40"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_41": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_41",
+      "Deepnest/Deepnest_41_b"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_42": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_42"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_43": {
+    "RoomSprites": [
+      "Queens_Gardens/Deepnest_43",
+      "Queens_Gardens/Deepnest_43_b"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Deepnest_44": {
+    "RoomSprites": [
+      "Deepnest/Deepnest_44",
+      "Deepnest/Deepnest_44_b"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Deepnest_East_01": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_01"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_02": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_02",
+      "Kingdoms_Edge/Deepnest_East_02_b"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_03": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_03"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_04": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_04"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_06": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_06"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_07": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_07"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_08": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_08"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_09": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_09",
+      "Kingdoms_Edge/Deepnest_East_09_b"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_10": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_10"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_11": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_11"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_12": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_12"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_13": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_13"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_14": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_14"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_14b": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_14b"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_15": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_15"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_16": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_16"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_18": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_18"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Deepnest_East_Hornet": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Deepnest_East_Hornet",
+      "Kingdoms_Edge/Deepnest_East_Hornet_b"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "Fungus1_01": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_01"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_01b": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_01b"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_02": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_02"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_03": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_03"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_04": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_04"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_05": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_05"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_06": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_06"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_07": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_07"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_08": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_08"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_09": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_09",
+      "Green_Path/Fungus1_09_b"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_10": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_10"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_11": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_11"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_12": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_12"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_13": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_13"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_14": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_14",
+      "Green_Path/Fungus1_14_b"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_15": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_15"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_16_alt": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_16_alt"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_17": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_17"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_19": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_19"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_20_v02": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_20_v02"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_21": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_21"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_22": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_22"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_23": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus1_23"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus1_24": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus1_24"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus1_25": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_25"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_26": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_26"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_28": {
+    "RoomSprites": [
+      "Cliffs/Fungus1_28",
+      "Cliffs/Fungus1_28_b"
+    ],
+    "ColorSetting": "Map_Howling_Cliffs"
+  },
+  "Fungus1_29": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_29"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_30": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_30"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_31": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_31"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_32": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_32"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_34": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_34"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_37": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_37"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus1_Slug": {
+    "RoomSprites": [
+      "Green_Path/Fungus1_Slug"
+    ],
+    "ColorSetting": "Map_Greenpath"
+  },
+  "Fungus2_01": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_01"
+    ],
+    "ColorSetting": "Map_Queens_Station"
+  },
+  "Fungus2_02": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_02"
+    ],
+    "ColorSetting": "Map_Queens_Station"
+  },
+  "Fungus2_03": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_03"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_04": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_04"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_05": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_05"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_06": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_06"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_07": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_07"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_08": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_08"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_09": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_09"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_10": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_10"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_11": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_11"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_12": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_12"
+    ],
+    "ColorSetting": "Map_Mantis_Village"
+  },
+  "Fungus2_13": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_13"
+    ],
+    "ColorSetting": "Map_Mantis_Village"
+  },
+  "Fungus2_14": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_14",
+      "Fungal Wastes/Fungus2_14_b",
+      "Fungal Wastes/Fungus2_14_c"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_15": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_15"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_17": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_17"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_18": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_18"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_19": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_19"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_20": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_20"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_21": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_21"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_23": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_23"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_25": {
+    "RoomSprites": [
+      "Deepnest/Fungus2_25"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Fungus2_26": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_26"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_28": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_28"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_29": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_29",
+      "Fungal Wastes/Fungus2_29_b"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_30": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_30"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_31": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_31"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_32": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_32"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_33": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_33"
+    ],
+    "ColorSetting": "Map_Fungal_Wastes"
+  },
+  "Fungus2_34": {
+    "RoomSprites": [
+      "Fungal Wastes/Fungus2_34"
+    ],
+    "ColorSetting": "Map_Queens_Station"
+  },
+  "Fungus3_01": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_01"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_02": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_02"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_03": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_03"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_04": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_04"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_05": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_05"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_08": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_08"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_10": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_10"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_11": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_11"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_13": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_13"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_21": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_21"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_22": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_22",
+      "Queens_Gardens/Fungus3_22_b"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_23": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_23",
+      "Queens_Gardens/Fungus3_23_b"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_24": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_24"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_25": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_25"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_25b": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_25b"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_26": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_26"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_27": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_27"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_28": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_28"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_30": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_30"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_34": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_34"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_35": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_35"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_39": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_39"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_40": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_40"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_44": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_44"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_47": {
+    "RoomSprites": [
+      "Fog_Canyon/Fungus3_47"
+    ],
+    "ColorSetting": "Map_Fog_Canyon"
+  },
+  "Fungus3_48": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_48",
+      "Queens_Gardens/Fungus3_48_bot",
+      "Queens_Gardens/Fungus3_48_left",
+      "Queens_Gardens/Fungus3_48_top"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_49": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_49"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "Fungus3_50": {
+    "RoomSprites": [
+      "Queens_Gardens/Fungus3_50"
+    ],
+    "ColorSetting": "Map_Queens_Gardens"
+  },
+  "GG_Atrium": {
+    "RoomSprites": [
+      "GODS_GLORY/GG_Atrium"
+    ],
+    "ColorSetting": "Map_Godhome"
+  },
+  "GG_Atrium_Roof": {
+    "RoomSprites": [
+      "GODS_GLORY/GG_Atrium_Roof"
+    ],
+    "ColorSetting": "Map_Godhome"
+  },
+  "GG_Lurker": {
+    "RoomSprites": [
+      "Kingdoms_Edge/GG_Lurker"
+    ],
+    "ColorSetting": "Map_Kingdoms_Edge"
+  },
+  "GG_Pipeway": {
+    "RoomSprites": [
+      "Waterways/GG_Pipeway"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "GG_Waterways": {
+    "RoomSprites": [
+      "Waterways/GG_Waterways"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Hive_01": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Hive_01",
+      "Kingdoms_Edge/Hive_01_b"
+    ],
+    "ColorSetting": "Map_Hive"
+  },
+  "Hive_02": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Hive_02"
+    ],
+    "ColorSetting": "Map_Hive"
+  },
+  "Hive_03": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Hive_03",
+      "Kingdoms_Edge/Hive_03_b"
+    ],
+    "ColorSetting": "Map_Hive"
+  },
+  "Hive_03_c": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Hive_03_c"
+    ],
+    "ColorSetting": "Map_Hive"
+  },
+  "Hive_04": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Hive_04",
+      "Kingdoms_Edge/Hive_04_b"
+    ],
+    "ColorSetting": "Map_Hive"
+  },
+  "Hive_05": {
+    "RoomSprites": [
+      "Kingdoms_Edge/Hive_05"
+    ],
+    "ColorSetting": "Map_Hive"
+  },
+  "Mines_01": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_01"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_02": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_02"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_03": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_03"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_04": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_04"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_05": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_05"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_06": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_06"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_07": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_07"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_10": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_10"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_11": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_11"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_13": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_13"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_16": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_16"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_17": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_17"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_18": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_18"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_19": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_19"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_20": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_20",
+      "Crystal Peak/Mines_20_b"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_23": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_23"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_24": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_24"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_25": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_25"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_28": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_28",
+      "Crystal Peak/Mines_28_b"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_29": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_29"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_30": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_30"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_31": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_31"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_32": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_32"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_33": {
+    "RoomSprites": [
+      "Crossroads/Mines_33"
+    ],
+    "ColorSetting": "Map_Forgotten_Crossroads"
+  },
+  "Mines_34": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_34"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_36": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_36"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "Mines_37": {
+    "RoomSprites": [
+      "Crystal Peak/Mines_37"
+    ],
+    "ColorSetting": "Map_Crystal_Peak"
+  },
+  "RestingGrounds_02": {
+    "RoomSprites": [
+      "Resting_Grounds/RestingGrounds_02"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "RestingGrounds_04": {
+    "RoomSprites": [
+      "Resting_Grounds/RestingGrounds_04"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "RestingGrounds_05": {
+    "RoomSprites": [
+      "Resting_Grounds/RestingGrounds_05"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "RestingGrounds_06": {
+    "RoomSprites": [
+      "Resting_Grounds/RestingGrounds_06"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "RestingGrounds_08": {
+    "RoomSprites": [
+      "Resting_Grounds/RestingGrounds_08"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "RestingGrounds_09": {
+    "RoomSprites": [
+      "Resting_Grounds/RestingGrounds_09"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "RestingGrounds_10": {
+    "RoomSprites": [
+      "Resting_Grounds/RestingGrounds_10",
+      "Resting_Grounds/RestingGrounds_10_b",
+      "Resting_Grounds/RestingGrounds_10_c",
+      "Resting_Grounds/RestingGrounds_10_d"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "RestingGrounds_12": {
+    "RoomSprites": [
+      "Resting_Grounds/RestingGrounds_12"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "RestingGrounds_17": {
+    "RoomSprites": [
+      "Resting_Grounds/RestingGrounds_17"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "Room_Mask_Maker": {
+    "RoomSprites": [
+      "Deepnest/Room_Mask_Maker"
+    ],
+    "ColorSetting": "Map_Deepnest"
+  },
+  "Ruins_Bathhouse": {
+    "RoomSprites": [
+      "City of Tears/Ruins_Bathhouse"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins_Elevator": {
+    "RoomSprites": [
+      "City of Tears/Ruins_Elevator"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_01": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_01"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_02": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_02"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_03": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_03"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_04": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_04"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_05": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_05"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_05b": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_05b"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_05c": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_05c"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_06": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_06"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_09": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_09"
+    ],
+    "ColorSetting": "Map_Soul_Sanctum"
+  },
+  "Ruins1_17": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_17"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_18": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_18",
+      "City of Tears/Ruins1_18_b"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_23": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_23"
+    ],
+    "ColorSetting": "Map_Soul_Sanctum"
+  },
+  "Ruins1_24": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_24"
+    ],
+    "ColorSetting": "Map_Soul_Sanctum"
+  },
+  "Ruins1_25": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_25"
+    ],
+    "ColorSetting": "Map_Soul_Sanctum"
+  },
+  "Ruins1_27": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_27"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_28": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_28"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_29": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_29"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_30": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_30"
+    ],
+    "ColorSetting": "Map_Soul_Sanctum"
+  },
+  //"City of Tears/Ruins1_31_top_2": {
+  //  "SceneName": "Ruins1_31b",
+  //  "ColorSetting": "Map_Soul_Sanctum"
+  //},
+  "Ruins1_31": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_31",
+      "City of Tears/Ruins1_31_top"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins1_31b": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_31b"
+    ],
+    "ColorSetting": "Map_Soul_Sanctum"
+  },
+  "Ruins1_32": {
+    "RoomSprites": [
+      "City of Tears/Ruins1_32"
+    ],
+    "ColorSetting": "Map_Soul_Sanctum"
+  },
+  "Ruins2_01": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_01"
+    ],
+    "ColorSetting": "Map_Watchers_Spire"
+  },
+  "Ruins2_01_b": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_01_b"
+    ],
+    "ColorSetting": "Map_Watchers_Spire"
+  },
+  "Ruins2_03": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_03"
+    ],
+    "ColorSetting": "Map_Watchers_Spire"
+  },
+  "Ruins2_03b": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_03b"
+    ],
+    "ColorSetting": "Map_Watchers_Spire"
+  },
+  "Ruins2_04": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_04"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins2_05": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_05"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins2_06": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_06"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins2_07": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_07",
+      "City of Tears/Ruins2_07_left",
+      "City of Tears/Ruins2_07_right"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins2_08": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_08"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins2_09": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_09"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins2_10": {
+    "RoomSprites": [
+      "Resting_Grounds/Ruins2_10"
+    ],
+    "ColorSetting": "Map_Resting_Grounds"
+  },
+  "Ruins2_10b": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_10b"
+    ],
+    "ColorSetting": "Map_City_of_Tears"
+  },
+  "Ruins2_11": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_11"
+    ],
+    "ColorSetting": "Map_Watchers_Spire"
+  },
+  "Ruins2_11_b": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_11_b"
+    ],
+    "ColorSetting": "Map_Watchers_Spire"
+  },
+  "Ruins2_Watcher_Room": {
+    "RoomSprites": [
+      "City of Tears/Ruins2_Watcher_Room"
+    ],
+    "ColorSetting": "Map_Watchers_Spire"
+  },
+  "Town": {
+    "RoomSprites": [
+      "Town_Tutorial/Town"
+    ],
+    "ColorSetting": "Map_Dirtmouth"
+  },
+  "Tutorial_01": {
+    "RoomSprites": [
+      "Town_Tutorial/Tutorial_01"
+    ],
+    "ColorSetting": "Map_Dirtmouth"
+  },
+  "Waterways_01": {
+    "RoomSprites": [
+      "Waterways/Waterways_01"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_02": {
+    "RoomSprites": [
+      "Waterways/Waterways_02",
+      "Waterways/Waterways_02_b"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_03": {
+    "RoomSprites": [
+      "Waterways/Waterways_03"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_04": {
+    "RoomSprites": [
+      "Waterways/Waterways_04",
+      "Waterways/Waterways_04_part_b"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_04b": {
+    "RoomSprites": [
+      "Waterways/Waterways_04b"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_05": {
+    "RoomSprites": [
+      "Waterways/Waterways_05"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_06": {
+    "RoomSprites": [
+      "Waterways/Waterways_06"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_07": {
+    "RoomSprites": [
+      "Waterways/Waterways_07"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_08": {
+    "RoomSprites": [
+      "Waterways/Waterways_08"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_09": {
+    "RoomSprites": [
+      "Waterways/Waterways_09"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_12": {
+    "RoomSprites": [
+      "Waterways/Waterways_12"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_13": {
+    "RoomSprites": [
+      "Waterways/Waterways_13"
+    ],
+    "ColorSetting": "Map_Ismas_Grove"
+  },
+  "Waterways_14": {
+    "RoomSprites": [
+      "Waterways/Waterways_14"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "Waterways_15": {
+    "RoomSprites": [
+      "Waterways/Waterways_15"
+    ],
+    "ColorSetting": "Map_Royal_Waterways"
+  },
+  "White_Palace_01": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_01"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_02": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_02"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_03_hub": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_03_hub"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_04": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_04"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_05": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_05"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_06": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_06"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_07": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_07"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_08": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_08"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_09": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_09"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_12": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_12"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_13": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_13"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_14": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_14"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_15": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_15"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_16": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_16"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_17": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_17"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_18": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_18"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_19": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_19"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  },
+  "White_Palace_20": {
+    "RoomSprites": [
+      "WHITE_PALACE/White_Palace_20"
+    ],
+    "ColorSetting": "Map_White_Palace"
+  }
+}

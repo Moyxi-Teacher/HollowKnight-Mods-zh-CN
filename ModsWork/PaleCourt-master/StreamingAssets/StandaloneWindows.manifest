@@ -1,0 +1,94 @@
+ManifestFileVersion: 0
+CRC: 3203670702
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: ismawin
+      Dependencies:
+        Dependency_0: miscbund
+        Dependency_1: soundbund
+    Info_1:
+      Name: miscbund
+      Dependencies:
+        Dependency_0: owarenadep
+    Info_2:
+      Name: zemerwin
+      Dependencies: {}
+    Info_3:
+      Name: owarenadep
+      Dependencies: {}
+    Info_4:
+      Name: soundbund
+      Dependencies: {}
+    Info_5:
+      Name: charmunlock
+      Dependencies: {}
+    Info_6:
+      Name: workshopdep
+      Dependencies: {}
+    Info_7:
+      Name: tisobundle
+      Dependencies: {}
+    Info_8:
+      Name: owarenazemer
+      Dependencies:
+        Dependency_0: owarenadep
+    Info_9:
+      Name: owarenadryya
+      Dependencies:
+        Dependency_0: owarenadep
+    Info_10:
+      Name: artistsbund
+      Dependencies: {}
+    Info_11:
+      Name: workshopentrance
+      Dependencies:
+        Dependency_0: workshopdep
+    Info_12:
+      Name: hegemolwin
+      Dependencies:
+        Dependency_0: miscbund
+    Info_13:
+      Name: titlescreen
+      Dependencies:
+        Dependency_0: workshopdep
+    Info_14:
+      Name: owarenaisma
+      Dependencies:
+        Dependency_0: owarenadep
+    Info_15:
+      Name: dependencies overworld
+      Dependencies:
+        Dependency_0: owarenadep
+    Info_16:
+      Name: owarenahegemol
+      Dependencies:
+        Dependency_0: owarenadep
+    Info_17:
+      Name: abyssaltemple
+      Dependencies:
+        Dependency_0: owarenadep
+    Info_18:
+      Name: ggarenahub
+      Dependencies:
+        Dependency_0: workshopdep
+    Info_19:
+      Name: creditsbundle
+      Dependencies: {}
+    Info_20:
+      Name: ismabg
+      Dependencies:
+        Dependency_0: workshopdep
+    Info_21:
+      Name: hubasset1
+      Dependencies:
+        Dependency_0: owarenadep
+    Info_22:
+      Name: radiantroom
+      Dependencies:
+        Dependency_0: owarenadep
+    Info_23:
+      Name: rewardroom
+      Dependencies:
+        Dependency_0: owarenadep
+        Dependency_1: workshopdep

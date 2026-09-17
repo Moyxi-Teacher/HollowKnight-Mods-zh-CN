@@ -1,0 +1,166 @@
+<!DOCTYPE html []>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="MarkdownViewer++" />
+    <title>LOGIC_README.md</title>
+    <style type="text/css">
+            
+/* Avoid page breaks inside the most common attributes, especially for exports (i.e. PDF) */
+td, h1, h2, h3, h4, h5, p, ul, ol, li {
+    page-break-inside: avoid; 
+}
+
+        </style>
+  </head>
+  <body>
+    <p>This file serves to document the randomizer logic.</p>
+    <h2 id="skip-settings">Skip Settings</h2>
+    <h3 id="precise-movement">Precise Movement</h3>
+    <ul>
+      <li>Precise Movement is a skip category used for ordinary movement with a very low margin of error. Precise Movement cases often, but not always, have a large penalty for failure.</li>
+      <li>In logic, Precise Movement is indicated with the <strong>PRECISEMOVEMENT</strong> token.</li>
+      <li>More advanced skips such as Fireball Skips or Acid Skips generally do not include the Precise Movement modifier, but rather one of Obscure Skips, Complex Skips, or Difficult Skips as appropriate.</li>
+      <li>Examples include:
+<ul><li>Jumping to <em>Hallownest_Seal-Fungal_Wastes_Sporgs</em> with no items.</li><li>Jumping to <em>Ancient_Basin_Map</em> with no items.</li><li>Navigating through the Lifeblood Core room with no items (logic for <em>Lifeblood_Core</em>, <em>Arcane_Egg-Lifeblood_Core</em>, <em>Warp-Lifeblood_Core_to_Abyss</em>).</li><li>Coyote jump to reach the warp to Palace Grounds in White_Palace_03 (logic for <em>Warp-White_Palace_Atrium_to_Palace_Grounds</em>).</li><li>Coyote jump and right dash to reach the platform in lower King's Station, from the bottom left entrance without Swim (logic for transitions in <em>Ruins2_06</em> from <em>Ruins2_06[left2]</em>).</li><li>Using Mantis Claw and Crystal Heart to pass under conveyors (logic for <em>Mines_37</em>, including <em>Geo_Chest-Crystal_Peak</em>). Also considered an Obscure Skip.</li></ul></li>
+    </ul>
+    <h3 id="proficient-combat">Proficient Combat</h3>
+    <ul>
+      <li>Proficient Combat is a skip category used for ordinary combat with limited items or movement. Precise Combat is combat that should be doable after casual play, with at most a small amount of practice necessary.</li>
+      <li>In logic, Proficient Combat is indicated with the <strong>PROFICIENTCOMBAT</strong> token. More commonly, the equivalent <strong>MILDCOMBATSKIPS</strong> macro is used, or the <strong>SPICYCOMBATSKIPS</strong> macro which also requires Difficult Skips.</li>
+      <li>A nearly complete list of combat logic usage is located at the bottom of the macros.json file.</li>
+      <li>Examples of <strong>MILDCOMBATSKIPS</strong> include:
+<ul><li>Fighting bosses with the <strong>AERIALMINIBOSS</strong> modifier (dream warriors, Uumuu, various others) without a dash item.</li><li>Fighting bosses with the <strong>BOSS</strong> modifier (most bosses that would usually be encountered after wings) without a dash item.</li><li>Fighting Flukemarm without Shade Soul or Abyss Shriek, but instead normal <strong>BOSS</strong> requirements.</li><li>Using Cyclone Slash or Great Slash for nail combat (rather than right or left or up slashes, when nail is randomized).</li></ul></li>
+      <li>Examples of <strong>SPICYCOMBATSKIPS</strong> include:
+<ul><li>Fighting bosses with the <strong>MINIBOSS</strong> modifier without a spell.</li><li>Fighting bosses with the <strong>AERIALMINIBOSS</strong> modifier without Vengeful Spirit or Howling Wraiths.</li><li>Fighting bosses with the <strong>AERIALMINIBOSS</strong> modifier with Cyclone Slash or Great Slash (rather than right or left or up slashes, when nail is randomized).</li><li>Using downslash only for nail combat.</li></ul></li>
+    </ul>
+    <h3 id="background-object-pogos">Background Object Pogos</h3>
+    <ul>
+      <li>Background Object Pogos are as the name suggests.</li>
+      <li>Interactive objects such as spikes, enemies, or bounce shrooms are not included in this category.</li>
+      <li>In logic, Background Object Pogos are indicated with the <strong>BACKGROUNDPOGOS</strong> token.</li>
+      <li>Examples include:
+<ul><li>Pogoing to reach the Watcher's Spire without wings.</li></ul></li>
+    </ul>
+    <h3 id="enemy-pogos">Enemy Pogos</h3>
+    <ul>
+      <li>Enemy Pogos are skips which require pogoing killable enemies or their projectiles.</li>
+      <li>Pogoing spikes, saws, or enemies which do not take damage (Goams, Garpedes, Durandoos, Crystal Crawlers, Wingsmoulds, etc) is not considered a skip. Pogoing the shade or its projectiles is classified under Shade Skips, and not Enemy Pogos.</li>
+      <li>In logic, Enemy Pogos are indicated with the <strong>ENEMYPOGOS</strong> token.</li>
+      <li>Examples include:
+<ul><li>Pogoing a Vengefly in Blue Lake to reach the rancid egg with wings.</li></ul></li>
+    </ul>
+    <h3 id="obscure-skips">Obscure Skips</h3>
+    <ul>
+      <li>Obscure Skips are progression paths which are subjectively determined to be too obscure for a new randomizer player to be expected to know.</li>
+      <li>Advanced skips with other modifiers generally do not include the Obscure Skips modifier. Inversely, where Obscure Skips appears, any other required skips will be noted.</li>
+      <li>In logic, Obscure Skips are indicated with the <strong>OBSCURESKIPS</strong> token.</li>
+      <li>Examples include:
+<ul><li>Destroying horizontal planks in Ancestral Mound or Kingdom's Edge using Crystal Heart.</li><li>Itemless explosion pogo to Mantis Village.</li><li>Corpse explosion pogo with wings below Fungal Wastes Cornifer.</li><li>Using Mantis Claw and Crystal Heart to pass under conveyors (logic for <em>Mines_37</em>, including <em>Geo_Chest-Crystal_Peak</em>). Also considered Precise Movement.</li></ul></li>
+    </ul>
+    <h3 id="shade-skips">Shade Skips</h3>
+    <ul>
+      <li>Shade Skips are skips which utilize the shade, often by pogoing it or using it for damage boosts.</li>
+      <li>Generally, shade skips which require shade fireballs are not in logic, due to their RNG-dependence and relative obscurity.</li>
+      <li>With Void Heart, shade skips (and Sibling pogos) require unequipping Void Heart, which causes the enemies to become hostile again. Void Tendrils are not currently affected by unequipping Void Heart.</li>
+      <li>In logic, Shade Skips are indicated with the <strong>SHADESKIPS</strong> token. More commonly, the <strong>$SHADESKIP</strong> state modifier is used, sometimes with arguments such as "2HITS", indicating that the player must be able to die with at least 4 masks so that the shade can take 2 nail hits.</li>
+      <li>Examples include:
+<ul><li>Pogoing the shade in a number of places to gain extra height. Most notably, shade skips can be used to reach Salubra with no items, or Blue Lake with vertical movement.</li></ul></li>
+    </ul>
+    <h3 id="infection-skips">Infection Skips</h3>
+    <ul>
+      <li>Infection Skips are skips which are only possible after Forgotten Crossroads has been infected. These skips most commonly involve pogoing infection bubbles or Furious Vengeflies.</li>
+      <li>In logic, Infection Skips are indicated with the <strong>INFECTIONSKIPS</strong> token. More commonly, the <strong>INFECTED</strong> macro is used.</li>
+      <li>Examples include:
+<ul><li>Pogoing infection bubbles to reach the Crossroads entrance to Fungal Wastes with no other items.</li><li>Pogoing the Furious Vengefly to reach Salubra or the Crossroads entrance to Blue Lake with no other items.</li><li>Pogoing the Furious Vengefly to reach <em>Hallownest_Seal-Crossroads_Well</em> with wings or dash and airstall.</li></ul></li>
+    </ul>
+    <h3 id="fireball-skips">Fireball Skips</h3>
+    <ul>
+      <li>Fireball Skips are skips which use Vengeful Spirit or Howling Wraiths (or their upgrades) to reset fall speed midair.</li>
+      <li>Generally, Fireball Skips in logic require at most 3 consecutive casts of a spell, meaning that Spell Twister skips are not in logic.</li>
+      <li>In logic, Fireball Skips are indicated with the <strong>FIREBALLSKIPS</strong> token. More commonly, the <strong>SPELLAIRSTALL</strong> macro is used.</li>
+      <li>Examples include:
+<ul><li>Using airstall to reach Salubra after Gruz Mother with no other movement.</li><li>Using airstall to cross Queen's Station from left to right with no other movement.</li></ul></li>
+    </ul>
+    <h3 id="acid-skips">Acid Skips</h3>
+    <ul>
+      <li>Acid Skips are skips which involve crossing over a pool of acid (or water, when the Swim ability is removed).</li>
+      <li>In logic, Acid Skips are indicated with the <strong>ACIDSKIPS</strong> token. More commonly, the <strong>LEFTSKIPACID</strong> or <strong>RIGHTSKIPACID</strong> macros are used.</li>
+      <li>Examples include:
+<ul><li>Using a low height wallcling Crystal Heart to cross several acid pools, such as at the Crossroads entrance to Fog Canyon or the Fog Canyon entrance to Queen's Gardens.</li></ul></li>
+    </ul>
+    <h3 id="spike-tunnels">Spike Tunnels</h3>
+    <ul>
+      <li>Spike Tunnels are skips which involve crossing through a narrow passage lined with spikes.</li>
+      <li>In logic, Spike Tunnels are indicated with the <strong>SPIKETUNNELS</strong> token.</li>
+      <li>Examples include:
+<ul><li>Crossing the spike tunnel on the way to Glowing Womb with dash and airstall or Dashmaster.</li><li>Entering the spike tunnels in the Waterways broken elevator shaft, using several possible item combinations.</li><li>Passing through the spike tunnel before the grub in Crystal Peak, which allows reaching the upper area with wings but no claw.</li></ul></li>
+    </ul>
+    <h3 id="dark-rooms">Dark Rooms</h3>
+    <ul>
+      <li>Dark Rooms are skips which involve passing through a dark room without Lumafly Lantern.</li>
+      <li>In logic, Dark Rooms are indicated with the <strong>DARKROOMS</strong> token.</li>
+      <li>Examples include:
+<ul><li>Passing through the dark Deepnest rooms.</li><li>Passing through the dark Howling Cliffs room before Joni's Blessing.</li><li>Passing through the dark Stone Sanctuary room before the No Eyes mask shard.</li><li>Passing through the dark Crystal Peak room before Crystallized Mound.</li></ul></li>
+    </ul>
+    <h3 id="damage-boosts">Damage Boosts</h3>
+    <ul>
+      <li>Damage Boosts are skips which involve intentionally taking damage from a hazard or enemy.</li>
+      <li>In logic, Damage Boosts are indicated with the <strong>DAMAGEBOOSTS</strong> token.</li>
+      <li>Examples include:
+<ul><li>Jumping into the Charged Lumaflies at the top of the room to boost to <em>Hallownest_Seal-Fog_Canyon_East</em> with no other movement.</li><li>Jumping into the acid or thorn hazards to reach <em>Vessel_Fragment-Greenpath</em> with wings but no claw.</li></ul></li>
+    </ul>
+    <h3 id="dangerous-skips">Dangerous Skips:</h3>
+    <ul>
+      <li>Dangerous Skips are skips which carry a high risk of taking damage, due to aggressive enemies or other sources.</li>
+      <li>Generally, this modifier is not applied to Acid Skips or Spike Tunnels, which are implicitly understood to be dangerous.</li>
+      <li>In logic, Dangerous Skips are indicated with the <strong>DANGEROUSSKIPS</strong> token.</li>
+      <li>Examples include:
+<ul><li>Skips requiring pogoing Dirtcarvers in the trap Deepnest entrance (logic for <em>Deepnest_01b[top1]</em>).</li><li>Pogoing up the Quick Slash room (Deepnest_East_14b) without items (logic for <em>Quick_Slash</em>, <em>Deepnest_East_14b[top1]</em>).</li><li>Various Hwurmp and/or Flukefey pogos in <em>Waterways_04b</em> (Waterways Mask Shard room).</li><li>Pogoing the Flukefey to cross the water with right dash and no swim in <em>Waterways_02</em>.</li></ul></li>
+    </ul>
+    <h3 id="slopeballs">Slopeballs</h3>
+    <ul>
+      <li>Slopeballs are skips which involving casting Vengeful Spirit into a curved surface. If the surface has the right curve, and the cast is from the right position, the fireball will be curved by the collision, and slowed enough for the player to pogo it.</li>
+      <li>In logic, Slopeballs are indicated with the <strong>SLOPEBALLSKIPS</strong> token. More commonly, the <strong>$SLOPEBALL</strong> state modifier is used, sometimes with various arguments related to tracking soul usage.</li>
+      <li>Examples include:
+<ul><li>A slopeball to reach Fungal Wastes from Forgotten Crossroads with no other items</li><li>A slopeball to reach Palace Grounds from Ancient Basin with only claw or wings</li><li>A slopeball to cross the long spike tunnel in Ancient Basin with only claw and dash</li><li>A slopeball to cross from left City of Tears into right City of Tears with only claw</li></ul></li>
+      <li>Note: some slopeballs are only possible with nail range extensions, or with Shaman Stone to change the spell hitbox. The slopeballs currently in logic do not require any charms.</li>
+    </ul>
+    <h3 id="shriek-pogos">Shriek Pogos</h3>
+    <ul>
+      <li>Shriek Pogos are skips where the player casts Abyss Shriek, then immediately does a double jump as the cast finishes. With the right timing, the shriek can be pogoed, cutting off the double jump into a smaller pogo, but with the benefit of refreshing the player's ability to dash or double jump. To be precise, there is a 4 frame window to press double jump, and a 6 frame window to press downslash, starting when the player regains control at the end of the cast, in order to perform a shriek pogo. The height gained from the pogo is maximized when double jump is pressed as early as possible, and nail is pressed as late as possible.</li>
+      <li>In logic, Shriek Pogos are indicated with the <strong>SHRIEKPOGOSKIPS</strong> token. More commonly, the <strong>$SHRIEKPOGO</strong> state modifier is used, sometimes with various arguments related to the number of shriek pogos required and other soul usage tracking.</li>
+      <li>With <strong>$SHRIEKPOGO</strong>, a <strong>DIFFICULTSKIP</strong> requirement is automatically added to chains of 4 or more shriek pogos. In general, when more than 1 shriek pogo is chained, <strong>$SHRIEKPOGO</strong> may require using dash between casts to stall out the soul meter long enough for it to refill.</li>
+      <li>Examples are typically along the lines of either: using shriek pogos to gain extra horizontal movement by refreshing dash midair, or using shriek pogos to gain minor extra vertical movement in situations where wings alone are not sufficient. For example, 3 shriek pogos can be used to enter Fungal Core without claw.</li>
+    </ul>
+    <h3 id="complex-skips">Complex Skips</h3>
+    <ul>
+      <li>Complex Skips are skips which have extended setup time or are obscure even by the standards of advanced skips.</li>
+      <li>In logic, Complex Skips are indicated with the <strong>COMPLEXSKIPS</strong> token.</li>
+      <li>Examples include:
+<ul><li>Leftward Lake of Unn acid skip, which requires spell airstall or Sharp Shadow (logic for <em>Fungus1_26[left1]</em>).</li><li>Swim skip in <em>Ruins2_07</em> in either direction, if done without Crystal Heart, using a combination of wings, claw, dash, and airstall or Sharp Shadow.</li><li><em>Love_Key</em> acid skip using Sharp Shadow.</li><li>Shade skip to Blue Lake using dash and airstall (logic for <em>Crossroads_04[right1]</em>).</li><li>Shade skip to <em>Geo_Chest-Crystal_Peak</em> using Grubberfly's Elegy to provoke the shade.</li><li>Vengefly pogo in King's Pass to Howling Cliffs (logic for <em>Tutorial_01[top2]</em>).</li><li>Vengefly pogo in Tower of Love to above Collector (logic for <em>Collector's_Map</em>, <em>Grub-Collector_1</em>, <em>Grub-Collector_2</em>, <em>Grub-Collector_3</em>).</li><li>Shade skips in Beast Den without Mantis Claw (logic for locations in <em>Deepnest_Spider_Town</em>).</li><li>Luring a Mantis Youth to pogo to <em>Geo_Rock-Mantis_Village_Above_Claw</em> without items.</li><li>Fireball skip with left dash, right claw, and wings to get to <em>Rancid_Egg-Waterways_West_Bluggsac</em> from the right without swim.</li></ul></li>
+    </ul>
+    <h3 id="difficult-skips">Difficult Skips</h3>
+    <ul>
+      <li>Difficult Skips are skips which are subjectively considered to be more difficult than usual.</li>
+      <li>In logic, Difficult Skips are indicated with the <strong>DIFFICULTSKIPS</strong> token.</li>
+      <li>Examples include:
+<ul><li>Item rando shade skip from chest above Baldur Shell to Howling Cliffs (logic for <em>Fungus1_28[left1]</em>).</li><li>Pogoing a falling Gluttinous Husk to reach the bottom left transition in lower King's Station without Swim (logic for <em>Ruins2_06[left2]</em>).</li></ul></li>
+    </ul>
+    <h2 id="geo-logic">Geo Logic</h2>
+    <p>Since geo is a consumable resource that can be used or lost in many ways (and is not available from randomized items, with some cursed settings), the randomizer does not track exact numbers of geo or relics in logic. However, any location which requires geo has logic to ensure that the player can farm geo off of respawning enemies. Additionally,</p>
+    <ul>
+      <li>The mid-expensive locations <em>Dash_Slash</em>, <em>Unbreakable_Heart</em>, <em>Unbreakable_Greed</em>, and <em>Unbreakable_Strength</em> also have logic to require the ability to visit Lemm, to reduce the odds of required farming.</li>
+      <li>The most expensive location <em>Vessel_Fragment-Basin</em> has logic to require the ability to visit Lemm <strong>and</strong> the ability to complete the second colosseum trial. Thus, the logic guarantees the ability to farm large amounts of geo through the colosseum, as well as possibly geo through relics.</li>
+    </ul>
+    <h2 id="terminal-logic-and-nonterminal-logic">Terminal Logic and Nonterminal Logic</h2>
+    <ul>
+      <li>Briefly, logic is terminal if it represents a goal which has a permanently saved effect. In other words, after achieving that, the player could return to start and fully reset before continuing. Terminal logic includes:
+<ul><li>Logic for locations</li><li>Logic for world events such as defeating bosses, triggering levers, destroying breakable walls, and so on.</li></ul></li>
+      <li>Nonterminal logic includes:
+<ul><li>All other waypoints, such as room waypoints, warp waypoints, <em>Can_Stag</em>, and so on.</li><li>Logic for transitions.</li></ul></li>
+      <li>As of version 4.1.0, the randomizer now tracks conditional logic access through state logic. State encompasses the ability to shade skip, the number of charm slots available, the amount of soul left, and similar resources. As a result, it is now possible that nonterminal logic can require the player to expend such resources (e.g. cast spells, etc). There are a few limitations of this system:
+<ul><li>The ability to refill soul by killing enemies in general is not taken into account. However, where logic requires cast spells, and there are nearby enemies to refill soul, that soul may be taken into account.</li><li>The ability to reset state by using dream gate is generally not taken into account. This is both for consistency and to avoid requiring the player to expend too much essence using this method.</li></ul></li>
+    </ul>
+  </body>
+</html>
