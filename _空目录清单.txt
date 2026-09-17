@@ -1,17 +1,35 @@
-ModsWork/AlwaysHazardRespawn-main/.vs/AlwaysHazardRespawn/copilot-chat/038fa0f9/sessions
+# ============================================================
+# 空目录清单（Git 不跟踪空目录，clone 后需按此重建）
+# 当前版本：2026-09-17 云端快照（第二轮，实际推送成功的那一轮）
+# ============================================================
+
 ModsWork/Benchwarp-tmp
 ModsWork/CustomKnight
-ModsWork/CustomKnight-master/.vs/CustomKnight/copilot-chat/6ac74931/sessions
-ModsWork/HKMP-master/HKMPServer/bin/Release/net472
 ModsWork/HollowKnight.SereCore-master/SereCoreCompat
 ModsWork/SkinBenchRoulette-main/SkinBenchRoulette
-TempTest/FontDiag/bin/Debug/net7.0
-TempTest/FontDiag/obj/Debug/net7.0/ref
-TempTest/FontDiag/obj/Debug/net7.0/refint
-TempTest/InspAsm/bin/Debug/net10.0
-TempTest/InspAsm/obj/Debug/net10.0/ref
-TempTest/InspAsm/obj/Debug/net10.0/refint
-TempTest/VerifyStrings
 TempTest/addmapdeliv
 TempTest/decompile/HKMod/temp_inspect
+TempTest/VerifyStrings
 TempTest/wavs
+
+# ============================================================
+# 历史记录（2026-09-17 16:18 首次备份时的 17 个空目录，现已失效）
+# 保留仅为追溯，恢复时请使用上面的 8 个。
+# ============================================================
+# ModsWork/AlwaysHazardRespawn-main/.vs/AlwaysHazardRespawn/copilot-chat/038fa0f9/sessions
+# ModsWork/Benchwarp-tmp
+# ModsWork/CustomKnight
+# ModsWork/CustomKnight-master/.vs/CustomKnight/copilot-chat/6ac74931/sessions
+# ModsWork/HKMP-master/HKMPServer/bin/Release/net472
+# ModsWork/HollowKnight.SereCore-master/SereCoreCompat
+# ModsWork/SkinBenchRoulette-main/SkinBenchRoulette
+# TempTest/FontDiag/bin/Debug/net7.0
+# TempTest/FontDiag/obj/Debug/net7.0/ref
+# TempTest/FontDiag/obj/Debug/net7.0/refint
+# TempTest/InspAsm/bin/Debug/net10.0
+# TempTest/InspAsm/obj/Debug/net10.0/ref
+# TempTest/InspAsm/obj/Debug/net10.0/refint
+# TempTest/VerifyStrings
+# TempTest/addmapdeliv
+# TempTest/decompile/HKMod/temp_inspect
+# TempTest/wavs
