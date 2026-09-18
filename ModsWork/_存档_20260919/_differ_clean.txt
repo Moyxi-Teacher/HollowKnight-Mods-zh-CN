@@ -1,0 +1,19 @@
+34339840  HkRefs/Mods/HKMirror/HKMirror.dll
+9944064  HkRefs/Mods/ItemChanger/ItemChanger.dll
+5392896  HkRefs/Mods/Custom Knight/CustomKnight.dll
+499200  HkRefs/Mods/MylaFlower/MylaFlower.dll
+182272  HkRefs/Mods/PaleCourt/PaleCourt.pdb
+163840  HkRefs/Mods/SFCore/SFCore.dll
+89088  HkRefs/Mods/MenuChanger/MenuChanger.dll
+86528  HkRefs/Mods/FrogCore/FrogCore.dll
+74240  HkRefs/Mods/Core.FsmUtil/Core_FsmUtil.dll
+34816  HkRefs/Mods/Vasi/Vasi.dll
+9620  HkRefs/Mods/MylaFlower/MylaFlower.pdb
+6762  Hallownest-Vocalized-master/HKVocal/AudioPlayer.cs
+5564  Hallownest-Vocalized-master/HKVocal/AudioAPI.cs
+3731  HK-Invulnerability-Indicator-main/InvulnerabilityIndicator.cs
+1386  _ExtractRes/Program.cs
+1111  Hallownest-Vocalized-master/HKVocal/Utils/GlobalUsings.cs
+679  Directory.Build.props
+628  README.md
+482  _ExtractRes/ExtractRes.csproj

@@ -1,0 +1,16 @@
+<Project>
+  <!-- 统一参考路径：只读指向 HkRefs（游戏 Managed 与 Mods 的副本），绝不写入游戏目录 -->
+  <PropertyGroup>
+    <HkRefs>$(MSBuildThisFileDirectory)HkRefs</HkRefs>
+    <HKRefs>$(HkRefs)</HKRefs>
+    <HollowKnightRefs>$(HkRefs)</HollowKnightRefs>
+    <HollowKnightFolder>$(HkRefs)</HollowKnightFolder>
+    <VanillaFiles>$(HkRefs)</VanillaFiles>
+    <ModdingAPI>$(HkRefs)</ModdingAPI>
+    <ModdingApi>$(HkRefs)</ModdingApi>
+    <LocalRefs>$(HkRefs)</LocalRefs>
+    <References>$(HkRefs)</References>
+    <ModsPath>$(HkRefs)/Mods</ModsPath>
+    <HollowKnightModsDirectory>$(HkRefs)/Mods</HollowKnightModsDirectory>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,223 @@
+=== 远端 ModsWork/ 下的顶层条目 ===
+    75  AdditionalMaps-master
+     1  AdditionalMaps-master [文件]
+     9  AlwaysHazardRespawn-main
+     1  AlwaysHazardRespawn-main [文件]
+    16  BenchWarpFix-HEAD
+     1  BenchWarpFix-HEAD [文件]
+     7  BenchwarpSpoilerCloak-HEAD
+     1  BenchwarpSpoilerCloak-HEAD [文件]
+    10  Better-Void-Heart-HEAD
+     1  Better-Void-Heart-HEAD [文件]
+     8  BetterModList-HEAD
+     1  BetterModList-HEAD [文件]
+     8  Breakable Hidden Wall Flicker
+     1  Breakable Hidden Wall Flicker [文件]
+    31  ConnectionMetadataInjector-HEAD
+     1  ConnectionMetadataInjector-HEAD [文件]
+    10  ControllerFixes-HEAD
+     1  ControllerFixes-HEAD [文件]
+   618  CustomKnight-master
+     1  CustomKnight-master [文件]
+     9  DamageValuesRewritten-main
+     1  DamageValuesRewritten-main [文件]
+    10  DarkerTransitions-HEAD
+     1  DarkerTransitions-HEAD [文件]
+     1  Directory.Build.props [文件]
+     1  Directory.Build.targets [文件]
+    54  DoodleBosses-master
+     1  DoodleBosses-master [文件]
+    10  DynamicCrystalDash-HEAD
+     1  DynamicCrystalDash-HEAD [文件]
+     9  EasySoulRefill-main
+     1  EasySoulRefill-main [文件]
+    29  Enemy-HP-Bars-master
+     1  Enemy-HP-Bars-master [文件]
+    43  FrogCore-master
+     1  FrogCore-master [文件]
+    18  GodhomeGeo-HEAD
+     1  GodhomeGeo-HEAD [文件]
+    33  GrassyKnight-HEAD
+     1  GrassyKnight-HEAD [文件]
+     7  HK-Invulnerability-Indicator-main
+     1  HK-Invulnerability-Indicator-main [文件]
+     3  HK.CollisionGlitchRemover-HEAD
+     1  HK.CollisionGlitchRemover-HEAD [文件]
+    35  HK.Core.FsmUtil-master
+     1  HK.Core.FsmUtil-master [文件]
+   467  HKMP-master
+     1  HKMP-master [文件]
+  7576  HKMirror-master
+     1  HKMirror-master [文件]
+    16  HKUnofficialPatch-main
+     1  HKUnofficialPatch-main [文件]
+    27  Hallownest-Vocalized-AudioLoader-master
+     1  Hallownest-Vocalized-AudioLoader-master [文件]
+    82  Hallownest-Vocalized-master
+     1  Hallownest-Vocalized-master [文件]
+   256  HkRefs
+     1  HkRefs [文件]
+    46  HkmpPouch-main
+     1  HkmpPouch-main [文件]
+   153  HollowKnight.BenchwarpMod-HEAD
+     1  HollowKnight.BenchwarpMod-HEAD [文件]
+    23  HollowKnight.CompanionCloth-HEAD
+     1  HollowKnight.CompanionCloth-HEAD [文件]
+    69  HollowKnight.DanielSteginkUtils-main
+     1  HollowKnight.DanielSteginkUtils-main [文件]
+    14  HollowKnight.DoubleJumpFix-HEAD
+     1  HollowKnight.DoubleJumpFix-HEAD [文件]
+    10  HollowKnight.ExtraNotchesForExtraCharms-main
+     1  HollowKnight.ExtraNotchesForExtraCharms-main [文件]
+     8  HollowKnight.GeoPots-HEAD
+     1  HollowKnight.GeoPots-HEAD [文件]
+     9  HollowKnight.InfectedHallownest-HEAD
+     1  HollowKnight.InfectedHallownest-HEAD [文件]
+     8  HollowKnight.InfiniteNotches-master
+     1  HollowKnight.InfiniteNotches-master [文件]
+    25  HollowKnight.InvincibilityMonitor-1.5
+     1  HollowKnight.InvincibilityMonitor-1.5 [文件]
+   559  HollowKnight.ItemChanger-master
+     1  HollowKnight.ItemChanger-master [文件]
+   102  HollowKnight.MagicUI-HEAD
+     1  HollowKnight.MagicUI-HEAD [文件]
+    65  HollowKnight.MenuChanger-master
+     1  HollowKnight.MenuChanger-master [文件]
+    33  HollowKnight.MylaFlower-HEAD
+     1  HollowKnight.MylaFlower-HEAD [文件]
+   116  HollowKnight.Osmi-main
+     1  HollowKnight.Osmi-main [文件]
+   315  HollowKnight.RandomizerMod-master
+     1  HollowKnight.RandomizerMod-master [文件]
+    23  HollowKnight.SereCore-master
+     1  HollowKnight.SereCore-master [文件]
+    96  HollowKnight.ToggleableBindings-master
+     1  HollowKnight.ToggleableBindings-master [文件]
+    38  HollowKnight.VanillaMapMod-master
+     1  HollowKnight.VanillaMapMod-master [文件]
+    18  HollowKnight.Vasi-master
+     1  HollowKnight.Vasi-master [文件]
+    11  InfiniteNotches-main
+     1  InfiniteNotches-main [文件]
+     4  InputDevicePriority
+     1  InputDevicePriority [文件]
+     8  KeepDiveIFrames-HEAD
+     1  KeepDiveIFrames-HEAD [文件]
+    13  Konpanion-main
+     1  Konpanion-main [文件]
+   240  MapChanger-HEAD
+     1  MapChanger-HEAD [文件]
+    13  MenderbugOptions-HEAD
+     1  MenderbugOptions-HEAD [文件]
+    86  ModCommon-master
+     1  ModCommon-master [文件]
+    23  MylaFlower
+     1  MylaFlower [文件]
+   226  PaleCourt-master
+     1  PaleCourt-master [文件]
+    68  PaleCourtCharms-main
+     1  PaleCourtCharms-main [文件]
+     6  PersistentDivine-HEAD
+     1  PersistentDivine-HEAD [文件]
+    11  Platforming-QoL-mod-HEAD
+     1  Platforming-QoL-mod-HEAD [文件]
+     8  Pogonest-HEAD
+     1  Pogonest-HEAD [文件]
+     5  Powerful-Shadow-Dash-HEAD
+     1  Powerful-Shadow-Dash-HEAD [文件]
+    39  QoL-main
+     1  QoL-main [文件]
+     8  QuirrelBoat-HEAD
+     1  QuirrelBoat-HEAD [文件]
+     1  README.md [文件]
+    16  RandomCompanions-master
+     1  RandomCompanions-master [文件]
+    54  RandomizerCore.Json-master
+     1  RandomizerCore.Json-master [文件]
+   316  RandomizerMod-extracted
+     1  RandomizerMod-extracted [文件]
+    64  ReplayTimerMod-main
+     1  ReplayTimerMod-main [文件]
+    67  SFCore-master
+     1  SFCore-master [文件]
+   174  Satchel-master
+     1  Satchel-master [文件]
+    16  ScreenResolution-HEAD
+     1  ScreenResolution-HEAD [文件]
+     3  SimplifiedChineseFont-HEAD
+     1  SimplifiedChineseFont-HEAD [文件]
+     7  SkinBenchRoulette-main
+     1  SkinBenchRoulette-main [文件]
+     7  UneatedGrubs-HEAD
+     1  UneatedGrubs-HEAD [文件]
+    43  WavLib-master
+     1  WavLib-master [文件]
+     8  ZenCharm-master
+     1  ZenCharm-master [文件]
+     2  _ExtractRes
+     1  _ExtractRes [文件]
+     1  _analyze_mods.py [文件]
+     1  _check_mods.py [文件]
+     1  _refs_inventory.json [文件]
+    16  obj_stale_1034
+     1  obj_stale_1034 [文件]
+     1  sgKey.snk [文件]
+     1  阶段2a完成.json [文件]
+
+=== 远端 D:\KDQSHH 根下其他条目 ===
+     1  FILE .gitignore
+     1  FILE AGENTS.md
+     1  FILE AudioLoader_dump.txt
+     1  FILE DKDQSHHTempTestcopy_palecourt.bat
+     1  FILE D重要文件Downloadstemplioren_contexts.txt
+     1  FILE HKVocal_decompiled
+     1  FILE HKVocal_dump.txt
+     1  FILE HollowKnightHaptics_交付
+     1  FILE HollowKnightHaptics_修复_砸地震动_20260917
+     1  FILE Mods
+     1  FILE ModsWork
+     1  FILE README_云端备份与恢复.md
+     1  FILE References
+     1  FILE TempTest
+     1  FILE _空目录清单.txt
+     1  FILE diag.txt
+     1  FILE fix_remaining.py
+     1  FILE haptics_clips_list.txt
+     1  FILE logs
+     1  FILE modzip
+     1  FILE modzip内所有模组文件夹清单.txt
+     1  FILE res2.txt
+     1  FILE res3.txt
+     1  FILE res4.txt
+     1  FILE skadi_recolor.py
+     1  FILE temp
+     1  FILE temp_haptics_decompile
+     1  FILE temp_ic_res.txt
+     1  FILE temp_make_itemchanger_zh.py
+     1  FILE temp_pp.txt
+     1  FILE temp_verify_haptics
+     1  FILE 任务进度.txt
+     1  FILE 分阶段执行框架.txt
+     1  FILE 备份
+     1  FILE 字体资产工作
+     1  FILE 日志.txt
+     1  FILE 熔断确认请求_2026-09-14.md
+     1  FILE 皮肤任务规格基准表.md
+     1  FILE 皮肤任务进度.txt
+     1  FILE 皮肤任务进度_详细分析.md
+     1  FILE 约束校验报告.md
+     1  FILE 访问日志.txt
+     1  HKVocal_decompiled
+     2  HollowKnightHaptics_交付
+     4  HollowKnightHaptics_修复_砸地震动_20260917
+   320  Mods
+ 12854  ModsWork
+   106  References
+   299  TempTest
+     1  logs
+    71  modzip
+   113  temp
+     1  temp_haptics_decompile
+     1  temp_verify_haptics
+    11  备份
+    67  字体资产工作

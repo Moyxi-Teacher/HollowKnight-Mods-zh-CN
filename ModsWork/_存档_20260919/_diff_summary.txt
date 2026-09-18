@@ -1,0 +1,73 @@
+=== 本地独有：按顶层目录归类 ===
+   104 个     17.7 MB  _qol_49
+    88 个     29.3 MB  Konpanion-main
+    50 个   1383.6 MB  PaleCourt-master
+    40 个     16.6 MB  HK-Invulnerability-Indicator-main
+    24 个      0.4 MB  _ScanTypes
+    23 个    203.0 MB  Hallownest-Vocalized-master
+    22 个      2.4 MB  MylaFlower
+    21 个      6.2 MB  Enemy-HP-Bars-master
+    21 个      0.4 MB  _ExtractRes
+    19 个      0.1 MB  ControllerFixes-HEAD
+    13 个      1.8 MB  _scan_getmod
+     4 个      0.1 MB  Haptics
+     2 个    342.0 MB  HkRefs
+     2 个      0.1 MB  _qol_build_out
+     1 个      3.6 MB  _tree.json
+     1 个      0.1 MB  _ehb_src
+     1 个      0.0 MB  _fix_hkvocals.py
+     1 个      0.0 MB  _fix_palecourt.py
+     1 个      0.0 MB  _upload_batch2.py
+     1 个      0.0 MB  _upload.py
+     1 个      0.0 MB  _push2_tree.py
+     1 个      0.0 MB  _fix_qol.py
+     1 个      0.0 MB  _upload_batch2_commit.py
+     1 个      0.0 MB  _fix_crossmod.py
+     1 个      0.0 MB  _verify_push2.py
+     1 个      0.0 MB  _fix_cf2.py
+     1 个      0.0 MB  _scan_saver2.py
+     1 个      0.0 MB  _scan_saver.py
+     1 个      0.0 MB  _append_log2.py
+     1 个      0.0 MB  _diag_hkvocals.py
+     1 个      0.0 MB  _upload_release.py
+     1 个      0.0 MB  _fix_cf.py
+     1 个      0.0 MB  _inventory.txt
+     1 个      0.0 MB  _diff_local_remote.py
+     1 个      0.0 MB  _push2_commit.py
+     1 个      0.0 MB  _fetch_src.py
+     1 个      0.0 MB  _diff_repo.py
+     1 个      0.0 MB  _fetch_rando.py
+     1 个      0.0 MB  _upload_batch2.log
+     1 个      0.0 MB  _fetch_cf.py
+     1 个      0.0 MB  _push2_verify.txt
+     1 个      0.0 MB  _inventory.py
+     1 个      0.0 MB  _blob_post.py
+     1 个      0.0 MB  _push2_tree.txt
+     1 个      0.0 MB  _tree_lookup.py
+     1 个      0.0 MB  _local_dlls.txt
+
+=== 与远端不一致的文件 ===
+34339840  HkRefs/Mods/HKMirror/HKMirror.dll
+9944064  HkRefs/Mods/ItemChanger/ItemChanger.dll
+5392896  HkRefs/Mods/Custom Knight/CustomKnight.dll
+499200  HkRefs/Mods/MylaFlower/MylaFlower.dll
+182272  HkRefs/Mods/PaleCourt/PaleCourt.pdb
+163840  HkRefs/Mods/SFCore/SFCore.dll
+89088  HkRefs/Mods/MenuChanger/MenuChanger.dll
+86528  HkRefs/Mods/FrogCore/FrogCore.dll
+74240  HkRefs/Mods/Core.FsmUtil/Core_FsmUtil.dll
+34816  HkRefs/Mods/Vasi/Vasi.dll
+21511  Konpanion-main/Konpanion.cs
+11976  MylaFlower/MylaFlower.cs
+11177  Enemy-HP-Bars-master/src/EnemyHPBar.cs
+9620  HkRefs/Mods/MylaFlower/MylaFlower.pdb
+7360  Hallownest-Vocalized-master/HKVocal/MajorFeatures/NPCDialogue.cs
+6762  Hallownest-Vocalized-master/HKVocal/AudioPlayer.cs
+5564  Hallownest-Vocalized-master/HKVocal/AudioAPI.cs
+5219  MylaFlower/RandoConnection/RandoInterop.cs
+3731  HK-Invulnerability-Indicator-main/InvulnerabilityIndicator.cs
+1386  _ExtractRes/Program.cs
+1111  Hallownest-Vocalized-master/HKVocal/Utils/GlobalUsings.cs
+679  Directory.Build.props
+628  README.md
+482  _ExtractRes/ExtractRes.csproj

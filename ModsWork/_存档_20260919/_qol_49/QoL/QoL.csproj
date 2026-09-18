@@ -1,0 +1,108 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <ProjectGuid>{F039FA1D-A12D-4672-BF0A-60CF7900EE21}</ProjectGuid>
+        <TargetFramework>net472</TargetFramework>
+        <AssemblyTitle>QoL</AssemblyTitle>
+        <AssemblyVersion>4.9.0</AssemblyVersion>
+        <Product>QoL</Product>
+        <Copyright>Copyright © Yusuf Bham 2021</Copyright>
+        <OutputPath>bin\$(Configuration)\</OutputPath>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <!-- 构建参考路径：指向本地只读参考库（不改动游戏目录） -->
+        <HollowKnightRefs>..\..\HkRefs</HollowKnightRefs>
+        <!-- 构建产物输出到本地工作目录，避免误写入游戏目录 -->
+        <CopyOutputDir>D:/KDQSHH/ModsWork/_qol_build_out</CopyOutputDir>
+        <!-- 用户决策：InformationalVersion = 原版数字 + 汉化 -->
+        <InformationalVersion>4.9.0汉化</InformationalVersion>
+    </PropertyGroup>
+
+    <Import Project="LocalBuildProperties.props" Condition="Exists('LocalBuildProperties.props')" />
+    
+    <ItemGroup>
+      <EmbeddedResource Include="Locales\zh.json" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>$(HollowKnightRefs)\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="MMHOOK_Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>$(HollowKnightRefs)\MMHOOK_Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="MMHOOK_PlayMaker, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>$(HollowKnightRefs)\MMHOOK_PlayMaker.dll</HintPath>
+        </Reference>
+        <Reference Include="Mono.Cecil, Version=0.11.3.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e">
+          <HintPath>$(HollowKnightRefs)\Mono.Cecil.dll</HintPath>
+        </Reference>
+        <Reference Include="MonoMod.RuntimeDetour, Version=21.4.29.1, Culture=neutral, PublicKeyToken=null">
+          <HintPath>$(HollowKnightRefs)\MonoMod.RuntimeDetour.dll</HintPath>
+        </Reference>
+        <Reference Include="MonoMod.Utils, Version=21.4.29.1, Culture=neutral, PublicKeyToken=null">
+          <HintPath>$(HollowKnightRefs)\MonoMod.Utils.dll</HintPath>
+        </Reference>
+        <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>$(HollowKnightRefs)\Newtonsoft.Json.dll</HintPath>
+        </Reference>
+        <Reference Include="PlayMaker, Version=1.6.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>$(HollowKnightRefs)\PlayMaker.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+            <HintPath>$(HollowKnightRefs)\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>$(HollowKnightRefs)\UnityEngine.AudioModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>$(HollowKnightRefs)\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.JSONSerializeModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>$(HollowKnightRefs)\UnityEngine.JSONSerializeModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>$(HollowKnightRefs)\UnityEngine.Physics2DModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UI">
+            <HintPath>$(HollowKnightRefs)\UnityEngine.UI.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIElementsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>$(HollowKnightRefs)\UnityEngine.UIElementsModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+            <HintPath>$(HollowKnightRefs)\UnityEngine.UIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="Vasi, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null" Condition="Exists('$(HollowKnightRefs)\Mods\Vasi\Vasi.dll')">
+          <HintPath>$(HollowKnightRefs)\Mods\Vasi\Vasi.dll</HintPath>
+         </Reference>
+    </ItemGroup>
+    
+    <Target Name="CopyMod" AfterTargets="PostBuildEvent">
+        <Copy 
+                SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" 
+                DestinationFolder="$(CopyOutputDir)/Mods/$(TargetName)" 
+                SkipUnchangedFiles="true" 
+        />
+    </Target>
+    
+    <Target Name="CreateReleaseZip" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
+        <MakeDir Directories="$(ProjectDir)Output" />
+        <Delete Files="$(ProjectDir)/$(TargetName).zip" />
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ProjectDir)/Output/" />
+        <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(ProjectDir)/Output/" />
+        <Copy SourceFiles="$(SolutionDir)/README.md" DestinationFolder="$(ProjectDir)/Output/" ContinueOnError="true"/>
+        <ZipDirectory DestinationFile="$(ProjectDir)/$(TargetName).zip" SourceDirectory="$(ProjectDir)/Output" />
+        <RemoveDir Directories="$(ProjectDir)Output" />
+        
+        <GetFileHash Files="$(ProjectDir)/$(TargetName).zip" Algorithm="SHA256" >
+            <Output
+                    TaskParameter="Items"
+                    ItemName="FilesWithHashes" 
+            />
+        </GetFileHash>
+        <Message Importance="High" Text="@(FilesWithHashes->'%(Identity): %(FileHash)')" />
+    </Target>
+</Project>

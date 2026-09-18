@@ -1,0 +1,20 @@
+快照条目数：13893
+快照中的文件数：13071
+
+=== 写入本地 blob ===
+  c148ee69b9f4  ModsWork/Enemy-HP-Bars-master/src/EnemyHPBar.cs
+  465bce8ece67  ModsWork/Konpanion-main/Konpanion.cs
+  5839937935f2  ModsWork/MylaFlower/MylaFlower.cs
+  834248e53c6c  ModsWork/MylaFlower/RandoConnection/RandoInterop.cs
+  aeffb05fd51d  ModsWork/Hallownest-Vocalized-master/HKVocal/MajorFeatures/NPCDialogue.cs
+  5884e50a2974  Mods/Enemy HP Bar（敌人血条）/EnemyHPBar.dll
+  1adbc8b45e01  Mods/Enemy HP Bar（敌人血条）/EnemyHPBar.pdb
+  9547b62a1d4a  Mods/Konpanion（伴侣）/Konpanion.dll
+  84ce6dad689c  Mods/Konpanion（伴侣）/Konpanion.pdb
+  8a73949fe4cd  Mods/MylaFlower（米拉花）/MylaFlower.dll
+  fff86b30da6f  Mods/MylaFlower（米拉花）/MylaFlower.pdb
+  f1da061c1854  Mods/Hallownest-Vocalized（圣巢之声）/HKVocal.dll
+  7c9f76e56ff3  Mods/Hallownest-Vocalized（圣巢之声）/HKVocal.pdb
+
+=== 生成 tree ===
+根 tree = 102b20593ee914d9812f0ff3488b9527fc8819fa

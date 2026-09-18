@@ -1,0 +1,30 @@
+远端 main = c6a36483cd30381b59010bed75b38b128d5a0fc2
+base_tree = 24b26fc074c09fd419c58e33b02a8468e50ff8b5
+  跳过(未变)       9980  Mods/Enemy HP Bar（敌人血条）/EnemyHPBar.pdb
+  跳过(未变)      33288  Mods/Hallownest-Vocalized（圣巢之声）/HKVocal.pdb
+
+需上传 11 个文件，跳过 2 个
+  11177        ModsWork/Enemy-HP-Bars-master/src/EnemyHPBar.cs
+  21511        ModsWork/Konpanion-main/Konpanion.cs
+  11976        ModsWork/MylaFlower/MylaFlower.cs
+  5219         ModsWork/MylaFlower/RandoConnection/RandoInterop.cs
+  7360         ModsWork/Hallownest-Vocalized-master/HKVocal/MajorFeatures/NPCDialogue.cs
+  39424        Mods/Enemy HP Bar（敌人血条）/EnemyHPBar.dll
+  24064        Mods/Konpanion（伴侣）/Konpanion.dll
+  60928        Mods/Konpanion（伴侣）/Konpanion.pdb
+  499200       Mods/MylaFlower（米拉花）/MylaFlower.dll
+  9620         Mods/MylaFlower（米拉花）/MylaFlower.pdb
+  104187904    Mods/Hallownest-Vocalized（圣巢之声）/HKVocal.dll
+
+
+=== 创建 blobs（共 11 个）===
+  [ok] ModsWork/Enemy-HP-Bars-master/src/EnemyHPBar.cs  (c148ee69b9)
+  [ok] ModsWork/Konpanion-main/Konpanion.cs  (465bce8ece)
+  [ok] ModsWork/MylaFlower/MylaFlower.cs  (5839937935)
+  [ok] ModsWork/MylaFlower/RandoConnection/RandoInterop.cs  (834248e53c)
+  [ok] ModsWork/Hallownest-Vocalized-master/HKVocal/MajorFeatures/NPCDialogue.cs  (aeffb05fd5)
+  [ok] Mods/Enemy HP Bar（敌人血条）/EnemyHPBar.dll  (5884e50a29)
+  [ok] Mods/Konpanion（伴侣）/Konpanion.dll  (9547b62a1d)
+  [ok] Mods/Konpanion（伴侣）/Konpanion.pdb  (84ce6dad68)
+  [ok] Mods/MylaFlower（米拉花）/MylaFlower.dll  (8a73949fe4)
+  [ok] Mods/MylaFlower（米拉花）/MylaFlower.pdb  (fff86b30da)
