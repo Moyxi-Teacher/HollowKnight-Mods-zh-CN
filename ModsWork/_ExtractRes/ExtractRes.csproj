@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <AssemblyName>ExtractRes</AssemblyName>
+    <Nullable>disable</Nullable>
+    <HkManaged>E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed</HkManaged>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Cecil">
+      <HintPath>$(HkManaged)\Mono.Cecil.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

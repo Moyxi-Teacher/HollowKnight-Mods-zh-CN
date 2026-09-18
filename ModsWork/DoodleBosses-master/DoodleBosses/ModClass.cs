@@ -8,11 +8,38 @@ using UObject = UnityEngine.Object;
 
 namespace DoodleBosses
 {
-    public class DoodleBosses : Mod, IGlobalSettings<Settings>, IMenuMod
+    public class DoodleBosses : Mod, IGlobalSettings<Settings>, IMenuMod, ITogglableMod
     {
         internal static DoodleBosses Instance;
         public Settings settings = new();
         public bool ToggleButtonInsideMenu => true;
+
+        // ── 总开关 ────────────────────────────────────────────────────────
+        // 本模组的做法是把 boss 材质上的贴图换成涂鸦贴图（material 是共享的，
+        // 所以一改就是全局生效）。要能真正关掉，就必须把这些材质原本的贴图
+        // 记下来，Unload 时原样还原；只摘掉钩子是不够的。
+        private readonly Dictionary<Material, Texture> _originalTextures = new();
+
+        /// <summary>替换贴图前先记住原贴图；重复初始化时不覆盖已记录的值。</summary>
+        private void RememberTexture(Material mat)
+        {
+            if (mat == null) return;
+            if (!_originalTextures.ContainsKey(mat)) _originalTextures[mat] = mat.mainTexture;
+        }
+
+        /// <summary>总开关：关闭模组时还原贴图并摘掉语言钩子。</summary>
+        public void Unload()
+        {
+            ModHooks.LanguageGetHook -= LanguageGet;
+
+            foreach (var pair in _originalTextures)
+            {
+                if (pair.Key != null) pair.Key.mainTexture = pair.Value;
+            }
+            _originalTextures.Clear();
+
+            Log("Unloaded");
+        }
 
         public static readonly Dictionary<string, GameObject> _gameObjects = new();
 
@@ -93,8 +120,9 @@ namespace DoodleBosses
 
             foreach (Bosses boss in BossStrings.Keys)
             {
-                _gameObjects[BossStrings[boss]].GetComponent<tk2dSprite>().GetCurrentSpriteDef().material.mainTexture = GetSprite((int)boss).texture;
-
+                var spriteDef = _gameObjects[BossStrings[boss]].GetComponent<tk2dSprite>().GetCurrentSpriteDef();
+                RememberTexture(spriteDef.material);          // 记下原贴图，供总开关还原
+                spriteDef.material.mainTexture = GetSprite((int)boss).texture;
             }
 
             Log("Finished loading regular bosses");
@@ -102,7 +130,10 @@ namespace DoodleBosses
             foreach (Specials sheet in SpecialStrings.Keys)
             {
                 Log("Doing special boss " + SpecialStrings[sheet].Item1);
-                _gameObjects[SpecialStrings[sheet].Item1].GetComponent<tk2dSprite>().Collection.materials[SpecialStrings[sheet].Item2].mainTexture = GetSprite((int)sheet, true).texture;
+                var mat = _gameObjects[SpecialStrings[sheet].Item1].GetComponent<tk2dSprite>()
+                              .Collection.materials[SpecialStrings[sheet].Item2];
+                RememberTexture(mat);                          // 同上
+                mat.mainTexture = GetSprite((int)sheet, true).texture;
             }
 
 
@@ -118,9 +149,13 @@ namespace DoodleBosses
 
         public List<IMenuMod.MenuEntry> GetMenuData(IMenuMod.MenuEntry? menu)
         {
-            List<IMenuMod.MenuEntry> menus = new()
-            {
-                new()
+            List<IMenuMod.MenuEntry> menus = new();
+
+            // 模组总开关：API 会把它作为 menu 参数传进来，必须放进返回列表里才会显示。
+            // 不接收它的话，设置菜单里就没有开关（原先正是如此）。
+            if (menu != null) menus.Add(menu.Value);
+
+            menus.Add(new()
                 {
                     Name = "显示艺术家署名",
                     Description = "若已启用，将覆盖赞助者鸣谢",
@@ -131,8 +166,8 @@ namespace DoodleBosses
                     },
                     Saver = i => settings.creditsOn = i == 0,
                     Loader = () => settings.creditsOn ? 0 : 1
-                },
-                new()
+                });
+            menus.Add(new()
                 {
                     Name = "涂鸦名字",
                     Description = "为所有BOSS添加滑稽的涂鸦名字！",
@@ -143,8 +178,7 @@ namespace DoodleBosses
                     },
                     Saver = i => settings.doodleNamesOn = i == 0,
                     Loader = () => settings.doodleNamesOn ? 0 : 1
-                },
-            };
+                });
 
             return menus;
         }

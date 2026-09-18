@@ -1,80 +1,15 @@
 <Project>
   <!--
-    统一引用路径配置（阶段2b：补齐签名密钥与构建 targets）
-    目的：将各模组 csproj 中指向作者本地不同硬盘路径的
-    HollowKnightRefs / HKRefs / HKModdingApi / VanillaFiles / LocalRefs /
-    ModdingAPI / HollowKnightFolder / HollowKnightManagedFolder /
-    HollowKnightModsDirectory / References / ModsPath 等变量，
-    统一指向 D:\KDQSHH\ModsWork\HkRefs（已从游戏 Managed 目录复制的参考 DLL）。
-    只读约束：此文件仅修改 D:\KDQSHH\ModsWork 下的工程配置，
-    绝不写入 E:\steam\steamapps\...\Hollow Knight 目录。
+    统一参考路径：只读指向游戏 Managed 目录。
+    绝不向该目录写入任何内容（各工程 csproj 的 CopyMod 目标均已 Condition=false）。
   -->
   <PropertyGroup>
-    <!-- 参考 DLL 根目录：游戏 Managed 文件夹下所有 DLL 的副本 -->
-    <HkRefs>$(MSBuildThisFileDirectory)HkRefs</HkRefs>
-    <!-- 与部分 csproj 中使用的变量名同义 -->
+    <HkRefs>E:\steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed</HkRefs>
     <HKRefs>$(HkRefs)</HKRefs>
-    <HKRefsFolder>$(HkRefs)</HKRefsFolder>
-    <HKModdingApi>$(HkRefs)</HKModdingApi>
-    <HK15PATH>$(HkRefs)</HK15PATH>
-    <ModdingAPI>$(HkRefs)</ModdingAPI>
-    <ModdingAPi>$(HkRefs)</ModdingAPi>
+    <HollowKnightRefs>$(HkRefs)</HollowKnightRefs>
     <LocalRefs>$(HkRefs)</LocalRefs>
     <VanillaFiles>$(HkRefs)</VanillaFiles>
-    <HollowKnightFolder>$(HkRefs)</HollowKnightFolder>
-    <HollowKnightManagedFolder>$(HkRefs)</HollowKnightManagedFolder>
-    <References>$(HkRefs)</References>
-    <HollowKnightRefs>$(HkRefs)</HollowKnightRefs>
-    <HollowKnightRefs Condition="Exists('$(HollowKnightRefs)')">$(HkRefs)</HollowKnightRefs>
-    <ModsPath>$(HkRefs)/Mods</ModsPath>
-    <HollowKnightModsDirectory>$(HkRefs)/Mods</HollowKnightModsDirectory>
-  </PropertyGroup>
-
-  <!--
-    各 csproj 中以 Condition="$(Var) == ''" 做兜底赋值的变量，若其默认值
-    指向不存在的路径，将被本文件覆盖。此处显式再兜底一次，确保万无一失。
-  -->
-  <PropertyGroup Condition=" '$(HkRefs)' == '' Or Exists('$(HkRefs)') == 'false' ">
-    <HkRefs>$(MSBuildThisFileDirectory)HkRefs</HkRefs>
-    <HKRefs>$(HkRefs)</HKRefs>
-    <HKRefsFolder>$(HkRefs)</HKRefsFolder>
-    <HKModdingApi>$(HkRefs)</HKModdingApi>
-    <HK15PATH>$(HkRefs)</HK15PATH>
     <ModdingAPI>$(HkRefs)</ModdingAPI>
-    <ModdingAPi>$(HkRefs)</ModdingAPi>
-    <LocalRefs>$(HkRefs)</LocalRefs>
-    <VanillaFiles>$(HkRefs)</VanillaFiles>
-    <HollowKnightFolder>$(HkRefs)</HollowKnightFolder>
-    <HollowKnightManagedFolder>$(HkRefs)</HollowKnightManagedFolder>
-    <References>$(HkRefs)</References>
-    <HollowKnightRefs>$(HkRefs)</HollowKnightRefs>
-    <HollowKnightRefs Condition="Exists('$(HollowKnightRefs)')">$(HkRefs)</HollowKnightRefs>
-    <ModsPath>$(HkRefs)/Mods</ModsPath>
-    <HollowKnightModsDirectory>$(HkRefs)/Mods</HollowKnightModsDirectory>
-  </PropertyGroup>
-
-  <!-- 用户决策(2026-09-11)：关闭强名称签名（原版 DLL 均未签名），
-       SignKeyFile 不再设置；sgKey.snk 保留在目录中但不再被引用 -->
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-
-  <!-- 输出目录统一（避免各模组 bin/Debug/... 多层嵌套） -->
-  <PropertyGroup>
-    <BaseIntermediateOutputPath Condition="$(BaseIntermediateOutputPath) == ''">$(MSBuildThisFileDirectory)obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-  </PropertyGroup>
-
-  <!--
-    SDK 自动生成 AssemblyInfo.cs 的策略（用户决策 2026-09-11）：
-    - 默认 GenerateAssemblyInfo=true：SDK 会读取 csproj 中的 AssemblyVersion /
-      FileVersion / InformationalVersion / AssemblyTitle 等属性生成程序集特性。
-      这是让版本号生效的前提——csproj 属性版本号只有在自动生成开启时才被写入 DLL。
-      （csproj 属性与自动生成不冲突；只有存在手写 Properties/AssemblyInfo.cs 时
-      才需在某些模组上单独设为 false，见各 csproj。）
-    - 无手写 AssemblyInfo.cs 的模组默认开启自动生成，版本号随csproj生效。
-  -->
-  <PropertyGroup>
-    <GenerateAssemblyInfo Condition="$(GenerateAssemblyInfo) == ''">true</GenerateAssemblyInfo>
-    <GenerateDocumentationFile Condition="$(GenerateDocumentationFile) == ''">false</GenerateDocumentationFile>
+    <ModdingApi>$(HkRefs)</ModdingApi>
   </PropertyGroup>
 </Project>
