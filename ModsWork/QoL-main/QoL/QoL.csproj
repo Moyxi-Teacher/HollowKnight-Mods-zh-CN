@@ -4,7 +4,6 @@
         <TargetFramework>net472</TargetFramework>
         <AssemblyTitle>QoL</AssemblyTitle>
         <AssemblyVersion>4.9.0</AssemblyVersion>
-    <InformationalVersion>4.9.0汉化</InformationalVersion>
         <Product>QoL</Product>
         <Copyright>Copyright © Yusuf Bham 2021</Copyright>
         <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -13,8 +12,12 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <HollowKnightRefs>..\..\..\References</HollowKnightRefs>
-        <CopyOutputDir>D:/Steam/steamapps/common/Hollow Knight/hollow_knight_Data/Managed</CopyOutputDir>
+        <!-- 构建参考路径：指向本地只读参考库（不改动游戏目录） -->
+        <HollowKnightRefs>..\..\HkRefs</HollowKnightRefs>
+        <!-- 构建产物输出到本地工作目录，避免误写入游戏目录 -->
+        <CopyOutputDir>D:/KDQSHH/ModsWork/_qol_build_out</CopyOutputDir>
+        <!-- 用户决策：InformationalVersion = 原版数字 + 汉化 -->
+        <InformationalVersion>4.9.0汉化</InformationalVersion>
     </PropertyGroup>
 
     <Import Project="LocalBuildProperties.props" Condition="Exists('LocalBuildProperties.props')" />

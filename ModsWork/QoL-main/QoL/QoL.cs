@@ -13,6 +13,7 @@ namespace QoL
     [UsedImplicitly]
     public class QoL : Mod, ITogglableMod, IGlobalSettings<Settings>, ICustomMenuMod
     {
+        // 汉化：模组显示名改为中文。注意存档键也随之变为「生活质量」。
         public QoL() : base("生活质量")
         {
             typeof(SettingsOverride).ModInterop();
@@ -20,6 +21,7 @@ namespace QoL
 
         public override string GetVersion() => VersionUtil.GetVersion<QoL>();
 
+        // 汉化：模组列表里进入本模组菜单的按钮文本
         public override string GetMenuButtonText() => "生活质量";
 
         internal static Settings GlobalSettings { get; private set; } = new();

@@ -3,7 +3,7 @@ using HKMirror.Reflection;
 
 namespace ControllerFixes;
 
-public class ControllerFixes : Mod, IGlobalSettings<GlobalSettings>, ICustomMenuMod
+public class ControllerFixes : Mod, IGlobalSettings<GlobalSettings>, ICustomMenuMod, ITogglableMod
 {
     internal static ControllerFixes Instance;
     public static GlobalSettings Settings { get; private set; } = new ();
@@ -384,8 +384,22 @@ public class ControllerFixes : Mod, IGlobalSettings<GlobalSettings>, ICustomMenu
 		orig(self, actionButton);
     }
 
-    public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? _) => 
-	    ModMenu.CreateMenuScreen(modListMenu);
+    public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? toggleDelegates) => 
+	    ModMenu.CreateMenuScreen(modListMenu, toggleDelegates);
 
-    public bool ToggleButtonInsideMenu => false;
+    // 总开关(2026-09-19)：改为 true，开关放进本模组菜单内部（与生活质量模组一致），
+    // 不再显示在模组列表那一层。
+    public bool ToggleButtonInsideMenu => true;
+
+    // 总开关(2026-09-19)：实现 ITogglableMod，开关位于本模组菜单的第一项。
+    // 关闭时反注册 Initialize 里注册的全部钩子，确保功能彻底停止。
+    public void Unload()
+    {
+        On.ControllerDetect.LookForActiveController -= LookForActiveController;
+        On.HeroController.CanCast -= CanCast;
+        ILInputManager.AttachDevice -= AttachDeviceIL;
+        ILUIButtonSkins.orig_GetButtonSkinFor -= GetButtonSkinForIL;
+        On.ControllerButtonLabel.ShowCurrentBinding -= ShowCurrentBinding;
+        On.ActionButtonIconBase.GetButtonIcon -= OverrideMenuPrompts;
+    }
 }

@@ -35,6 +35,10 @@ namespace QoL
                 RegularGridLayout.CreateVerticalLayout(105f),
                 c =>
                 {
+                    // 修复(2026-09-19)：本模组走 ICustomMenuMod 自建菜单这条路，
+                    // Modding API 只在 IMenuMod 分支里主动调用 RefreshValueFromGameSettings()，
+                    // 因此这个「总开关」的显示值一直停留在初始索引 0（显示为「关」），
+                    // 与实际启用状态不符。这里在创建之后立即手动刷新一次。
                     c.AddHorizontalOption("QoL", new HorizontalOptionConfig
                     {
                         Label = "QoL",
@@ -47,7 +51,8 @@ namespace QoL
                         RefreshSetting = (s, _) => s.optionList.SetOptionTo(Convert.ToInt32(dels.GetModEnabled())),
                         CancelAction = Return,
                         Style = HorizontalOptionStyle.VanillaStyle
-                    });
+                    }, out MenuOptionHorizontal qolToggle);
+                    qolToggle.menuSetting.RefreshValueFromGameSettings();
 
                     c.AddMenuButton("Module Toggles", new MenuButtonConfig
                     {

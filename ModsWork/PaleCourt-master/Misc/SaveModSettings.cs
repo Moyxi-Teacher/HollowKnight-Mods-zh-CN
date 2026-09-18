@@ -72,6 +72,11 @@ namespace FiveKnights
         public bool GreetedNailsmith = false;
         public bool GreetedSheo = false;
 
+        // 修复(2026-09-19)：新增「调试模式」存档字段。
+        // 原版该项只写内存静态字段 isDebug（默认 true），从不落盘，重启必然回到默认值。
+        // 默认值保持 true，以保证老存档（无此字段）的初始行为与原版一致。
+        public bool IsDebug = true;
+
         public bool IsmaFirstConvo1 = false;
         public bool IsmaFirstConvo2 = false;
         public bool IsmaSecondConvo1 = false;

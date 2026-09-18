@@ -15,10 +15,19 @@ public static class ModMenu
         "Xbox 360、Xbox 按钮提示（菜单按键提示：Back/Select）",
     ];
 
-    public static MenuScreen CreateMenuScreen(MenuScreen modListMenu)
+    public static MenuScreen CreateMenuScreen(MenuScreen modListMenu, ModToggleDelegates? toggleDelegates = null)
     {
+        // 总开关(2026-09-19)：放在菜单第一项，与生活质量等模组的表现一致。
+        // Satchel 的 CreateToggle 会在菜单构建完成后自动刷新，显示真实启用状态。
+        List<Element> toggles = [];
+        if (toggleDelegates.HasValue)
+        {
+            toggles.Add(toggleDelegates.Value.CreateToggle("控制器修正", "启用或关闭控制器修正模组"));
+        }
+
         MenuRef = new Menu("控制器修正",
         [
+            .. toggles,
             new MenuButton("链接至说明",
                 "如果有任何不清楚之处，请阅读本模组所基于的 Steam 讨论串",
                 _ => Application.OpenURL("https://steamcommunity.com/sharedfiles/filedetails/?id=2525497719")),

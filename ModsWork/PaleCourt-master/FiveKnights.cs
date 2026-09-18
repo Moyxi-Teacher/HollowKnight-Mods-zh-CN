@@ -448,9 +448,11 @@ namespace FiveKnights
                 && info.SceneName is "White_Palace_09"
             );
 
-            if (!GlobalSettings.ForcedMenuTheme)
+            // 修复(2026-09-19)：原版在此处只要发现玩家把「强制使用模组菜单主题」设为关，
+            // 就立即改回开并强制切换主题，导致该选项永远无法关闭。
+            // 现改为：只有玩家把它设为「开」时才切换主题。
+            if (GlobalSettings.ForcedMenuTheme)
             {
-                GlobalSettings.ForcedMenuTheme = true;
                 var tmpStyle = MenuStyles.Instance.styles.First(x => x.styleObject.name.Contains("Pale_Court"));
                 MenuStyles.Instance.SetStyle(MenuStyles.Instance.styles.ToList().IndexOf(tmpStyle), false);
             }
@@ -487,8 +489,12 @@ namespace FiveKnights
                 "调试模式",
                 new[] { "关", "开" },
                 "启用调试模式。",
-                index => isDebug = index == 1,
-                () => isDebug ? 1 : 0));
+                index =>
+                {
+                    SaveSettings.IsDebug = index == 1;
+                    isDebug = index == 1;
+                },
+                () => SaveSettings.IsDebug ? 1 : 0));
 
             entries.Add(new IMenuMod.MenuEntry(
                 "伊斯玛雕像进度",
@@ -725,6 +731,8 @@ namespace FiveKnights
 
         private void AfterSavegameLoadHookHandler(SaveGameData saveGameData)
         {
+            // 修复(2026-09-19)：把存档里保存的调试模式开关同步到静态字段
+            isDebug = SaveSettings.IsDebug;
             StartGame();
         }
 
