@@ -76,7 +76,10 @@ public class EnemyHPBar : Mod, IGlobalSettings<Settings>, ICustomMenuMod, IToggl
 		bg = HPBarCreateSprite(ResourceLoader.GetBackgroundImage());
 		UObject.DontDestroyOnLoad(canvas);
 		UObject.DontDestroyOnLoad(bossCanvas);
-		InstallCK = ModHooks.GetMod("CustomKnight") is Mod;
+		// 修复(2026-09-19)：CustomKnight 汉化后显示名为「自定义小骑士」，
+		// 原先按英文名查找会失败，导致与 CK 的联动被整体关闭。此处新旧名都识别。
+		InstallCK = ModHooks.GetMod("CustomKnight") is Mod
+			|| ModHooks.GetMod("自定义小骑士") is Mod;
 		if (InstallCK) {
 			AddCKHandle();
 		}

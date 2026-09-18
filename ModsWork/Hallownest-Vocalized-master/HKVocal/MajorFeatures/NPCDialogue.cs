@@ -192,7 +192,8 @@ public static class NPCDialogue
         
         #region PaleCourt
         
-        if (args.self.currentConversation == "SHEO_DREAM" && pcConvo == "SHEO_DREAM_PC_0" && ModHooks.GetMod("Pale Court") is Mod ) 
+        // 修复(2026-09-19)：苍白宫廷汉化后显示名为「苍白宫廷」，新旧名都识别。
+        if (args.self.currentConversation == "SHEO_DREAM" && pcConvo == "SHEO_DREAM_PC_0" && (ModHooks.GetMod("Pale Court") is Mod || ModHooks.GetMod("苍白宫廷") is Mod)) 
         {
             convo = pcConvo;
         }

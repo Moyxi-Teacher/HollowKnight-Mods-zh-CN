@@ -54,7 +54,8 @@ namespace MylaFlower
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += ReplaceMylaSprite;
 
             // Hook rando
-            if (ModHooks.GetMod("ItemChangerMod") is not null)
+            // 修复(2026-09-19)：物品替换器汉化后显示名为「物品替换器」，新旧名都识别。
+            if (ModHooks.GetMod("ItemChangerMod") is not null || ModHooks.GetMod("物品替换器") is not null)
             {
                 RandoConnection.RandoInteropManager.Hook();
             }

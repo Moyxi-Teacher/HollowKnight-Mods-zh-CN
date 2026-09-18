@@ -35,7 +35,9 @@ namespace Konpanion
 
         public static bool HasPouch()
         {
-            var hasPouch = ModHooks.GetMod("HkmpPouch") is Mod;
+            // 修复(2026-09-19)：HkmpPouch 汉化后显示名为「HkmpPouch（网络库）」，新旧名都识别。
+            var hasPouch = ModHooks.GetMod("HkmpPouch") is Mod
+                || ModHooks.GetMod("HkmpPouch（网络库）") is Mod;
             return hasPouch;
         }
         public override string GetVersion()
