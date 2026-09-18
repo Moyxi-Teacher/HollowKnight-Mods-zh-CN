@@ -196,242 +196,242 @@ namespace DoodleBosses
             switch (key)
             {
                 case "BIGFLY_SUPER":
-                    if (settings.doodleNamesOn) return "Mother of";
-                    return "Gruz";
+                    if (settings.doodleNamesOn) return "速写之";
+                    return orig;
                 case "BIGFLY_MAIN":
-                    if (settings.doodleNamesOn) return "Sketches";
-                    return "Mother";
+                    if (settings.doodleNamesOn) return "母";
+                    return orig;
                 case "BIGFLY_SUB":
-                    if (settings.creditsOn) return "by Godfriend";
-                    return "";
+                    if (settings.creditsOn) return "作者：Godfriend";
+                    return orig;
                 case "VENGEFLY_SUPER":
-                    if (settings.doodleNamesOn) return "Doodle";
-                    return "Vengefly";
+                    if (settings.doodleNamesOn) return "涂鸦";
+                    return orig;
                 case "VENGEFLY_MAIN":
-                    return "King";
+                    return orig;
                 case "VENGEFLY_SUB":
-                    if (settings.creditsOn) return "by Godfriend";
-                    return "";
+                    if (settings.creditsOn) return "作者：Godfriend";
+                    return orig;
                 case "MAWLEK_SUPER":
-                    if (settings.doodleNamesOn) return "Doodling";
-                    return "Brooding";
+                    if (settings.doodleNamesOn) return "涂鸦的";
+                    return orig;
                 case "MAWLEK_MAIN":
-                    return "Mawlek";
+                    return orig;
                 case "MAWLEK_SUB":
-                    if (settings.creditsOn) return "by Godfriend";
-                    return "";
+                    if (settings.creditsOn) return "作者：Godfriend";
+                    return orig;
                 case "FALSE_KNIGHT_SUPER":
-                    return "";
+                    return orig;
                 case "FALSE_KNIGHT_MAIN":
-                    if (settings.doodleNamesOn) return "False Doodle";
-                    return "False Knight";
+                    if (settings.doodleNamesOn) return "假涂鸦";
+                    return orig;
                 case "FALSE_KNIGHT_SUB":
-                    if (settings.creditsOn) return "by MinishLink";
-                    return "";
+                    if (settings.creditsOn) return "作者：MinishLink";
+                    return orig;
                 case "FALSE_KNIGHT_DREAM_SUPER":
-                    return "Failed";
+                    return orig;
                 case "FALSE_KNIGHT_DREAM_MAIN":
-                    if (settings.doodleNamesOn) return "Masterpiece";
-                    return "Champion";
+                    if (settings.doodleNamesOn) return "杰作";
+                    return orig;
                 case "FALSE_KNIGHT_DREAM_SUB":
-                    if (settings.creditsOn) return "by MinishLink";
-                    return "";
+                    if (settings.creditsOn) return "作者：MinishLink";
+                    return orig;
                 /*case "HORNET_SUPER":
-                    return "";
+                    return orig;
                 case "HORNET_MAIN":
-                    return "";
+                    return orig;
                 case "HORNET_SUB":
                     return "";*/
                 case "MEGA_MOSS_SUPER":
-                    return "Massive";
+                    return orig;
                 case "MEGA_MOSS_MAIN":
-                    return "Moss Charger";
+                    return orig;
                 case "MEGA_MOSS_SUB":
-                    if (settings.creditsOn) return "by flame-shadow";
-                    return "";
+                    if (settings.creditsOn) return "作者：flame-shadow";
+                    return orig;
                 case "FLUKEMARM_SUPER":
-                    return "";
+                    return orig;
                 case "FLUKEMARM_MAIN":
-                    if (settings.doodleNamesOn) return "Mommy Anime";
-                    return "Flukemarm";
+                    if (settings.doodleNamesOn) return "动漫妈妈";
+                    return orig;
                 case "FLUKEMARM_SUB":
-                    if (settings.creditsOn) return "by Failed Vessel";
-                    return "";
+                    if (settings.creditsOn) return "作者：Failed Vessel";
+                    return orig;
                 case "MANTIS_LORDS_SUPER":
-                    return "Mantis";
+                    return orig;
                 case "MANTIS_LORDS_MAIN":
-                    return "Lords";
+                    return orig;
                 case "MANTIS_LORDS_SUB":
-                    if (settings.creditsOn) return "by flame-shadow";
-                    return "";
+                    if (settings.creditsOn) return "作者：flame-shadow";
+                    return orig;
                 case "SISTERS_SUPER":
-                    if (settings.creditsOn) return "Sisters";
-                    return "";
+                    if (settings.creditsOn) return "战斗姐妹";
+                    return orig;
                 case "SISTERS_MAIN":
-                    if (settings.creditsOn) return "Of Battle";
-                    return "Sisters";
+                    if (settings.creditsOn) return "";
+                    return orig;
                 case "SISTERS_SUB":
-                    if (settings.creditsOn) return "by flame-shadow";
-                    return "Of Battle";
+                    if (settings.creditsOn) return "作者：flame-shadow";
+                    return orig;
                 case "OBLOBBLES_SUPER":
-                    return "";
+                    return orig;
                 case "OBLOBBLES_MAIN":
-                    if (settings.doodleNamesOn) return "Doodlobles";
-                    return "Oblobbles";
+                    if (settings.doodleNamesOn) return "涂鸦罗布";
+                    return orig;
                 case "OBLOBBLES_SUB":
-                    if (settings.creditsOn) return "by Jex111";
-                    return "";
+                    if (settings.creditsOn) return "作者：Jex111";
+                    return orig;
                 case "HIVE_KNIGHT_SUPER":
-                    if (settings.creditsOn) return "Hive";
-                    return "";
+                    if (settings.creditsOn) return "蜂巢";
+                    return orig;
                 case "HIVE_KNIGHT_MAIN":
-                    if (settings.creditsOn) return "Knight";
-                    return "Hive";
+                    if (settings.creditsOn) return "骑士";
+                    return orig;
                 case "HIVE_KNIGHT_SUB":
-                    if (settings.creditsOn) return "by MTmerm";
-                    return "Knight";
+                    if (settings.creditsOn) return "作者：MTmerm";
+                    return orig;
                 case "INFECTED_KNIGHT_SUPER":
-                    if (settings.doodleNamesOn) return "Watercolor";
-                    return "Broken";
+                    if (settings.doodleNamesOn) return "水彩";
+                    return orig;
                 case "INFECTED_KNIGHT_MAIN":
-                    return "Vessel";
+                    return orig;
                 case "INFECTED_KNIGHT_SUB":
-                    if (settings.creditsOn) return "by Akivaq";
-                    return "";
+                    if (settings.creditsOn) return "作者：Akivaq";
+                    return orig;
                 case "INFECTED_KNIGHT_DREAM_SUPER":
-                    if (settings.doodleNamesOn) return "Watercolor";
-                    return "Lost";
+                    if (settings.doodleNamesOn) return "水彩";
+                    return orig;
                 case "INFECTED_KNIGHT_DREAM_MAIN":
-                    return "Kin";
+                    return orig;
                 case "INFECTED_KNIGHT_DREAM_SUB":
-                    if (settings.creditsOn) return "by Akivaq";
-                    return "";
+                    if (settings.creditsOn) return "作者：Akivaq";
+                    return orig;
                 case "MIMIC_SPIDER_SUPER":
-                    if (settings.doodleNamesOn) return "Sketch";
-                    return "";
+                    if (settings.doodleNamesOn) return "素描";
+                    return orig;
                 case "MIMIC_SPIDER_MAIN":
-                    return "Nosk";
+                    return orig;
                 case "MIMIC_SPIDER_SUB":
-                    if (settings.creditsOn) return "by MinishLink";
-                    return "";
+                    if (settings.creditsOn) return "作者：MinishLink";
+                    return orig;
                 case "COLLECTOR_SUPER":
-                    if (settings.doodleNamesOn) return "Art";
-                    return "The";
+                    if (settings.doodleNamesOn) return "艺术";
+                    return orig;
                 case "COLLECTOR_MAIN":
-                    return "Collector";
+                    return orig;
                 case "COLLECTOR_SUB":
-                    if (settings.creditsOn) return "by KaziVuri";
-                    return "";
+                    if (settings.creditsOn) return "作者：KaziVuri";
+                    return orig;
                 case "LOBSTER_LANCER_NC_SUPER":
-                    if (!settings.doodleNamesOn) return "God";
+                    if (!settings.doodleNamesOn) return orig;
                     if (!settings.creditsOn) return "";
-                    return "Sketch";
+                    return "素描";
                 case "LOBSTER_LANCER_C_SUPER":
-                    if (settings.doodleNamesOn) return "Sketch";
-                    return "God";
+                    if (settings.doodleNamesOn) return "素描";
+                    return orig;
                 case "LOBSTER_LANCER_NC_MAIN":
-                    if (settings.creditsOn) return "Tamer";
-                    return "Sketch";
+                    if (settings.creditsOn) return "驯服者";
+                    return "素描";
                 case "LOBSTER_LANCER_C_MAIN":
-                    return "Tamer";
+                    return "驯服者";
                 case "LOBSTER_LANCER_NC_SUB":
-                    if (settings.creditsOn) return "by Godfriend";
-                    return "Tamer";
+                    if (settings.creditsOn) return "作者：Godfriend";
+                    return "驯服者";
                 case "LOBSTER_LANCER_C_SUB":
-                    if (settings.creditsOn) return "by Godfriend";
+                    if (settings.creditsOn) return "作者：Godfriend";
                     return orig;
                 case "CRYSTAL_GUARDIAN_SUPER":
                     if (!settings.creditsOn) return "";
-                    if (!settings.doodleNamesOn) return "Crystal";
-                    return "Sketchy";
+                    if (!settings.doodleNamesOn) return orig;
+                    return "素描风";
                 case "CRYSTAL_GUARDIAN_MAIN":
-                    if (!settings.creditsOn) return "Sketchy";
-                    if (!settings.doodleNamesOn) return "Guardian";
+                    if (!settings.creditsOn) return "素描风";
+                    if (!settings.doodleNamesOn) return orig;
                     return "CG";
                 case "CRYSTAL_GUARDIAN_SUB":
-                    if (settings.creditsOn) return "by DaveyTheDuck";
+                    if (settings.creditsOn) return "作者：DaveyTheDuck";
                     return "CG";
                 case "ENRAGED_GUARDIAN_SUPER":
-                    if (settings.doodleNamesOn) return "Sketchy";
-                    return "Enraged";
+                    if (settings.doodleNamesOn) return "素描风";
+                    return orig;
                 case "ENRAGED_GUARDIAN_MAIN":
                     if (settings.doodleNamesOn) return "EG";
-                    return "Guardian";
+                    return orig;
                 case "ENRAGED_GUARDIAN_SUB":
-                    if (settings.creditsOn) return "by DaveyTheDuck";
-                    return "";
+                    if (settings.creditsOn) return "作者：DaveyTheDuck";
+                    return orig;
                 case "MEGA_JELLY_SUPER":
-                    if (settings.doodleNamesOn) return "Sketch";
-                    return "";
+                    if (settings.doodleNamesOn) return "素描";
+                    return orig;
                 case "MEGA_JELLY_MAIN":
-                    if (settings.doodleNamesOn) return "Uuwuu";
-                    return "Uumuu";
+                    if (settings.doodleNamesOn) return "乌乌乌";
+                    return orig;
                 case "MEGA_JELLY_SUB":
-                    if (settings.creditsOn) return "by AceiestArtist";
-                    return "";
+                    if (settings.creditsOn) return "作者：AceiestArtist";
+                    return orig;
                 case "TRAITOR_LORD_SUPER":
-                    if (settings.doodleNamesOn) return "Doodle";
-                    return "Traitor";
+                    if (settings.doodleNamesOn) return "涂鸦";
+                    return orig;
                 case "TRAITOR_LORD_MAIN":
-                    if (settings.doodleNamesOn) return "Traitor";
-                    return "Lord";
+                    if (settings.doodleNamesOn) return "叛徒";
+                    return orig;
                 case "TRAITOR_LORD_SUB":
-                    if (settings.creditsOn) return "by MTmerm";
-                    return "";
+                    if (settings.creditsOn) return "作者：MTmerm";
+                    return orig;
                 // GPZ
                 case "MAGE_KNIGHT_SUPER":
-                    if (settings.doodleNamesOn) return "Soul Warrior";
-                    return "Soul";
+                    if (settings.doodleNamesOn) return "灵魂战士";
+                    return orig;
                 case "MAGE_KNIGHT_MAIN":
-                    if (settings.doodleNamesOn) return "Lite";
-                    return "Warrior";
+                    if (settings.doodleNamesOn) return "轻量";
+                    return orig;
                 case "MAGE_KNIGHT_SUB":
-                    if (settings.creditsOn) return "by Akivaq";
-                    return "";
+                    if (settings.creditsOn) return "作者：Akivaq";
+                    return orig;
                 case "MAGE_LORD_SUPER":
-                    if (settings.doodleNamesOn) return "Doodle";
-                    return "Soul";
+                    if (settings.doodleNamesOn) return "涂鸦";
+                    return orig;
                 case "MAGE_LORD_MAIN":
-                    return "Master";
+                    return orig;
                 case "MAGE_LORD_SUB":
-                    if (settings.creditsOn) return "by Chaktis";
-                    return "";
+                    if (settings.creditsOn) return "作者：Chaktis";
+                    return orig;
                 case "MAGE_LORD_DREAM_SUPER":
-                    if (settings.doodleNamesOn) return "Doodle";
-                    return "Soul";
+                    if (settings.doodleNamesOn) return "涂鸦";
+                    return orig;
                 case "MAGE_LORD_DREAM_MAIN":
-                    return "Tyrant";
+                    return orig;
                 case "MAGE_LORD_DREAM_SUB":
-                    if (settings.creditsOn) return "by Chaktis";
-                    return "";
+                    if (settings.creditsOn) return "作者：Chaktis";
+                    return orig;
                 case "DUNG_DEFENDER_SUPER":
                     if (!settings.creditsOn) return "";
-                    if (!settings.doodleNamesOn) return "Dung";
-                    return "Doodle";
+                    if (!settings.doodleNamesOn) return orig;
+                    return orig;
                 case "DUNG_DEFENDER_MAIN":
-                    if (settings.creditsOn) return "Defender";
-                    return "Doodle";
+                    if (settings.creditsOn) return "守卫";
+                    return orig;
                 case "DUNG_DEFENDER_SUB":
-                    if (settings.creditsOn) return "by flame-shadow";
-                    return "Defender";
+                    if (settings.creditsOn) return "作者：flame-shadow";
+                    return orig;
                 case "WHITE_DEFENDER_SUPER":
                     if (!settings.creditsOn) return "";
-                    if (!settings.doodleNamesOn) return "White";
-                    return "Wite-Out";
+                    if (!settings.doodleNamesOn) return orig;
+                    return orig;
                 case "WHITE_DEFENDER_MAIN":
-                    if (settings.creditsOn) return "Defender";
-                    return "Wite-Out";
+                    if (settings.creditsOn) return "守卫";
+                    return orig;
                 case "WHITE_DEFENDER_SUB":
-                    if (settings.creditsOn) return "by RocketFire20";
-                    return "Defender";
+                    if (settings.creditsOn) return "作者：RocketFire20";
+                    return orig;
                 case "BLACK_KNIGHT_SUPER":
-                    if (settings.doodleNamesOn) return "Sharpie";
-                    return "Watcher";
+                    if (settings.doodleNamesOn) return "记号笔";
+                    return orig;
                 case "BLACK_KNIGHT_MAIN":
-                    return "Knight";
+                    return orig;
                 case "BLACK_KNIGHT_SUB":
-                    if (settings.creditsOn) return "by Dandy";
-                    return "";
+                    if (settings.creditsOn) return "作者：Dandy";
+                    return orig;
                 case "GH_NOEYES_NC_SUPER":
                 case "GH_NOEYES_C_SUPER":
                 //    return "";
@@ -440,7 +440,7 @@ namespace DoodleBosses
                     return orig;//"No Eyes";
                 case "GH_NOEYES_NC_SUB":
                 case "GH_NOEYES_C_SUB":
-                    if (settings.creditsOn) return "by Torny";
+                    if (settings.creditsOn) return "作者：Torny";
                     return orig;//"";
                 case "GH_MUMCAT_NC_SUPER":
                 case "GH_MUMCAT_C_SUPER":
@@ -450,116 +450,116 @@ namespace DoodleBosses
                     return orig;//"";
                 case "GH_MUMCAT_NC_SUB":
                 case "GH_MUMCAT_C_SUB":
-                    if (settings.creditsOn) return "by flame-shadow";
+                    if (settings.creditsOn) return "作者：flame-shadow";
                     return orig;//"";
                 case "GH_GALIEN_NC_SUPER":
                 case "GH_GALIEN_C_SUPER":
-                    return "";
+                    return orig;
                 case "GH_GALIEN_NC_MAIN":
                 case "GH_GALIEN_C_MAIN":
-                    if (settings.doodleNamesOn) return "Scrabblien";
-                    return "Galien";
+                    if (settings.doodleNamesOn) return "涂鸦里安";
+                    return orig;
                 case "GH_GALIEN_NC_SUB":
                 case "GH_GALIEN_C_SUB":
-                    if (settings.creditsOn) return "by Jex111";
+                    if (settings.creditsOn) return "作者：Jex111";
                     return orig;//"";
                 case "GH_MARKOTH_NC_SUPER":
                 case "GH_MARKOTH_C_SUPER":
-                    return "";
+                    return orig;
                 case "GH_MARKOTH_NC_MAIN":
                 case "GH_MARKOTH_C_MAIN":
-                    if (settings.doodleNamesOn) return "Doodlekoth";
-                    return "Markoth";
+                    if (settings.doodleNamesOn) return "涂鸦科斯";
+                    return orig;
                 case "GH_MARKOTH_NC_SUB":
                 case "GH_MARKOTH_C_SUB":
-                    if (settings.creditsOn) return "by Chaktis";
+                    if (settings.creditsOn) return "作者：Chaktis";
                     return orig;//"";
                 case "GH_XERO_NC_SUPER":
                 case "GH_XERO_C_SUPER":
-                    if (settings.doodleNamesOn) return "Watery";
-                    return "";
+                    if (settings.doodleNamesOn) return "水彩";
+                    return orig;
                 case "GH_XERO_NC_MAIN":
                 case "GH_XERO_C_MAIN":
-                    return "Xero";
+                    return orig;
                 case "GH_XERO_NC_SUB":
                 case "GH_XERO_C_SUB":
-                    if (settings.creditsOn) return "by flame-shadow";
+                    if (settings.creditsOn) return "作者：flame-shadow";
                     return orig;//"";
                 case "GH_ALADAR_NC_SUPER":
                 case "GH_ALADAR_C_SUPER":
-                    if (settings.doodleNamesOn) return "Anime";
-                    return "";
+                    if (settings.doodleNamesOn) return "动漫";
+                    return orig;
                 case "GH_ALADAR_NC_MAIN":
                 case "GH_ALADAR_C_MAIN":
-                    if (settings.doodleNamesOn) return "Protagonist";
-                    return "Gorb";
+                    if (settings.doodleNamesOn) return "主角";
+                    return orig;
                 case "GH_ALADAR_NC_SUB":
                 case "GH_ALADAR_C_SUB":
-                    if (settings.creditsOn) return "by FailedVessel";
+                    if (settings.creditsOn) return "作者：FailedVessel";
                     return orig;//"";
                 case "GH_HU_NC_SUPER":
                 case "GH_HU_C_SUPER":
-                    return "";
+                    return orig;
                 case "GH_HU_NC_MAIN":
                 case "GH_HU_C_MAIN":
-                    if (settings.doodleNamesOn) return "Pancake Man";
-                    return "Elder Hu";
+                    if (settings.doodleNamesOn) return "煎饼人";
+                    return orig;
                 case "GH_HU_NC_SUB":
                 case "GH_HU_C_SUB":
-                    if (settings.creditsOn) return "by RocketFire20";
+                    if (settings.creditsOn) return "作者：RocketFire20";
                     return orig;//"";
                 // Oro/Mato
                 case "PAINTMASTER_SUPER":
-                    if (settings.doodleNamesOn) return "Doodlemaster";
-                    return "Paintmaster";
+                    if (settings.doodleNamesOn) return "涂鸦大师";
+                    return orig;
                 case "PAINTMASTER_MAIN":
-                    return "Sheo";
+                    return orig;
                 case "PAINTMASTER_SUB":
-                    if (settings.creditsOn) return "by RocketFire20";
-                    return "";
+                    if (settings.creditsOn) return "作者：RocketFire20";
+                    return orig;
                 case "SLY_BOSS_SUPER":
-                    if (settings.doodleNamesOn) return "Pencilsage";
-                    return "Great Nailsage";
+                    if (settings.doodleNamesOn) return "铅笔贤者";
+                    return orig;
                 case "SLY_BOSS_MAIN":
-                    return "Sly";
+                    return orig;
                 case "SLY_BOSS_SUB":
-                    if (settings.creditsOn) return "by RiverRobot";
-                    return "";
+                    if (settings.creditsOn) return "作者：RiverRobot";
+                    return orig;
                 // PV
                 case "GRIMM_SUPER":
-                    if (settings.doodleNamesOn) return "Crayon Master";
-                    return "Troupe Master";
+                    if (settings.doodleNamesOn) return "蜡笔大师";
+                    return orig;
                 case "GRIMM_MAIN":
-                    return "Grimm";
+                    return orig;
                 case "GRIMM_SUB":
-                    if (settings.creditsOn) return "by MinishLink";
-                    return "";
+                    if (settings.creditsOn) return "作者：MinishLink";
+                    return orig;
                 case "NIGHTMARE_GRIMM_SUPER":
-                    if (settings.doodleNamesOn) return "Nightmare Crayon";
-                    return "Troupe Master";
+                    if (settings.doodleNamesOn) return "梦魇蜡笔";
+                    return orig;
                 case "NIGHTMARE_GRIMM_MAIN":
-                    return "Grimm";
+                    return orig;
                 case "NIGHTMARE_GRIMM_SUB":
-                    if (settings.creditsOn) return "by MinishLink";
-                    return "";
+                    if (settings.creditsOn) return "作者：MinishLink";
+                    return orig;
                 // AbsRad
                 case "ZOTE_SUPER":
-                    if (settings.doodleNamesOn) return "Off-hand";
-                    return "Zote";
+                    if (settings.doodleNamesOn) return "副手";
+                    return orig;
                 case "ZOTE_MAIN":
                     if (settings.doodleNamesOn) return "Zote";
-                    return "The Mighty";
+                    return orig;
                 case "ZOTE_SUB":
-                    if (settings.creditsOn) return "by flame-shadow";
-                    return "";
+                    if (settings.creditsOn) return "作者：flame-shadow";
+                    return orig;
                 // Rad
                 case "HOLLOW_KNIGHT_SUPER":
-                    if (settings.creditsOn) return "Wisp0468 presents";
-                    return "The";
+                    if (settings.creditsOn) return "Wisp0468 出品";
+                    return orig;
                 case "HOLLOW_KNIGHT_MAIN":
-                    if (!settings.creditsOn) return "Doodle Knight";
-                    if (!settings.doodleNamesOn) return "The Hollow Knight";
-                    return "The Doodle Knight";
+                    if (!settings.creditsOn) return "涂鸦骑士";
+                    if (!settings.doodleNamesOn) return orig;
+                    return orig;
             }
 
 
