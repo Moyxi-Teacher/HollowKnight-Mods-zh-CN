@@ -12,7 +12,7 @@ namespace ExtraNotchesForExtraCharms
     {
         internal static ExtraNotchesForExtraCharms Instance;
 
-        public override string GetVersion() => "1.0.0.0";
+        public override string GetVersion() => "1.1.0.0";
 
         public ExtraNotchesForExtraCharms() : base("额外护符槽位") {}
 
@@ -106,7 +106,9 @@ namespace ExtraNotchesForExtraCharms
         }
 
         /// <summary>
-        /// Calculates the number of extra notches to add
+        /// 计算本次应额外增加的护符槽位数量。
+        /// 修改(2026-09-20)：只统计玩家**已经解锁**的额外护符，
+        /// 每解锁一个就增加 notchesPerCharm 个槽位；一个都没解锁则不增加。
         /// </summary>
         /// <returns></returns>
         private int GetExtraNotches()
@@ -115,10 +117,42 @@ namespace ExtraNotchesForExtraCharms
                                                                 BindingFlags.NonPublic | BindingFlags.Static);
             List<Sprite> customCharmList = (List<Sprite>)fieldInfo.GetValue(null);
             int maxCharms = customCharmList.Count;
-            int extraNotches = maxCharms / globalSettings.charmsPerNotch;
-            Log($"{maxCharms} modded charms -> {extraNotches} extra charm notches");
+
+            int unlocked = CountUnlockedModdedCharms(maxCharms);
+            int extraNotches = unlocked * globalSettings.notchesPerCharm;
+            Log($"已解锁 {unlocked}/{maxCharms} 个额外护符，每个 +{globalSettings.notchesPerCharm} 槽位 -> 共 {extraNotches} 个额外护符槽位");
 
             return extraNotches;
+        }
+
+        /// <summary>
+        /// 统计玩家已经解锁（获得）的额外护符数量。
+        /// 模组新增的护符编号从 41 开始（SFCore 的约定：第 i 个护符的编号是 41 + i），
+        /// 解锁状态记录在 PlayerData 的 gotCharm_41、gotCharm_42 …… 字段中。
+        /// 苍白宫廷、禅意护符等模组都按这个约定读写（部分模组用钩子映射到自己的存档字段）。
+        /// </summary>
+        /// <param name="maxCharms">模组新增的护符总数</param>
+        /// <returns></returns>
+        private int CountUnlockedModdedCharms(int maxCharms)
+        {
+            int unlocked = 0;
+            for (int i = 0; i < maxCharms; i++)
+            {
+                int charmId = 41 + i;
+                try
+                {
+                    if (PlayerData.instance.GetBool("gotCharm_" + charmId))
+                    {
+                        unlocked++;
+                    }
+                }
+                catch (Exception e)
+                {
+                    // 极少数护符没有对应的存档字段：按未解锁处理，不影响其余护符
+                    Log($"读取 gotCharm_{charmId} 失败，按未解锁处理：{e.Message}");
+                }
+            }
+            return unlocked;
         }
 
         #region Menu Options
@@ -129,7 +163,7 @@ namespace ExtraNotchesForExtraCharms
             return new List<IMenuMod.MenuEntry>
             {
                 new(toggleButtonEntry.Value.Name, toggleButtonEntry.Value.Values, "启用或禁用额外护符槽位功能。", toggleButtonEntry.Value.Saver, toggleButtonEntry.Value.Loader),
-                new("每护符槽位数", new[]{"1","2","3","4","5","6","7","8","9","10"}, "每个护符槽位可容纳的额外护符数量。", i => globalSettings.charmsPerNotch = i + 1, () => globalSettings.charmsPerNotch - 1)
+                new("每个护符增加的槽位数", new[]{"1","2","3","4","5","6","7","8","9","10"}, "每解锁一个额外护符，增加的护符槽位数量。", i => globalSettings.notchesPerCharm = i + 1, () => globalSettings.notchesPerCharm - 1)
             };
         }
         #endregion

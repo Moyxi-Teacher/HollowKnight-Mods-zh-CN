@@ -18,11 +18,11 @@ namespace ExtraNotchesForExtraCharms
             menu = new Menu("额外护符槽位", new Element[] { });
 
             // Populate main menu
-            menu.AddElement(new HorizontalOption("每护符槽位数",
-                                                    "每个护符槽位可容纳的额外护符数量",
+            menu.AddElement(new HorizontalOption("每个护符增加的槽位数",
+                                                    "每解锁一个额外护符，增加的护符槽位数量",
                                                     CostValues(),
-                                                    value => ExtraNotchesForExtraCharms.globalSettings.charmsPerNotch = value + 1,
-                                                    () => ExtraNotchesForExtraCharms.globalSettings.charmsPerNotch - 1));
+                                                    value => ExtraNotchesForExtraCharms.globalSettings.notchesPerCharm = value + 1,
+                                                    () => ExtraNotchesForExtraCharms.globalSettings.notchesPerCharm - 1));
 
             // Insert the menu into the overall menu
             menuScreen = menu.GetMenuScreen(modListMenu);

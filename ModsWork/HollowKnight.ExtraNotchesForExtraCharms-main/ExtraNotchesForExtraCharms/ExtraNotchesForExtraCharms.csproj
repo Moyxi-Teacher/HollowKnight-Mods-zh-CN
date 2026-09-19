@@ -13,9 +13,9 @@
     <Product>ExtraNotchesForExtraCharms</Product>
     <Description>A Hollow Knight Mod</Description>
     <Copyright>Copyright ©  2026</Copyright>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <InformationalVersion>1.0.0.0汉化</InformationalVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <InformationalVersion>1.1.0.0汉化</InformationalVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <LangVersion>12</LangVersion>
   </PropertyGroup>
