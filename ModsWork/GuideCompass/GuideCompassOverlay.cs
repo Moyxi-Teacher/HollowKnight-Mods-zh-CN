@@ -320,67 +320,43 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
 
         GuideStep step = GuideRoute.Steps[_stepIndex];
         bool routeComplete = _routeFinished || (_stepIndex == GuideRoute.Steps.Length - 1 && step.IsComplete());
-        float width = Mathf.Min(580f * scale, Screen.width - 24f);
-        float padding = 14f * scale;
-        float contentWidth = width - padding * 2f;
-        float textWidth = Mathf.Max(80f, contentWidth);
-        string title = $"{GuideRoute.Title} · {_stepIndex + 1}/{GuideRoute.Steps.Length}";
-        string tag = step.Optional ? "（可选）" : "";
-        string target = routeComplete ? "本期路线已完成" : $"下一目标：{step.Target}{tag}";
-        Vector2 direction = GetCurrentDirection(step, out bool targetTracked);
-        string status = routeComplete
-            ? "已取得城市纹章。"
-            : GetCompassStatus(step, targetTracked);
-        string description = routeComplete
-            ? status
-            : $"{status}\n{GetCompletionDescription(step)}";
-        string footer = "F6 上一步   F7 下一步   F8 隐藏/显示";
-        float gap = 6f * scale;
-        float titleHeight = _titleStyle.CalcHeight(new GUIContent(title), textWidth);
-        float targetHeight = _bodyStyle.CalcHeight(new GUIContent(target), textWidth);
-        float descriptionHeight = _smallStyle.CalcHeight(new GUIContent(description), textWidth);
-        float footerHeight = _smallStyle.CalcHeight(new GUIContent(footer), textWidth);
-        float height = padding * 2f + titleHeight + targetHeight + descriptionHeight + footerHeight + gap * 3f;
-        Rect panel = new(Screen.width - width - 12f, 14f, width, height);
+        float width = Mathf.Min(360f * scale, Screen.width * 0.42f);
+        float contentX = Mathf.Max(12f, Screen.width - width - 48f * scale);
+        float contentWidth = Mathf.Max(80f, width - 12f * scale);
+        float top = 48f * scale;
+        float gap = 12f * scale;
+        string target = routeComplete
+            ? "本期路线已完成"
+            : step.Target + (step.Optional ? "（可选）" : "");
+        string hint = routeComplete ? "本期路线已完成。" : step.Hint;
+        float headerHeight = _titleStyle.CalcHeight(new GUIContent("现阶段建议："), contentWidth);
+        float targetHeight = _bodyStyle.CalcHeight(new GUIContent(target), contentWidth);
+        float hintHeight = _smallStyle.CalcHeight(new GUIContent(hint), contentWidth);
 
-        float y = panel.y + padding;
-        GUI.Label(new Rect(panel.x + padding, y, textWidth, titleHeight), title, _titleStyle);
-        y += titleHeight + gap;
-        GUI.Label(new Rect(panel.x + padding, y, textWidth, targetHeight), target, _bodyStyle);
-        y += targetHeight + gap;
-        GUI.Label(new Rect(panel.x + padding, y, textWidth, descriptionHeight), description, _smallStyle);
-        y += descriptionHeight + gap;
-        GUI.Label(new Rect(panel.x + padding, y, textWidth, footerHeight), footer, _smallStyle);
+        DrawSectionHeader(new Rect(contentX, top, contentWidth, headerHeight), "当前任务：", scale);
+        float targetY = top + headerHeight + 5f * scale;
+        GUI.Label(new Rect(contentX, targetY, contentWidth, targetHeight), target, _bodyStyle);
+        float hintHeaderY = targetY + targetHeight + gap;
+        DrawSectionHeader(new Rect(contentX, hintHeaderY, contentWidth, headerHeight), "现阶段建议：", scale);
+        float hintY = hintHeaderY + headerHeight + 5f * scale;
+        GUI.Label(new Rect(contentX, hintY, contentWidth, hintHeight), hint, _smallStyle);
 
+        Vector2 direction = GetCurrentDirection(step, out _);
         DrawArrowBesideHero(direction, scale);
     }
 
-    private string GetCompletionDescription(GuideStep step)
+    private void DrawSectionHeader(Rect rect, string label, float scale)
     {
-        string trigger = step.CompletionKind switch
-        {
-            GuideCompletionKind.Manual => "完成此操作后按 F7 继续；也可随时按 F6 返回上一步。",
-            GuideCompletionKind.Interaction => step.InteractionKind switch
-            {
-                GuideInteractionKind.GeoPickup => "钱袋完全打碎后自动推进；拾取普通吉欧不会推进。",
-                GuideInteractionKind.BreakableWall => "隐藏墙被打破后自动推进。",
-                GuideInteractionKind.BlueBlood => "打破蓝血容器后自动推进。",
-                GuideInteractionKind.LoreMarker => "与印记互动并触发提示后自动推进。",
-                _ => "完成指定交互后自动推进。",
-            },
-            GuideCompletionKind.Location => $"到达 {step.SceneName} 的指定坐标（半径 {step.ArrivalRadius:0.0}）后自动推进。",
-            GuideCompletionKind.PlayerDataBool => $"游戏标志 {step.PlayerDataKey} 变为 true 后自动推进。",
-            GuideCompletionKind.PlayerDataBoolAny => $"任一游戏标志变为 true 后自动推进：{string.Join(" / ", step.PlayerDataKeys)}。",
-            GuideCompletionKind.PlayerDataBoolAll => $"以下游戏标志全部变为 true 后自动推进：{string.Join("、", step.PlayerDataKeys)}。",
-            GuideCompletionKind.PlayerDataIntAtLeast => $"游戏数据 {step.PlayerDataKey} 达到 {step.RequiredIntValue} 后自动推进。",
-            GuideCompletionKind.FsmStateEntered => $"场景/对象的 FSM「{step.FsmName}」进入「{step.FsmStateName}」后自动推进。",
-            GuideCompletionKind.NearbyTarget => $"进入目标「{string.Join(" / ", step.TargetObjectKeywords)}」附近后自动推进。",
-            GuideCompletionKind.EnemyKills => $"击败 {step.RequiredKillCount} 个指定敌人后自动推进（当前 { _killCount}/{step.RequiredKillCount}）。",
-            GuideCompletionKind.BenchUse => "使用长椅并触发存档点后自动推进。",
-            _ => "完成条件未配置。",
-        };
-
-        return $"{trigger}\n{step.Hint}";
+        Color previousColor = GUI.color;
+        GUI.color = new Color(1f, 1f, 1f, 0.72f);
+        GUI.DrawTexture(
+            new Rect(rect.x, rect.y + rect.height * 0.58f, 40f * scale, Mathf.Max(1f, scale)),
+            Texture2D.whiteTexture);
+        GUI.color = previousColor;
+        GUI.Label(
+            new Rect(rect.x + 48f * scale, rect.y, rect.width - 48f * scale, rect.height),
+            label,
+            _titleStyle);
     }
 
     private Vector2 GetCurrentDirection(GuideStep step, out bool targetTracked)
@@ -408,20 +384,6 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
 
         targetTracked = false;
         return step.Direction;
-    }
-
-    private string GetCompassStatus(GuideStep step, bool targetTracked)
-    {
-        if (step.CompletionKind == GuideCompletionKind.Location)
-        {
-            return targetTracked
-                ? "指南针实时指向本场景的攻略坐标。"
-                : "目标位于其他场景，当前显示路线提示方向。";
-        }
-
-        return targetTracked
-            ? $"指南针实时指向：{_cachedTargetName}。"
-            : "当前场景未发现目标对象，显示路线提示方向。";
     }
 
     private bool TryGetTrackedTarget(GuideStep step, out Vector2 position)
@@ -575,23 +537,22 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         _styleScale = scale;
         _titleStyle = new GUIStyle(GUI.skin.label)
         {
-            fontSize = Mathf.RoundToInt(20f * scale),
-            fontStyle = FontStyle.Bold,
+            fontSize = Mathf.RoundToInt(18f * scale),
             wordWrap = true,
-            normal = { textColor = new Color(1f, 0.78f, 0.24f, 0.9f) }
+            normal = { textColor = new Color(0.94f, 0.95f, 0.98f, 0.9f) }
         };
         _bodyStyle = new GUIStyle(GUI.skin.label)
         {
-            fontSize = Mathf.RoundToInt(19f * scale),
+            fontSize = Mathf.RoundToInt(21f * scale),
             fontStyle = FontStyle.Bold,
             wordWrap = true,
-            normal = { textColor = new Color(1f, 1f, 1f, 0.9f) }
+            normal = { textColor = new Color(0.2f, 0.88f, 0.42f, 0.95f) }
         };
         _smallStyle = new GUIStyle(GUI.skin.label)
         {
-            fontSize = Mathf.RoundToInt(16f * scale),
+            fontSize = Mathf.RoundToInt(17f * scale),
             wordWrap = true,
-            normal = { textColor = new Color(0.86f, 0.9f, 0.94f, 0.82f) }
+            normal = { textColor = new Color(0.92f, 0.93f, 0.96f, 0.9f) }
         };
     }
 
