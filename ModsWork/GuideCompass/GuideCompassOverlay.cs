@@ -9,7 +9,6 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
     private const KeyCode NextKey = KeyCode.F7;
     private const KeyCode ToggleKey = KeyCode.F8;
 
-    private static readonly Color AccentColor = new(1f, 0.78f, 0.24f, 1f);
     private static readonly Vector2 ArrowUpperTail = new(4f, 4f);
     private static readonly Vector2 ArrowTip = new(28f, 16f);
     private static readonly Vector2 ArrowLowerTail = new(4f, 28f);
@@ -526,7 +525,7 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         float size = 19f * scale;
         Rect rect = new(
             heroScreenPosition.x - size / 2f,
-            Screen.height - heroScreenPosition.y - size - 16f * scale,
+            Screen.height - heroScreenPosition.y - size - 30f * scale,
             size,
             size);
         DrawArrow(rect, direction);
@@ -566,7 +565,7 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         };
 
         Color shadowColor = new(0.025f, 0.03f, 0.04f, 0.9f);
-        Color arrowColor = new(1f, 0.78f, 0.12f, 1f);
+        Color arrowColor = new(0.24f, 1f, 0.42f, 1f);
         const int samplesPerAxis = 4;
         const float arrowStrokeRadius = 1.7f;
         const float shadowStrokeRadius = 2.8f;

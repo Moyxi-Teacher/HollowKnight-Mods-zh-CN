@@ -366,7 +366,7 @@ internal sealed class GuideStep
 internal static class GuideRoute
 {
     public const string Title = "第一期：十字路口的小骑士";
-    public const int ProgressVersion = 2;
+    public const int ProgressVersion = 3;
 
     public static readonly GuideStep[] Steps =
     {
@@ -377,8 +377,10 @@ internal static class GuideRoute
             .WithTargetObjects("Breakable Wall", "Break Wall", "Door"),
         BirthplaceGeoBag("左侧平台的小钱袋", "爬上平台将隐藏小钱袋完全打碎。", Vector2.left),
         BirthplaceInteraction("塔顶左角的蓝血", "回到塔形平台并一路向上，打破蓝血容器并取得蓝血。", GuideInteractionKind.BlueBlood, Vector2.up),
-        BirthplaceGeoBag("塌陷平台墙缝里的小钱袋", "拿完蓝血后往右，等塔平台塌陷；将左侧墙缝里的小钱袋完全打碎。", Vector2.right),
-        BirthplaceGeoBag("尖刺平台右下方的小钱袋", "落下并向右越过尖刺平台，将右下角的小钱袋完全打碎。", Vector2.down),
+        BirthplaceGeoBag(
+            "隐藏小钱袋（尖刺平台右下角）",
+            "塔平台会塌陷。打碎前一个钱袋后下来，向右越过有尖刺的平台；继续往右下角寻找并完全打碎出现的小钱袋。",
+            Vector2.right + Vector2.down),
         GuideStep.WhenPlayerDataBoolIsTrue(
             "取得亡者之怒护符（可选）",
             "从尖刺平台下劈落到下方区域并取得亡者之怒护符；也可按 F7 跳过。",
