@@ -621,6 +621,16 @@
             Event raised when a skin is set
             </summary>
         </member>
+        <member name="E:CustomKnight.SkinManager.OnSkinTexturesLoaded">
+            <summary>
+            Event raised after all textures for the current skin have been loaded and applied.
+            </summary>
+        </member>
+        <member name="M:CustomKnight.SkinManager.GetLoadedTextureForCurrentSkin(System.String)">
+            <summary>
+            Gets a texture already loaded for the current skin, or null if it has not been loaded.
+            </summary>
+        </member>
         <member name="M:CustomKnight.SkinManager.AddSkin(CustomKnight.ISelectableSkin)">
             <summary>
                 Add a skin to the skin list provided by an external mod.

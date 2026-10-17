@@ -27,6 +27,8 @@ Steam/steamapps/common/Hollow Knight/hollow_knight_Data/Managed/Mods/
 本 DLL 为**汉化版**，模组在游戏内模组列表中的显示名已翻译为中文。
 汉化版本号标记为「汉化」后缀，便于识别。如遇兼容性问题，请备份原版 DLL 后替换。
 
+启用自定义小骑士的平滑贴图加载时，皮肤 `HPBar` 文件夹内的 7 张血条贴图会紧随 `Knight.png` 加载，并在加载完成后复用。
+
 ## 中文翻译
 
 本模组为所有敌人和 Boss 添加可自定义的血条。

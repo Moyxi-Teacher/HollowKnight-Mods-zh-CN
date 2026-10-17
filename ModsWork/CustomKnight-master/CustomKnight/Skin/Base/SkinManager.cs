@@ -25,6 +25,13 @@ namespace CustomKnight
         public static Dictionary<string, Skinable> Skinables = new()
         {
             {Knight.NAME,new Knight()},
+            {"HPBar/bg",new HPBarTexture("bg")},
+            {"HPBar/mg",new HPBarTexture("mg")},
+            {"HPBar/fg",new HPBarTexture("fg")},
+            {"HPBar/ol",new HPBarTexture("ol")},
+            {"HPBar/bossbg",new HPBarTexture("bossbg")},
+            {"HPBar/bossfg",new HPBarTexture("bossfg")},
+            {"HPBar/bossol",new HPBarTexture("bossol")},
             {Sprint.NAME,new Sprint()},
             {Unn.NAME,new Unn()},
             {Shade.NAME,new Shade()},
@@ -199,6 +206,32 @@ namespace CustomKnight
         /// Event raised when a skin is set
         /// </summary>
         public static event EventHandler<EventArgs> OnSetSkin;
+        /// <summary>
+        /// Event raised after all textures for the current skin have been loaded and applied.
+        /// </summary>
+        public static event EventHandler<EventArgs> OnSkinTexturesLoaded;
+
+        internal static void NotifySkinTexturesLoaded()
+        {
+            OnSkinTexturesLoaded?.Invoke(CustomKnight.Instance, new EventArgs());
+        }
+
+        /// <summary>
+        /// Gets a texture already loaded for the current skin, or null if it has not been loaded.
+        /// </summary>
+        public static Texture2D GetLoadedTextureForCurrentSkin(string fileName)
+        {
+            var currentSkin = GetCurrentSkin();
+            if (currentSkin == null
+                || !TextureCache.skinTextureCache.TryGetValue(currentSkin.GetId(), out var skinCache)
+                || !skinCache.TryGetValue(fileName, out var texture)
+                || texture.missing)
+            {
+                return null;
+            }
+
+            return texture.tex;
+        }
 
         private static GameObject _inv;
         internal static GameObject inv

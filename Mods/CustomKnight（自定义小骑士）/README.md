@@ -2,11 +2,12 @@
 
 - **模组原名**：Custom Knight
 - **版本**：3.5.0汉化
-- **目标**：汉化模组显示名、游戏内菜单文本，启用平滑加载优先 Knight.png 加载
+- **目标**：汉化模组显示名、游戏内菜单文本，启用平滑加载优先加载 Knight.png 和怪物血条贴图
 - **汉化内容**：
   - 模组显示名（`GetName()` / `GetMenuButtonText()`）→ 自定义小骑士
   - 菜单文本 → 中文
   - 平滑加载模式：Knight.png 解码后立即 Apply 到主角，不等其余上百张贴图全部就绪
+  - 怪物血条联动：HPBar 下 7 张贴图紧随 Knight.png 加载；平滑加载完成后由 Enemy HP Bar 复用已解码贴图
 - **不改动项**：源码引用、HK Mod API 调用、BepInEx 相关逻辑、平滑加载协程结构
 - **Assembly 一致性**：InformationalVersion=3.5.0汉化，AssemblyVersion=3.5.0
 - **语言回退**：无额外语言包，代码内嵌中文字符串

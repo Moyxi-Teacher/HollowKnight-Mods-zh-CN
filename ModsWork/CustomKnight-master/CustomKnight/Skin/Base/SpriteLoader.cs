@@ -281,6 +281,7 @@
                 kvp.Value.Apply();
             }
             texRoutineRunning = false;
+            SkinManager.NotifySkinTexturesLoaded();
         }
 
 

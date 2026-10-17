@@ -90,25 +90,64 @@ public class EnemyHPBar : Mod, IGlobalSettings<Settings>, ICustomMenuMod, IToggl
 		AnimJson.SaveAllConfig();
 
 	}
-	private void AddCKHandle() => SkinManager.OnSetSkin += ChangeSkin;
+	private void AddCKHandle() {
+		SkinManager.OnSetSkin += ChangeSkin;
+		SkinManager.OnSkinTexturesLoaded += ChangeSkinAfterTexturesLoaded;
+	}
 
 	private void ChangeSkin(object sender, EventArgs e) {
-		if (Directory.Exists(Path.Combine(SkinManager.GetCurrentSkin().getSwapperPath(), "HPBar"))) {
-			if (globalSettings.Intergration) {
-				EnemyHPBar.CompleteImage(Path.Combine(SkinManager.GetCurrentSkin().getSwapperPath(), "HPBar"));
-				bossol = HPBarCreateSprite(ResourceLoader.GetCKImage(HPBAR_BOSSOL));
-				bossbg = HPBarCreateSprite(ResourceLoader.GetCKImage(HPBAR_BOSSBG));
-				bossfg = HPBarCreateSprite(ResourceLoader.GetCKImage(HPBAR_BOSSFG));
-				ol = HPBarCreateSprite(ResourceLoader.GetCKImage(HPBAR_OL));
-				fg = HPBarCreateSprite(ResourceLoader.GetCKImage(HPBAR_FG));
-				mg = HPBarCreateSprite(ResourceLoader.GetCKImage(HPBAR_MG));
-				bg = HPBarCreateSprite(ResourceLoader.GetCKImage(HPBAR_BG));
-				AnimJson.animDict.Clear();
-				AnimJson.Initdic();
-				AnimJson.LoadAllConfig();
-				AnimJson.SaveAllConfig();
-			}
+		if (!globalSettings.Intergration) {
+			return;
 		}
+
+		string skinPath = Path.Combine(SkinManager.GetCurrentSkin().getSwapperPath(), "HPBar");
+		if (!Directory.Exists(skinPath)) {
+			return;
+		}
+
+		CompleteImage(skinPath);
+		if (!global::CustomKnight.CustomKnight.GlobalSettings.SmoothTextureLoading) {
+			ApplyCKSkin(useLoadedTextures: false);
+		}
+	}
+
+	private void ChangeSkinAfterTexturesLoaded(object sender, EventArgs e) {
+		string skinPath = Path.Combine(SkinManager.GetCurrentSkin().getSwapperPath(), "HPBar");
+		if (globalSettings.Intergration
+			&& global::CustomKnight.CustomKnight.GlobalSettings.SmoothTextureLoading
+			&& Directory.Exists(skinPath)) {
+			CompleteImage(skinPath);
+			ApplyCKSkin(useLoadedTextures: true);
+		}
+	}
+
+	private static void ApplyCKSkin(bool useLoadedTextures) {
+		bossol = GetCKSprite(HPBAR_BOSSOL, useLoadedTextures);
+		bossbg = GetCKSprite(HPBAR_BOSSBG, useLoadedTextures);
+		bossfg = GetCKSprite(HPBAR_BOSSFG, useLoadedTextures);
+		ol = GetCKSprite(HPBAR_OL, useLoadedTextures);
+		fg = GetCKSprite(HPBAR_FG, useLoadedTextures);
+		mg = GetCKSprite(HPBAR_MG, useLoadedTextures);
+		bg = GetCKSprite(HPBAR_BG, useLoadedTextures);
+		AnimJson.animDict.Clear();
+		AnimJson.Initdic();
+		AnimJson.LoadAllConfig();
+		AnimJson.SaveAllConfig();
+	}
+
+	private static Sprite GetCKSprite(string fileName, bool useLoadedTexture) {
+		Texture2D texture = useLoadedTexture
+			? SkinManager.GetLoadedTextureForCurrentSkin($"HPBar/{fileName}")
+			: null;
+		if (texture == null) {
+			return HPBarCreateSprite(ResourceLoader.GetCKImage(fileName));
+		}
+
+		texture.anisoLevel = 0;
+		return Sprite.Create(
+			texture,
+			new Rect(0, 0, texture.width, texture.height),
+			new Vector2(0.5f, 0.5f));
 	}
 	public static string GetCKPath() => Directory.Exists(Path.Combine(SkinManager.GetCurrentSkin().getSwapperPath(), "HPBar"))
 			? Path.Combine(SkinManager.GetCurrentSkin().getSwapperPath(), "HPBar")
@@ -290,6 +329,10 @@ public class EnemyHPBar : Mod, IGlobalSettings<Settings>, ICustomMenuMod, IToggl
 		ModHooks.OnReceiveDeathEventHook -= Instance_OnReceiveDeathEventHook;
 		UnityEngine.SceneManagement.SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
 		On.PlayMakerFSM.Start -= ModifyFSM;
+		if (InstallCK) {
+			SkinManager.OnSetSkin -= ChangeSkin;
+			SkinManager.OnSkinTexturesLoaded -= ChangeSkinAfterTexturesLoaded;
+		}
 		globalSettings.CurrentSkin = EnemyHPBar.CurrentSkin.GetId();
 		foreach (GameObject go in UObject.FindObjectsOfType<GameObject>()) {
 			if (go.GetComponent<HPBar>() is HPBar hpBar) {
