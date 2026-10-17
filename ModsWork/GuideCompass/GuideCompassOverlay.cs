@@ -24,7 +24,6 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
     private GUIStyle _bodyStyle;
     private GUIStyle _smallStyle;
     private float _styleScale;
-    private float _nextTargetScanTime;
     private int _cachedTargetStep = -1;
     private string _cachedTargetScene;
     private string _cachedTargetName;
@@ -202,7 +201,8 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
             return;
         }
 
-        if (GuideRoute.Steps[instance._stepIndex].MatchesInteractionEvent(fsm, eventName))
+        if (GuideRoute.Steps[instance._stepIndex].MatchesInteractionEvent(fsm, eventName)
+            && instance.IsCurrentTargetObject(fsm.gameObject))
         {
             instance.AdvanceStep();
         }
@@ -396,7 +396,6 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         string sceneName = GameManager.instance.sceneName;
         if (_cachedTargetStep != _stepIndex
             || !string.Equals(_cachedTargetScene, sceneName, System.StringComparison.Ordinal)
-            || Time.unscaledTime >= _nextTargetScanTime
             || _cachedTarget == null
             || !_cachedTarget.gameObject.activeInHierarchy)
         {
@@ -418,8 +417,6 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         _cachedTargetName = null;
         _cachedTargetStep = _stepIndex;
         _cachedTargetScene = sceneName;
-        _nextTargetScanTime = Time.unscaledTime + 0.75f;
-
         if (string.IsNullOrEmpty(sceneName) || HeroController.instance == null)
         {
             return;
@@ -428,6 +425,7 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         int bestMatchScore = 0;
         float bestDistance = float.MaxValue;
         Vector2 heroPosition = HeroController.instance.transform.position;
+        HashSet<int> matchedTargets = new();
         foreach (GameObject candidateObject in UnityEngine.Object.FindObjectsOfType<GameObject>())
         {
             if (!string.Equals(candidateObject.scene.name, sceneName, System.StringComparison.Ordinal))
@@ -435,9 +433,13 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
                 continue;
             }
 
-            Transform candidate = candidateObject.transform;
-            int matchScore = GetTargetMatchScore(candidate, step.TargetObjectKeywords);
-            if (matchScore == 0)
+            if (!TryGetTargetMatch(candidateObject.transform, step.TargetObjectKeywords, out Transform candidate, out int matchScore)
+                || IsDestroyedGeoRock(candidate))
+            {
+                continue;
+            }
+
+            if (!matchedTargets.Add(candidate.GetInstanceID()))
             {
                 continue;
             }
@@ -463,11 +465,47 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         }
     }
 
-    private static int GetTargetMatchScore(Transform candidate, string[] keywords)
+    private static bool TryGetTargetMatch(
+        Transform candidate,
+        string[] keywords,
+        out Transform matchedTarget,
+        out int bestScore)
     {
-        int score = GetTargetMatchScore(candidate.name, keywords);
-        PlayMakerFSM fsm = candidate.GetComponent<PlayMakerFSM>();
-        return fsm == null ? score : Mathf.Max(score, GetTargetMatchScore(fsm.FsmName, keywords));
+        matchedTarget = null;
+        bestScore = 0;
+        for (Transform current = candidate; current != null; current = current.parent)
+        {
+            int score = GetTargetMatchScore(current.name, keywords);
+            PlayMakerFSM fsm = current.GetComponent<PlayMakerFSM>();
+            if (fsm != null)
+            {
+                score = Mathf.Max(score, GetTargetMatchScore(fsm.FsmName, keywords));
+            }
+
+            if (score > bestScore)
+            {
+                bestScore = score;
+                matchedTarget = current;
+            }
+        }
+
+        return matchedTarget != null;
+    }
+
+    private static bool IsDestroyedGeoRock(Transform candidate)
+    {
+        for (Transform current = candidate; current != null; current = current.parent)
+        {
+            PlayMakerFSM fsm = current.GetComponent<PlayMakerFSM>();
+            if (fsm != null
+                && string.Equals(fsm.FsmName, "Geo Rock", System.StringComparison.Ordinal)
+                && string.Equals(fsm.Fsm.ActiveStateName, "Destroy", System.StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private static int GetTargetMatchScore(string objectName, string[] keywords)
@@ -525,7 +563,7 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         float size = 19f * scale;
         Rect rect = new(
             heroScreenPosition.x - size / 2f,
-            Screen.height - heroScreenPosition.y - size - 30f * scale,
+            Screen.height - heroScreenPosition.y - size - 42f * scale,
             size,
             size);
         DrawArrow(rect, direction);
