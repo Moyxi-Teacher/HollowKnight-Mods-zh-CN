@@ -371,10 +371,10 @@ internal static class GuideRoute
     public static readonly GuideStep[] Steps =
     {
         BirthplaceGeoBag("出生地左侧暗门里的小钱袋", "从出生地往左直接进入暗门，将里面的小钱袋完全打碎。", Vector2.left),
-        BirthplaceInteraction("白王印记", "跳上平台后向上、再往左；与白王印记互动并看到提示。", GuideInteractionKind.LoreMarker, Vector2.up + Vector2.left)
-            .WithTargetObjects("Lore Tablet", "LoreTablet", "Tablet"),
+        BirthplaceInteraction("白王印记", "跳上平台后向上、再往左；与白王印记互动并看到提示。", GuideInteractionKind.LoreMarker, Vector2.up)
+            .WithTargetObjects("Lore Tablet", "LoreTablet"),
         BirthplaceInteraction("打破左侧的门", "继续往左攻击并打破挡路的门。", GuideInteractionKind.BreakableWall, Vector2.left)
-            .WithTargetObjects("Breakable Wall", "Break Wall", "Door"),
+            .WithTargetObjects("Breakable Wall", "Break Wall"),
         BirthplaceGeoBag("左侧平台的小钱袋", "爬上平台将隐藏小钱袋完全打碎。", Vector2.left),
         BirthplaceInteraction("塔顶左角的蓝血", "回到塔形平台并一路向上，打破蓝血容器并取得蓝血。", GuideInteractionKind.BlueBlood, Vector2.up),
         BirthplaceGeoBag(
