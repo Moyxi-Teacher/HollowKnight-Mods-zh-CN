@@ -445,21 +445,11 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
             }
 
             float distance = ((Vector2)candidate.position - heroPosition).sqrMagnitude;
-            Vector2 offset = (Vector2)candidate.position - heroPosition;
-            float alignment = step.Direction.sqrMagnitude > 0.01f && offset.sqrMagnitude > 0.01f
-                ? Vector2.Dot(step.Direction, offset.normalized)
-                : 0f;
-            if (alignment < -0.25f)
-            {
-                continue;
-            }
-
-            int directionalScore = matchScore + Mathf.RoundToInt(alignment * 100f);
-            if (directionalScore > bestMatchScore || (directionalScore == bestMatchScore && distance < bestDistance))
+            if (matchScore > bestMatchScore || (matchScore == bestMatchScore && distance < bestDistance))
             {
                 _cachedTarget = candidate;
                 _cachedTargetName = candidate.name;
-                bestMatchScore = directionalScore;
+                bestMatchScore = matchScore;
                 bestDistance = distance;
             }
         }
