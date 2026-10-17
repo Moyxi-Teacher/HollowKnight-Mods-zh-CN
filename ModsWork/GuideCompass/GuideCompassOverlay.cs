@@ -428,21 +428,36 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
             return;
         }
 
-        int bestMatchScore = 0;
+        int bestTargetScore = int.MinValue;
         float bestDistance = float.MaxValue;
-        int fallbackMatchScore = 0;
-        float fallbackDistance = float.MaxValue;
-        Transform fallbackTarget = null;
         Vector2 heroPosition = HeroController.instance.transform.position;
         HashSet<int> matchedTargets = new();
-        foreach (GameObject candidateObject in UnityEngine.Object.FindObjectsOfType<GameObject>())
+        Transform[] candidates;
+        if (step.CompletionKind == GuideCompletionKind.Interaction
+            && step.InteractionKind == GuideInteractionKind.GeoPickup)
         {
-            if (!string.Equals(candidateObject.scene.name, sceneName, System.StringComparison.Ordinal))
+            GeoRock[] geoRocks = UnityEngine.Object.FindObjectsOfType<GeoRock>();
+            candidates = new Transform[geoRocks.Length];
+            for (int i = 0; i < geoRocks.Length; i++)
             {
-                continue;
+                candidates[i] = geoRocks[i].transform;
             }
+        }
+        else
+        {
+            PlayMakerFSM[] fsms = UnityEngine.Object.FindObjectsOfType<PlayMakerFSM>();
+            candidates = new Transform[fsms.Length];
+            for (int i = 0; i < fsms.Length; i++)
+            {
+                candidates[i] = fsms[i].transform;
+            }
+        }
 
-            if (!TryGetTargetMatch(candidateObject.transform, step.TargetObjectKeywords, out Transform candidate, out int matchScore)
+        foreach (Transform candidateObject in candidates)
+        {
+            if (candidateObject == null
+                || !string.Equals(candidateObject.gameObject.scene.name, sceneName, System.StringComparison.Ordinal)
+                || !TryGetTargetMatch(candidateObject, step.TargetObjectKeywords, out Transform candidate, out int matchScore)
                 || IsDestroyedGeoRock(candidate))
             {
                 continue;
@@ -454,38 +469,23 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
             }
 
             float distance = ((Vector2)candidate.position - heroPosition).sqrMagnitude;
-            if (matchScore > fallbackMatchScore
-                || (matchScore == fallbackMatchScore && distance < fallbackDistance))
-            {
-                fallbackTarget = candidate;
-                fallbackMatchScore = matchScore;
-                fallbackDistance = distance;
-            }
-
             Vector2 offset = (Vector2)candidate.position - heroPosition;
             float alignment = step.Direction.sqrMagnitude > 0.01f && offset.sqrMagnitude > 0.01f
                 ? Vector2.Dot(step.Direction, offset.normalized)
                 : 0f;
-            if (step.CompletionKind == GuideCompletionKind.Interaction
-                && step.InteractionKind == GuideInteractionKind.GeoPickup
-                && alignment < -0.15f)
+            if (step.Direction.sqrMagnitude > 0.01f && alignment < -0.25f)
             {
                 continue;
             }
 
-            if (matchScore > bestMatchScore || (matchScore == bestMatchScore && distance < bestDistance))
+            int targetScore = matchScore + Mathf.RoundToInt(alignment * 100);
+            if (targetScore > bestTargetScore || (targetScore == bestTargetScore && distance < bestDistance))
             {
                 _cachedTarget = candidate;
                 _cachedTargetName = candidate.name;
-                bestMatchScore = matchScore;
+                bestTargetScore = targetScore;
                 bestDistance = distance;
             }
-        }
-
-        if (_cachedTarget == null)
-        {
-            _cachedTarget = fallbackTarget;
-            _cachedTargetName = fallbackTarget == null ? null : fallbackTarget.name;
         }
     }
 
