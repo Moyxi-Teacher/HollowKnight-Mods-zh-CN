@@ -24,6 +24,7 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
     private GUIStyle _bodyStyle;
     private GUIStyle _smallStyle;
     private float _styleScale;
+    private float _nextTargetScanTime;
     private int _cachedTargetStep = -1;
     private string _cachedTargetScene;
     private string _cachedTargetName;
@@ -394,10 +395,14 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         }
 
         string sceneName = GameManager.instance.sceneName;
-        if (_cachedTargetStep != _stepIndex
-            || !string.Equals(_cachedTargetScene, sceneName, System.StringComparison.Ordinal)
-            || _cachedTarget == null
-            || !_cachedTarget.gameObject.activeInHierarchy)
+        bool contextChanged = _cachedTargetStep != _stepIndex
+            || !string.Equals(_cachedTargetScene, sceneName, System.StringComparison.Ordinal);
+        bool targetUnavailable = _cachedTarget == null || !_cachedTarget.gameObject.activeInHierarchy;
+        if (contextChanged)
+        {
+            UpdateTrackedTarget(step, sceneName);
+        }
+        else if (targetUnavailable && Time.unscaledTime >= _nextTargetScanTime)
         {
             UpdateTrackedTarget(step, sceneName);
         }
@@ -417,6 +422,7 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         _cachedTargetName = null;
         _cachedTargetStep = _stepIndex;
         _cachedTargetScene = sceneName;
+        _nextTargetScanTime = Time.unscaledTime + 2f;
         if (string.IsNullOrEmpty(sceneName) || HeroController.instance == null)
         {
             return;
