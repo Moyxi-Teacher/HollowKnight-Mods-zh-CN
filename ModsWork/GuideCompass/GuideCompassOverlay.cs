@@ -424,6 +424,9 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
 
         int bestMatchScore = 0;
         float bestDistance = float.MaxValue;
+        int fallbackMatchScore = 0;
+        float fallbackDistance = float.MaxValue;
+        Transform fallbackTarget = null;
         Vector2 heroPosition = HeroController.instance.transform.position;
         HashSet<int> matchedTargets = new();
         foreach (GameObject candidateObject in UnityEngine.Object.FindObjectsOfType<GameObject>())
@@ -445,6 +448,25 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
             }
 
             float distance = ((Vector2)candidate.position - heroPosition).sqrMagnitude;
+            if (matchScore > fallbackMatchScore
+                || (matchScore == fallbackMatchScore && distance < fallbackDistance))
+            {
+                fallbackTarget = candidate;
+                fallbackMatchScore = matchScore;
+                fallbackDistance = distance;
+            }
+
+            Vector2 offset = (Vector2)candidate.position - heroPosition;
+            float alignment = step.Direction.sqrMagnitude > 0.01f && offset.sqrMagnitude > 0.01f
+                ? Vector2.Dot(step.Direction, offset.normalized)
+                : 0f;
+            if (step.CompletionKind == GuideCompletionKind.Interaction
+                && step.InteractionKind == GuideInteractionKind.GeoPickup
+                && alignment < -0.15f)
+            {
+                continue;
+            }
+
             if (matchScore > bestMatchScore || (matchScore == bestMatchScore && distance < bestDistance))
             {
                 _cachedTarget = candidate;
@@ -452,6 +474,12 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
                 bestMatchScore = matchScore;
                 bestDistance = distance;
             }
+        }
+
+        if (_cachedTarget == null)
+        {
+            _cachedTarget = fallbackTarget;
+            _cachedTargetName = fallbackTarget == null ? null : fallbackTarget.name;
         }
     }
 
