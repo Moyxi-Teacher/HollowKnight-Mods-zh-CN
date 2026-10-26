@@ -26,7 +26,10 @@ public sealed class GuideCompassMod : Mod, ICustomMenuMod, ILocalSettings<GuideC
         GuideCompassOverlay.LoadProgress(
             compatibleRoute ? _localSettings.StepIndex : 0,
             compatibleRoute && _localSettings.RouteFinished,
-            compatibleRoute ? _localSettings.KillCount : 0);
+            compatibleRoute ? _localSettings.KillCount : 0,
+            _localSettings.HasTutorialLoreMarkerPosition,
+            _localSettings.TutorialLoreMarkerX,
+            _localSettings.TutorialLoreMarkerY);
     }
 
     public GuideCompassLocalSettings OnSaveLocal()
@@ -55,12 +58,14 @@ public sealed class GuideCompassMod : Mod, ICustomMenuMod, ILocalSettings<GuideC
         On.PlayMakerFSM.SetState += OnPlayMakerFsmSetState;
         On.PlayMakerFSM.SendEvent += OnPlayMakerFsmSendEvent;
         On.HutongGames.PlayMaker.Fsm.EnterState += OnFsmEnterState;
+        On.AudioEvent.SpawnAndPlayOneShot += OnAudioEventSpawnAndPlayOneShot;
         On.Breakable.Break += OnBreakableBroken;
         On.HealthCocoon.SetBroken += OnHealthCocoonBroken;
         On.HealthManager.Die += OnHealthManagerDie;
         On.PlayerData.SetBenchRespawn_RespawnMarker_string_int += OnBenchRested;
         On.PlayerData.SetBenchRespawn_string_string_bool += OnBenchRested;
         On.PlayerData.SetBenchRespawn_string_string_int_bool += OnBenchRested;
+        On.GameManager.FinishedEnteringScene += OnFinishedEnteringScene;
         _overlayObject = new GameObject("GuideCompassOverlay");
         Object.DontDestroyOnLoad(_overlayObject);
         _overlayObject.AddComponent<GuideCompassOverlay>();
@@ -71,12 +76,14 @@ public sealed class GuideCompassMod : Mod, ICustomMenuMod, ILocalSettings<GuideC
         On.PlayMakerFSM.SetState -= OnPlayMakerFsmSetState;
         On.PlayMakerFSM.SendEvent -= OnPlayMakerFsmSendEvent;
         On.HutongGames.PlayMaker.Fsm.EnterState -= OnFsmEnterState;
+        On.AudioEvent.SpawnAndPlayOneShot -= OnAudioEventSpawnAndPlayOneShot;
         On.Breakable.Break -= OnBreakableBroken;
         On.HealthCocoon.SetBroken -= OnHealthCocoonBroken;
         On.HealthManager.Die -= OnHealthManagerDie;
         On.PlayerData.SetBenchRespawn_RespawnMarker_string_int -= OnBenchRested;
         On.PlayerData.SetBenchRespawn_string_string_bool -= OnBenchRested;
         On.PlayerData.SetBenchRespawn_string_string_int_bool -= OnBenchRested;
+        On.GameManager.FinishedEnteringScene -= OnFinishedEnteringScene;
         if (_overlayObject != null)
         {
             Object.Destroy(_overlayObject);
@@ -99,7 +106,7 @@ public sealed class GuideCompassMod : Mod, ICustomMenuMod, ILocalSettings<GuideC
         string eventName)
     {
         orig(self, eventName);
-        GuideCompassOverlay.NotifyFsmEventSent(self, eventName);
+        GuideCompassOverlay.NotifyLoreMarkerFsmEvent(self, eventName);
     }
 
     private static void OnFsmEnterState(
@@ -112,6 +119,16 @@ public sealed class GuideCompassMod : Mod, ICustomMenuMod, ILocalSettings<GuideC
         {
             GuideCompassOverlay.NotifyFsmStateEntered(self.FsmComponent, state.Name);
         }
+    }
+
+    private static void OnAudioEventSpawnAndPlayOneShot(
+        On.AudioEvent.orig_SpawnAndPlayOneShot orig,
+        ref AudioEvent self,
+        AudioSource source,
+        Vector3 position)
+    {
+        orig(ref self, source, position);
+        GuideCompassOverlay.NotifyLoreMarkerActivated(self, source, position);
     }
 
     private static void OnBreakableBroken(
@@ -176,5 +193,13 @@ public sealed class GuideCompassMod : Mod, ICustomMenuMod, ILocalSettings<GuideC
     {
         orig(self, spawnMarker, sceneName, spawnType, facingRight);
         GuideCompassOverlay.NotifyBenchRested(sceneName);
+    }
+
+    private static void OnFinishedEnteringScene(
+        On.GameManager.orig_FinishedEnteringScene orig,
+        GameManager self)
+    {
+        orig(self);
+        GuideCompassOverlay.NotifySceneEntered();
     }
 }

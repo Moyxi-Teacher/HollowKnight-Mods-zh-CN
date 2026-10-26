@@ -33,7 +33,8 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="Satchel">
-      <HintPath>$(HollowKnightRefs)\Mods\Satchel（依赖库）\Satchel.dll</HintPath>
+      <HintPath Condition="Exists('$(HollowKnightRefs)\Mods\Satchel（依赖库）\Satchel.dll')">$(HollowKnightRefs)\Mods\Satchel（依赖库）\Satchel.dll</HintPath>
+      <HintPath Condition="!Exists('$(HollowKnightRefs)\Mods\Satchel（依赖库）\Satchel.dll')">$(HollowKnightRefs)\Mods\Disabled\Satchel（依赖库）\Satchel.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine">
@@ -42,6 +43,10 @@
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(HollowKnightRefs)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AudioModule">
+      <HintPath>$(HollowKnightRefs)\UnityEngine.AudioModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
@@ -60,5 +65,9 @@
       <HintPath>$(HollowKnightRefs)\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="verify\**\obj\**\*.cs" />
   </ItemGroup>
 </Project>

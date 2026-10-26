@@ -33,6 +33,7 @@ internal sealed class GuideStep
     public bool Optional { get; }
     public GuideCompletionKind CompletionKind { get; private set; }
     public string SceneName { get; private set; }
+    public string TeleportSceneName { get; private set; }
     public Vector2 Position { get; private set; }
     public float ArrivalRadius { get; private set; }
     public string PlayerDataKey { get; private set; }
@@ -256,13 +257,6 @@ internal sealed class GuideStep
                 return false;
             }
 
-            if (InteractionKind == GuideInteractionKind.LoreMarker
-                && MatchesTargetObject(fsm.gameObject)
-                && IsLoreInteractionState(stateName))
-            {
-                return true;
-            }
-
             if (InteractionKind == GuideInteractionKind.GeoPickup)
             {
                 return string.Equals(fsm.FsmName, "Geo Rock", System.StringComparison.Ordinal)
@@ -309,15 +303,6 @@ internal sealed class GuideStep
             && !string.IsNullOrEmpty(sceneName);
     }
 
-    public bool MatchesInteractionEvent(PlayMakerFSM fsm, string eventName)
-    {
-        return CompletionKind == GuideCompletionKind.Interaction
-            && InteractionKind == GuideInteractionKind.LoreMarker
-            && fsm != null
-            && MatchesTargetObject(fsm.gameObject)
-            && IsLoreInteractionState(eventName);
-    }
-
     private bool MatchesTargetObject(GameObject source)
     {
         if (source == null || TargetObjectKeywords == null || TargetObjectKeywords.Length == 0)
@@ -340,20 +325,21 @@ internal sealed class GuideStep
         return false;
     }
 
-    private static bool IsLoreInteractionState(string name)
-    {
-        return !string.IsNullOrEmpty(name)
-            && (name.IndexOf("inspect", System.StringComparison.OrdinalIgnoreCase) >= 0
-                || name.IndexOf("interact", System.StringComparison.OrdinalIgnoreCase) >= 0
-                || name.IndexOf("read", System.StringComparison.OrdinalIgnoreCase) >= 0
-                || name.IndexOf("activate", System.StringComparison.OrdinalIgnoreCase) >= 0
-                || name.IndexOf("convo", System.StringComparison.OrdinalIgnoreCase) >= 0);
-    }
-
     public GuideStep WithTargetObjects(params string[] keywords)
     {
         TargetObjectKeywords = keywords;
         return this;
+    }
+
+    public GuideStep WithTeleportSceneName(string sceneName)
+    {
+        TeleportSceneName = sceneName;
+        return this;
+    }
+
+    public string GetTeleportSceneName()
+    {
+        return string.IsNullOrEmpty(TeleportSceneName) ? SceneName : TeleportSceneName;
     }
 
     public GuideStep SkipWhenAnyPlayerDataBoolIsTrue(params string[] playerDataKeys)
@@ -366,25 +352,30 @@ internal sealed class GuideStep
 internal static class GuideRoute
 {
     public const string Title = "第一期：十字路口的小骑士";
-    public const int ProgressVersion = 4;
+    public const int ProgressVersion = 5;
+    public static readonly Vector2 TutorialLoreMarkerPosition = new(55.16f, 34.15f);
 
     public static readonly GuideStep[] Steps =
     {
-        BirthplaceGeoBag("出生地左侧暗门里的小钱袋", "从出生地往左直接进入暗门，将里面的小钱袋完全打碎。", Vector2.left),
+        BirthplaceGeoBag("出生地左侧暗门里的小钱袋", "从出生地往左直接进入暗门，将里面的小钱袋完全打碎。", Vector2.left, "Geo Rock 3"),
         BirthplaceInteraction("白王印记", "跳上平台后向上、再往左；与白王印记互动并看到提示。", GuideInteractionKind.LoreMarker, Vector2.up)
-            .WithTargetObjects("Lore Tablet", "LoreTablet"),
+            .WithTargetObjects("Inspect Region Ghost")
+            .WithTeleportSceneName("Tutorial_01"),
         BirthplaceInteraction("打破左侧的门", "继续往左攻击并打破挡路的门。", GuideInteractionKind.BreakableWall, Vector2.left)
-            .WithTargetObjects("Breakable Wall", "Break Wall"),
-        BirthplaceGeoBag("左侧平台的小钱袋", "爬上平台将隐藏小钱袋完全打碎。", Vector2.left),
+            .WithTargetObjects("Breakable Wall", "Break Wall")
+            .WithTeleportSceneName("Tutorial_01"),
+        BirthplaceGeoBag("左侧平台的小钱袋", "爬上平台将隐藏小钱袋完全打碎。", Vector2.left, "Geo Rock 2"),
         BirthplaceInteraction("塔顶左角的蓝血", "回到塔形平台并一路向上，打破蓝血容器并取得蓝血。", GuideInteractionKind.BlueBlood, Vector2.up),
         BirthplaceGeoBag(
             "塔平台左侧墙缝里的小钱袋",
             "塔平台会塌陷。拿到蓝血后等平台塌下，前往塔平台左侧墙壁的缝隙，将里面的小钱袋完全打碎。",
-            Vector2.left),
+            Vector2.left,
+            "Geo Rock 1"),
         BirthplaceGeoBag(
             "尖刺平台右下角的小钱袋",
             "打碎墙缝里的钱袋后下来，向右越过有尖刺的平台，再将右下角出现的小钱袋完全打碎。",
-            Vector2.right + Vector2.down),
+            Vector2.right + Vector2.down,
+            "Geo Rock 1 (1)"),
         GuideStep.WhenPlayerDataBoolIsTrue(
             "取得亡者之怒护符（可选）",
             "从尖刺平台下劈落到下方区域并取得亡者之怒护符；也可按 F7 跳过。",
@@ -395,26 +386,30 @@ internal static class GuideRoute
             "从出生地沿捷径离开，完成信仰之跃抵达山脚小镇；可跳过的出生地目标会自动略过。",
             "visitedDirtmouth",
             direction: Vector2.right)
-            .WithTargetObjects("Dirtmouth"),
+            .WithTargetObjects("Dirtmouth")
+            .WithTeleportSceneName("Town"),
         GuideStep.WhenPlayerDataBoolIsTrue(
             "查看黑卵圣殿",
             "从德特茅斯水井下到遗忘十字路口，再往右进入黑卵圣殿；存档记录后自动推进。",
             "eggTempleVisited",
             direction: Vector2.down)
-            .WithTargetObjects("Black Egg", "Egg Temple"),
+            .WithTargetObjects("Black Egg", "Egg Temple")
+            .WithTeleportSceneName("Crossroads_50"),
         GuideStep.NearTarget(
             "到达虫爷爷的位置",
             "离开圣殿后一路往左到头，进入虫爷爷房间；到达房间即可完成，不要求对话。继续主线前准备至少 46 吉欧。",
-            null,
+            "Town",
             3f,
             Vector2.left,
-            "Elderbug"),
+            "Elderbug")
+            .WithTeleportSceneName("Town"),
         GuideStep.WhenPlayerDataBoolIsTrue(
             "购买遗忘十字路地图",
             "离开虫爷爷房间后往下寻找制图师 Cornifer 并购买地图；购买标志出现后自动推进。",
             "mapCrossroads",
             direction: Vector2.left)
-            .WithTargetObjects("Cornifer"),
+            .WithTargetObjects("Cornifer")
+            .WithTeleportSceneName("Crossroads_33"),
         GuideStep.WhenEnemiesAreDefeated(
             "击败酸水路上的大型敌人",
             "从地图区域往下进入左侧岔路，穿过酸水并击败大型敌人，再前往最左侧的幼虫罐。",
@@ -428,8 +423,18 @@ internal static class GuideRoute
             1,
             direction: Vector2.left)
             .WithTargetObjects("Grub"),
-        GeoBagStep("车站旁的小钱袋", "救出幼虫后一直往右到鹿角虫车站标志，再往上将隐藏小钱袋完全打碎。", Vector2.up, optional: true),
-        WallStep("车站标志上方的隐藏墙", "打破车站标志上方的隐藏墙，然后穿过墙往右、再往下进入温泉。", Vector2.up, optional: true),
+        GeoBagStep("车站旁的钱袋（1/3）", "依次打碎车站附近三个钱袋；当前目标按完整对象名精确指引。", Vector2.up, optional: true)
+            .WithTargetObjects("Geo Rock 1 (1)")
+            .WithTeleportSceneName("Crossroads_07"),
+        GeoBagStep("车站旁的钱袋（2/3）", "继续打碎车站附近的第二个钱袋；当前目标按完整对象名精确指引。", Vector2.up, optional: true)
+            .WithTargetObjects("Geo Rock 1 (2)")
+            .WithTeleportSceneName("Crossroads_07"),
+        GeoBagStep("车站旁的钱袋（3/3）", "打碎车站附近最后一个钱袋，完成这组三个目标。", Vector2.up, optional: true)
+            .WithTargetObjects("Geo Rock 1")
+            .WithTeleportSceneName("Crossroads_07"),
+        WallStep("车站标志上方的隐藏墙", "打破车站标志上方的隐藏墙，然后穿过墙往右、再往下进入温泉。", Vector2.up, optional: true)
+            .WithTargetObjects("Breakable Wall_Silhouette")
+            .WithTeleportSceneName("Crossroads_07"),
         GuideStep.WhenBenchIsUsed("在温泉长椅休息", "进入温泉并使用长椅存档回血；之后离开温泉继续向右。", Vector2.right),
         GuideStep.WhenEnemiesAreDefeated(
             "击败三只阿斯匹德",
@@ -437,7 +442,9 @@ internal static class GuideRoute
             3,
             Vector2.right,
             "Aspid"),
-        GeoBagStep("穿过陷阱后的钱袋", "打开门后向右越过陷阱和小怪，将当前路线上的目标钱袋完全打碎。", Vector2.right, optional: true),
+        GeoBagStep("穿过陷阱后的钱袋", "打开门后向右越过陷阱和小怪，将当前路线上的目标钱袋完全打碎。", Vector2.right, optional: true)
+            .WithTargetObjects("Geo Rock 2")
+            .WithTeleportSceneName("Crossroads_01"),
         GuideStep.WhenPlayerDataBoolIsTrue(
             "开启遗忘十字路车站",
             "向右找到鹿角虫车站并进入站内，支付吉欧开启遗忘十字路口车站。",
@@ -463,7 +470,9 @@ internal static class GuideRoute
             direction: Vector2.up)
             .WithTargetObjects("Iselda"),
         GuideStep.WhenBenchIsUsed("回遗忘十字路口坐长椅", "乘车返回遗忘十字路口，在长椅存档并更新地图，然后出门往下再往左。", Vector2.down),
-        GeoBagStep("格鲁兹之母附近的小钱袋", "从车站区域往下再往左，路暂未开放；先打碎附近可选小钱袋，再继续向右。", Vector2.left, optional: true),
+        GeoBagStep("格鲁兹之母附近的小钱袋", "从车站区域往下再往左，路暂未开放；先打碎附近可选小钱袋，再继续向右。", Vector2.left, optional: true)
+            .WithTargetObjects("Geo Rock 1")
+            .WithTeleportSceneName("Crossroads_27"),
         GuideStep.WhenPlayerDataBoolIsTrue(
             "击败格鲁兹之母",
             "继续向右触发格鲁兹之母战斗；留意连续上下撞击，击败后还会出现七只小苍蝇。",
@@ -483,7 +492,8 @@ internal static class GuideRoute
             2,
             direction: Vector2.up)
             .WithTargetObjects("Grub"),
-        WallStep("幼虫区域的隐藏墙", "救出第二只幼虫后上行离开，遇到持盾小怪可用下劈处理；往左跳上平台并打破隐藏墙。", Vector2.left),
+        WallStep("幼虫区域的隐藏墙", "救出第二只幼虫后上行离开，遇到持盾小怪可用下劈处理；往左跳上平台并打破隐藏墙。", Vector2.left)
+            .WithTargetObjects("Breakable Wall"),
         GuideStep.WhenPlayerDataIntReaches(
             "救出第三只幼虫",
             "进入隐藏墙后的区域，打破幼虫罐并救出第三只幼虫。",
@@ -510,12 +520,16 @@ internal static class GuideRoute
             "hasCityKey",
             direction: Vector2.left)
             .WithTargetObjects("City Crest", "City Key"),
-        GeoBagStep("假骑士左侧的大钱袋", "取得城市纹章后到左边将大钱袋完全打碎；之后往左再向上离开本期路线。", Vector2.left, optional: true),
+        GeoBagStep("假骑士左侧的大钱袋", "取得城市纹章后到左边将大钱袋完全打碎；之后往左再向上离开本期路线。", Vector2.left, optional: true)
+            .WithTargetObjects("Geo Rock 1")
+            .WithTeleportSceneName("Crossroads_10"),
     };
 
-    private static GuideStep BirthplaceGeoBag(string target, string hint, Vector2 direction)
+    private static GuideStep BirthplaceGeoBag(string target, string hint, Vector2 direction, string objectName)
     {
         return GeoBagStep(target, hint, direction)
+            .WithTargetObjects(objectName)
+            .WithTeleportSceneName("Tutorial_01")
             .SkipWhenAnyPlayerDataBoolIsTrue("gotCharm_6", "visitedDirtmouth");
     }
 
@@ -526,6 +540,7 @@ internal static class GuideRoute
         Vector2 direction)
     {
         return GuideStep.WhenInteractionOccurs(target, hint, interactionKind, direction, optional: true)
+            .WithTeleportSceneName("Tutorial_01")
             .SkipWhenAnyPlayerDataBoolIsTrue("gotCharm_6", "visitedDirtmouth");
     }
 

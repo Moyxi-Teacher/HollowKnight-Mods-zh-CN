@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace GuideCompass;
@@ -8,6 +9,7 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
     private const KeyCode PreviousKey = KeyCode.F6;
     private const KeyCode NextKey = KeyCode.F7;
     private const KeyCode ToggleKey = KeyCode.F8;
+    private const KeyCode TeleportToTargetKey = KeyCode.F9;
 
     private static readonly Vector2 ArrowUpperTail = new(4f, 4f);
     private static readonly Vector2 ArrowTip = new(28f, 16f);
@@ -18,11 +20,14 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
     private static bool _loadedRouteFinished;
     private static int _loadedKillCount;
     private static bool _hasLoadedProgress;
+    private static Vector2? _observedTutorialLoreMarkerPosition;
+    private static readonly HashSet<string> LoggedLoreDiagnostics = new();
 
     private Texture2D _arrowTexture;
     private GUIStyle _titleStyle;
     private GUIStyle _bodyStyle;
     private GUIStyle _smallStyle;
+    private GUIStyle _shortcutStyle;
     private float _styleScale;
     private float _nextTargetScanTime;
     private int _cachedTargetStep = -1;
@@ -35,6 +40,10 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
     private bool _visible = true;
     private bool _routeFinished;
     private bool _restorePending = true;
+    private bool _pendingTeleport;
+    private int _pendingTeleportStepIndex = -1;
+    private string _pendingTeleportScene;
+    private float _pendingTeleportStartedAt;
 
     public static GuideCompassOverlay Instance { get; private set; }
 
@@ -54,6 +63,19 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
 
     private void Update()
     {
+        if (_pendingTeleport)
+        {
+            if (Time.realtimeSinceStartup - _pendingTeleportStartedAt > 120f)
+            {
+                Modding.Logger.Log("[攻略指南针] 跨场景传送超时：场景尚未完成加载，已取消待执行传送。");
+                ClearPendingTeleport();
+            }
+            else
+            {
+                return;
+            }
+        }
+
         if (HeroController.instance == null || GameManager.instance == null)
         {
             return;
@@ -87,8 +109,169 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         {
             _visible = !_visible;
         }
+        else if (Input.GetKeyDown(TeleportToTargetKey))
+        {
+            TeleportToCurrentTarget();
+        }
 
         TryAdvanceIfComplete();
+    }
+
+    private void TeleportToCurrentTarget()
+    {
+        GuideStep step = GuideRoute.Steps[_stepIndex];
+        string targetScene = step.GetTeleportSceneName();
+        string currentScene = GameManager.instance.sceneName;
+        if (!string.IsNullOrEmpty(targetScene)
+            && !string.Equals(currentScene, targetScene, System.StringComparison.Ordinal))
+        {
+            BeginCrossSceneTeleport(targetScene);
+            return;
+        }
+
+        Vector2 targetPosition;
+        if (step.CompletionKind == GuideCompletionKind.Location)
+        {
+            if (!string.Equals(currentScene, step.SceneName, System.StringComparison.Ordinal))
+            {
+                Modding.Logger.Log($"[攻略指南针] 无法传送：目标位于场景 {step.SceneName}，当前场景为 {GameManager.instance.sceneName}。");
+                return;
+            }
+
+            targetPosition = step.Position;
+        }
+        else if (!TryGetTrackedTarget(step, out targetPosition))
+        {
+            Modding.Logger.Log($"[攻略指南针] 无法传送：当前目标“{step.Target}”没有可定位的场景坐标。");
+            return;
+        }
+
+        TeleportHeroToTarget(step, targetPosition);
+    }
+
+    private void BeginCrossSceneTeleport(string targetScene)
+    {
+        if (_pendingTeleport)
+        {
+            Modding.Logger.Log("[攻略指南针] 已有跨场景传送正在执行；请等待它完成后再按 F9。");
+            return;
+        }
+
+        _pendingTeleport = true;
+        _pendingTeleportStepIndex = _stepIndex;
+        _pendingTeleportScene = targetScene;
+        _pendingTeleportStartedAt = Time.realtimeSinceStartup;
+        Modding.Logger.Log($"[攻略指南针] 正在加载目标场景“{targetScene}”，加载完成后将重新定位“{GuideRoute.Steps[_stepIndex].Target}”并传送。");
+        GameManager.instance.BeginSceneTransition(new GameManager.SceneLoadInfo
+        {
+            SceneName = targetScene,
+            EntryGateName = string.Empty,
+            Visualization = GameManager.SceneLoadVisualizations.Default,
+        });
+    }
+
+    internal static void NotifySceneEntered()
+    {
+        GuideCompassOverlay instance = Instance;
+        if (instance == null || !instance._pendingTeleport)
+        {
+            return;
+        }
+
+        if (GameManager.instance == null
+            || !string.Equals(
+                GameManager.instance.sceneName,
+                instance._pendingTeleportScene,
+                System.StringComparison.Ordinal))
+        {
+            Modding.Logger.Log(
+                $"[攻略指南针] 跨场景传送已取消：加载完成的场景与目标场景“{instance._pendingTeleportScene}”不一致。");
+            instance.ClearPendingTeleport();
+            return;
+        }
+
+        instance.StartCoroutine(instance.CompletePendingTeleport());
+    }
+
+    private IEnumerator CompletePendingTeleport()
+    {
+        int stepIndex = _pendingTeleportStepIndex;
+        string targetScene = _pendingTeleportScene;
+        yield return new WaitForSecondsRealtime(0.25f);
+
+        if (!_pendingTeleport)
+        {
+            yield break;
+        }
+
+        if (_stepIndex != stepIndex)
+        {
+            Modding.Logger.Log("[攻略指南针] 跨场景传送已取消：加载期间当前攻略目标发生变化。");
+            ClearPendingTeleport();
+            yield break;
+        }
+
+        if (GameManager.instance == null
+            || !string.Equals(GameManager.instance.sceneName, targetScene, System.StringComparison.Ordinal))
+        {
+            Modding.Logger.Log($"[攻略指南针] 跨场景传送失败：当前未处于目标场景“{targetScene}”。");
+            ClearPendingTeleport();
+            yield break;
+        }
+
+        GuideStep step = GuideRoute.Steps[stepIndex];
+        Vector2 targetPosition;
+        bool targetResolved;
+        if (step.CompletionKind == GuideCompletionKind.Location)
+        {
+            targetResolved = string.Equals(step.SceneName, targetScene, System.StringComparison.Ordinal);
+            targetPosition = step.Position;
+        }
+        else
+        {
+            ResetCurrentTarget();
+            targetResolved = TryGetTrackedTarget(step, out targetPosition);
+        }
+
+        if (!targetResolved)
+        {
+            Modding.Logger.Log(
+                $"[攻略指南针] 跨场景传送失败：场景“{targetScene}”加载完成，但无法唯一定位目标“{step.Target}”。");
+            ClearPendingTeleport();
+            yield break;
+        }
+
+        ClearPendingTeleport();
+        TeleportHeroToTarget(step, targetPosition);
+    }
+
+    private void ClearPendingTeleport()
+    {
+        _pendingTeleport = false;
+        _pendingTeleportStepIndex = -1;
+        _pendingTeleportScene = null;
+        _pendingTeleportStartedAt = 0f;
+    }
+
+    private static void TeleportHeroToTarget(GuideStep step, Vector2 targetPosition)
+    {
+        HeroController hero = HeroController.instance;
+        if (hero == null)
+        {
+            Modding.Logger.Log($"[攻略指南针] 无法传送：当前目标“{step.Target}”已定位，但骑士对象不可用。");
+            return;
+        }
+
+        Vector2 destination = targetPosition + Vector2.up * 1.5f;
+        hero.transform.position = new Vector3(destination.x, destination.y, hero.transform.position.z);
+        Rigidbody2D body = hero.GetComponent<Rigidbody2D>();
+        if (body != null)
+        {
+            body.velocity = Vector2.zero;
+        }
+
+        Modding.Logger.Log(
+            $"[攻略指南针] 已传送到当前目标“{step.Target}”附近：({destination.x:F2}, {destination.y:F2})。");
     }
 
     internal static void ResetProgress()
@@ -106,11 +289,20 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         Instance._restorePending = false;
     }
 
-    internal static void LoadProgress(int stepIndex, bool routeFinished, int killCount)
+    internal static void LoadProgress(
+        int stepIndex,
+        bool routeFinished,
+        int killCount,
+        bool hasLoreMarkerPosition,
+        float loreMarkerX,
+        float loreMarkerY)
     {
         _loadedStepIndex = stepIndex;
         _loadedRouteFinished = routeFinished;
         _loadedKillCount = killCount;
+        _observedTutorialLoreMarkerPosition = hasLoreMarkerPosition
+            ? new Vector2(loreMarkerX, loreMarkerY)
+            : null;
 
         GuideCompassOverlay instance = Instance;
         if (instance == null)
@@ -130,13 +322,22 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
     {
         GuideCompassOverlay instance = Instance;
         return instance == null
-            ? new GuideCompassLocalSettings { RouteVersion = GuideRoute.ProgressVersion }
+            ? new GuideCompassLocalSettings
+            {
+                RouteVersion = GuideRoute.ProgressVersion,
+                HasTutorialLoreMarkerPosition = _observedTutorialLoreMarkerPosition.HasValue,
+                TutorialLoreMarkerX = _observedTutorialLoreMarkerPosition?.x ?? 0f,
+                TutorialLoreMarkerY = _observedTutorialLoreMarkerPosition?.y ?? 0f,
+            }
             : new GuideCompassLocalSettings
             {
                 StepIndex = instance._stepIndex,
                 RouteFinished = instance._routeFinished,
                 KillCount = instance._killCount,
                 RouteVersion = GuideRoute.ProgressVersion,
+                HasTutorialLoreMarkerPosition = _observedTutorialLoreMarkerPosition.HasValue,
+                TutorialLoreMarkerX = _observedTutorialLoreMarkerPosition?.x ?? 0f,
+                TutorialLoreMarkerY = _observedTutorialLoreMarkerPosition?.y ?? 0f,
             };
     }
 
@@ -194,19 +395,68 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         }
     }
 
-    internal static void NotifyFsmEventSent(PlayMakerFSM fsm, string eventName)
+    internal static void NotifyLoreMarkerActivated(AudioEvent audioEvent, AudioSource source, Vector3 position)
     {
         GuideCompassOverlay instance = Instance;
-        if (instance == null || instance._routeFinished)
+        if (audioEvent.Clip == null
+            || !string.Equals(audioEvent.Clip.name, "Lore_Tablet_activate_temp", System.StringComparison.Ordinal)
+            || GameManager.instance == null
+            || !string.Equals(GameManager.instance.sceneName, "Tutorial_01", System.StringComparison.Ordinal))
         {
             return;
         }
 
-        if (GuideRoute.Steps[instance._stepIndex].MatchesInteractionEvent(fsm, eventName)
-            && instance.IsCurrentTargetObject(fsm.gameObject))
+        _observedTutorialLoreMarkerPosition = new Vector2(position.x, position.y);
+        Vector3 sourcePosition = source == null ? position : source.transform.position;
+        Modding.Logger.Log(
+            $"[攻略指南针] 记录最近检查的教程碑文：音效位置={FormatPosition(position)}，" +
+            $"AudioSource位置={FormatPosition(sourcePosition)}，骑士位置=" +
+            $"{(HeroController.instance == null ? "<none>" : FormatPosition(HeroController.instance.transform.position))}");
+
+        if (instance == null || instance._routeFinished || HeroController.instance == null)
+        {
+            return;
+        }
+
+        GuideStep step = GuideRoute.Steps[instance._stepIndex];
+        if (step.CompletionKind == GuideCompletionKind.Interaction
+            && step.InteractionKind == GuideInteractionKind.LoreMarker
+            && Vector2.Distance(HeroController.instance.transform.position, position) <= 6f)
         {
             instance.AdvanceStep();
         }
+    }
+
+    internal static void NotifyLoreMarkerFsmEvent(PlayMakerFSM fsm, string eventName)
+    {
+        GuideCompassOverlay instance = Instance;
+        if (instance == null
+            || instance._routeFinished
+            || fsm == null
+            || GameManager.instance == null
+            || HeroController.instance == null
+            || !string.Equals(GameManager.instance.sceneName, "Tutorial_01", System.StringComparison.Ordinal))
+        {
+            return;
+        }
+
+        GuideStep step = GuideRoute.Steps[instance._stepIndex];
+        if (step.CompletionKind != GuideCompletionKind.Interaction
+            || step.InteractionKind != GuideInteractionKind.LoreMarker
+            || Vector2.Distance(fsm.transform.position, HeroController.instance.transform.position) > 10f)
+        {
+            return;
+        }
+
+        LogLoreDiagnostic(
+            $"FSM事件={eventName}，FSM={GetFsmDescription(fsm)}，位置={FormatPosition(fsm.transform.position)}");
+        if (!IsLoreInteractionSignal(eventName))
+        {
+            return;
+        }
+
+        LogLoreDiagnostic(
+            $"候选碑文 FSM 事件={eventName}，FSM={GetFsmDescription(fsm)}，位置={FormatPosition(fsm.transform.position)}");
     }
 
     internal static void NotifyInteraction(GuideInteractionKind interactionKind, GameObject source)
@@ -332,6 +582,8 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         float headerHeight = _titleStyle.CalcHeight(new GUIContent("现阶段建议："), contentWidth);
         float targetHeight = _bodyStyle.CalcHeight(new GUIContent(target), contentWidth);
         float hintHeight = _smallStyle.CalcHeight(new GUIContent(hint), contentWidth);
+        const string shortcuts = "F6 上一步　F7 下一步/跳过可选\nF8 隐藏/显示　F9 传送到目标";
+        float shortcutsHeight = _shortcutStyle.CalcHeight(new GUIContent(shortcuts), contentWidth);
 
         DrawSectionHeader(new Rect(contentX, top, contentWidth, headerHeight), "当前任务：", scale);
         float targetY = top + headerHeight + 5f * scale;
@@ -340,8 +592,17 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         DrawSectionHeader(new Rect(contentX, hintHeaderY, contentWidth, headerHeight), "现阶段建议：", scale);
         float hintY = hintHeaderY + headerHeight + 5f * scale;
         GUI.Label(new Rect(contentX, hintY, contentWidth, hintHeight), hint, _smallStyle);
+        float shortcutsY = hintY + hintHeight + 8f * scale;
+        GUI.Label(new Rect(contentX, shortcutsY, contentWidth, shortcutsHeight), shortcuts, _shortcutStyle);
 
-        Vector2 direction = GetCurrentDirection(step, out _);
+        Vector2 direction = GetCurrentDirection(step, out bool targetTracked);
+        if (step.TargetObjectKeywords != null
+            && step.TargetObjectKeywords.Length > 0
+            && !targetTracked)
+        {
+            return;
+        }
+
         DrawArrowBesideHero(direction, scale);
     }
 
@@ -361,6 +622,15 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
 
     private Vector2 GetCurrentDirection(GuideStep step, out bool targetTracked)
     {
+        if (step.CompletionKind == GuideCompletionKind.Interaction
+            && step.InteractionKind == GuideInteractionKind.LoreMarker
+            && string.Equals(GameManager.instance.sceneName, "Tutorial_01", System.StringComparison.Ordinal))
+        {
+            Vector2 loreDelta = GetTutorialLoreMarkerPosition() - (Vector2)HeroController.instance.transform.position;
+            targetTracked = true;
+            return loreDelta.sqrMagnitude > 0.01f ? loreDelta.normalized : step.Direction;
+        }
+
         if (step.CompletionKind == GuideCompletionKind.Location
             && string.Equals(GameManager.instance.sceneName, step.SceneName, System.StringComparison.Ordinal))
         {
@@ -389,6 +659,18 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
     private bool TryGetTrackedTarget(GuideStep step, out Vector2 position)
     {
         position = default;
+        if (step.CompletionKind == GuideCompletionKind.Interaction
+            && step.InteractionKind == GuideInteractionKind.LoreMarker)
+        {
+            if (string.Equals(GameManager.instance.sceneName, "Tutorial_01", System.StringComparison.Ordinal))
+            {
+                position = GetTutorialLoreMarkerPosition();
+                return true;
+            }
+
+            return false;
+        }
+
         if (step.TargetObjectKeywords == null || step.TargetObjectKeywords.Length == 0)
         {
             return false;
@@ -397,7 +679,7 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         string sceneName = GameManager.instance.sceneName;
         bool contextChanged = _cachedTargetStep != _stepIndex
             || !string.Equals(_cachedTargetScene, sceneName, System.StringComparison.Ordinal);
-        bool targetUnavailable = _cachedTarget == null || !_cachedTarget.gameObject.activeInHierarchy;
+        bool targetUnavailable = !IsTrackedTargetAvailable(step);
         if (contextChanged)
         {
             UpdateTrackedTarget(step, sceneName);
@@ -407,13 +689,67 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
             UpdateTrackedTarget(step, sceneName);
         }
 
-        if (_cachedTarget == null || !_cachedTarget.gameObject.activeInHierarchy)
+        if (!IsTrackedTargetAvailable(step))
         {
             return false;
         }
 
         position = _cachedTarget.position;
         return true;
+    }
+
+    private static Vector2 GetTutorialLoreMarkerPosition()
+    {
+        return _observedTutorialLoreMarkerPosition ?? GuideRoute.TutorialLoreMarkerPosition;
+    }
+
+    private static bool IsLoreInteractionSignal(string eventName)
+    {
+        return !string.IsNullOrEmpty(eventName)
+            && (eventName.IndexOf("inspect", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || eventName.IndexOf("interact", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || eventName.IndexOf("read", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || eventName.IndexOf("activate", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || eventName.IndexOf("convo", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || eventName.IndexOf("talk", System.StringComparison.OrdinalIgnoreCase) >= 0
+                || eventName.IndexOf("lore", System.StringComparison.OrdinalIgnoreCase) >= 0);
+    }
+
+    private static void LogLoreDiagnostic(string detail)
+    {
+        if (LoggedLoreDiagnostics.Count >= 80 || !LoggedLoreDiagnostics.Add(detail))
+        {
+            return;
+        }
+
+        Modding.Logger.Log($"[攻略指南针] 白王印记附近交互诊断：{detail}");
+    }
+
+    private static string GetFsmDescription(PlayMakerFSM fsm)
+    {
+        return fsm == null ? "<none>" : $"{fsm.gameObject.name}/{fsm.FsmName}";
+    }
+
+    private static string FormatPosition(Vector3 position)
+    {
+        return $"({position.x:F2}, {position.y:F2})";
+    }
+
+    private bool IsTrackedTargetAvailable(GuideStep step)
+    {
+        if (_cachedTarget == null)
+        {
+            return false;
+        }
+
+        if (step.CompletionKind == GuideCompletionKind.Interaction
+            && step.InteractionKind == GuideInteractionKind.LoreMarker)
+        {
+            return _cachedTarget.gameObject.scene.IsValid()
+                && string.Equals(_cachedTarget.gameObject.scene.name, "Tutorial_01", System.StringComparison.Ordinal);
+        }
+
+        return _cachedTarget.gameObject.activeInHierarchy;
     }
 
     private void UpdateTrackedTarget(GuideStep step, string sceneName)
@@ -429,8 +765,9 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
         }
 
         int bestTargetScore = int.MinValue;
-        float bestDistance = float.MaxValue;
-        Vector2 heroPosition = HeroController.instance.transform.position;
+        bool ambiguousTarget = false;
+        Transform bestTarget = null;
+        string bestTargetName = null;
         HashSet<int> matchedTargets = new();
         Transform[] candidates;
         if (step.CompletionKind == GuideCompletionKind.Interaction
@@ -468,24 +805,23 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
                 continue;
             }
 
-            float distance = ((Vector2)candidate.position - heroPosition).sqrMagnitude;
-            Vector2 offset = (Vector2)candidate.position - heroPosition;
-            float alignment = step.Direction.sqrMagnitude > 0.01f && offset.sqrMagnitude > 0.01f
-                ? Vector2.Dot(step.Direction, offset.normalized)
-                : 0f;
-            if (step.Direction.sqrMagnitude > 0.01f && alignment < -0.25f)
+            if (matchScore > bestTargetScore)
             {
-                continue;
+                bestTarget = candidate;
+                bestTargetName = candidate.name;
+                bestTargetScore = matchScore;
+                ambiguousTarget = false;
             }
+            else if (matchScore == bestTargetScore)
+            {
+                ambiguousTarget = true;
+            }
+        }
 
-            int targetScore = matchScore + Mathf.RoundToInt(alignment * 100);
-            if (targetScore > bestTargetScore || (targetScore == bestTargetScore && distance < bestDistance))
-            {
-                _cachedTarget = candidate;
-                _cachedTargetName = candidate.name;
-                bestTargetScore = targetScore;
-                bestDistance = distance;
-            }
+        if (!ambiguousTarget)
+        {
+            _cachedTarget = bestTarget;
+            _cachedTargetName = bestTargetName;
         }
     }
 
@@ -545,12 +881,8 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
             if (!string.IsNullOrEmpty(keyword)
                 && string.Equals(objectName, keyword, System.StringComparison.OrdinalIgnoreCase))
             {
-                score = Mathf.Max(score, keyword.Length + 1000);
-            }
-            else if (!string.IsNullOrEmpty(keyword)
-                && objectName.IndexOf(keyword, System.StringComparison.OrdinalIgnoreCase) >= 0)
-            {
-                score = Mathf.Max(score, keyword.Length);
+                score = 1;
+                break;
             }
         }
 
@@ -614,6 +946,13 @@ internal sealed class GuideCompassOverlay : MonoBehaviour
             fontSize = Mathf.RoundToInt(17f * scale),
             wordWrap = true,
             normal = { textColor = new Color(0.92f, 0.93f, 0.96f, 0.9f) }
+        };
+        _shortcutStyle = new GUIStyle(GUI.skin.label)
+        {
+            alignment = TextAnchor.UpperRight,
+            fontSize = Mathf.RoundToInt(14f * scale),
+            wordWrap = true,
+            normal = { textColor = new Color(0.82f, 0.85f, 0.89f, 0.78f) }
         };
     }
 
